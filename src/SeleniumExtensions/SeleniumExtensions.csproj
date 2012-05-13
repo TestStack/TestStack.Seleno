@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementAssert.cs" />
     <Compile Include="Configurator.cs" />
     <Compile Include="IISExpressRunner.cs" />
     <Compile Include="SeleniumExtensionsException.cs" />

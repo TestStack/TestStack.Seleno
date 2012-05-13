@@ -11,7 +11,7 @@ namespace SeleniumExtensions
 {
     public class UiComponent
     {
-        protected RemoteWebDriver Browser;
+        protected internal RemoteWebDriver Browser;
 
         protected TPage NavigateTo<TPage>(By clickDestination)
             where TPage : UiComponent, new()
@@ -26,6 +26,11 @@ namespace SeleniumExtensions
         {
             Browser.Navigate().GoToUrl(relativeUrl);
             return new TDestinationPage { Browser = Browser };
+        }
+
+        public ElementAssert AssertThatElements(By selector)
+        {
+            return new ElementAssert(this, selector);
         }
 
         private void Navigate(By clickDestination)
