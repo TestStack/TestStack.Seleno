@@ -8,7 +8,7 @@ namespace SampleWebApp.FunctionalTests
     {
         public HomePage Register(RegisterModel model)
         {
-            FillWith(model);
+            FillWithModel(model);
             return NavigateTo<HomePage>(By.Id("register"));
         }
     }

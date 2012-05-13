@@ -24,7 +24,7 @@ namespace SeleniumExtensions
             return Browser.FindElement(By.Name(name)).GetAttribute("value");
         }
 
-        public void FillWith(TViewModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        public void FillWithModel(TViewModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
         {
             var type = typeof(TViewModel);
             foreach (var property in type.GetProperties())
