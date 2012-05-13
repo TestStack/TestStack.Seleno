@@ -1,0 +1,112 @@
+﻿using System;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Text;
+using System.Threading;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
+
+namespace SeleniumExtensions
+{
+    public class UiComponent
+    {
+        protected RemoteWebDriver Browser;
+
+        protected TPage NavigateTo<TPage>(By clickDestination)
+            where TPage : UiComponent, new()
+        {
+            Navigate(clickDestination);
+
+            return new TPage { Browser = Browser };
+        }
+
+        protected TDestinationPage NavigateTo<TDestinationPage>(string relativeUrl)
+            where TDestinationPage : UiComponent, new()
+        {
+            Browser.Navigate().GoToUrl(relativeUrl);
+            return new TDestinationPage { Browser = Browser };
+        }
+
+        private void Navigate(By clickDestination)
+        {
+            Execute(clickDestination, e => e.Click());
+        }
+
+        public IWebElement Execute(By findElement, Action<IWebElement> action)
+        {
+            try
+            {
+                var element = Browser.FindElement(findElement);
+                action(element);
+                return element;
+            }
+            catch (Exception)
+            {
+                TakeScreenshot();
+                throw;
+            }
+        }
+
+        public IWebElement ExecuteWithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
+        {
+            try
+            {
+                var element = FindElementWithWait(findElement, waitInSeconds);
+                action(element);
+                return element;
+            }
+            catch (Exception)
+            {
+                TakeScreenshot();
+                throw;
+            }
+        }
+
+        IWebElement FindElementWithWait(By findElement, int waitInSeconds = 20)
+        {
+            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(waitInSeconds));
+            return wait.Until(d => d.FindElement(findElement));
+        }
+
+        public void WaitForAjaxCallsToFinish(int timeOutInSecond = 10)
+        {
+            var stillGoing = true;
+            int waitedFor = 0;
+
+            while (stillGoing)
+            {
+                Thread.Sleep(Configurator.WaitForAjaxPollingInterval);
+                waitedFor++;
+
+                stillGoing = !(bool)Browser.ExecuteScript("return jQuery.active == 0");
+                if (waitedFor > timeOutInSecond)
+                    throw new SeleniumExtensionsException(string.Format("Wait for AJAX timed out after waiting for {0} seconds", timeOutInSecond));
+            }
+        }
+
+        public void TakeScreenshot(string fileName = null)
+        {
+            var pathFromConfig = Configurator.ScreenShotPath;
+            var camera = (ITakesScreenshot)Browser;
+            var screenshot = camera.GetScreenshot();
+
+            if (!Directory.Exists(pathFromConfig))
+                Directory.CreateDirectory(pathFromConfig);
+
+            var windowTitle = Browser.Title;
+            fileName = fileName ?? string.Format("{0}{1}.png", windowTitle, DateTime.Now.ToFileTime()).Replace(':', '.');
+            var outputPath = Path.Combine(pathFromConfig, fileName);
+
+            var pathChars = Path.GetInvalidPathChars();
+
+            var stringBuilder = new StringBuilder(outputPath);
+
+            foreach (var item in pathChars)
+                stringBuilder.Replace(item, '.');
+
+            var screenShotPath = stringBuilder.ToString();
+            screenshot.SaveAsFile(screenShotPath, ImageFormat.Png);
+        }
+    }
+}
