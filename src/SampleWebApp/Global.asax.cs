@@ -34,6 +34,11 @@ namespace SampleWebApp
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
+            RegisterRoutes();
+        }
+
+        public static void RegisterRoutes()
+        {
             RegisterRoutes(RouteTable.Routes);
         }
     }
