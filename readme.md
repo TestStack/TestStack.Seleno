@@ -1,0 +1,1 @@
+SeleniumExtensions helps you write automated UI tests in the right way by implementing page objects and page components and by filling the forms using strongly typed view models
