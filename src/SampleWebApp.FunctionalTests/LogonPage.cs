@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using SampleWebApp.Controllers;
 using SeleniumExtensions;
 
 namespace SampleWebApp.FunctionalTests
@@ -7,7 +8,8 @@ namespace SampleWebApp.FunctionalTests
     {
         public RegisterPage GotToRegisterPage()
         {
-            return NavigateTo<RegisterPage>(By.LinkText("Register"));
+            //return NavigateTo<RegisterPage>(By.LinkText("Register"));
+            return NavigateTo<AccountController, RegisterPage>(x => x.Register());
         }
     }
 }

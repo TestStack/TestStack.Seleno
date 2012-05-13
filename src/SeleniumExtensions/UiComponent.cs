@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
+using System.Web.Mvc;
+using Microsoft.Web.Mvc;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtensions.Fakes;
 
 namespace SeleniumExtensions
 {
@@ -18,17 +22,27 @@ namespace SeleniumExtensions
         {
             Navigate(clickDestination);
 
-            return new TPage { Browser = Browser };
+            return new TPage {Browser = Browser};
         }
 
         protected TDestinationPage NavigateTo<TDestinationPage>(string relativeUrl)
             where TDestinationPage : UiComponent, new()
         {
             Browser.Navigate().GoToUrl(relativeUrl);
-            return new TDestinationPage { Browser = Browser };
+            return new TDestinationPage {Browser = Browser};
         }
 
-        private void Navigate(By clickDestination)
+        protected TDestinationPage NavigateTo<TController, TDestinationPage>(Expression<Action<TController>> action)
+            where TController : Controller
+            where TDestinationPage : UiComponent, new()
+        {
+            var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer());
+            var relativeUrl = helper.BuildUrlFromExpression(action);
+
+            return NavigateTo<TDestinationPage>(IISExpressRunner.HomePage + relativeUrl);
+        }
+
+        void Navigate(By clickDestination)
         {
             Execute(clickDestination, e => e.Click());
         }
@@ -79,16 +93,17 @@ namespace SeleniumExtensions
                 Thread.Sleep(Configurator.WaitForAjaxPollingInterval);
                 waitedFor++;
 
-                stillGoing = !(bool)Browser.ExecuteScript("return jQuery.active == 0");
+                stillGoing = !(bool) Browser.ExecuteScript("return jQuery.active == 0");
                 if (waitedFor > timeOutInSecond)
-                    throw new SeleniumExtensionsException(string.Format("Wait for AJAX timed out after waiting for {0} seconds", timeOutInSecond));
+                    throw new SeleniumExtensionsException(
+                        string.Format("Wait for AJAX timed out after waiting for {0} seconds", timeOutInSecond));
             }
         }
 
         public void TakeScreenshot(string fileName = null)
         {
             var pathFromConfig = Configurator.ScreenShotPath;
-            var camera = (ITakesScreenshot)Browser;
+            var camera = (ITakesScreenshot) Browser;
             var screenshot = camera.GetScreenshot();
 
             if (!Directory.Exists(pathFromConfig))

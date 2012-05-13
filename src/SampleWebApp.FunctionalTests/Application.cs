@@ -11,6 +11,7 @@ namespace SampleWebApp.FunctionalTests
         public Application(RemoteWebDriver browser)
         {
             Browser = browser;
+            MvcApplication.RegisterRoutes();
 
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
         }
@@ -33,7 +34,11 @@ namespace SampleWebApp.FunctionalTests
                 var solutionPath = dirInfo.Parent.Parent.Parent.FullName;
                 var path = Path.Combine(solutionPath, "SampleWebApp");
                 IISExpressRunner.Start(path, 12345);
-                var browser = new InternetExplorerDriver().SetImplicitTimeout(10);
+                var options = new InternetExplorerOptions();
+                options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+                var browser = new InternetExplorerDriver(options);
+
+                browser.SetImplicitTimeout(10);
                 var homePage = new Application(browser).Start();
                 return homePage;
             }
