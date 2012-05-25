@@ -3,7 +3,7 @@ using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace SeleniumExtensions
+namespace Seleno
 {
     public static class WebDriverExtensions
     {

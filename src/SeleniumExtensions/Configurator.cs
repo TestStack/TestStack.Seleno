@@ -1,4 +1,4 @@
-namespace SeleniumExtensions
+namespace Seleno
 {
     public class Configurator
     {

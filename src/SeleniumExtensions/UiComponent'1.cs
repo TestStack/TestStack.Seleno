@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 
-namespace SeleniumExtensions
+namespace Seleno
 {
     public class UiComponent<TViewModel> : UiComponent
     {

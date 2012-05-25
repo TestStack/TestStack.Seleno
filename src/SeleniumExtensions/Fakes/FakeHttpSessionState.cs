@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.Web.SessionState;
 
-namespace SeleniumExtensions.Fakes
+namespace Seleno.Fakes
 {
     internal class FakeHttpSessionState : HttpSessionStateBase
     {

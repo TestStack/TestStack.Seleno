@@ -9,9 +9,9 @@ using Microsoft.Web.Mvc;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtensions.Fakes;
+using Seleno.Fakes;
 
-namespace SeleniumExtensions
+namespace Seleno
 {
     public class UiComponent
     {

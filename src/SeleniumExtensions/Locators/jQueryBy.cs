@@ -4,7 +4,7 @@
 //| License - http://www.vcskicks.com/license.php    |
 //====================================================
 
-namespace SeleniumExtensions.Locators
+namespace Seleno.Locators
 {
     public class By : OpenQA.Selenium.By
     {

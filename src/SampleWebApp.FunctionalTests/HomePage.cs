@@ -1,5 +1,5 @@
 using OpenQA.Selenium;
-using SeleniumExtensions;
+using Seleno;
 
 namespace SampleWebApp.FunctionalTests
 {

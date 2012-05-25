@@ -11,7 +11,7 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace SeleniumExtensions.Locators
+namespace Seleno.Locators
 {
     public static class SeleniumExtensions
     {

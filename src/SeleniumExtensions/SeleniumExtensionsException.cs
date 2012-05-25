@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeleniumExtensions
+namespace Seleno
 {
     public class SeleniumExtensionsException : Exception
     {

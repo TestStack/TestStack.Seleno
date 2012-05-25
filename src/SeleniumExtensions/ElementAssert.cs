@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace SeleniumExtensions
+namespace Seleno
 {
     public class ElementAssert
     {

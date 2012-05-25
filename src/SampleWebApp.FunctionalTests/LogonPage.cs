@@ -1,6 +1,6 @@
 using OpenQA.Selenium;
 using SampleWebApp.Controllers;
-using SeleniumExtensions;
+using Seleno;
 
 namespace SampleWebApp.FunctionalTests
 {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumExtensions", "SeleniumExtensions\SeleniumExtensions.csproj", "{32A3EB53-458F-42F1-8780-77950FFB9972}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seleno", "SeleniumExtensions\Seleno.csproj", "{32A3EB53-458F-42F1-8780-77950FFB9972}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApp", "SampleWebApp\SampleWebApp.csproj", "{386D168D-F1D6-4445-BA89-F009C7B0D2F9}"
 EndProject

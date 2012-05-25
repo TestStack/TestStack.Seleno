@@ -2,7 +2,7 @@
 using System.IO;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
-using SeleniumExtensions;
+using Seleno;
 
 namespace SampleWebApp.FunctionalTests
 {

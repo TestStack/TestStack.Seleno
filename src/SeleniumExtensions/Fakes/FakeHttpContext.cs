@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.SessionState;
 
-namespace SeleniumExtensions.Fakes
+namespace Seleno.Fakes
 {
     internal class FakeHttpContext : HttpContextBase
     {
