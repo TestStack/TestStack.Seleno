@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Seleno.Fakes
+namespace Seleno.Configuration.Fakes
 {
     internal class FakeViewDataContainer : IViewDataContainer
     {

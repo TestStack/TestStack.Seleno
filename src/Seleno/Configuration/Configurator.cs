@@ -1,4 +1,4 @@
-namespace Seleno
+namespace Seleno.Configuration
 {
     public class Configurator
     {

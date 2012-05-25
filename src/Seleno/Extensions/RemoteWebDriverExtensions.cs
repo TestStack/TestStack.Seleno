@@ -3,9 +3,9 @@ using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace Seleno
+namespace Seleno.Extensions
 {
-    public static class WebDriverExtensions
+    public static class RemoteWebDriverExtensions
     {
         public static RemoteWebDriver SetImplicitTimeout(this RemoteWebDriver driver, int timeoutInSeconds)
         {

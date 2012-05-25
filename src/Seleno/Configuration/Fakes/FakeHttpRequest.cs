@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Seleno.Fakes
+namespace Seleno.Configuration.Fakes
 {
     internal class FakeHttpRequest : HttpRequestBase
     {

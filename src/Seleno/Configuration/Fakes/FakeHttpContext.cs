@@ -6,7 +6,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.SessionState;
 
-namespace Seleno.Fakes
+namespace Seleno.Configuration.Fakes
 {
     internal class FakeHttpContext : HttpContextBase
     {

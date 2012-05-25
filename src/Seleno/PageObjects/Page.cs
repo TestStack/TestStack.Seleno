@@ -6,19 +6,23 @@ using System.Text;
 using System.Threading;
 using System.Web.Mvc;
 using Microsoft.Web.Mvc;
+
+using Seleno.Configuration;
+using Seleno.Configuration.Fakes;
+using Seleno.Specifications.Assertions;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
-using Seleno.Fakes;
 
-namespace Seleno
+namespace Seleno.PageObjects
 {
-    public class UiComponent
+    public class Page
     {
         protected internal RemoteWebDriver Browser;
 
         protected TPage NavigateTo<TPage>(By clickDestination)
-            where TPage : UiComponent, new()
+            where TPage : Page, new()
         {
             Navigate(clickDestination);
 
@@ -26,7 +30,7 @@ namespace Seleno
         }
 
         protected TDestinationPage NavigateTo<TDestinationPage>(string relativeUrl)
-            where TDestinationPage : UiComponent, new()
+            where TDestinationPage : Page, new()
         {
             Browser.Navigate().GoToUrl(relativeUrl);
             return new TDestinationPage {Browser = Browser};
@@ -39,7 +43,7 @@ namespace Seleno
 
         protected TDestinationPage NavigateTo<TController, TDestinationPage>(Expression<Action<TController>> action)
             where TController : Controller
-            where TDestinationPage : UiComponent, new()
+            where TDestinationPage : Page, new()
         {
             var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer());
             var relativeUrl = helper.BuildUrlFromExpression(action);
@@ -100,7 +104,7 @@ namespace Seleno
 
                 stillGoing = !(bool) Browser.ExecuteScript("return jQuery.active == 0");
                 if (waitedFor > timeOutInSecond)
-                    throw new SeleniumExtensionsException(
+                    throw new SelenoException(
                         string.Format("Wait for AJAX timed out after waiting for {0} seconds", timeOutInSecond));
             }
         }

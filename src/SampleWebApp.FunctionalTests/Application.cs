@@ -3,10 +3,13 @@ using System.IO;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using Seleno;
+using Seleno.Configuration;
+using Seleno.Extensions;
+using Seleno.PageObjects;
 
 namespace SampleWebApp.FunctionalTests
 {
-    public class Application : UiComponent
+    public class Application : Page
     {
         public Application(RemoteWebDriver browser)
         {

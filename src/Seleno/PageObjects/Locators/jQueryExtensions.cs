@@ -1,19 +1,14 @@
-﻿//====================================================
-//| Downloaded From                                  |
-//| Visual C# Kicks - http://www.vcskicks.com/       |
-//| License - http://www.vcskicks.com/license.php    |
-//====================================================
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace Seleno.Locators
+namespace Seleno.PageObjects.Locators
 {
-    public static class SeleniumExtensions
+    public static class jQueryExtensions
     {
         /// <summary>
         /// Return whether jQuery is loaded in the current page
@@ -45,8 +40,8 @@ namespace Seleno.Locators
                 jQueryURL = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
 
             //Script to load jQuery from external site
-            string versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)                                  
-                                          : string.Empty;
+            string versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
+                                              : string.Empty;
             string loadingScript =
                 @"if (typeof jQuery != 'function')
                   {
@@ -84,6 +79,42 @@ namespace Seleno.Locators
         /// <summary>
         /// Overloads the FindElement function to include support for the jQuery selector class
         /// </summary>
+        public static IWebElement FindElement(this IWebDriver driver, By.jQueryBy by)
+        {
+            return (driver as RemoteWebDriver).FindElement(by);
+        }
+
+        /// <summary>
+        /// Gets the HTML using jQuery selector class
+        /// </summary>
+        public static string GetHtml(this IWebDriver driver, By.jQueryBy by)
+        {
+            return (driver as RemoteWebDriver).GetHtml(by);
+        }
+
+        /// <summary>
+        /// Overloads the FindElement function to include support for the jQuery selector class
+        /// </summary>
+        public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, By.jQueryBy by)
+        {
+            return (driver as RemoteWebDriver).FindElements(by);
+        }
+
+        public static int CountNumberOfElements(this IWebDriver browser, By.jQueryBy by, Func<IWebElement, Boolean> predicate = null)
+        {
+            var elements = browser.FindElements(by);
+            if (predicate == null)
+            {
+                return elements.Count;
+            }
+
+            return elements.Where(predicate).Count();
+        }
+
+
+        /// <summary>
+        /// Overloads the FindElement function to include support for the jQuery selector class
+        /// </summary>
         public static IWebElement FindElement(this RemoteWebDriver driver, By.jQueryBy by)
         {
             //First make sure we can use jQuery functions
@@ -96,6 +127,19 @@ namespace Seleno.Locators
                 return element;
             else
                 throw new NoSuchElementException("No element found with jQuery command: jQuery" + by.Selector);
+        }
+
+        /// <summary>
+        /// Overloads the FindElement function to include support for the jQuery selector class
+        /// </summary>
+        public static string GetHtml(this RemoteWebDriver driver, By.jQueryBy by)
+        {
+            //First make sure we can use jQuery functions
+            driver.LoadjQuery();
+
+            //Execute the jQuery selector as a script
+            var html = driver.ExecuteScript("return jQuery" + by.Selector + ".html()").ToString();
+            return html;
         }
 
         /// <summary>

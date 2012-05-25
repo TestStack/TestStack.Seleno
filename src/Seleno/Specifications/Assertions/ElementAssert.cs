@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using Seleno.PageObjects;
 
-namespace Seleno
+namespace Seleno.Specifications.Assertions
 {
     public class ElementAssert
     {
-        private readonly UiComponent _component;
+        private readonly Page _component;
         private readonly By _selector;
 
-        public ElementAssert(UiComponent component, By selector)
+        public ElementAssert(Page component, By selector)
         {
             _component = component;
             _selector = selector;
@@ -38,7 +39,7 @@ namespace Seleno
             if (string.IsNullOrEmpty(message))
                 message = string.Format("'{0}' was in fact found!", _selector);
 
-            throw new SeleniumExtensionsException(message);
+            throw new SelenoException(message);
         }
 
         public ElementAssert Exist(string message = null)
@@ -49,7 +50,7 @@ namespace Seleno
             }
             catch (NoSuchElementException ex)
             {
-                throw new SeleniumExtensionsException(message, ex);
+                throw new SelenoException(message, ex);
             }
 
             return this;

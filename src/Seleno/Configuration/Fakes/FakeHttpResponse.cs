@@ -1,7 +1,7 @@
 using System.Text;
 using System.Web;
 
-namespace Seleno.Fakes
+namespace Seleno.Configuration.Fakes
 {
     internal class FakeHttpResponse : HttpResponseBase
     {

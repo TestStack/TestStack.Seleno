@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 
-namespace Seleno
+namespace Seleno.PageObjects
 {
-    public class UiComponent<TViewModel> : UiComponent
+    public class Page<TViewModel> : Page
     {
         public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {

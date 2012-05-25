@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Seleno
+namespace Seleno.Configuration
 {
     public class IISExpressRunner
     {
