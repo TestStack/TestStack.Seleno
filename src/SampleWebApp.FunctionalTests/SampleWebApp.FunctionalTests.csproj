@@ -73,7 +73,7 @@
       <Project>{386D168D-F1D6-4445-BA89-F009C7B0D2F9}</Project>
       <Name>SampleWebApp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SeleniumExtensions\Seleno.csproj">
+    <ProjectReference Include="..\Seleno\Seleno.csproj">
       <Project>{32A3EB53-458F-42F1-8780-77950FFB9972}</Project>
       <Name>Seleno</Name>
     </ProjectReference>

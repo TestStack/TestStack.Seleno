@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security.Principal;
@@ -95,7 +96,7 @@ namespace Seleno.Fakes
             get { return new FakeHttpSessionState(_sessionItems); }
         }
 
-        public override System.Collections.IDictionary Items
+        public override IDictionary Items
         {
             get
             {
