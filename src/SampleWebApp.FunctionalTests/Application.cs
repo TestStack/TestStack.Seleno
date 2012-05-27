@@ -2,10 +2,9 @@
 using System.IO;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
-using Seleno;
-using Seleno.Configuration;
-using Seleno.Extensions;
-using Seleno.PageObjects;
+using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Extensions;
+using TestStack.Seleno.PageObjects;
 
 namespace SampleWebApp.FunctionalTests
 {
