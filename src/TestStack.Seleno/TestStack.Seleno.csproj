@@ -92,6 +92,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\WebElementExtensions.cs" />
+    <Compile Include="Infrastructure\Logging\ILog.cs" />
+    <Compile Include="Infrastructure\Logging\ILogFactory.cs" />
+    <Compile Include="Infrastructure\Logging\LogManager.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogFactory.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogger.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\DebugLogFactory.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\DebugLogger.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\NullDebugLogger.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />
     <Compile Include="Configuration\Configurator.cs" />
