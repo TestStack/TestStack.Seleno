@@ -17,3 +17,4 @@ PackageBuild/*
 Build/*
 *.mdf
 *.ldf
+*.vsdoc

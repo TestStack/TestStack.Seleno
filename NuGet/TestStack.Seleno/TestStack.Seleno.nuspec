@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>TestStack.Seleno</id>
+    <version>0.2</version>
+    <title>Seleno</title>
+    <authors>Mehdi Khalili, Michael Whelan</authors>
+    <owners>Mehdi Khalili, Michael Whelan</owners>
+    <projectUrl>https://github.com/TestStack/TestStack.Seleno</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Seleno helps you write automated UI tests in the right way</description>
+    <releaseNotes>The baseline for Seleno</releaseNotes>
+    <copyright>Copyright 2012  Mehdi Khalili, Michael Whelan</copyright>
+  </metadata>
+</package>
