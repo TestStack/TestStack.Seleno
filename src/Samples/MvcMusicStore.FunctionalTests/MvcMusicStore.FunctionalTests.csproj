@@ -47,7 +47,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="1.Brittle\" />
+    <Folder Include="2.Good\" />
+    <Folder Include="3.Great\" />
+    <Folder Include="4.LivingDoco\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
