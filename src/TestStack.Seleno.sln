@@ -12,11 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno", "TestSta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Tests", "TestStack.Seleno.Tests\TestStack.Seleno.Tests.csproj", "{A2CC3281-DC6E-48E3-B541-2DE37E346E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "MvcMusicStore\MvcMusicStore.csproj", "{32DCD27D-A84C-4250-B657-408B3620A9AC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore.FunctionalTests", "MvcMusicStore.FunctionalTests\MvcMusicStore.FunctionalTests.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "Samples\MvcMusicStore\MvcMusicStore.csproj", "{32DCD27D-A84C-4250-B657-408B3620A9AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore.FunctionalTests", "Samples\MvcMusicStore.FunctionalTests\MvcMusicStore.FunctionalTests.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
