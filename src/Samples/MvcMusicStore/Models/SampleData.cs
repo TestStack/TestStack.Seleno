@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace MvcMusicStore.Models
 {
-    public class SampleData : DropCreateDatabaseIfModelChanges<MusicStoreEntities>
+    public class SampleData : DropCreateDatabaseAlways<MusicStoreEntities>
     {
         protected override void Seed(MusicStoreEntities context)
         {
