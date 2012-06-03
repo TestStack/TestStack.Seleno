@@ -15,6 +15,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
     public abstract class CheckoutScenario : ScenarioBase
     {
         protected abstract string ScenarioTitle { get; }
+        protected HomePage HomePage { get; set; }
 
         [Test]
         public void BddifyMe()
@@ -22,6 +23,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
             this.BDDfy(ScenarioTitle);
         }
 
+        // should be straight to the db, not through the UI
         public void Given_that_I_am_a_logged_in_user()
         {
             //FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
@@ -33,10 +35,10 @@ namespace MvcMusicStore.FunctionalTests.Step4
                 ConfirmPassword = "!2345Qwert"
             };
             Browser.Navigate().GoToUrl(SystemUnderTest.HomePageAddress);
-            var homePage = PageFactory.Create<HomePage>();
-            LogonPage logonPage = homePage.Menu.SelectAdminForNotLoggedInUser();
+            HomePage = PageFactory.Create<HomePage>();
+            LogonPage logonPage = HomePage.Menu.SelectAdminForNotLoggedInUser();
             RegisterPage registerPage = logonPage.GoToRegisterPage();
-            homePage = registerPage.CreateValidUser(validUser);
+            HomePage = registerPage.CreateValidUser(validUser);
         }
     }
 }

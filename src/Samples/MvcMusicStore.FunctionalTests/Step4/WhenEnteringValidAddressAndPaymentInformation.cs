@@ -29,7 +29,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
 
         protected override string ScenarioTitle
         {
-            get { return "Scenario 1: Checking out"; }
+            get { return "Checking out"; }
         }
     }
 }

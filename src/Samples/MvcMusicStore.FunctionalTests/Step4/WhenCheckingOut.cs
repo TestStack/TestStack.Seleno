@@ -1,12 +1,17 @@
+using MvcMusicStore.FunctionalTests.Step4.Pages;
+
 namespace MvcMusicStore.FunctionalTests.Step4
 {
     class WhenCheckingOut : CheckoutScenario
     {
+        // should be straight to the db, not through the UI
         public void AndGiven_I_have_an_album_in_my_Cart()
         {
-
+            AlbumBrowsePage albumBrowsePage = HomePage.GenreMenu.SelectGenreByName(AlbumGenre.Disco);
+            AlbumDetailPage albumDetailPage = albumBrowsePage.SelectAlbumByName("Le Freak");
         }
 
+        // should be straight to the db, not through the UI
         public void AndGiven_I_am_on_the_Shopping_Cart_page()
         {
 

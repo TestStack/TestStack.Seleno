@@ -8,6 +8,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
         {
             //NavigateTo<HomePage>(string.Empty);
             _menu = PageFactory.Create<NavigationComponent>();
+            _genreMenu = PageFactory.Create<GenreNavigationComponent>();
         }
 
         NavigationComponent _menu;
@@ -15,5 +16,12 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
         {
             get { return _menu; }
         }
+
+        GenreNavigationComponent _genreMenu;
+        public GenreNavigationComponent GenreMenu
+        {
+            get { return _genreMenu; }
+        }
+
     }
 }
