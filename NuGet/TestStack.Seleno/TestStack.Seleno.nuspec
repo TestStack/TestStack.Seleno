@@ -6,7 +6,7 @@
     <title>Seleno</title>
     <authors>Mehdi Khalili, Michael Whelan</authors>
     <owners>Mehdi Khalili, Michael Whelan</owners>
-    <projectUrl>https://github.com/TestStack/TestStack.Seleno</projectUrl>
+    <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Seleno helps you write automated UI tests in the right way</description>
     <releaseNotes>The baseline for Seleno</releaseNotes>
