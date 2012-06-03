@@ -1,0 +1,7 @@
+﻿Using Page Object is great; but you still end up with a fair bit of magic string which makes the tests brittle.
+We can do better than that.
+
+We use View Models in the code to create strongly typed pages. Why not those same models to interact with PageObject.
+The result is Page<TViewModel>
+
+Now changing a property name does not break the test

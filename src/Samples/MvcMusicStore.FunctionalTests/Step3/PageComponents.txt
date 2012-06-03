@@ -1,0 +1,8 @@
+﻿A Page Object need not represent an entire page. 
+It may represent a section that appears many times within a site or page, such as site navigation. 
+The essential principle is that there is only one place in your test suite with knowledge of the 
+structure of the HTML of a particular (part of a) page.
+
+Some pages are big; some pages are complex. Applying SRP to PageObject means that we should break a page into smaller components.
+
+You should use Page Components for panels, menus, rows in grids, modal pop-ups ETC

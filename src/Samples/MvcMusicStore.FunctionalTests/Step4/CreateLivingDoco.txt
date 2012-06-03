@@ -1,0 +1,1 @@
+﻿You can mix BDD with Automated UI to get living documentation for your code.

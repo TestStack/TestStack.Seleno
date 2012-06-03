@@ -3,7 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
-namespace MvcMusicStore.FunctionalTests.Brittle
+namespace MvcMusicStore.FunctionalTests
 {
     class Can_buy_an_Album_when_registered
     {

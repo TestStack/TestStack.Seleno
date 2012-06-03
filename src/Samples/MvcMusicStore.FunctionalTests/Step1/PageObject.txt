@@ -1,0 +1,43 @@
+﻿Step 1 is about following OO practices: we do this by using Page Objects:
+
+The Page Object pattern is as a way of encapsulating the interaction with an individual page in your application in a single object. 
+It makes heavy use of OO principles to enable code reuse and improve maintenance. 
+Rather than having test methods that are a series of Selenium commands that are sent to the server, 
+your scripts become a series of interactions with objects that represent a page (or part of one).
+
+The usage of the Page Object design pattern creates a strong separation of concerns between Scripts and Page Objects. 
+The Scripts are very procedural and the detail is handled in the Page Object. Scripts are the What and Page Objects are the How.
+
+•	Scripts are the specification of what the tests should do. 
+	They only interact with the Page Objects and make assertions in the tests. 
+	They should not have any implementation details, such as Selenium calls, whatsoever. 
+•	Page Objects hold the implementation details of the specification and define how the test will interact with the web page. 
+	The Page Object encapsulates all of the interaction with Selenium, and all of the logic of that interaction. 
+	There are no test assertions in the Page Objects but they can throw exceptions.
+
+In fact, the test of whether you are implementing the Page Object design pattern correctly is whether you 
+could swap out Selenium for another web driver, such as Watin, and not have to make any changes to the Script. 
+The Page Object would change significantly, and would probably be replaced entirely by a Watin Page Object.
+
+•	Separating test specification from test implementation makes tests more robust. If you change how a feature works, you just have to change the test, rather than every test that uses the feature.
+•	Maintenance is easier because you only have to change things in one place.
+•	Scripts are more readable as they just work with Page Objects and make assertions. They do not have any Selenium code as this is hidden away in the Page Object. 
+
+Elements and Actions
+Page Objects have two parts – Elements and Actions. Elements and Actions are interactions with the Page using Selenium. 
+Elements are implemented as properties on the Page Object, and Actions are implemented as methods.
+
+Elements are objects that you locate on the page, such as text boxes, check boxes, text on screen, etc. 
+You might get and set Element values. You can create Element objects as properties on your Page Object and then override them with Get/Set. 
+
+Actions are the interactions with the Page that do something, like submitting a form, or clicking a link. 
+These are implemented as methods on the Page Object. They are usually named with verbs and often require some synchronisation.
+
+Locators belong in Page Objects. 
+One of things Page Objects help with is isolating Locators since they are tucked away in a class rather than spread throughout scripts. 
+A speciﬁc locator for a particular Element on a Page appears only once in your entire set of Page Objects. 
+Locators do not cross Page Object boundaries (a Page Object can’t access another Page Object’s Locator). 
+This means that another Page Object can access the data in the Locator (as a property) but not the Locator itself.
+
+The best locator to use is ID. Try to use this whenever possible to make the application more testable. 
+Selenium Remote Control uses Sizzle for locators. Web Driver does not use that as it contains non W3C standard CSS selectors.
