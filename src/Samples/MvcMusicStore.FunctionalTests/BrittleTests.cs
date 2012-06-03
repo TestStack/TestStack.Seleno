@@ -1,33 +1,10 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 
 namespace MvcMusicStore.FunctionalTests
 {
-    class Can_buy_an_Album_when_registered
+    class Can_buy_an_Album_when_registered : WebTestBase
     {
-        private IWebDriver _driver;
-
-        [SetUp]
-        public void SetupTest()
-        {
-            _driver = new FirefoxDriver();
-            _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                _driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-        }
 
         [Test]
         public void Verify()
