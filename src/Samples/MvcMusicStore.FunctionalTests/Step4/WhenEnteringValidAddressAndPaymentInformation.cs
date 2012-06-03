@@ -1,6 +1,6 @@
 namespace MvcMusicStore.FunctionalTests.Step4
 {
-    class when_entering_valid_address_and_payment_information : checkout_scenario
+    class WhenEnteringValidAddressAndPaymentInformation : CheckoutScenario
     {
         public void AndGiven_am_checking_out()
         {

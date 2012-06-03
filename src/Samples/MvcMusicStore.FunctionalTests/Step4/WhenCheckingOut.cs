@@ -1,6 +1,6 @@
 namespace MvcMusicStore.FunctionalTests.Step4
 {
-    class when_checking_out : checkout_scenario
+    class WhenCheckingOut : CheckoutScenario
     {
         public void AndGiven_I_have_an_album_in_my_Cart()
         {

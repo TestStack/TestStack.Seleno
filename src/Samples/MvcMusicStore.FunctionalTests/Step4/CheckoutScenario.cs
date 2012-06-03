@@ -8,7 +8,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
         AsA="As a Customer",
         IWant="I want to purchase an album",
         SoThat="So that I can enjoy my music")]
-    abstract class checkout_scenario : WebTestBase
+    abstract class CheckoutScenario : WebTestBase
     {
         protected abstract string ScenarioTitle { get; }
 
