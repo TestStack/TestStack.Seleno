@@ -32,7 +32,7 @@ namespace MvcMusicStore.FunctionalTests.Brittle
         [Test]
         public void Verify()
         {
-            _driver.Navigate().GoToUrl(SystemUnderTest.HomePage);
+            _driver.Navigate().GoToUrl(SystemUnderTest.HomePageAddress);
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Register")).Click();
             _driver.FindElement(By.Id("UserName")).Clear();
@@ -40,9 +40,9 @@ namespace MvcMusicStore.FunctionalTests.Brittle
             _driver.FindElement(By.Id("Email")).Clear();
             _driver.FindElement(By.Id("Email")).SendKeys("chunkylover53@aol.com");
             _driver.FindElement(By.Id("Password")).Clear();
-            _driver.FindElement(By.Id("Password")).SendKeys("abC!2345");
+            _driver.FindElement(By.Id("Password")).SendKeys("!2345Qwert");
             _driver.FindElement(By.Id("ConfirmPassword")).Clear();
-            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys("abC!2345");
+            _driver.FindElement(By.Id("ConfirmPassword")).SendKeys("!2345Qwert");
             _driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
             _driver.FindElement(By.LinkText("Disco")).Click();
             _driver.FindElement(By.CssSelector("img[alt=\"Le Freak\"]")).Click();
