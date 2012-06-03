@@ -84,8 +84,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver">
-      <HintPath>..\packages\Selenium.WebDriver.2.21.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.22.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selenium.WebDriver.2.22.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support">
       <HintPath>..\packages\Selenium.Support.2.21.0\lib\net40\WebDriver.Support.dll</HintPath>
@@ -104,6 +105,7 @@
     <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
+    <Compile Include="PageObjects\PageFactory.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />

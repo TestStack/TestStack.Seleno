@@ -49,7 +49,7 @@ namespace TestStack.Seleno.PageObjects
             return NavigateTo<TDestinationPage>(IISExpressRunner.HomePage + relativeUrl);
         }
 
-        void Navigate(By clickDestination)
+        protected void Navigate(By clickDestination)
         {
             Execute(clickDestination, e => e.Click());
         }
