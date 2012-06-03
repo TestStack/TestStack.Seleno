@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects
 {
-    public class Page<TViewModel> : Page
+    public class UiComponent<TViewModel> : UiComponent
     {
         public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {

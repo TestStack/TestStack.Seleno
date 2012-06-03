@@ -104,6 +104,8 @@
     <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
+    <Compile Include="PageObjects\Page.cs" />
+    <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />
     <Compile Include="Configuration\Configurator.cs" />
@@ -120,8 +122,8 @@
     <Compile Include="PageObjects\Locators\jQueryExtensions.cs" />
     <Compile Include="Specifications\Scenario.cs" />
     <Compile Include="SelenoException.cs" />
-    <Compile Include="PageObjects\Page%271.cs" />
-    <Compile Include="PageObjects\Page.cs" />
+    <Compile Include="PageObjects\UiComponent`1.cs" />
+    <Compile Include="PageObjects\UiComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\RemoteWebDriverExtensions.cs" />
     <Compile Include="PageObjects\Actions\ActionHelpers.cs" />

@@ -8,10 +8,10 @@ namespace TestStack.Seleno.Specifications.Assertions
 {
     public class ElementAssert
     {
-        private readonly Page _component;
+        private readonly UiComponent _component;
         private readonly By _selector;
 
-        public ElementAssert(Page component, By selector)
+        public ElementAssert(UiComponent component, By selector)
         {
             _component = component;
             _selector = selector;
