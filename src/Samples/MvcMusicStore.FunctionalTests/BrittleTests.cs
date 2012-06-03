@@ -1,10 +1,34 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace MvcMusicStore.FunctionalTests
 {
-    class Can_buy_an_Album_when_registered : WebTestBase
+    class Can_buy_an_Album_when_registered
     {
+        private IWebDriver _driver;
+
+        [SetUp]
+        public void SetupTest()
+        {
+            _driver = new FirefoxDriver();
+            _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+        }
+
+        [TearDown]
+        public void TeardownTest()
+        {
+            try
+            {
+                _driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
 
         [Test]
         public void Verify()
@@ -46,7 +70,7 @@ namespace MvcMusicStore.FunctionalTests
             _driver.FindElement(By.Id("PromoCode")).Clear();
             _driver.FindElement(By.Id("PromoCode")).SendKeys("FREE");
             _driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
-            
+
             Assert.IsTrue(_driver.PageSource.Contains("Checkout Complete"));
         }
     }

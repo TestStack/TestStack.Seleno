@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,11 @@
     <Compile Include="BrittleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Step4\CheckoutScenario.cs" />
+    <Compile Include="Step4\Pages\HomePage.cs" />
+    <Compile Include="Step4\Pages\LogonPage.cs" />
+    <Compile Include="Step4\Pages\NavigationComponent.cs" />
+    <Compile Include="Step4\Pages\RegisterPage.cs" />
+    <Compile Include="Step4\ScenarioBase.cs" />
     <Compile Include="Step4\WhenCheckingOut.cs" />
     <Compile Include="Step4\WhenEnteringValidAddressAndPaymentInformation.cs" />
     <Compile Include="SystemUnderTest.cs" />
@@ -75,6 +81,10 @@
     <ProjectReference Include="..\..\TestStack.Seleno\TestStack.Seleno.csproj">
       <Project>{32A3EB53-458F-42F1-8780-77950FFB9972}</Project>
       <Name>TestStack.Seleno</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcMusicStore\MvcMusicStore.csproj">
+      <Project>{32DCD27D-A84C-4250-B657-408B3620A9AC}</Project>
+      <Name>MvcMusicStore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

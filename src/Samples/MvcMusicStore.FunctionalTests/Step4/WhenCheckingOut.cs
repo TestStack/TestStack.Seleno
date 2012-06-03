@@ -24,7 +24,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
 
         protected override string ScenarioTitle
         {
-            get { return "Scenario 2: Checking out with valid address and payment information"; }
+            get { return "Checking out with valid address and payment information"; }
         }
     }
 }
