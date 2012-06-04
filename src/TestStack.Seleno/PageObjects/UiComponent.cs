@@ -69,6 +69,20 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
+        public TResult Execute<TResult>(By findElement, Func<IWebElement, TResult> func)
+        {
+            try
+            {
+                var element = Browser.FindElement(findElement);
+                return func(element);
+            }
+            catch (Exception)
+            {
+                TakeScreenshot();
+                throw;
+            }
+        }
+
         public IWebElement ExecuteWithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
         {
             try

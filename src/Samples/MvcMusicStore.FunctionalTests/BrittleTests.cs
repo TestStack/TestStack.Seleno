@@ -6,7 +6,7 @@ using OpenQA.Selenium.Firefox;
 
 namespace MvcMusicStore.FunctionalTests
 {
-    class Can_buy_an_Album_when_registered
+    class BrittleTests
     {
         private IWebDriver _driver;
 
@@ -31,7 +31,7 @@ namespace MvcMusicStore.FunctionalTests
         }
 
         [Test]
-        public void Verify()
+        public void Can_buy_an_Album_when_registered()
         {
             _driver.Navigate().GoToUrl(SystemUnderTest.HomePageAddress);
             _driver.FindElement(By.LinkText("Admin")).Click();
