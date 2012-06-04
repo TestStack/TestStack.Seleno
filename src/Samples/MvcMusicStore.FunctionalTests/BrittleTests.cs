@@ -1,4 +1,5 @@
 ﻿using System;
+
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -69,7 +70,7 @@ namespace MvcMusicStore.FunctionalTests
             _driver.FindElement(By.Id("PromoCode")).Clear();
             _driver.FindElement(By.Id("PromoCode")).SendKeys("FREE");
             _driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
-            
+
             Assert.IsTrue(_driver.PageSource.Contains("Checkout Complete"));
         }
     }

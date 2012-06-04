@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Tests
         [Fact]
         public void ToVerifyThatTheBuildRunsTests()
         {
-            Assert.Equal(1, 1);
+            Assert.Equal(1, 1); 
         }
     }
 }
