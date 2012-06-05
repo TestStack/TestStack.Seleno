@@ -4,22 +4,30 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
 {
     public class HomePage : Page
     {
-        public HomePage()
-        {
-            _menu = GetComponent<NavigationComponent>();
-            _genreMenu = GetComponent<GenreNavigationComponent>();
-        }
-
-        NavigationComponent _menu;
+        private NavigationComponent _menu;
         public NavigationComponent Menu
         {
-            get { return _menu; }
+            get
+            {
+                if (_menu == null)
+                {
+                    _menu = GetComponent<NavigationComponent>();                    
+                }
+                return _menu;
+            }
         }
 
-        GenreNavigationComponent _genreMenu;
+        private GenreNavigationComponent _genreMenu;
         public GenreNavigationComponent GenreMenu
         {
-            get { return _genreMenu; }
+            get
+            {
+                if (_genreMenu == null)
+                {
+                    _genreMenu = GetComponent<GenreNavigationComponent>();
+                }
+                return _genreMenu;
+            }
         }
 
     }
