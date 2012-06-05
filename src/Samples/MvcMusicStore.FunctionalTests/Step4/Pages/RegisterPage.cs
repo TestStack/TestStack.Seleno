@@ -1,5 +1,4 @@
-using Mvc3ToolsUpdateWeb_Default.Models;
-
+using MvcMusicStore.Models;
 using TestStack.Seleno.PageObjects;
 
 using OpenQA.Selenium;

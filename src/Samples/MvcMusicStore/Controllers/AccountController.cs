@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using Mvc3ToolsUpdateWeb_Default.Models;
 using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers

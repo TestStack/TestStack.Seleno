@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -33,6 +34,9 @@ namespace TestStack.Seleno.PageObjects
                 var propertyValue = property.GetValue(viewModel, null);
 
                 if (property.GetCustomAttributes(typeof(HiddenInputAttribute), false).Length > 0)
+                    continue;
+
+                if (property.GetCustomAttributes(typeof(ScaffoldColumnAttribute), false).Length > 0)
                     continue;
 
                 if (propertyValue == null)
