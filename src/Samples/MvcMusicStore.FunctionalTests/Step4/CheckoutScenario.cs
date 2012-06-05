@@ -1,5 +1,5 @@
-﻿using Mvc3ToolsUpdateWeb_Default.Models;
-using MvcMusicStore.FunctionalTests.Step4.Pages;
+﻿using MvcMusicStore.FunctionalTests.Step4.Pages;
+using MvcMusicStore.Models;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Core;
 using TestStack.Seleno.PageObjects;

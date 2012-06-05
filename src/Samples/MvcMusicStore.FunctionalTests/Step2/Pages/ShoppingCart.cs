@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.FunctionalTests.Step1.Pages
+namespace MvcMusicStore.FunctionalTests.Step2.Pages
 {
     public class ShoppingCart : Page
     {

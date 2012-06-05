@@ -1,8 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using Mvc3ToolsUpdateWeb_Default.Models;
-
+using MvcMusicStore.Models;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 
