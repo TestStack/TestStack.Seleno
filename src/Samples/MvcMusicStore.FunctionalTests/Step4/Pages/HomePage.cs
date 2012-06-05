@@ -6,9 +6,8 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public HomePage()
         {
-            //NavigateTo<HomePage>(string.Empty);
-            _menu = PageFactory.Create<NavigationComponent>();
-            _genreMenu = PageFactory.Create<GenreNavigationComponent>();
+            _menu = GetComponent<NavigationComponent>();
+            _genreMenu = GetComponent<GenreNavigationComponent>();
         }
 
         NavigationComponent _menu;

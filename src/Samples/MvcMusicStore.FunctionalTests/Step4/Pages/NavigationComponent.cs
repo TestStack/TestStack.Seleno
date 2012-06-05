@@ -7,8 +7,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public LogonPage SelectAdminForNotLoggedInUser()
         {
-            Navigate(By.LinkText("Admin"));
-            return PageFactory.Create<LogonPage>();
+            return NavigateTo<LogonPage>(By.LinkText("Admin"));
         }
     }
 }

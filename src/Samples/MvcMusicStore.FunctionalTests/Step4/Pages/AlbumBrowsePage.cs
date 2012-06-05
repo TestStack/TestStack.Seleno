@@ -9,8 +9,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
         public AlbumDetailPage SelectAlbumByName(string name)
         {
             string selector = string.Format("img[alt=\"{0}\"]", name);
-            Navigate(By.CssSelector(selector));
-            return PageFactory.Create<AlbumDetailPage>();
+            return NavigateTo<AlbumDetailPage>(By.CssSelector(selector));
         }
     }
 }

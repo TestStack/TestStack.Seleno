@@ -12,10 +12,9 @@ namespace MvcMusicStore.FunctionalTests.Step4
         AsA="As a Customer",
         IWant="I want to purchase an album",
         SoThat="So that I can enjoy my music")]
-    public abstract class CheckoutScenario : ScenarioBase
+    public abstract class CheckoutScenario 
     {
         protected abstract string ScenarioTitle { get; }
-        protected HomePage HomePage { get; set; }
 
         [Test]
         public void BddifyMe()
@@ -34,11 +33,13 @@ namespace MvcMusicStore.FunctionalTests.Step4
                 Password = "!2345Qwert",
                 ConfirmPassword = "!2345Qwert"
             };
-            Browser.Navigate().GoToUrl(SystemUnderTest.HomePageAddress);
-            HomePage = PageFactory.Create<HomePage>();
-            LogonPage logonPage = HomePage.Menu.SelectAdminForNotLoggedInUser();
-            RegisterPage registerPage = logonPage.GoToRegisterPage();
-            HomePage = registerPage.CreateValidUser(validUser);
+
+            Application
+                .HomePage
+                .Menu
+                .SelectAdminForNotLoggedInUser()
+                .GoToRegisterPage()
+                .CreateValidUser(validUser);
         }
     }
 }

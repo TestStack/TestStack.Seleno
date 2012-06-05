@@ -7,8 +7,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public AlbumBrowsePage SelectGenreByName(AlbumGenre genre)
         {
-            Navigate(By.LinkText(genre.ToString()));
-            return PageFactory.Create<AlbumBrowsePage>();
+            return NavigateTo<AlbumBrowsePage>(By.LinkText(genre.ToString()));
         }
     }
 }

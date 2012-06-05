@@ -75,6 +75,8 @@
     <Compile Include="Step1\Pages\RegisterPage.cs" />
     <Compile Include="Step1\Pages\ShoppingCart.cs" />
     <Compile Include="Step4\CheckoutScenario.cs" />
+    <Compile Include="Step4\Application.cs" />
+    <Compile Include="Step4\Pages\AddressAndPaymentPage.cs" />
     <Compile Include="Step4\Pages\AlbumBrowsePage.cs" />
     <Compile Include="Step4\Pages\AlbumDetailPage.cs" />
     <Compile Include="Step4\Pages\AlbumGenre.cs" />
@@ -83,7 +85,7 @@
     <Compile Include="Step4\Pages\LogonPage.cs" />
     <Compile Include="Step4\Pages\NavigationComponent.cs" />
     <Compile Include="Step4\Pages\RegisterPage.cs" />
-    <Compile Include="Step4\Pages\ShoppingCart.cs" />
+    <Compile Include="Step4\Pages\ShoppingCartPage.cs" />
     <Compile Include="Step4\ScenarioBase.cs" />
     <Compile Include="Step4\WhenCheckingOut.cs" />
     <Compile Include="Step4\WhenEnteringValidAddressAndPaymentInformation.cs" />

@@ -12,9 +12,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public RegisterPage GoToRegisterPage()
         {
-            Navigate(By.LinkText("Register"));
-            //Browser.FindElement(By.LinkText("Register")).Click();
-            return PageFactory.Create<RegisterPage>();
+            return NavigateTo<RegisterPage>(By.LinkText("Register"));
         }
 
         public TDestinationPage LoginWithValidUserAndNavigateToPage<TController, TDestinationPage>(LogOnModel logonModel, Expression<Action<TController>> action)
@@ -25,6 +23,5 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
             Navigate(By.CssSelector("input[type=\"submit\"]"));
             return NavigateTo<TController, TDestinationPage>(action);
         }
-
     }
 }

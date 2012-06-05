@@ -49,6 +49,12 @@ namespace TestStack.Seleno.PageObjects
             return NavigateTo<TDestinationPage>(IISExpressRunner.HomePage + relativeUrl);
         }
 
+        public TComponent GetComponent<TComponent>()
+            where TComponent : UiComponent, new()
+        {
+            return new TComponent() {Browser = Browser};
+        }
+
         protected void Navigate(By clickDestination)
         {
             Execute(clickDestination, e => e.Click());
