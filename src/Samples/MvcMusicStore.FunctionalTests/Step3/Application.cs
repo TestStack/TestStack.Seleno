@@ -1,15 +1,13 @@
 ﻿using System;
 using System.IO;
-
-using MvcMusicStore.FunctionalTests.Step4.Pages;
-
+using MvcMusicStore.FunctionalTests.Step3.Pages;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Extensions;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.FunctionalTests.Step4
+namespace MvcMusicStore.FunctionalTests.Step3
 {
     public class Application : Page
     {
@@ -24,7 +22,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
             Browser.Close();
         }
 
-        HomePage Start()
+        public HomePage Start()
         {
             return NavigateTo<HomePage>(IISExpressRunner.HomePage);
         }

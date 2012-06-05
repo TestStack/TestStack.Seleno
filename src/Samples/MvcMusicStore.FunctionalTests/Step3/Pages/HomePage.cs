@@ -1,6 +1,6 @@
 ﻿using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.FunctionalTests.Step4.Pages
+namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
     public class HomePage : Page
     {
