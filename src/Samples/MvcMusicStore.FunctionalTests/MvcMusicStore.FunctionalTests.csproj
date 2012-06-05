@@ -67,7 +67,8 @@
     <Compile Include="BrittleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Step1\Application.cs" />
-    <Compile Include="Step1\BetterTestsWithPageObject.cs" />
+    <Compile Include="Step1\PageObject.cs" />
+    <Compile Include="Step1\Pages\AddressAndPaymentPage.cs" />
     <Compile Include="Step1\Pages\AlbumBrowsePage.cs" />
     <Compile Include="Step1\Pages\AlbumDetailPage.cs" />
     <Compile Include="Step1\Pages\HomePage.cs" />
