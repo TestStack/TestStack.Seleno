@@ -1,17 +1,19 @@
-﻿using MvcMusicStore.FunctionalTests.Step1.Pages;
+﻿using FluentAssertions;
+using MvcMusicStore.FunctionalTests.Step2.Pages;
 using NUnit.Framework;
-using FluentAssertions;
 using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.FunctionalTests.Step1
+namespace MvcMusicStore.FunctionalTests.Step2
 {
-    public class PageObject
+    public class PageObjectWithComponents
     {
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
             var homepage = Application.HomePage;
+
             var registerPage = homepage
+                .Menu
                 .SelectAdminForNotLoggedInUser()
                 .GoToRegisterPage();
 
@@ -23,14 +25,17 @@ namespace MvcMusicStore.FunctionalTests.Step1
             homepage = registerPage.SubmitRegistration();
             var orderedPage = PlaceOrder(homepage);
             orderedPage.Title.Should().Be("Checkout Complete");
+
+            orderedPage.Title.Should().Be("Checkout Complete");
         }
 
         private static Page PlaceOrder(HomePage homepage)
         {
             var shippingPage = homepage
+                .GenreMenu
                 .SelectGenreByName("Disco")
                 .SelectAlbumByName("Le Freak")
-                .AddToCart()
+                .AddAlbumToCart()
                 .Checkout();
 
             shippingPage.FirstName = "Homer";

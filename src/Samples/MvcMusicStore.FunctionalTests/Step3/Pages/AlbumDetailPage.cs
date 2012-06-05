@@ -5,7 +5,7 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
     public class AlbumDetailPage : Page
     {
-        public ShoppingCart AddToCart()
+        public ShoppingCart AddAlbumToCart()
         {
             return NavigateTo<ShoppingCart>(By.LinkText("Add to cart"));
         }

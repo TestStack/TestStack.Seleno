@@ -1,18 +1,17 @@
-﻿using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects;
+﻿using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step2.Pages
 {
     public class HomePage : Page
     {
-        public LogonPage SelectAdminForNotLoggedInUser()
+        public NavigationComponent Menu
         {
-            return NavigateTo<LogonPage>(By.LinkText("Admin"));
+            get { return GetComponent<NavigationComponent>(); }
         }
 
-        public AlbumBrowsePage SelectGenreByName(string genre)
+        public GenreNavigationComponent GenreMenu
         {
-            return NavigateTo<AlbumBrowsePage>(By.LinkText(genre));
+            get { return GetComponent<GenreNavigationComponent>(); }
         }
     }
 }

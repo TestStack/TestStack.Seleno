@@ -1,16 +1,15 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using FluentAssertions;
 
 namespace MvcMusicStore.FunctionalTests.Step3
 {
-    public class StronglyTypedPageObjectWithComponents
+    public class StronglyTypedPageObjectWithComponent
     {
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var homepage = Application.HomePage;
-
-            var orderedPage = homepage
+            var orderedPage = Application
+                .HomePage
                 .Menu
                 .SelectAdminForNotLoggedInUser()
                 .GoToRegisterPage()
@@ -18,9 +17,9 @@ namespace MvcMusicStore.FunctionalTests.Step3
                 .GenreMenu
                 .SelectGenreByName("Disco")
                 .SelectAlbumByName("Le Freak")
-                .AddToCart()
+                .AddAlbumToCart()
                 .Checkout()
-                .SubmitShippingInfo(ObjectMother.CreateShippingInfo(), "FREE");
+                .SubmitShippingInfo(ObjectMother.CreateShippingInfo(), "Free");
 
             orderedPage.Title.Should().Be("Checkout Complete");
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using MvcMusicStore.FunctionalTests.Step2.Pages;
+using MvcMusicStore.FunctionalTests.Step3.Pages;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Extensions;
