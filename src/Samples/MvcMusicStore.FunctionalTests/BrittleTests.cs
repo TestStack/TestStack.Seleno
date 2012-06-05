@@ -33,7 +33,7 @@ namespace MvcMusicStore.FunctionalTests
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            _driver.Navigate().GoToUrl(SystemUnderTest.HomePageAddress);
+            _driver.Navigate().GoToUrl(Application.HomePage.Url);
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Register")).Click();
             _driver.FindElement(By.Id("UserName")).Clear();

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrittleTests.cs" />
+    <Compile Include="ObjectMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Step1\Application.cs" />
     <Compile Include="Step1\PageObject.cs" />
@@ -75,21 +76,11 @@
     <Compile Include="Step1\Pages\LogonPage.cs" />
     <Compile Include="Step1\Pages\RegisterPage.cs" />
     <Compile Include="Step1\Pages\ShoppingCart.cs" />
-    <Compile Include="Step2\Application.cs" />
-    <Compile Include="Step2\StronglyTypedPageObject.cs" />
-    <Compile Include="Step2\Pages\AddressAndPaymentPage.cs" />
-    <Compile Include="Step2\Pages\AlbumBrowsePage.cs" />
-    <Compile Include="Step2\Pages\AlbumDetailPage.cs" />
-    <Compile Include="Step2\Pages\HomePage.cs" />
-    <Compile Include="Step2\Pages\LogonPage.cs" />
-    <Compile Include="Step2\Pages\RegisterPage.cs" />
-    <Compile Include="Step2\Pages\ShoppingCart.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Step3\Application.cs" />
     <Compile Include="Step3\Pages\GenreNavigationComponent.cs" />
     <Compile Include="Step3\Pages\NavigationComponent.cs" />
-    <Compile Include="Step4\LivingDocumentation.cs" />
-    <Compile Include="Step4\Application.cs" />
-    <Compile Include="Step4\Pages\AddressAndPaymentPage.cs" />
-    <Compile Include="Step3\Application.cs" />
+    <Compile Include="Step3\StronglyTypedPageObjectWithComponent.cs" />
     <Compile Include="Step3\Pages\AddressAndPaymentPage.cs" />
     <Compile Include="Step3\Pages\AlbumBrowsePage.cs" />
     <Compile Include="Step3\Pages\AlbumDetailPage.cs" />
@@ -97,7 +88,20 @@
     <Compile Include="Step3\Pages\LogonPage.cs" />
     <Compile Include="Step3\Pages\RegisterPage.cs" />
     <Compile Include="Step3\Pages\ShoppingCart.cs" />
-    <Compile Include="Step3\StronglyTypedPageObjectWithComponents.cs" />
+    <Compile Include="Step2\Application.cs" />
+    <Compile Include="Step2\Pages\GenreNavigationComponent.cs" />
+    <Compile Include="Step2\Pages\NavigationComponent.cs" />
+    <Compile Include="Step4\Application.cs" />
+    <Compile Include="Step4\LivingDocumentation.cs" />
+    <Compile Include="Step4\Pages\AddressAndPaymentPage.cs" />
+    <Compile Include="Step2\Pages\AddressAndPaymentPage.cs" />
+    <Compile Include="Step2\Pages\AlbumBrowsePage.cs" />
+    <Compile Include="Step2\Pages\AlbumDetailPage.cs" />
+    <Compile Include="Step2\Pages\HomePage.cs" />
+    <Compile Include="Step2\Pages\LogonPage.cs" />
+    <Compile Include="Step2\Pages\RegisterPage.cs" />
+    <Compile Include="Step2\Pages\ShoppingCart.cs" />
+    <Compile Include="Step2\PageObjectWithComponents.cs" />
     <Compile Include="Step4\Pages\AlbumBrowsePage.cs" />
     <Compile Include="Step4\Pages\AlbumDetailPage.cs" />
     <Compile Include="Step4\Pages\AlbumGenre.cs" />
@@ -107,7 +111,6 @@
     <Compile Include="Step4\Pages\NavigationComponent.cs" />
     <Compile Include="Step4\Pages\RegisterPage.cs" />
     <Compile Include="Step4\Pages\ShoppingCartPage.cs" />
-    <Compile Include="SystemUnderTest.cs" />
     <Compile Include="WebTestBase.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -126,8 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Step1\PageObject.txt" />
-    <Content Include="Step2\StronglyTypedPageObject.txt" />
-    <Content Include="Step3\PageComponents.txt" />
+    <Content Include="Step3\StronglyTypedPageObject.txt" />
+    <Content Include="Step2\PageComponents.txt" />
     <Content Include="Step4\CreateLivingDoco.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

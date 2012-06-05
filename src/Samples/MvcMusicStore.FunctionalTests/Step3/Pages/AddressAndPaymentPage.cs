@@ -7,11 +7,13 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
     public class AddressAndPaymentPage : Page<Order>
     {
-        public Page SubmitOrder()
+        public Page SubmitShippingInfo(Order order, string promoCode)
         {
+            FillWithModel(order);
+            PromoCode = promoCode;
             return NavigateTo<Page>(By.CssSelector("input[type=submit]"));
         }
 
-        public string PromoCode { set { Execute(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
+        string PromoCode { set { Execute(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
     }
 }
