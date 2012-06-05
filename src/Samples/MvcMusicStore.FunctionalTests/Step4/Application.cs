@@ -24,7 +24,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
             Browser.Close();
         }
 
-        public HomePage Start()
+        HomePage Start()
         {
             return NavigateTo<HomePage>(IISExpressRunner.HomePage);
         }
@@ -35,7 +35,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
             {
                 var dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
                 var solutionPath = dirInfo.Parent.Parent.Parent.FullName;
-                var path = Path.Combine(solutionPath, "SampleWebApp");
+                var path = Path.Combine(solutionPath, "MvcMusicStore");
                 IISExpressRunner.Start(path, 12345);
                 var browser = new FirefoxDriver();
 
