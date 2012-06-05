@@ -1,38 +1,29 @@
-﻿using MvcMusicStore.FunctionalTests.Step2.Pages;
-using MvcMusicStore.Models;
+﻿using MvcMusicStore.Models;
 using NUnit.Framework;
 using FluentAssertions;
-using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step2
 {
     public class StronglyTypedPageObject
     {
-            [Test]
-            public void Can_buy_an_Album_when_registered()
-            {
-                var model = CreateRegisterModel();
-                var shippingInfo = CreateShippingInfo();
-                var homepage = Application.HomePage;
+        [Test]
+        public void Can_buy_an_Album_when_registered()
+        {
+            var user = CreateRegisterModel();
+            var shippingInfo = CreateShippingInfo();
+            var orderedPage = Application
+                .HomePage
+                .SelectAdminForNotLoggedInUser()
+                .GoToRegisterPage()
+                .CreateValidUser(user)
+                .SelectGenreByName("Disco")
+                .SelectAlbumByName("Le Freak")
+                .AddAlbumToCart()
+                .Checkout()
+                .SubmitShippingInfo(shippingInfo, "Free");
 
-                var registerPage = homepage
-                    .SelectAdminForNotLoggedInUser()
-                    .GoToRegisterPage();
-                registerPage.FillWithModel(model);
-                homepage = registerPage.SubmitRegistration();
-
-                var shippingPage = homepage
-                    .SelectGenreByName("Disco")
-                    .SelectAlbumByName("Le Freak")
-                    .AddToCart()
-                    .Checkout();
-
-                shippingPage.FillWithModel(shippingInfo);
-                shippingPage.PromoCode = "FREE";
-                var orderedPage = shippingPage.SubmitOrder();
-
-                orderedPage.Title.Should().Be("Checkout Complete");
-            }
+            orderedPage.Title.Should().Be("Checkout Complete");
+        }
 
         private static Order CreateShippingInfo()
         {

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using MvcMusicStore.FunctionalTests.Step4.Pages;
+using MvcMusicStore.FunctionalTests.Step2.Pages;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.FunctionalTests.Step4
+namespace MvcMusicStore.FunctionalTests
 {
     public class Application : Page
     {

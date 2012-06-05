@@ -7,23 +7,23 @@ namespace MvcMusicStore.FunctionalTests.Step1
 {
     public class PageObject
     {
-            [Test]
-            public void Can_buy_an_Album_when_registered()
-            {
-                var homepage = Application.HomePage;
-                var registerPage = homepage
-                    .SelectAdminForNotLoggedInUser()
-                    .GoToRegisterPage();
+        [Test]
+        public void Can_buy_an_Album_when_registered()
+        {
+            var homepage = Application.HomePage;
+            var registerPage = homepage
+                .SelectAdminForNotLoggedInUser()
+                .GoToRegisterPage();
 
-                registerPage.Username = "HJSimpson";
-                registerPage.Email = "chunkylover53@aol.com";
-                registerPage.Password = "!2345Qwert";
-                registerPage.ConfirmPassword = "!2345Qwert";
+            registerPage.Username = "HJSimpson";
+            registerPage.Email = "chunkylover53@aol.com";
+            registerPage.Password = "!2345Qwert";
+            registerPage.ConfirmPassword = "!2345Qwert";
 
-                homepage = registerPage.SubmitRegistration();
-                var orderedPage = Order(homepage);
-                orderedPage.Title.Should().Be("Checkout Complete");
-            }
+            homepage = registerPage.SubmitRegistration();
+            var orderedPage = Order(homepage);
+            orderedPage.Title.Should().Be("Checkout Complete");
+        }
 
         private static Page Order(HomePage homepage)
         {

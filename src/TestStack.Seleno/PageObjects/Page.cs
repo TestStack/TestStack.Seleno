@@ -9,5 +9,7 @@ namespace TestStack.Seleno.PageObjects
                 return Browser.Title;
             }
         }
+
+        public string Url { get { return Browser.Url; } }
     }
 }

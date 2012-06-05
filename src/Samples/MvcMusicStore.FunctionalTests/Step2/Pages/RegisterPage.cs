@@ -6,8 +6,9 @@ namespace MvcMusicStore.FunctionalTests.Step2.Pages
 {
     public class RegisterPage : Page<RegisterModel>
     {
-        public HomePage SubmitRegistration()
+        public HomePage CreateValidUser(RegisterModel model)
         {
+            FillWithModel(model);
             return NavigateTo<HomePage>(By.CssSelector("input[type='submit']"));
         }
     }
