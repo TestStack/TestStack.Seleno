@@ -12,7 +12,7 @@ namespace MvcMusicStore.FunctionalTests.Step1
         {
             var homepage = Application.HomePage;
             var registerPage = homepage
-                .SelectAdminForNotLoggedInUser()
+                .GoToAdminForAnonymousUser()
                 .GoToRegisterPage();
 
             registerPage.Username = "HJSimpson";

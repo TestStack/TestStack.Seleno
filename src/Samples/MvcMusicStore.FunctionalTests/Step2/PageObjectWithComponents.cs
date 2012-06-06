@@ -11,10 +11,9 @@ namespace MvcMusicStore.FunctionalTests.Step2
         public void Can_buy_an_Album_when_registered()
         {
             var homepage = Application.HomePage;
-
             var registerPage = homepage
                 .Menu
-                .SelectAdminForNotLoggedInUser()
+                .GoToAdminForAnonymousUser()
                 .GoToRegisterPage();
 
             registerPage.Username = "HJSimpson";
@@ -24,8 +23,6 @@ namespace MvcMusicStore.FunctionalTests.Step2
 
             homepage = registerPage.SubmitRegistration();
             var orderedPage = PlaceOrder(homepage);
-            orderedPage.Title.Should().Be("Checkout Complete");
-
             orderedPage.Title.Should().Be("Checkout Complete");
         }
 

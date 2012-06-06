@@ -5,7 +5,7 @@ namespace MvcMusicStore.FunctionalTests.Step1.Pages
 {
     public class HomePage : Page
     {
-        public LogonPage SelectAdminForNotLoggedInUser()
+        public LogonPage GoToAdminForAnonymousUser()
         {
             return NavigateTo<LogonPage>(By.LinkText("Admin"));
         }

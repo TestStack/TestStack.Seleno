@@ -11,7 +11,7 @@ namespace MvcMusicStore.FunctionalTests.Step3
             var orderedPage = Application
                 .HomePage
                 .Menu
-                .SelectAdminForNotLoggedInUser()
+                .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()
                 .CreateValidUser(ObjectMother.CreateRegisterModel())
                 .GenreMenu

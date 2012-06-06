@@ -5,7 +5,7 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
     public class NavigationComponent : UiComponent
     {
-        public LogonPage SelectAdminForNotLoggedInUser()
+        public LogonPage GoToAdminForAnonymousUser()
         {
             return NavigateTo<LogonPage>(By.LinkText("Admin"));
         }

@@ -31,7 +31,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
             _homePage = Application
                 .HomePage
                 .Menu
-                .SelectAdminForNotLoggedInUser()
+                .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()
                 .CreateValidUser(ObjectMother.CreateRegisterModel());
         }
