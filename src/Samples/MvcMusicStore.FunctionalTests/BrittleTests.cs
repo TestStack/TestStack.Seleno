@@ -10,13 +10,6 @@ namespace MvcMusicStore.FunctionalTests
     {
         private IWebDriver _driver;
 
-        [SetUp]
-        public void SetupTest()
-        {
-            _driver = new FirefoxDriver();
-            _driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
-        }
-
         [TearDown]
         public void TeardownTest()
         {
@@ -33,7 +26,9 @@ namespace MvcMusicStore.FunctionalTests
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            _driver.Navigate().GoToUrl(Application.HomePage.Url);
+            var homepage = Application.HomePage;
+            _driver = homepage.Driver;
+            _driver.Navigate().GoToUrl(homepage.Url);
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Register")).Click();
             _driver.FindElement(By.Id("UserName")).Clear();
