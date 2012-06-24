@@ -20,6 +20,11 @@ namespace TestStack.Seleno.PageObjects
     {
         protected internal RemoteWebDriver Browser;
 
+        public UiComponent()
+        {
+            Browser = HostFactory.SelenoHost.Browser as RemoteWebDriver;
+        }
+
         protected TPage NavigateTo<TPage>(By clickDestination)
             where TPage : UiComponent, new()
         {
