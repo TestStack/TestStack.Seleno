@@ -1,5 +1,5 @@
+using Funq;
 using TestStack.Seleno.Configuration.Contracts;
-using TestStack.Seleno.Configuration.WebServers;
 
 using OpenQA.Selenium;
 
@@ -7,14 +7,14 @@ namespace TestStack.Seleno.Configuration
 {
     public class SelenoApplication : ISelenoApplication
     {
-        readonly WebApplication _webApplication;
-        public IWebDriver Browser { get; internal set; }
-        public ICamera Camera { get; internal set; }
-        public IWebServer WebServer { get; internal set; }
+        public Container Container { get; set; }
+        public IWebDriver Browser { get { return Container.Resolve<IWebDriver>(); } }
+        public ICamera Camera { get { return Container.Resolve<ICamera>(); } }
+        public IWebServer WebServer { get { return Container.Resolve<IWebServer>(); } }
 
-        public SelenoApplication(WebApplication webApplication)
+        public SelenoApplication(Container container)
         {
-            _webApplication = webApplication;
+            Container = container;
         }
 
         public void Initialize()

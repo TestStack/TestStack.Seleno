@@ -1,5 +1,5 @@
 using System;
-
+using Funq;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -32,12 +32,19 @@ namespace TestStack.Seleno.Configuration
             _log.InfoFormat("Seleno v{0}, .NET Framework v{1}", 
                 typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
 
-            var app = new SelenoApplication(_webApplication);
-            app.WebServer = _webServer ?? new IisExpressWebServer(_webApplication);
-            app.Browser = _webDriver.Invoke();
-            app.Camera = _camera;
+            var container = BuildContainer();
+            var app = new SelenoApplication(container);
 
             return app;
+        }
+
+        private Container BuildContainer()
+        {
+            var container = new Container();
+            container.Register(c => _webServer ?? new IisExpressWebServer(_webApplication));
+            container.Register<IWebDriver>(c => _webDriver.Invoke());
+            container.Register(c => _camera);
+            return container;
         }
 
         public void ProjectToTest(WebApplication webApplication)

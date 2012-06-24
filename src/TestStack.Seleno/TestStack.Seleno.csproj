@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />
+    <Compile Include="Configuration\Contracts\IContainerAdapter.cs" />
     <Compile Include="Configuration\Contracts\ISelenoApplication.cs" />
     <Compile Include="Configuration\AppConfigurator.cs" />
     <Compile Include="Configuration\SelenoApplicationRunner.cs" />
@@ -111,6 +112,22 @@
     <Compile Include="Configuration\WebServers\ProjectLocation.cs" />
     <Compile Include="Configuration\WebServers\WebApplication.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
+    <Compile Include="Funq\Action.cs" />
+    <Compile Include="Funq\AutoWireHelpers.cs" />
+    <Compile Include="Funq\ReflectionExtensions.cs" />
+    <Compile Include="Funq\Container.Adapter.cs" />
+    <Compile Include="Funq\Container.cs" />
+    <Compile Include="Funq\Container.Overloads.cs" />
+    <Compile Include="Funq\Func.cs" />
+    <Compile Include="Funq\IFluentInterface.cs" />
+    <Compile Include="Funq\IFunqlet.cs" />
+    <Compile Include="Funq\Owner.cs" />
+    <Compile Include="Funq\ResolutionException.cs" />
+    <Compile Include="Funq\ReuseScope.cs" />
+    <Compile Include="Funq\ServiceEntry.cs" />
+    <Compile Include="Funq\ServiceEntry.Generic.cs" />
+    <Compile Include="Funq\ServiceKey.cs" />
+    <Compile Include="Funq\Syntax.cs" />
     <Compile Include="Infrastructure\Logging\ILog.cs" />
     <Compile Include="Infrastructure\Logging\ILogFactory.cs" />
     <Compile Include="Infrastructure\Logging\LogManager.cs" />
@@ -147,11 +164,15 @@
     <Compile Include="PageObjects\Actions\ActionHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Funq\Container.xdoc" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PageObjects\Components\" />
     <Folder Include="PageObjects\Elements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Funq\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
