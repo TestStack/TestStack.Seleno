@@ -2,28 +2,36 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace TestStack.Seleno.Configuration
+using TestStack.Seleno.Configuration.Contracts;
+
+namespace TestStack.Seleno.Configuration.WebServers
 {
-    public class IISExpressRunner
+    public class IisExpressWebServer : IWebServer
     {
         private static Process _webHostProcess;
         private static int _port;
         private static string _websitePath;
 
-        public static void Start(string websitePath, int port)
+        public IisExpressWebServer(string websitePath, int port)
         {
             _websitePath = websitePath;
             _port = port;
+        }
+
+        public void Start()
+        {
             var thread = new Thread(StartIisExpress) { IsBackground = true };
             thread.Start();
         }
 
-        public static string HomePage
+        public void Stop()
         {
-            get
-            {
-                return string.Format("http://localhost:{0}/", _port);
-            }
+            KillHosts();
+        }
+
+        public string BaseUrl
+        {
+            get { return string.Format("http://localhost:{0}/", _port); }
         }
 
         private static void StartIisExpress()
@@ -56,11 +64,6 @@ namespace TestStack.Seleno.Configuration
                 Arguments = String.Format("/path:\"{0}\" /port:{1}", applicationPath, port),
                 FileName = string.Format("{0}\\IIS Express\\iisexpress.exe", programfiles)
             };
-        }
-
-        public static void Stop()
-        {
-            KillHosts();
         }
 
         private static void KillHosts()

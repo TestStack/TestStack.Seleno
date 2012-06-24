@@ -95,6 +95,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BrowserFactory.cs" />
+    <Compile Include="Configuration\Contracts\IHost.cs" />
+    <Compile Include="Configuration\HostConfigurator.cs" />
+    <Compile Include="Configuration\HostFactory.cs" />
+    <Compile Include="Configuration\Contracts\IHostConfigurator.cs" />
+    <Compile Include="Configuration\Contracts\ILifecycleTask.cs" />
+    <Compile Include="Configuration\Screenshots\FileCamera.cs" />
+    <Compile Include="Configuration\Contracts\ICamera.cs" />
+    <Compile Include="Configuration\Screenshots\NullCamera.cs" />
+    <Compile Include="Configuration\SelenoHost.cs" />
+    <Compile Include="Configuration\Contracts\IWebServer.cs" />
+    <Compile Include="Configuration\WebServers\IisExpressWebServer.cs" />
+    <Compile Include="Configuration\WebServers\ProjectLocation.cs" />
+    <Compile Include="Configuration\WebServers\WebApplication.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Infrastructure\Logging\ILog.cs" />
     <Compile Include="Infrastructure\Logging\ILogFactory.cs" />
@@ -120,7 +134,7 @@
     <Compile Include="Configuration\Fakes\FakeHttpSessionState.cs" />
     <Compile Include="Specifications\IContainer.cs" />
     <Compile Include="Specifications\IDataHelper.cs" />
-    <Compile Include="Configuration\IISExpressRunner.cs" />
+    <Compile Include="Configuration\Contracts\IISExpressRunner.cs" />
     <Compile Include="PageObjects\Locators\jQueryBy.cs" />
     <Compile Include="PageObjects\Locators\jQueryExtensions.cs" />
     <Compile Include="Specifications\Scenario.cs" />

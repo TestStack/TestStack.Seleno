@@ -10,6 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
 using TestStack.Seleno.Specifications.Assertions;
 

@@ -3,6 +3,7 @@ using System.IO;
 using MvcMusicStore.FunctionalTests.Step1.Pages;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
