@@ -22,7 +22,8 @@ namespace TestStack.Seleno.PageObjects
 
         public UiComponent()
         {
-            Browser = HostFactory.SelenoHost.Browser as RemoteWebDriver;
+            if(SelenoApplicationRunner.Host != null)
+                Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
         }
 
         protected TPage NavigateTo<TPage>(By clickDestination)

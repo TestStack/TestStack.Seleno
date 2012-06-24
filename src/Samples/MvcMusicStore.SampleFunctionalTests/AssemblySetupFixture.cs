@@ -9,12 +9,12 @@ namespace MvcMusicStore.SampleFunctionalTests
     [SetUpFixture]
     public class AssemblySetupFixture
     {
-        private IHost _host;
+        private ISelenoApplication _selenoApplication;
 
         [SetUp]
         public void SetUp()
         {
-            _host = HostFactory
+            _selenoApplication = SelenoApplicationRunner
                 .New(x =>
                          x.ProjectToTest(
                              WebApplication.Create(app =>
@@ -22,43 +22,13 @@ namespace MvcMusicStore.SampleFunctionalTests
                                  app.Location = ProjectLocation.FromFolder("MvcMusicStore");
                                  app.PortNumber = 18763;
                              })));
-            _host.Initialize();
+            _selenoApplication.Initialize();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _host.ShutDown();
+            _selenoApplication.ShutDown();
         }
     }
-
-
-    //[SetUpFixture]
-    //public class AssemblySetupFixture
-    //{
-    //    [SetUp]
-    //    public void SetUp()
-    //    {
-    //        SelenoApplicationRunner.Run(configurator =>
-    //        {
-    //            //cfg.WithWebProject(
-    //            //    new WebApplication2(ProjectLocation.FromFolder("MvcMusicStore"), 12345));
-    //            configurator
-    //                .WithWebDriver(() => GetFireFoxDriver());
-    //            configurator.WithWebProject(WebApplication.Create(app =>
-    //            {
-    //                app.Location = ProjectLocation.FromFolder("MvcMusicStore");
-    //                app.PortNumber = 12345;
-    //            }));
-    //        });
-    //    }
-
-    //    private static IWebDriver GetFireFoxDriver()
-    //    {
-    //        var browser = new FirefoxDriver();
-    //        browser.SetImplicitTimeout(10);
-    //        return browser;
-    //    }
-
-    //}
 }

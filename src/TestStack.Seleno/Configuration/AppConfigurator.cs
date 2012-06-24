@@ -1,4 +1,5 @@
 using System;
+
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -9,31 +10,45 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.Configuration
 {
-    public class HostConfigurator : IHostConfigurator
+    public class AppConfigurator : IAppConfigurator
     {
-        WebApplication _webApplication;
+        static readonly ILog _log = LogManager.GetLogger("Seleno");
+
+        private WebApplication _webApplication;
+        private IWebServer _webServer;
         private ICamera _camera = new NullCamera();
         private ILogFactory _logFactory = new ConsoleLogFactory();
         private Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
 
-        public void Validate()
+        private void Validate()
         {
-            //           throw new NotImplementedException();
+            if (_webApplication == null)
+                throw new AppConfigurationException("The web application must be set.");
         }
 
-        public IHost CreateHost()
+        public ISelenoApplication CreateApplication()
         {
-            var host = new SelenoHost(_webApplication);
-            host.Browser = _webDriver.Invoke();
-            host.Camera = _camera;
+            Validate();
+            _log.InfoFormat("Seleno v{0}, .NET Framework v{1}", 
+                typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
 
-            return host;
+            var app = new SelenoApplication(_webApplication);
+            app.WebServer = _webServer ?? new IisExpressWebServer(_webApplication);
+            app.Browser = _webDriver.Invoke();
+            app.Camera = _camera;
+
+            return app;
         }
 
         public void ProjectToTest(WebApplication webApplication)
         {
             _webApplication = webApplication;
         }
+
+        public void WithWebServer(IWebServer webServer)
+        {
+            _webServer = webServer;
+        } 
 
         public void WithWebDriver(Func<IWebDriver> webDriver)
         {

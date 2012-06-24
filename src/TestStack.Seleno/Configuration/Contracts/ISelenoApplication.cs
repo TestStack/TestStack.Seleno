@@ -2,7 +2,7 @@
 
 namespace TestStack.Seleno.Configuration.Contracts
 {
-    public interface IHost
+    public interface ISelenoApplication
     {
         void Initialize();
         void ShutDown();

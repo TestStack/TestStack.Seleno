@@ -8,14 +8,12 @@ namespace TestStack.Seleno.Configuration.WebServers
 {
     public class IisExpressWebServer : IWebServer
     {
+        private static WebApplication _application;
         private static Process _webHostProcess;
-        private static int _port;
-        private static string _websitePath;
 
-        public IisExpressWebServer(string websitePath, int port)
+        public IisExpressWebServer(WebApplication application)
         {
-            _websitePath = websitePath;
-            _port = port;
+            _application = application;
         }
 
         public void Start()
@@ -31,12 +29,12 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public string BaseUrl
         {
-            get { return string.Format("http://localhost:{0}/", _port); }
+            get { return string.Format("http://localhost:{0}/", _application.PortNumber); }
         }
 
         private static void StartIisExpress()
         {
-            var webHostStartInfo = ProcessStartInfo(_websitePath, _port);
+            var webHostStartInfo = ProcessStartInfo(_application.Location.FullPath, _application.PortNumber);
 
             try
             {
