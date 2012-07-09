@@ -128,6 +128,7 @@
     <Compile Include="Funq\ServiceEntry.Generic.cs" />
     <Compile Include="Funq\ServiceKey.cs" />
     <Compile Include="Funq\Syntax.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="Infrastructure\Logging\ILog.cs" />
     <Compile Include="Infrastructure\Logging\ILogFactory.cs" />
     <Compile Include="Infrastructure\Logging\LogManager.cs" />
