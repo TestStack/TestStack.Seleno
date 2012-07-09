@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TestStack.Seleno.PageObjects.Page">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>PageObjects\Page.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestStack.Seleno.PageObjects.Page&lt;TViewModel&gt;">
+    <Position X="7.5" Y="7.25" Width="1.75" />
+    <InheritanceLine Type="TestStack.Seleno.PageObjects.UiComponent&lt;TViewModel&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="8.375" Y="6.502" />
+        <Point X="8.375" Y="7.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PageObjects\Page`1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestStack.Seleno.PageObjects.UiComponent">
+    <Position X="5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIQAAAQAABCABAAAAAAAAAEAAAAQCAAEAAA=</HashCode>
+      <FileName>PageObjects\UiComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestStack.Seleno.PageObjects.UiComponent&lt;TViewModel&gt;">
+    <Position X="7" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAgAAAAAAgAABAAAEAAAAAAAAAA=</HashCode>
+      <FileName>PageObjects\UiComponent`1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

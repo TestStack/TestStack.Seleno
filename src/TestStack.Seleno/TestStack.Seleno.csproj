@@ -166,6 +166,7 @@
   <ItemGroup>
     <None Include="Funq\Container.xdoc" />
     <None Include="packages.config" />
+    <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PageObjects\Components\" />
