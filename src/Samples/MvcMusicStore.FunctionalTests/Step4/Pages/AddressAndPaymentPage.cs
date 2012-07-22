@@ -1,3 +1,4 @@
+using FluentAssertions;
 using MvcMusicStore.Models;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
@@ -11,6 +12,11 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
         {
             FillWithModel(order);
             PromoCode = promoCode;
+
+            //Order model = ReadModelFromPage();
+            //var element = GetElementFor(x => x.Phone);
+            //model.Should().BeSameAs(order);
+
             return NavigateTo<Page>(By.CssSelector("input[type=submit]"));
         }
 

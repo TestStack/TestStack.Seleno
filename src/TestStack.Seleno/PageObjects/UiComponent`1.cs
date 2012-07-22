@@ -6,10 +6,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent<TViewModel> : UiComponent
+        where TViewModel: new()
     {
         public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {
@@ -46,6 +48,51 @@ namespace TestStack.Seleno.PageObjects
 
                 EnterTextInField(propertyName, stringValue);
             }
+        }
+
+        public TViewModel ReadModelFromPage()
+        {
+            var type = typeof(TViewModel);
+
+            var instance = new TViewModel();
+            foreach (var property in type.GetProperties())
+            {
+                var propertyName = property.Name;
+                var element = TryFindElement(By.Id(propertyName));
+
+                if (element != null)
+                {
+                    var text = element.Text;
+                    if (CanWriteProperty(text, property))
+                    {
+                        var typedValue = text.ChangeType(property.PropertyType);
+                        property.SetValue(instance, typedValue, null);
+                    }
+                }
+            }
+
+            return instance;
+        }
+
+        private bool CanWriteProperty(String text, PropertyInfo property)
+        {
+            return !String.IsNullOrEmpty(text) && property != null && property.CanWrite;
+        }
+
+        public IWebElement GetElementFor<TField>(Expression<Func<TViewModel, TField>> field)
+        {
+            string name = ExpressionHelper.GetExpressionText(field);
+            string id = TagBuilder.CreateSanitizedId(name);
+            var element = TryFindElement(By.Id(id));
+            return element;
+        }
+
+        public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> field)
+        {
+            var name = ExpressionHelper.GetExpressionText(field);
+
+            var javascriptExpression = string.Format("$('#{0}').is(':visible')", name);
+            return ExecuteScriptAndReturn<bool>(javascriptExpression);
         }
 
         private string GetStringValue(IDictionary<Type, Func<object, string>> propertyTypeHandling, object propertyValue, PropertyInfo property)

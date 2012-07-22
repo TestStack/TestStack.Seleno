@@ -13,6 +13,7 @@ using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
 using TestStack.Seleno.Specifications.Assertions;
+//using TestStack.Seleno.PageObjects.Locators;
 
 namespace TestStack.Seleno.PageObjects
 {
@@ -41,10 +42,24 @@ namespace TestStack.Seleno.PageObjects
             return new TDestinationPage {Browser = Browser};
         }
 
-         public ElementAssert AssertThatElements(By selector)
+        public ElementAssert AssertThatElements(By selector)
         {
             return new ElementAssert(this, selector);
         }
+
+        protected IWebElement TryFindElement(By by)
+        {
+             IWebElement result = null;
+             try
+             {
+                 result = Browser.FindElement(by);
+             }
+             catch (NoSuchElementException)
+             {
+             }
+
+            return result;
+         }
 
         protected TDestinationPage NavigateTo<TController, TDestinationPage>(Expression<Action<TController>> action)
             where TController : Controller
@@ -115,6 +130,12 @@ namespace TestStack.Seleno.PageObjects
         {
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(waitInSeconds));
             return wait.Until(d => d.FindElement(findElement));
+        }
+
+        public TReturn ExecuteScriptAndReturn<TReturn>(string javascriptToBeExecuted)
+        {
+            var javascriptExecutor = ((IJavaScriptExecutor)Browser);
+            return (TReturn)javascriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
         }
 
         public void WaitForAjaxCallsToFinish(int timeOutInSecond = 10)
