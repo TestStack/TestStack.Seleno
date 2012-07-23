@@ -1,4 +1,3 @@
-using FluentAssertions;
 using MvcMusicStore.Models;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
@@ -15,7 +14,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
 
             //Order model = ReadModelFromPage();
             //var element = GetElementFor(x => x.Phone);
-            //model.Should().BeSameAs(order);
+            ////model.Should().BeSameAs(order);
 
             return NavigateTo<Page>(By.CssSelector("input[type=submit]"));
         }

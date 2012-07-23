@@ -58,25 +58,21 @@ namespace TestStack.Seleno.PageObjects
             foreach (var property in type.GetProperties())
             {
                 var propertyName = property.Name;
-                var element = TryFindElement(By.Id(propertyName));
-
-                if (element != null)
+                var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
+                var typedValue = ExecuteScriptAndReturn(javascriptExtractor, property.PropertyType);
+                
+                if (CanWriteProperty(typedValue, property))
                 {
-                    var text = element.Text;
-                    if (CanWriteProperty(text, property))
-                    {
-                        var typedValue = text.ChangeType(property.PropertyType);
-                        property.SetValue(instance, typedValue, null);
-                    }
+                    property.SetValue(instance, typedValue, null);
                 }
             }
-
             return instance;
         }
 
-        private bool CanWriteProperty(String text, PropertyInfo property)
+       
+        private bool CanWriteProperty(Object typedValue, PropertyInfo property)
         {
-            return !String.IsNullOrEmpty(text) && property != null && property.CanWrite;
+            return typedValue != null && property != null && property.CanWrite;
         }
 
         public IWebElement GetElementFor<TField>(Expression<Func<TViewModel, TField>> field)

@@ -13,7 +13,9 @@ using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
 using TestStack.Seleno.Specifications.Assertions;
-//using TestStack.Seleno.PageObjects.Locators;
+using TestStack.Seleno.PageObjects.Locators;
+using TestStack.Seleno.Extensions;
+using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects
 {
@@ -48,6 +50,20 @@ namespace TestStack.Seleno.PageObjects
         }
 
         protected IWebElement TryFindElement(By by)
+        {
+             IWebElement result = null;
+             try
+             {
+                 result = Browser.FindElement(by);
+             }
+             catch (NoSuchElementException)
+             {
+             }
+
+            return result;
+         }
+
+        protected IWebElement TryFindElement(Locators.By.jQueryBy by)
         {
              IWebElement result = null;
              try
@@ -136,6 +152,21 @@ namespace TestStack.Seleno.PageObjects
         {
             var javascriptExecutor = ((IJavaScriptExecutor)Browser);
             return (TReturn)javascriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
+        }
+
+        public object ExecuteScriptAndReturn(string javascriptToBeExecuted, Type returnType, IJavaScriptExecutor javaScriptExecutor = null)
+        {
+            javaScriptExecutor = javaScriptExecutor ?? Browser;
+            object result = null;
+
+            object untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
+            try
+            {
+                result = untypedValue.ChangeType(returnType);
+            }
+            catch { }
+
+            return result;
         }
 
         public void WaitForAjaxCallsToFinish(int timeOutInSecond = 10)
