@@ -2,7 +2,7 @@ using MvcMusicStore.ViewModels;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 
-namespace MvcMusicStore.SampleFunctionalTests.Pages
+namespace TestStack.Seleno.Samples.MvcMusicStore.Pages
 {
     public class ShoppingCartPage : Page<ShoppingCartViewModel>
     {

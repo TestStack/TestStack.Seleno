@@ -8,8 +8,8 @@
     <ProjectGuid>{44695C43-6AF4-4D46-A121-8C9B8326F9EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcMusicStore.SampleFunctionalTests</RootNamespace>
-    <AssemblyName>MvcMusicStore.SampleFunctionalTests</AssemblyName>
+    <RootNamespace>TestStack.Seleno.Samples.MvcMusicStore</RootNamespace>
+    <AssemblyName>TestStack.Seleno.Samples.MvcMusicStore</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>

@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
-using MvcMusicStore.SampleFunctionalTests.Pages;
 using NUnit.Framework;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Core;
 using TestStack.Seleno.PageObjects;
+using TestStack.Seleno.Samples.MvcMusicStore.Pages;
 
-namespace MvcMusicStore.SampleFunctionalTests.Scenarios
+namespace TestStack.Seleno.Samples.MvcMusicStore.Scenarios
 {
     [Story(
         Title = "Can buy music online",

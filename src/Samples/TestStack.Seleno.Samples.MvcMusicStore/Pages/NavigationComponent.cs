@@ -1,8 +1,7 @@
 using TestStack.Seleno.PageObjects;
-
 using OpenQA.Selenium;
 
-namespace MvcMusicStore.SampleFunctionalTests.Pages
+namespace TestStack.Seleno.Samples.MvcMusicStore.Pages
 {
     public class NavigationComponent : UiComponent
     {

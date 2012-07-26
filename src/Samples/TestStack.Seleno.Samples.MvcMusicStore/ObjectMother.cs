@@ -1,6 +1,6 @@
 ﻿using MvcMusicStore.Models;
 
-namespace MvcMusicStore.SampleFunctionalTests
+namespace TestStack.Seleno.Samples.MvcMusicStore
 {
     public class ObjectMother
     {

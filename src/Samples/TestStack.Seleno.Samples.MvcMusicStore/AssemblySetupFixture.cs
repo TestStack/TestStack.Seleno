@@ -1,10 +1,9 @@
 ﻿using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
-
 using NUnit.Framework;
 
-namespace MvcMusicStore.SampleFunctionalTests
+namespace TestStack.Seleno.Samples.MvcMusicStore
 {
     [SetUpFixture]
     public class AssemblySetupFixture
