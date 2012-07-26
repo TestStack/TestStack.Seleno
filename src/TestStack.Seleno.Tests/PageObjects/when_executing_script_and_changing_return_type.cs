@@ -37,7 +37,7 @@ namespace TestStack.Seleno.Tests.PageObjects
         }
 
         [Test]
-        public void should_cast_the_return_type_to_a_boolean()
+        public void should_cast_the_return_type_to_the_specified_type()
         {
             _result.Should().BeOfType<bool>();
         }
