@@ -2,6 +2,7 @@
 using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -29,15 +30,6 @@ namespace TestStack.Seleno.PageObjects.Actions
         public static void SendKeyBoardShortCut(this IWebDriver browser, string commandKey, char key)
         {
             browser.SendKeyBoardShortCut(new[] { commandKey }, key);
-        }
-
-        public static TReturn ExecuteJavaScriptAndReturn<TReturn>(this IWebDriver browser, string javascriptToBeExecuted)
-        {
-            var remoteDriver = (RemoteWebDriver)browser;
-
-            var x = remoteDriver.ExecuteScript("return " + javascriptToBeExecuted);
-
-            return (TReturn)x;
         }
 
         public static void SendKeyBoardShortCut(this IWebDriver browser, string[] commandKeys, char key)
@@ -83,12 +75,12 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public static long GetCursorPosition(this IWebDriver browser)
         {
-            return browser.ExecuteJavaScriptAndReturn<long>("window.getSelection().getRangeAt(0).startOffset");
+            return browser.ExecuteScriptAndReturn<long>("window.getSelection().getRangeAt(0).startOffset");
         }
 
         public static long GetSelectionLength(this IWebDriver browser, string jquerySelector)
         {
-            return browser.ExecuteJavaScriptAndReturn<long>(string.Format("$('{0}').getSelection().length", jquerySelector));
+            return browser.ExecuteScriptAndReturn<long>(string.Format("$('{0}').getSelection().length", jquerySelector));
         }
 
         public static void SetCursorFocusOnAt(this IWebDriver browser, string jquerySelector, int caretPosition = 0)

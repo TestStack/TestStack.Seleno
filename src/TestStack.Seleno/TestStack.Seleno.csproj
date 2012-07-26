@@ -111,6 +111,7 @@
     <Compile Include="Configuration\WebServers\IisExpressWebServer.cs" />
     <Compile Include="Configuration\WebServers\ProjectLocation.cs" />
     <Compile Include="Configuration\WebServers\WebApplication.cs" />
+    <Compile Include="Extensions\PropertyExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Funq\Action.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
+    <Compile Include="PageObjects\Components\TableComponent.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />
@@ -171,7 +173,6 @@
     <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PageObjects\Components\" />
     <Folder Include="PageObjects\Elements\" />
   </ItemGroup>
   <ItemGroup>

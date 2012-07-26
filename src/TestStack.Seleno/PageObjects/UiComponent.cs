@@ -148,11 +148,11 @@ namespace TestStack.Seleno.PageObjects
             return wait.Until(d => d.FindElement(findElement));
         }
 
-        public TReturn ExecuteScriptAndReturn<TReturn>(string javascriptToBeExecuted)
-        {
-            var javascriptExecutor = ((IJavaScriptExecutor)Browser);
-            return (TReturn)javascriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
-        }
+        //public TReturn ExecuteScriptAndReturn<TReturn>(string javascriptToBeExecuted)
+        //{
+        //    var javascriptExecutor = ((IJavaScriptExecutor)Browser);
+        //    return (TReturn)javascriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
+        //}
 
         public object ExecuteScriptAndReturn(string javascriptToBeExecuted, Type returnType, IJavaScriptExecutor javaScriptExecutor = null)
         {

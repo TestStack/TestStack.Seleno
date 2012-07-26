@@ -88,7 +88,7 @@ namespace TestStack.Seleno.PageObjects
             var name = ExpressionHelper.GetExpressionText(field);
 
             var javascriptExpression = string.Format("$('#{0}').is(':visible')", name);
-            return ExecuteScriptAndReturn<bool>(javascriptExpression);
+            return Browser.ExecuteScriptAndReturn<bool>(javascriptExpression);
         }
 
         private string GetStringValue(IDictionary<Type, Func<object, string>> propertyTypeHandling, object propertyValue, PropertyInfo property)

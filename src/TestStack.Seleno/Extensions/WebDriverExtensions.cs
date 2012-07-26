@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using TestStack.Seleno.PageObjects.Locators;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
@@ -19,6 +20,11 @@ namespace TestStack.Seleno.Extensions
         public static void WaitForMilliseconds(this IWebDriver driver, int milliseconds)
         {
             System.Threading.Thread.Sleep(milliseconds);
+        }
+
+        public static TReturn ExecuteScriptAndReturn<TReturn>(this IWebDriver driver, string javascriptToBeExecuted)
+        {
+            return (TReturn)(driver as RemoteWebDriver).ExecuteScript("return " + javascriptToBeExecuted);
         }
 
         public static IWebElement FindElement(this IWebDriver driver, By by, Func<IWebElement, bool> predicate)

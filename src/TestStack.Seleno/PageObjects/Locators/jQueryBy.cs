@@ -1,10 +1,4 @@
-﻿//====================================================
-//| Downloaded From                                  |
-//| Visual C# Kicks - http://www.vcskicks.com/       |
-//| License - http://www.vcskicks.com/license.php    |
-//====================================================
-
-namespace TestStack.Seleno.PageObjects.Locators
+﻿namespace TestStack.Seleno.PageObjects.Locators
 {
     public class By : OpenQA.Selenium.By
     {
@@ -31,6 +25,12 @@ namespace TestStack.Seleno.PageObjects.Locators
             {
                 this.Selector = selector;
             }
+
+            public jQueryBy Html(string selector = "")
+            {
+                return Function("html", selector);
+            }
+
 
             #region ----Tree Traversal----
 
