@@ -8,7 +8,7 @@
     <owners>Mehdi Khalili, Michael Whelan</owners>
     <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Seleno helps you write automated UI tests in the right way</description>
+    <description>Seleno helps you write automated UI tests in the right way with Selenium WebDriver</description>
     <releaseNotes>The baseline for Seleno</releaseNotes>
     <copyright>Copyright 2012 TestStack</copyright>
   </metadata>
