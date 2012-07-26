@@ -7,6 +7,11 @@ namespace TestStack.Seleno.Extensions
 {
     public static class PropertyExtensions
     {
+        public static bool CanWriteToProperty(this PropertyInfo property, object typedValue)
+        {
+            return typedValue != null && property.CanWrite;
+        }
+
         public static TDomain SetValue<TDomain, TProperty>(this TDomain domainObject, Expression<Func<TDomain, TProperty>> domainPropertySelector, TProperty value)
             where TDomain : class
         {

@@ -142,7 +142,9 @@
     <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
+    <Compile Include="PageObjects\Components\FormComponent.cs" />
     <Compile Include="PageObjects\Components\TableComponent.cs" />
+    <Compile Include="PageObjects\Components\PanelComponent.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />

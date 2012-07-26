@@ -13,20 +13,6 @@ namespace TestStack.Seleno.PageObjects
     public class UiComponent<TViewModel> : UiComponent
         where TViewModel: new()
     {
-        public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
-        {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return Browser.FindElement(By.Name(name)).Selected;
-        }
-
-        public string GetTextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
-        {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return Browser.FindElement(By.Name(name)).GetAttribute("value");
-        }
-
         public void FillWithModel(TViewModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
         {
             var type = typeof(TViewModel);
@@ -50,6 +36,19 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
+        private void EnterTextInField(string fieldName, string value)
+        {
+            if (String.IsNullOrEmpty(value)) return;
+
+            Execute(By.Name(fieldName),
+                    element =>
+                    {
+                        element.Clear();
+                        if (!string.IsNullOrEmpty(value))
+                            element.SendKeys(value);
+                    });
+        }
+
         public TViewModel ReadModelFromPage()
         {
             var type = typeof(TViewModel);
@@ -61,7 +60,7 @@ namespace TestStack.Seleno.PageObjects
                 var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
                 var typedValue = ExecuteScriptAndReturn(javascriptExtractor, property.PropertyType);
                 
-                if (CanWriteProperty(typedValue, property))
+                if (property.CanWriteToProperty(typedValue))
                 {
                     property.SetValue(instance, typedValue, null);
                 }
@@ -69,10 +68,18 @@ namespace TestStack.Seleno.PageObjects
             return instance;
         }
 
-       
-        private bool CanWriteProperty(Object typedValue, PropertyInfo property)
+        public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {
-            return typedValue != null && property != null && property.CanWrite;
+            var name = ExpressionHelper.GetExpressionText(field);
+
+            return Browser.FindElement(By.Name(name)).Selected;
+        }
+
+        public string GetTextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        {
+            var name = ExpressionHelper.GetExpressionText(field);
+
+            return Browser.FindElement(By.Name(name)).GetAttribute("value");
         }
 
         public IWebElement GetElementFor<TField>(Expression<Func<TViewModel, TField>> field)
@@ -124,16 +131,5 @@ namespace TestStack.Seleno.PageObjects
             return propertyValue.ToString();
         }
 
-        private void EnterTextInField(string fieldName, string value)
-        {
-            if (String.IsNullOrEmpty(value)) return;
-
-            Execute(By.Name(fieldName), element =>
-                                            {
-                                                element.Clear();
-                                                if (!string.IsNullOrEmpty(value))
-                                                    element.SendKeys(value);
-                                            });
-        }
     }
 }

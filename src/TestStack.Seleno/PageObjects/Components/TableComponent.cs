@@ -14,7 +14,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Components
 {
-    public class GridComponent<TViewModel> : IEnumerable<TViewModel>
+    public class TableComponent<TViewModel> : IEnumerable<TViewModel>
          where TViewModel : class, new()
     {
         public const string PropertyNameAttribute = "data-property-name";
@@ -25,6 +25,11 @@ namespace TestStack.Seleno.PageObjects.Components
         private IEnumerable<PropertyInfo> _displayedPropertiesInGrids;
         private IList<TViewModel> _rows;
         private long? _numberOfRows;
+
+        public TableComponent(string gridId)
+        {
+            _gridId = gridId;
+        }
 
         private IEnumerable<PropertyInfo> DisplayedProperties
         {
@@ -72,11 +77,6 @@ namespace TestStack.Seleno.PageObjects.Components
             get { return GetRowAt(rowNumber); }
         }
 
-        public GridComponent(string gridId)
-        {
-            _gridId = gridId;
-        }
-
         public long NumberOfRows
         {
             get
@@ -120,7 +120,7 @@ namespace TestStack.Seleno.PageObjects.Components
             {
                 var cellValue = GetCellValue(rowIndex, property);
 
-                if (CanWriteToProperty(property, cellValue))
+                if (property.CanWriteToProperty(cellValue))
                 {
                     property.SetValue(item, cellValue, null);
                 }
@@ -180,9 +180,5 @@ namespace TestStack.Seleno.PageObjects.Components
             return !String.IsNullOrWhiteSpace(cellText) ? cellText.ChangeType(property.PropertyType) : null;
         }
 
-        private static bool CanWriteToProperty(PropertyInfo property, object cellValue)
-        {
-            return cellValue != null && property.CanWrite;
-        }
     }
 }
