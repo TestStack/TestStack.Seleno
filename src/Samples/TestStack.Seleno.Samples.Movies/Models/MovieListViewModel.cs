@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MvcMovie.Models
+namespace TestStack.Seleno.Samples.Movies.Models
 {
     public class MovieListViewModel
     {

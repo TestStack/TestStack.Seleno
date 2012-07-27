@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcMovie.Controllers
+namespace TestStack.Seleno.Samples.Movies.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Web.Mvc;
-using MvcMovie.Infrastructure.Data;
-using MvcMovie.Infrastructure.Data.InMemory;
+using TestStack.Seleno.Samples.Movies.Infrastructure.Data;
+using TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory;
 
-namespace MvcMovie.Controllers
+namespace TestStack.Seleno.Samples.Movies.Controllers
 {
     public class MoviesController : Controller
     {

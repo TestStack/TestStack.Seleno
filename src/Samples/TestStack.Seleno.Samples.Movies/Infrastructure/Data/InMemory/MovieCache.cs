@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MvcMovie.Models;
+using TestStack.Seleno.Samples.Movies.Models;
 
-namespace MvcMovie.Infrastructure.Data.InMemory
+namespace TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory
 {
     public class MovieCache 
     {

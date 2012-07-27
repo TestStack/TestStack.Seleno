@@ -16,13 +16,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno", "TestSta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Tests", "TestStack.Seleno.Tests\TestStack.Seleno.Tests.csproj", "{A2CC3281-DC6E-48E3-B541-2DE37E346E35}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies", "Samples\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj", "{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies.FunctionalTests", "Samples\TestStack.Seleno.Samples.Movies.FunctionalTests\TestStack.Seleno.Samples.Movies.FunctionalTests.csproj", "{44695C43-6AF4-4D46-A121-8C9B8326F9EA}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "Samples\MvcMusicStore\MvcMusicStore.csproj", "{32DCD27D-A84C-4250-B657-408B3620A9AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.PageObjects", "Samples\TestStack.Seleno.Samples.PageObjects\TestStack.Seleno.Samples.PageObjects.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests", "Samples\TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests\TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.MvcMusicStore", "Samples\TestStack.Seleno.Samples.MvcMusicStore\TestStack.Seleno.Samples.MvcMusicStore.csproj", "{44695C43-6AF4-4D46-A121-8C9B8326F9EA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusicStore", "MusicStore", "{66ABFE42-A2AB-4C04-BB5E-CF721DD194DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies", "Samples\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj", "{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Movies", "Movies", "{62617568-5C2B-4DB1-A8CB-2C8A9E256E40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,14 @@ Global
 		{A2CC3281-DC6E-48E3-B541-2DE37E346E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2CC3281-DC6E-48E3-B541-2DE37E346E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2CC3281-DC6E-48E3-B541-2DE37E346E35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32DCD27D-A84C-4250-B657-408B3620A9AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32DCD27D-A84C-4250-B657-408B3620A9AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32DCD27D-A84C-4250-B657-408B3620A9AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,22 +58,16 @@ Global
 		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{32DCD27D-A84C-4250-B657-408B3620A9AC} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
-		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
-		{44695C43-6AF4-4D46-A121-8C9B8326F9EA} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
-		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
+		{66ABFE42-A2AB-4C04-BB5E-CF721DD194DC} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
+		{62617568-5C2B-4DB1-A8CB-2C8A9E256E40} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
+		{32DCD27D-A84C-4250-B657-408B3620A9AC} = {66ABFE42-A2AB-4C04-BB5E-CF721DD194DC}
+		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E} = {66ABFE42-A2AB-4C04-BB5E-CF721DD194DC}
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25} = {62617568-5C2B-4DB1-A8CB-2C8A9E256E40}
+		{44695C43-6AF4-4D46-A121-8C9B8326F9EA} = {62617568-5C2B-4DB1-A8CB-2C8A9E256E40}
 	EndGlobalSection
 EndGlobal

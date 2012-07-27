@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
+using TestStack.Seleno.Samples.Movies.Models;
 
-using MvcMovie.Models;
-
-namespace MvcMovie.Infrastructure.Data
+namespace TestStack.Seleno.Samples.Movies.Infrastructure.Data
 {
     public interface IMovieRepository
     {
