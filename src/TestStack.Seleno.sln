@@ -11,9 +11,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E5339FE-5E0F-4245-AD87-D59777DD47CF}"
-	ProjectSection(SolutionItems) = preProject
-		..\NuGet\TestStack.Seleno\TestStack.Seleno.nuspec = ..\NuGet\TestStack.Seleno\TestStack.Seleno.nuspec
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno", "TestStack.Seleno\TestStack.Seleno.csproj", "{32A3EB53-458F-42F1-8780-77950FFB9972}"
 EndProject
@@ -24,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.PageObjects", "Samples\TestStack.Seleno.Samples.PageObjects\TestStack.Seleno.Samples.PageObjects.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.MvcMusicStore", "Samples\TestStack.Seleno.Samples.MvcMusicStore\TestStack.Seleno.Samples.MvcMusicStore.csproj", "{44695C43-6AF4-4D46-A121-8C9B8326F9EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies", "Samples\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj", "{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +50,10 @@ Global
 		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44695C43-6AF4-4D46-A121-8C9B8326F9EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +62,6 @@ Global
 		{32DCD27D-A84C-4250-B657-408B3620A9AC} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
 		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
 		{44695C43-6AF4-4D46-A121-8C9B8326F9EA} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
+		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,61 @@
+﻿@using Microsoft.Web.Mvc
+@model IEnumerable<MvcMovie.Models.MovieListViewModel>
+
+@{
+    ViewBag.Title = "Movies List";
+}
+
+<h2>Movie List</h2>
+
+<table id="ApplicationsListGrid" class="table table-striped">
+    <thead>
+        <tr>
+            <th data-property-name="@Html.NameFor(x => x.First().Title)">
+                Title
+            </th>
+            <th data-property-name="@Html.NameFor(x => x.First().Genre)">
+                Genre
+            </th>
+            <th data-property-name="@Html.NameFor(x => x.First().ReleaseDate)">
+                Release Date
+            </th>
+            <th data-property-name="@Html.NameFor(x => x.First().Rating)">
+                Rating
+            </th>
+            <th data-property-name="@Html.NameFor(x => x.First().Price)">
+                Price
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td data-property-name="@Html.NameFor(x => item.Title)">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td data-property-name="@Html.NameFor(x => item.Genre)">
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td data-property-name="@Html.NameFor(x => item.ReleaseDate)">
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td data-property-name="@Html.NameFor(x => item.Rating)">
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td data-property-name="@Html.NameFor(x => item.Rating)">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @(Html.ActionLink("Edit", "Edit", new {@id = item.Id}))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+@*    @(Html.ActionLink("Add a new Application", "Create", new { @id = ControlIdentifiers.Applications.Index.NewApplication }))
+*@</div>
