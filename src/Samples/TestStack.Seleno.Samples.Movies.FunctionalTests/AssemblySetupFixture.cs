@@ -18,8 +18,8 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests
                          x.ProjectToTest(
                              WebApplication.Create(app =>
                              {
-                                 app.Location = ProjectLocation.FromFolder("MvcMusicStore");
-                                 app.PortNumber = 18763;
+                                 app.Location = ProjectLocation.FromFolder("TestStack.Seleno.Samples.Movies");
+                                 app.PortNumber = 19456;
                              })));
             _selenoApplication.Initialize();
         }

@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Samples.Movies.Controllers
 
         public ActionResult Index()
         {
-            var list = _repository.GetAll().ToList();
+            var list = _repository.GetAll().OrderBy(x => x.Title).ToList();
             return View(list);
         }
 

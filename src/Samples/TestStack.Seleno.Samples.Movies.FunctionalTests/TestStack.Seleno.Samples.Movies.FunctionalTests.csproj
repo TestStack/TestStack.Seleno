@@ -67,8 +67,11 @@
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\LogonPage.cs" />
+    <Compile Include="Pages\Movies\MovieListPage.cs" />
     <Compile Include="Pages\RegisterPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserStories\BDDfyFixture.cs" />
+    <Compile Include="UserStories\ViewingMovies\movie_list_story.cs" />
     <Compile Include="UserStories\ViewingMovies\viewing_a_list_of_movies.cs" />
   </ItemGroup>
   <ItemGroup>

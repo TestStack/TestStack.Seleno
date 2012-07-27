@@ -22,10 +22,10 @@
             <th data-property-name="@Html.NameFor(x => x.First().Rating)">
                 Rating
             </th>
-            <th data-property-name="@Html.NameFor(x => x.First().Price)">
+@*            <th data-property-name="@Html.NameFor(x => x.First().Price)">
                 Price
             </th>
-            <th>Action</th>
+*@            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -45,10 +45,10 @@
                 <td data-property-name="@Html.NameFor(x => item.Rating)">
                     @Html.DisplayFor(modelItem => item.Rating)
                 </td>
-                <td data-property-name="@Html.NameFor(x => item.Rating)">
+@*                <td data-property-name="@Html.NameFor(x => item.Price)">
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
-                <td>
+*@                <td>
                     @(Html.ActionLink("Edit", "Edit", new {@id = item.Id}))
                 </td>
             </tr>

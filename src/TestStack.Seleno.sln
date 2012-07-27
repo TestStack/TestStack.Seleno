@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BE1D3D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E5339FE-5E0F-4245-AD87-D59777DD47CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno", "TestStack.Seleno\TestStack.Seleno.csproj", "{32A3EB53-458F-42F1-8780-77950FFB9972}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Tests", "TestStack.Seleno.Tests\TestStack.Seleno.Tests.csproj", "{A2CC3281-DC6E-48E3-B541-2DE37E346E35}"

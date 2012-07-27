@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
+using TestStack.Seleno.PageObjects.Components;
 
 namespace TestStack.Seleno.PageObjects
 {

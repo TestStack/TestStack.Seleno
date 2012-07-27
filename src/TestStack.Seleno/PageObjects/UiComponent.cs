@@ -12,6 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
+using TestStack.Seleno.PageObjects.Components;
 using TestStack.Seleno.Specifications.Assertions;
 using TestStack.Seleno.PageObjects.Locators;
 using TestStack.Seleno.Extensions;
@@ -44,6 +45,11 @@ namespace TestStack.Seleno.PageObjects
             return new TDestinationPage {Browser = Browser};
         }
 
+        protected TableComponent<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
+        {
+            return new TableComponent<TModel>(gridId) { Browser = Browser };    
+        }
+        
         public ElementAssert AssertThatElements(By selector)
         {
             return new ElementAssert(this, selector);
