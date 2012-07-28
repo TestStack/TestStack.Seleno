@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

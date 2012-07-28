@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using TestStack.Seleno.Samples.Movies.FunctionalTests.Extensions;
 using TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies;
 using TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory;
 
@@ -12,6 +13,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMov
         public void Given_I_have_12_Movies()
         {
             // would create some test data and save it to the database
+            // but MVC sample already has hard-coded test values for convenience
         }
 
         public void When_I_navigate_to_the_Movie_List_page()
@@ -28,7 +30,6 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMov
         {
             //var pageList = _page.MovieList.ToList();
             //var dbList = Db.Movies.OrderBy(x => x.Title).ToList();
-            //pageList.Should().ContainInOrder(dbList);
         }
     }
 }

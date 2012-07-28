@@ -5,20 +5,65 @@ namespace TestStack.Seleno.Extensions
 {
     public static class TypeExtensions
     {
-        public static T ChangeType<T>(this object value)
+        /// <summary>
+        /// Generic method to convert from one type to another and returns the strongly typed value. 
+        /// Returns default value for type if cannot convert.
+        /// </summary>
+        public static TReturn TryConvertTo<TFrom, TReturn>(this TFrom from, TReturn defaultValue = default(TReturn))
         {
-            return (T)ChangeType(value, typeof(T));
+            try
+            {
+                return (TReturn)from.TryConvertTo(typeof(TReturn), defaultValue);
+            }
+            catch
+            {
+                
+            }
+
+            return defaultValue;
         }
 
-        public static object ChangeType(this object value, Type t)
+        /// <summary>
+        /// Converts from one type to another and returns the value. Returns default value for type if cannot convert.
+        /// </summary>
+        public static object TryConvertTo<TFrom>(this TFrom from, Type returnType, object defaultValue = null)
         {
-            TypeConverter tc = TypeDescriptor.GetConverter(t);
-            return tc.ConvertFrom(value);
+            try
+            {
+                if (from == null)
+                    return defaultValue;
+
+                if ((from as string) != null)
+                {
+                    string value = from as string;
+
+                    if (returnType.IsEnum)
+                        return Enum.Parse(returnType, value, true);
+
+                    if (string.IsNullOrEmpty(value))
+                        return defaultValue;
+                }
+
+                if ((from as IConvertible) != null)
+                    return Convert.ChangeType(from, returnType);
+
+                if (returnType.IsAssignableFrom(from.GetType()))
+                    return from;
+
+                TypeConverter converter = TypeDescriptor.GetConverter(from.GetType());
+
+                if (converter.CanConvertTo(returnType))
+                    return converter.ConvertTo(from, returnType);
+
+                if ((from as string) != null)
+                    return from.ToString().TryConvertTo<string>(returnType, defaultValue);
+            }
+            catch
+            {
+            }
+
+            return defaultValue;
         }
 
-        public static void RegisterTypeConverter<T, TC>() where TC : TypeConverter
-        {
-            TypeDescriptor.AddAttributes(typeof(T), new TypeConverterAttribute(typeof(TC)));
-        }
     }
 }

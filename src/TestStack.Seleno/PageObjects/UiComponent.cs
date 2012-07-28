@@ -163,14 +163,9 @@ namespace TestStack.Seleno.PageObjects
         public object ExecuteScriptAndReturn(string javascriptToBeExecuted, Type returnType, IJavaScriptExecutor javaScriptExecutor = null)
         {
             javaScriptExecutor = javaScriptExecutor ?? Browser;
-            object result = null;
 
             object untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
-            try
-            {
-                result = untypedValue.ChangeType(returnType);
-            }
-            catch { }
+            object result = untypedValue.TryConvertTo(returnType, null);
 
             return result;
         }

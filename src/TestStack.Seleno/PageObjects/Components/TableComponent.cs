@@ -162,8 +162,6 @@ namespace TestStack.Seleno.PageObjects.Components
 
         private object GetCellValue(int rowIndex, PropertyInfo property)
         {
-
-
             if (property.PropertyType == typeof(bool))
             {
                 var javaScriptCheckBoxStateRetriever =
@@ -174,10 +172,10 @@ namespace TestStack.Seleno.PageObjects.Components
 
             }
 
-
             var cellText = GetCellFor(rowIndex, property).Text;
 
-            return !String.IsNullOrWhiteSpace(cellText) ? cellText.ChangeType(property.PropertyType) : null;
+            var typedValue = !String.IsNullOrWhiteSpace(cellText) ? cellText.TryConvertTo<string>(property.PropertyType) : null;
+            return typedValue;
         }
 
     }
