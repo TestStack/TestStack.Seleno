@@ -149,7 +149,7 @@
     <Compile Include="PageObjects\Actions\ElementFinder.cs" />
     <Compile Include="PageObjects\Actions\IElementFinder.cs" />
     <Compile Include="PageObjects\Actions\PageNavigator.cs" />
-    <Compile Include="PageObjects\Components\TableComponent.cs" />
+    <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
@@ -181,6 +181,7 @@
     <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="PageObjects\Components\" />
     <Folder Include="PageObjects\Elements\" />
   </ItemGroup>
   <ItemGroup>

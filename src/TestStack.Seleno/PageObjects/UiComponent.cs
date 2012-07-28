@@ -7,7 +7,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.PageObjects.Components;
 using TestStack.Seleno.Specifications.Assertions;
 using By = OpenQA.Selenium.By;
 
@@ -41,9 +40,9 @@ namespace TestStack.Seleno.PageObjects
             return new ElementFinder(Browser);
         }
 
-        protected TableComponent<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
+        protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
-            return new TableComponent<TModel>(gridId) { Browser = Browser };
+            return new TableReader<TModel>(gridId) { Browser = Browser };
         }
 
         public ElementAssert AssertThatElements(By selector)
@@ -56,46 +55,6 @@ namespace TestStack.Seleno.PageObjects
         {
             return new TComponent() { Browser = Browser };
         }
-
-        //protected IWebElement TryFindElement(By by)
-        //{
-        //    IWebElement result = null;
-        //    try
-        //    {
-        //        result = Browser.FindElement(by);
-        //    }
-        //    catch (NoSuchElementException)
-        //    {
-        //    }
-
-        //    return result;
-        //}
-
-        //protected IWebElement TryFindElement(Locators.By.jQueryBy by)
-        //{
-        //    IWebElement result = null;
-        //    try
-        //    {
-        //        result = Browser.FindElementByjQuery(by);
-        //    }
-        //    catch (NoSuchElementException)
-        //    {
-        //    }
-
-        //    return result;
-        //}
-
-        //IWebElement FindElementWithWait(By findElement, int waitInSeconds = 20)
-        //{
-        //    var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(waitInSeconds));
-        //    return wait.Until(d => d.FindElement(findElement));
-        //}
-
-        //public TReturn ExecuteScriptAndReturn<TReturn>(string javascriptToBeExecuted)
-        //{
-        //    var javascriptExecutor = ((IJavaScriptExecutor)Browser);
-        //    return (TReturn)javascriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
-        //}
 
         public void WaitForAjaxCallsToFinish(int timeOutInSecond = 10)
         {
