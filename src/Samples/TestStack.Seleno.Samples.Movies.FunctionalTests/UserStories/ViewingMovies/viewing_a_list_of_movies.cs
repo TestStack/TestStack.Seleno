@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using FluentAssertions;
-using TestStack.Seleno.Samples.Movies.FunctionalTests.Extensions;
+﻿using FluentAssertions;
 using TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies;
-using TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMovies
 {

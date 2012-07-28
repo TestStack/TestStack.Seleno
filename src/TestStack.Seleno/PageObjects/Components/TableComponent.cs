@@ -146,7 +146,7 @@ namespace TestStack.Seleno.PageObjects.Components
         {
             var selector = GetCellSelector(rowIndex, property.Name);
 
-            return Browser.FindElement(By.jQuery(selector));
+            return Browser.FindElementByjQuery(By.jQuery(selector));
         }
 
         string GetCellSelector(int rowIndex, string propertyName)

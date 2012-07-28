@@ -9,16 +9,16 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public Page SubmitShippingInfo(Order order, string promoCode)
         {
-            FillWithModel(order);
+            Input().Model(order);
             PromoCode = promoCode;
 
             //Order model = ReadModelFromPage();
             //var element = GetElementFor(x => x.Phone);
             ////model.Should().BeSameAs(order);
 
-            return NavigateTo<Page>(By.CssSelector("input[type=submit]"));
+            return Navigate().To<Page>(By.CssSelector("input[type=submit]"));
         }
 
-        string PromoCode { set { Execute(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
+        string PromoCode { set { Execute().ActionOnLocator(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
     }
 }

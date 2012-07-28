@@ -11,16 +11,16 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
     {
         public RegisterPage GoToRegisterPage()
         {
-            return NavigateTo<RegisterPage>(By.LinkText("Register"));
+            return Navigate().To<RegisterPage>(By.LinkText("Register"));
         }
 
         public TDestinationPage LoginWithValidUserAndNavigateToPage<TController, TDestinationPage>(LogOnModel logonModel, Expression<Action<TController>> action)
             where TController : Controller
             where TDestinationPage : UiComponent, new()
         {
-            FillWithModel(logonModel);
-            Navigate(By.CssSelector("input[type=\"submit\"]"));
-            return NavigateTo<TController, TDestinationPage>(action);
+            Input().Model(logonModel);
+            Navigate().To(By.CssSelector("input[type=\"submit\"]"));
+            return Navigate().To<TController, TDestinationPage>(action);
         }
     }
 }

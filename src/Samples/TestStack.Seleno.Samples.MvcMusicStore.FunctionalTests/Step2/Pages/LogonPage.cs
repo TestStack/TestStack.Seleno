@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step2.Pages
     {
         public RegisterPage GoToRegisterPage()
         {
-            return NavigateTo<RegisterPage>(By.LinkText("Register"));
+            return Navigate().To<RegisterPage>(By.LinkText("Register"));
         }
     }
 }

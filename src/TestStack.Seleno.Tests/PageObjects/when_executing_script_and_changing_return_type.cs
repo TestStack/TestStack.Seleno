@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.Tests.PageObjects
 {
+    // TODO: Change this test to work with ScriptExector instead of UiComponent 
     [TestFixture]
     public class when_executing_script_and_changing_return_type_with_UiComponent
     {
@@ -27,7 +28,7 @@ namespace TestStack.Seleno.Tests.PageObjects
                 .ExecuteScript(Arg.Any<string>())
                 .Returns("true");
 
-            _result = SUT.ExecuteScriptAndReturn(executedScript, _expectedType, _fakeJavaScriptExecutor);
+            //_result = SUT.Execute().ScriptAndReturn(executedScript, _expectedType, _fakeJavaScriptExecutor);
         }
 
         [Test]
