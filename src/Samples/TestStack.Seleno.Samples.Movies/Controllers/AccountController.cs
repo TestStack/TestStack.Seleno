@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using TestStack.Seleno.Samples.Movies.Models;
+using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.Controllers
 {

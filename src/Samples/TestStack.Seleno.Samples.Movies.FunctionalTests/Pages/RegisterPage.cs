@@ -1,6 +1,6 @@
 using TestStack.Seleno.PageObjects;
 using OpenQA.Selenium;
-using TestStack.Seleno.Samples.Movies.Models;
+using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
 {
@@ -8,8 +8,8 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
     {
         public HomePage CreateValidUser(RegisterModel registerModel)
         {
-            FillWithModel(registerModel);
-            return NavigateTo<HomePage>(By.CssSelector("input[type=\"submit\"]"));
+            Input().Model(registerModel);
+            return Navigate().To<HomePage>(By.CssSelector("input[type=\"submit\"]"));
         }
     }
 }

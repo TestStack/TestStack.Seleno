@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
-
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
-namespace TestStack.Seleno.PageObjects.Components
+namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class TableComponent<TViewModel> : IEnumerable<TViewModel>
+    public class TableReader<TViewModel> : IEnumerable<TViewModel>
          where TViewModel : class, new()
     {
         public const string PropertyNameAttribute = "data-property-name";
@@ -26,7 +24,7 @@ namespace TestStack.Seleno.PageObjects.Components
         private IList<TViewModel> _rows;
         private long? _numberOfRows;
 
-        public TableComponent(string gridId)
+        public TableReader(string gridId)
         {
             _gridId = gridId;
         }
@@ -146,7 +144,7 @@ namespace TestStack.Seleno.PageObjects.Components
         {
             var selector = GetCellSelector(rowIndex, property.Name);
 
-            return Browser.FindElement(By.jQuery(selector));
+            return Browser.FindElementByjQuery(By.jQuery(selector));
         }
 
         string GetCellSelector(int rowIndex, string propertyName)

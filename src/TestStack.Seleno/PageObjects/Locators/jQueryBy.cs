@@ -11,7 +11,7 @@
         }
 
         /// <summary>
-        /// Specialized "By" class for jQuery selector
+        /// Specialized "ActionOnLocator" class for jQuery selector
         /// </summary>
         public class jQueryBy
         {

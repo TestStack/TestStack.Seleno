@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step2.Pages
     {
         public LogonPage GoToAdminForAnonymousUser()
         {
-            return NavigateTo<LogonPage>(By.LinkText("Admin"));
+            return Navigate().To<LogonPage>(By.LinkText("Admin"));
         }
     }
 }

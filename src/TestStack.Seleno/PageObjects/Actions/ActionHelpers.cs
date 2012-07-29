@@ -20,7 +20,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public static IWebElement PerformActionOn(this IWebDriver browser, Locators.By.jQueryBy by, Action<IWebElement> actionToPerform)
         {
-            var element = browser.FindElement(@by);
+            var element = browser.FindElementByjQuery(@by);
 
             actionToPerform(element);
 

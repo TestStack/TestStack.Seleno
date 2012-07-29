@@ -107,7 +107,7 @@ namespace TestStack.Seleno.Extensions
 
         public static bool HasElement(this IWebDriver driver, By.jQueryBy byJQuery)
         {
-            return driver.HasElement(d => d.FindElement(byJQuery));
+            return driver.HasElement(d => d.FindElementByjQuery(byJQuery));
         }
 
         static bool HasElement(this IWebDriver driver, Func<IWebDriver, IWebElement> elementFinder)

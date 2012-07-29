@@ -1,6 +1,6 @@
 namespace TestStack.Seleno.PageObjects
 {
-    public class Page<TViewModel> : UiComponent<TViewModel> where TViewModel : new()
+    public class Page<TViewModel> : UiComponent<TViewModel> where TViewModel : class, new()
     {
         public string Title
         {

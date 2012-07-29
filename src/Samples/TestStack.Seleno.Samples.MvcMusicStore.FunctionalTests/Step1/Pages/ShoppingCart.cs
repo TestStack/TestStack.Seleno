@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step1.Pages
     {
         public AddressAndPaymentPage Checkout()
         {
-            return NavigateTo<AddressAndPaymentPage>(By.LinkText("Checkout >>"));
+            return Navigate().To<AddressAndPaymentPage>(By.LinkText("Checkout >>"));
         }
     }
 }

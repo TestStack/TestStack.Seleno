@@ -24,7 +24,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests
 
         public HomePage Start()
         {
-            return NavigateTo<HomePage>(IISExpressRunner.HomePage);
+            return Navigate().To<HomePage>(IISExpressRunner.HomePage);
         }
 
         public static HomePage HomePage

@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step3.Pages
     {
         public AlbumBrowsePage SelectGenreByName(string genre)
         {
-            return NavigateTo<AlbumBrowsePage>(By.LinkText(genre));
+            return Navigate().To<AlbumBrowsePage>(By.LinkText(genre));
         }
     }
 }

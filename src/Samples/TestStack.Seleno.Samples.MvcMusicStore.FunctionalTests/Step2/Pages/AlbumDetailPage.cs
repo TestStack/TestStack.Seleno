@@ -7,7 +7,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step2.Pages
     {
         public ShoppingCart AddAlbumToCart()
         {
-            return NavigateTo<ShoppingCart>(By.LinkText("Add to cart"));
+            return Navigate().To<ShoppingCart>(By.LinkText("Add to cart"));
         }
     }
 }

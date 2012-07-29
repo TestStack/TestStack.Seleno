@@ -1,5 +1,7 @@
 using System;
+
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.Infrastructure.Logging;
 
 namespace TestStack.Seleno.Configuration
@@ -9,7 +11,7 @@ namespace TestStack.Seleno.Configuration
         static readonly ILog _log = LogManager.GetLogger("Seleno");
         public static ISelenoApplication Host { get; private set; }
 
-        public static ISelenoApplication New(Action<IAppConfigurator> configure)
+        private static ISelenoApplication New(Action<IAppConfigurator> configure)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");
@@ -17,16 +19,28 @@ namespace TestStack.Seleno.Configuration
             var configurator = new AppConfigurator();
             configure(configurator);
             Host = configurator.CreateApplication();
+            Host.Initialize();
 
             return Host;
         }
 
-        public static void Run(Action<IAppConfigurator> configure)
+        public static void Run(string webProjectFolder, int portNumber)
+        {
+            var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
+            Host = New(x => x.ProjectToTest(webApplication));
+        }
+
+        public static void Run(WebApplication app, Action<IAppConfigurator> configure)
         {
             try
             {
-                New(configure)
-                    .Initialize();
+                Action<IAppConfigurator> action = x =>
+                {
+                    x.ProjectToTest(app);
+                    configure(x);
+                };
+                
+               Host = New(action);
             }
             catch (Exception ex)
             {

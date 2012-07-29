@@ -8,8 +8,8 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step3.Pages
     {
         public HomePage CreateValidUser(RegisterModel model)
         {
-            FillWithModel(model);
-            return NavigateTo<HomePage>(By.CssSelector("input[type='submit']"));
+            Input().Model(model);
+            return Navigate().To<HomePage>(By.CssSelector("input[type='submit']"));
         }
     }
 }
