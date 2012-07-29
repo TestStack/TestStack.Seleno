@@ -1,3 +1,4 @@
+using System;
 using Funq;
 using TestStack.Seleno.Configuration.Contracts;
 
@@ -15,6 +16,7 @@ namespace TestStack.Seleno.Configuration
         public SelenoApplication(Container container)
         {
             Container = container;
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
         }
 
         public void Initialize()
@@ -28,5 +30,12 @@ namespace TestStack.Seleno.Configuration
             Browser.Close();
             WebServer.Stop();
         }
+
+
+        void CurrentDomain_DomainUnload(object sender, EventArgs e)
+        {
+            ShutDown();
+        }
+
     }
 }
