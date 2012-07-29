@@ -1,27 +1,27 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using TestStack.Seleno.Samples.Movies.Infrastructure.Data;
-using TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory;
+using AutoMapper;
+using TestStack.Seleno.Samples.Movies.Core.Domain;
+using TestStack.Seleno.Samples.Movies.Core.Services;
+using TestStack.Seleno.Samples.Movies.Core.Services.InMemoryDataProvider;
+using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.Controllers
 {
     public class MoviesController : Controller
     {
-        readonly IMovieRepository _repository;
+        readonly IRepository<Movie> _repository;
 
-        public MoviesController(IMovieRepository repository)
+        public MoviesController(IRepository<Movie> repository)
         {
             _repository = repository;
         }
 
-        public MoviesController()
-        {
-            _repository = new MovieRepository();
-        }
-
         public ActionResult Index()
         {
-            var list = _repository.GetAll().OrderBy(x => x.Title).ToList();
+            var domain = _repository.GetAll().OrderBy(x => x.Title).ToList();
+            var list = Mapper.Map<IEnumerable<Movie>, IEnumerable<MovieListViewModel>>(domain);
             return View(list);
         }
 

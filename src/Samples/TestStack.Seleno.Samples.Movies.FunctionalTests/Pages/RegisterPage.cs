@@ -1,6 +1,6 @@
 using TestStack.Seleno.PageObjects;
 using OpenQA.Selenium;
-using TestStack.Seleno.Samples.Movies.Models;
+using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
 {

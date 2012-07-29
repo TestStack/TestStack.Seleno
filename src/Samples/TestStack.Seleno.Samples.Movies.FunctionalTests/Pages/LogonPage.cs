@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
-using TestStack.Seleno.Samples.Movies.Models;
+using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
 {

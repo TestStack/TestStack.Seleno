@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace TestStack.Seleno.Samples.Movies.Models
+namespace TestStack.Seleno.Samples.Movies.ViewModels
 {
 
     public class ChangePasswordModel

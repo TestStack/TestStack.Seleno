@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestStack.Seleno.Samples.Movies.Models;
 
-namespace TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory
+using TestStack.Seleno.Samples.Movies.Core.Domain;
+
+namespace TestStack.Seleno.Samples.Movies.Core.Services.InMemoryDataProvider
 {
     public static class Db
     {
-        static IList<MovieListViewModel> _movies;
-        public static IList<MovieListViewModel> Movies
+        static IList<Movie> _movies;
+        public static IList<Movie> Movies
         {
             get
             {
@@ -20,7 +21,7 @@ namespace TestStack.Seleno.Samples.Movies.Infrastructure.Data.InMemory
             }
         }
 
-        public static MovieListViewModel AddMovie(MovieListViewModel movieList)
+        public static Movie AddMovie(Movie movieList)
         {
             movieList.Id = Guid.NewGuid();
             _movies.Add(movieList);

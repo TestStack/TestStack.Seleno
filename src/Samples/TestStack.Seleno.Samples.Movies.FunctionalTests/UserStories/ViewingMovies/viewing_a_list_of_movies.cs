@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using NUnit.Framework;
 using TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMovies
@@ -27,6 +28,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMov
         {
             //var pageList = _page.MovieList.ToList();
             //var dbList = Db.Movies.OrderBy(x => x.Title).ToList();
+            Assert.True(true);
         }
     }
 }

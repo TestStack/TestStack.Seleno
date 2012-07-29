@@ -1,6 +1,9 @@
-﻿using TestStack.Seleno.Configuration;
+﻿using Configurator = TestStack.BDDfy.Configuration.Configurator;
+using TestStack.BDDfy.Processors.HtmlReporter;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
+
 using NUnit.Framework;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests
@@ -22,12 +25,19 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests
                                  app.PortNumber = 19456;
                              })));
             _selenoApplication.Initialize();
+            InitializeBDDfyReport();
         }
 
         [TearDown]
         public void TearDown()
         {
             _selenoApplication.ShutDown();
+        }
+
+        private void InitializeBDDfyReport()
+        {
+            Configurator.BatchProcessors.HtmlReport.Disable();
+            Configurator.BatchProcessors.Add(new HtmlReporter(new FunctionalTestsHtmlReportConfig()));
         }
     }
 }
