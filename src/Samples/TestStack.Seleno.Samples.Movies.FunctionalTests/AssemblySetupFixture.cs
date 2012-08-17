@@ -1,9 +1,6 @@
 ﻿using Configurator = TestStack.BDDfy.Configuration.Configurator;
 using TestStack.BDDfy.Processors.HtmlReporter;
 using TestStack.Seleno.Configuration;
-using TestStack.Seleno.Configuration.Contracts;
-using TestStack.Seleno.Configuration.WebServers;
-
 using NUnit.Framework;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests

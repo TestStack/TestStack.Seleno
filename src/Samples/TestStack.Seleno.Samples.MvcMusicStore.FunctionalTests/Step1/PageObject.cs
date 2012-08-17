@@ -10,7 +10,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step1
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var homepage = Application.HomePage;
+            var homepage = new HomePage();
             var registerPage = homepage
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage();

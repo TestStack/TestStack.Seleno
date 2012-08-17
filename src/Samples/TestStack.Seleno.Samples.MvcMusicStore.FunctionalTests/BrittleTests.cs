@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using TestStack.Seleno.Configuration;
 
 namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests
 {
@@ -24,9 +25,8 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var homepage = Application.HomePage;
-            _driver = homepage.Driver;
-            _driver.Navigate().GoToUrl(homepage.Url);
+            _driver = SelenoApplicationRunner.Host.Browser;
+            _driver.Navigate().GoToUrl(_driver.Url);
             _driver.FindElement(By.LinkText("Admin")).Click();
             _driver.FindElement(By.LinkText("Register")).Click();
             _driver.FindElement(By.Id("UserName")).Clear();

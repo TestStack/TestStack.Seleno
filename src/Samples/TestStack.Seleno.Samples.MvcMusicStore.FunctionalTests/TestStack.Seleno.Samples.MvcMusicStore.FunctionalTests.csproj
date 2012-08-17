@@ -64,10 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyFixture.cs" />
     <Compile Include="BrittleTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Step1\Application.cs" />
     <Compile Include="Step1\PageObject.cs" />
     <Compile Include="Step1\Pages\AddressAndPaymentPage.cs" />
     <Compile Include="Step1\Pages\AlbumBrowsePage.cs" />
@@ -76,8 +76,6 @@
     <Compile Include="Step1\Pages\LogonPage.cs" />
     <Compile Include="Step1\Pages\RegisterPage.cs" />
     <Compile Include="Step1\Pages\ShoppingCart.cs" />
-    <Compile Include="Application.cs" />
-    <Compile Include="Step3\Application.cs" />
     <Compile Include="Step3\Pages\GenreNavigationComponent.cs" />
     <Compile Include="Step3\Pages\NavigationComponent.cs" />
     <Compile Include="Step3\StronglyTypedPageObjectWithComponent.cs" />
@@ -88,7 +86,6 @@
     <Compile Include="Step3\Pages\LogonPage.cs" />
     <Compile Include="Step3\Pages\RegisterPage.cs" />
     <Compile Include="Step3\Pages\ShoppingCart.cs" />
-    <Compile Include="Step2\Application.cs" />
     <Compile Include="Step2\Pages\GenreNavigationComponent.cs" />
     <Compile Include="Step2\Pages\NavigationComponent.cs" />
     <Compile Include="Step4\Application.cs" />

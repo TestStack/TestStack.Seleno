@@ -14,30 +14,32 @@ namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent
     {
-        protected internal RemoteWebDriver Browser;
-        protected IPageNavigator _navigator;
-        protected IScriptExecutor _executor;
-        protected IElementFinder _finder;
+        protected internal readonly RemoteWebDriver Browser;
+        private readonly PageNavigator _navigator;
+        protected readonly ElementFinder ElementFinder;
+        protected readonly ScriptExecutor ScriptExecutor;
 
         public UiComponent()
         {
-            if (SelenoApplicationRunner.Host != null)
-                Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
+            Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
+            ElementFinder = new ElementFinder(Browser);
+            ScriptExecutor = new ScriptExecutor(Browser, ElementFinder);
+            _navigator = new PageNavigator(Browser, ScriptExecutor);
         }
 
         protected IPageNavigator Navigate()
         {
-            return new PageNavigator(Browser, new ScriptExecutor(Browser, new ElementFinder(Browser)));
+            return _navigator;
         }
 
         protected IScriptExecutor Execute()
         {
-            return new ScriptExecutor(Browser, new ElementFinder(Browser));
+            return ScriptExecutor;
         }
 
         protected IElementFinder Find()
         {
-            return new ElementFinder(Browser);
+            return ElementFinder;
         }
 
         protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
@@ -53,7 +55,7 @@ namespace TestStack.Seleno.PageObjects
         public TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
-            return new TComponent() { Browser = Browser };
+            return new TComponent();
         }
 
         public void WaitForAjaxCallsToFinish(int timeOutInSecond = 10)

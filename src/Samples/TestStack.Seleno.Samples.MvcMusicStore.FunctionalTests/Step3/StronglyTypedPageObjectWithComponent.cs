@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
+using TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step3.Pages;
 
 namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step3
 {
@@ -8,8 +9,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step3
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var orderedPage = Application
-                .HomePage
+            var orderedPage = new HomePage()
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

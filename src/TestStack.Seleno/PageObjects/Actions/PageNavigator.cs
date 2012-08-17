@@ -23,13 +23,13 @@ namespace TestStack.Seleno.PageObjects.Actions
         public TPage To<TPage>(By clickDestination) where TPage : UiComponent, new()
         {
             To(clickDestination);
-            return new TPage { Browser = Browser };
+            return new TPage();
         }
 
         public TPage To<TPage>(string relativeUrl) where TPage : UiComponent, new()
         {
             Browser.Navigate().GoToUrl(relativeUrl);
-            return new TPage { Browser = Browser };
+            return new TPage();
         }
 
         public TPage To<TController, TPage>(Expression<Action<TController>> action)

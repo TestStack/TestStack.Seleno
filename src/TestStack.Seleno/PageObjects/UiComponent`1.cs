@@ -7,12 +7,12 @@ namespace TestStack.Seleno.PageObjects
     {
         protected PageReader<TModel> Read()
         {
-            return new PageReader<TModel>(Browser, _executor, _finder);
+            return new PageReader<TModel>(Browser, ScriptExecutor, ElementFinder);
         }
 
         protected PageWriter<TModel> Input()
         {
-            return new PageWriter<TModel>(Browser, _executor, _finder);
+            return new PageWriter<TModel>(Browser, ScriptExecutor, ElementFinder);
         } 
     }
 }
