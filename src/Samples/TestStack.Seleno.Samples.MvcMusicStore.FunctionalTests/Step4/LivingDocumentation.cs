@@ -28,8 +28,7 @@ namespace TestStack.Seleno.Samples.MvcMusicStore.FunctionalTests.Step4
         // should be straight to the db, not through the UI
         public void Given_that_I_am_a_logged_in_user()
         {
-            _homePage = new Application()
-                .HomePage
+            _homePage = new HomePage()
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

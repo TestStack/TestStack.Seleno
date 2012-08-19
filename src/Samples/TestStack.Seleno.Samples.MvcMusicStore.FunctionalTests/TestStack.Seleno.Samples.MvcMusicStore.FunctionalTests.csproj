@@ -88,7 +88,6 @@
     <Compile Include="Step3\Pages\ShoppingCart.cs" />
     <Compile Include="Step2\Pages\GenreNavigationComponent.cs" />
     <Compile Include="Step2\Pages\NavigationComponent.cs" />
-    <Compile Include="Step4\Application.cs" />
     <Compile Include="Step4\LivingDocumentation.cs" />
     <Compile Include="Step4\Pages\AddressAndPaymentPage.cs" />
     <Compile Include="Step2\Pages\AddressAndPaymentPage.cs" />
