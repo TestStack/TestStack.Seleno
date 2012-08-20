@@ -155,7 +155,6 @@
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />
-    <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="Configuration\Fakes\FakeViewDataContainer.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpContext.cs" />

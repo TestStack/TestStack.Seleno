@@ -1,18 +1,9 @@
-﻿using OpenQA.Selenium.Remote;
-using TestStack.Seleno.PageObjects;
+﻿using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
     public class HomePage : Page
     {
-        public RemoteWebDriver Driver
-        {
-            get
-            {
-                return Browser;
-            }
-        }
-
         public NavigationComponent Menu
         {
             get { return GetComponent<NavigationComponent>(); }

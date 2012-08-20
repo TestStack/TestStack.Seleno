@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.Specifications.Assertions
@@ -10,11 +12,13 @@ namespace TestStack.Seleno.Specifications.Assertions
     {
         private readonly UiComponent _component;
         private readonly By _selector;
+        private readonly ICamera _camera;
 
-        public ElementAssert(UiComponent component, By selector)
+        public ElementAssert(UiComponent component, By selector, ICamera camera)
         {
             _component = component;
             _selector = selector;
+            _camera = camera;
         }
 
         RemoteWebDriver Browser
@@ -65,7 +69,7 @@ namespace TestStack.Seleno.Specifications.Assertions
             }
             catch (Exception)
             {
-                _component.TakeScreenshot();
+                _camera.TakeScreenshot();
                 throw;
             }
 

@@ -1,10 +1,7 @@
 using System;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -13,11 +10,13 @@ namespace TestStack.Seleno.PageObjects.Actions
     {
         protected RemoteWebDriver Browser;
         private readonly IElementFinder _finder;
+        private readonly ICamera _camera;
 
-        internal ScriptExecutor(RemoteWebDriver browser, IElementFinder finder)
+        internal ScriptExecutor(RemoteWebDriver browser, IElementFinder finder, ICamera camera)
         {
             Browser = browser;
             _finder = finder;
+            _camera = camera;
         }
 
         public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action)
@@ -30,7 +29,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
             catch (Exception)
             {
-                TakeScreenshot();
+                _camera.TakeScreenshot();
                 throw;
             }
         }
@@ -44,7 +43,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
             catch (Exception)
             {
-                TakeScreenshot();
+                _camera.TakeScreenshot();
                 throw;
             }
         }
@@ -59,7 +58,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
             catch (Exception)
             {
-                TakeScreenshot();
+                _camera.TakeScreenshot();
                 throw;
             }
         }
@@ -73,30 +72,5 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             return result;
         }
-
-        private void TakeScreenshot(string fileName = null)
-        {
-            var pathFromConfig = Configurator.ScreenShotPath;
-            var camera = (ITakesScreenshot)Browser;
-            var screenshot = camera.GetScreenshot();
-
-            if (!Directory.Exists(pathFromConfig))
-                Directory.CreateDirectory(pathFromConfig);
-
-            var windowTitle = Browser.Title;
-            fileName = fileName ?? string.Format("{0}{1}.png", windowTitle, DateTime.Now.ToFileTime()).Replace(':', '.');
-            var outputPath = Path.Combine(pathFromConfig, fileName);
-
-            var pathChars = Path.GetInvalidPathChars();
-
-            var stringBuilder = new StringBuilder(outputPath);
-
-            foreach (var item in pathChars)
-                stringBuilder.Replace(item, '.');
-
-            var screenShotPath = stringBuilder.ToString();
-            screenshot.SaveAsFile(screenShotPath, ImageFormat.Png);
-        }
-
     }
 }
