@@ -1,31 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
-using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.Specifications.Assertions
 {
     public class ElementAssert
     {
-        private readonly UiComponent _component;
         private readonly By _selector;
         private readonly ICamera _camera;
 
-        public ElementAssert(UiComponent component, By selector, ICamera camera)
+        public ElementAssert(By selector, ICamera camera)
         {
-            _component = component;
             _selector = selector;
             _camera = camera;
         }
 
-        RemoteWebDriver Browser
+        IWebDriver Browser
         {
             get
             {
-                return _component.Browser;
+                return SelenoApplicationRunner.Host.Browser;
             }
         }
 
@@ -43,6 +39,7 @@ namespace TestStack.Seleno.Specifications.Assertions
             if (string.IsNullOrEmpty(message))
                 message = string.Format("'{0}' was in fact found!", _selector);
 
+            _camera.TakeScreenshot();
             throw new SelenoException(message);
         }
 
@@ -54,6 +51,7 @@ namespace TestStack.Seleno.Specifications.Assertions
             }
             catch (NoSuchElementException ex)
             {
+                _camera.TakeScreenshot();
                 throw new SelenoException(message, ex);
             }
 
