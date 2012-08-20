@@ -12,13 +12,11 @@ namespace TestStack.Seleno.Configuration
 {
     public class AppConfigurator : IAppConfigurator
     {
-        static readonly ILog _log = LogManager.GetLogger("Seleno");
-
         private WebApplication _webApplication;
         private IWebServer _webServer;
         private ICamera _camera = new NullCamera();
-        private ILogFactory _logFactory = new ConsoleLogFactory();
         private Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
+        private ILogFactory _logFactory = new ConsoleLogFactory();
 
         private void Validate()
         {
@@ -29,8 +27,10 @@ namespace TestStack.Seleno.Configuration
         public ISelenoApplication CreateApplication()
         {
             Validate();
-            _log.InfoFormat("Seleno v{0}, .NET Framework v{1}", 
-                typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
+            _logFactory
+                .GetLogger(GetType())
+                .InfoFormat("Seleno v{0}, .NET Framework v{1}", 
+                    typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
 
             var container = BuildContainer();
             var app = new SelenoApplication(container);
@@ -42,7 +42,7 @@ namespace TestStack.Seleno.Configuration
         {
             var container = new Container();
             container.Register(c => _webServer ?? new IisExpressWebServer(_webApplication));
-            container.Register<IWebDriver>(c => _webDriver.Invoke());
+            container.Register(c => _webDriver.Invoke());
             container.Register(c => _camera);
             return container;
         }

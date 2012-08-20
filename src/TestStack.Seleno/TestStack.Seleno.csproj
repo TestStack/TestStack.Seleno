@@ -153,7 +153,6 @@
     <Compile Include="PageObjects\Actions\PageReader.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
-    <Compile Include="Specifications\Assertions\WebDriverAssertionExtensions.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="Configuration\Fakes\FakeViewDataContainer.cs" />
@@ -179,10 +178,7 @@
     <None Include="packages.config" />
     <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PageObjects\Components\" />
-    <Folder Include="PageObjects\Elements\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Funq\License.txt" />
   </ItemGroup>

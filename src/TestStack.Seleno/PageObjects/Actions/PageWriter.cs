@@ -5,21 +5,16 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
     public class PageWriter<TModel> where TModel : class, new()
     {
-        private RemoteWebDriver _browser;
         private readonly IScriptExecutor _execute;
-        private readonly IElementFinder _finder;
 
-        public PageWriter(RemoteWebDriver browser, IScriptExecutor executor, IElementFinder finder)
+        public PageWriter(IScriptExecutor executor)
         {
-            _browser = browser;
             _execute = executor;
-            _finder = finder;
         }
 
         public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
@@ -92,6 +87,5 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             return propertyValue.ToString();
         }
-
     }
 }
