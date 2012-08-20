@@ -24,10 +24,10 @@ namespace TestStack.Seleno.Configuration
             return Host;
         }
 
-        public static void Run(string webProjectFolder, int portNumber)
+        public static void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null)
         {
             var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
-            Host = New(x => x.ProjectToTest(webApplication));
+            Run(webApplication, configure);
         }
 
         public static void Run(WebApplication app, Action<IAppConfigurator> configure)
@@ -37,7 +37,9 @@ namespace TestStack.Seleno.Configuration
                 Action<IAppConfigurator> action = x =>
                 {
                     x.ProjectToTest(app);
-                    configure(x);
+
+                    if (configure != null)
+                        configure(x);
                 };
                 
                Host = New(action);
