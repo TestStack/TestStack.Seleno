@@ -41,11 +41,11 @@ namespace TestStack.Seleno.PageObjects.Actions
 
                 var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property);
 
-                EnterTextInField(propertyName, stringValue);
+                TextInField(propertyName, stringValue);
             }
         }
 
-        public void EnterTextInField(string fieldName, string value)
+        public void TextInField(string fieldName, string value)
         {
             if (String.IsNullOrEmpty(value)) return;
 

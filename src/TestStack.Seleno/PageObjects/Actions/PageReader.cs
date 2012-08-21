@@ -23,7 +23,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             _finder = finder;
         }
 
-        public TViewModel ReadModelFromPage()
+        public TViewModel ModelFromPage()
         {
             var type = typeof(TViewModel);
 
@@ -42,21 +42,21 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
-        public bool GetCheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public bool CheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {
             var name = ExpressionHelper.GetExpressionText(field);
 
             return _browser.FindElement(By.Name(name)).Selected;
         }
 
-        public string GetTextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public string TextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {
             var name = ExpressionHelper.GetExpressionText(field);
 
             return _browser.FindElement(By.Name(name)).GetAttribute("value");
         }
 
-        public IWebElement GetElementFor<TField>(Expression<Func<TViewModel, TField>> field)
+        public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field)
         {
             string name = ExpressionHelper.GetExpressionText(field);
             string id = TagBuilder.CreateSanitizedId(name);

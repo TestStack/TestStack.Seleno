@@ -12,8 +12,8 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
             Input().Model(order);
             PromoCode = promoCode;
 
-            //Order model = ReadModelFromPage();
-            //var element = GetElementFor(x => x.Phone);
+            //Order model = ModelFromPage();
+            //var element = ElementFor(x => x.Phone);
             ////model.Should().BeSameAs(order);
 
             return Navigate().To<Page>(By.CssSelector("input[type=submit]"));
