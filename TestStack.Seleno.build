@@ -24,7 +24,7 @@
     <SourceExclusions>**\.svn\**\*.*;**\_svn\**\*.*;**\*.user;**\*.suo;**\*.db;**\bin\**\*.*;**\obj\**\*.*;</SourceExclusions>
     <ProjectName>$(MSBuildProjectName)</ProjectName>
 
-    <xunitConsole>"$(MSBuildProjectDirectory)\tools\xunit\xunit.console.clr4.x86.exe"</xunitConsole>
+    <NUnitConsole>"$(MSBuildProjectDirectory)\tools\NUnit\nunit-console.exe"</NUnitConsole>
   </PropertyGroup>
 
   <!--Default-->
@@ -92,7 +92,7 @@
     <CreateItem Include="$(TestPath)\TestStack.Seleno.Tests.dll">
       <Output ItemName="_testFiles" TaskParameter="Include"/>
     </CreateItem>
-    <Exec Command="$(xunitConsole) @(_testFiles->'&quot;%(FullPath)&quot;', ' ') /noshadow"></Exec>
+    <Exec Command="$(NUnitConsole) @(_testFiles->'&quot;%(FullPath)&quot;', ' ') /nologo /noshadow"></Exec>
   </Target>
 
   <Target Name="Distrib" DependsOnTargets="Clean;Build;Copy">
