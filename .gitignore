@@ -19,3 +19,4 @@ Build/*
 *.ldf
 *.sdf
 *.vsdoc
+TestResult.xml
