@@ -8,4 +8,4 @@ by screen recorders. We then fix the issues of that test in three steps (with co
 
 In Step4 we transform the test in Step3 to generate living documentation out of our UI tests and get even more value out of them.
 
-You may read about all this on http://www.mehdi-khalili.com/presentations/automated-ui-testing-done-right-at-dddsydney
+You may read about all this [here](http://www.mehdi-khalili.com/presentations/automated-ui-testing-done-right-at-dddsydney)
