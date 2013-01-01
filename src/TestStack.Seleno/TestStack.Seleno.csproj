@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />
+    <Compile Include="Configuration\Resources.cs" />
     <Compile Include="Configuration\Contracts\IContainerAdapter.cs" />
     <Compile Include="Configuration\Contracts\ISelenoApplication.cs" />
     <Compile Include="Configuration\AppConfigurator.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Configuration\SelenoApplication.cs" />
     <Compile Include="Configuration\Contracts\IWebServer.cs" />
     <Compile Include="Configuration\WebServers\IisExpressWebServer.cs" />
+    <Compile Include="Configuration\WebServers\InternetWebServer.cs" />
     <Compile Include="Configuration\WebServers\ProjectLocation.cs" />
     <Compile Include="Configuration\WebServers\WebApplication.cs" />
     <Compile Include="Extensions\PropertyExtensions.cs" />
@@ -154,12 +156,9 @@
     <Compile Include="Configuration\Fakes\FakeHttpRequest.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpResponse.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpSessionState.cs" />
-    <Compile Include="Specifications\IContainer.cs" />
-    <Compile Include="Specifications\IDataHelper.cs" />
     <Compile Include="Configuration\Contracts\IISExpressRunner.cs" />
     <Compile Include="PageObjects\Locators\jQueryBy.cs" />
     <Compile Include="PageObjects\Locators\jQueryExtensions.cs" />
-    <Compile Include="Specifications\Scenario.cs" />
     <Compile Include="SelenoException.cs" />
     <Compile Include="PageObjects\UiComponent`1.cs" />
     <Compile Include="PageObjects\UiComponent.cs" />
@@ -174,6 +173,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Configuration\WebDrivers\chromedriver.exe" />
+    <EmbeddedResource Include="Configuration\WebDrivers\IEDriverServer_Win32_2.28.0.exe" />
+    <EmbeddedResource Include="Configuration\WebDrivers\IEDriverServer_x64_2.28.0.exe" />
     <Content Include="Funq\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,34 +2,15 @@
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    //public class WebApplication
-    //{
-    //    public ProjectLocation Location { get; set; }
-    //    public int PortNumber { get; set; }
-
-    //    private WebApplication() { }
-
-    //    public static WebApplication Create(Action<WebApplication> action)
-    //    {
-    //        var application = new WebApplication();
-    //        action(application);
-
-    //        if (application.Location == null)
-    //            throw new ArgumentNullException("Location");
-    //        if (application.PortNumber == 0)
-    //            application.PortNumber = 23456;
-
-    //        return application;
-    //    }
-    //}
-
     public class WebApplication
     {
-        public ProjectLocation Location { get; private set; }
+        public IProjectLocation Location { get; private set; }
         public int PortNumber { get; private set; }
 
-        public WebApplication(ProjectLocation location, int portNumber)
+        public WebApplication(IProjectLocation location, int portNumber)
         {
+            Guard.Against(location == null, "You must specify a location");
+            Guard.Against(portNumber <= 0, "portNumber must be greater than zero");
             Location = location;
             PortNumber = portNumber;
         }
