@@ -4,7 +4,12 @@ using System.Linq;
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    public class ProjectLocation
+    public interface IProjectLocation
+    {
+        string FullPath { get; }
+    }
+
+    public class ProjectLocation : IProjectLocation
     {
         public string FullPath { get; private set; }
 

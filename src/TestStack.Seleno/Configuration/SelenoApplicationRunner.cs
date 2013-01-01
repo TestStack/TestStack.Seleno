@@ -50,5 +50,23 @@ namespace TestStack.Seleno.Configuration
             }
         }
 
+        public static void Run(Action<IAppConfigurator> configure)
+        {
+            try
+            {
+                Action<IAppConfigurator> action = x =>
+                {
+                    if (configure != null)
+                        configure(x);
+                };
+
+                Host = New(action);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("The Seleno Application exited abnormally with an exception", ex);
+            }
+        }
+
     }
 }
