@@ -20,7 +20,7 @@ namespace TestStack.Seleno.Configuration
 
         private void Validate()
         {
-            if (_webApplication == null)
+            if (_webServer.GetType() == typeof(IisExpressWebServer) && _webApplication == null)
                 throw new AppConfigurationException("The web application must be set.");
         }
 
