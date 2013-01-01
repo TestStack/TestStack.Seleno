@@ -11,5 +11,10 @@
     <description>Seleno helps you write automated UI tests in the right way (using Selenium WebDriver)</description>
     <releaseNotes>The baseline for Seleno</releaseNotes>
     <copyright>Copyright 2012 TestStack</copyright>
+	<dependencies> 
+	   <group>
+		  <dependency id="Selenium.WebDriver" version="2.28" />
+	   </group>
+	</dependencies>
   </metadata>
 </package>
