@@ -31,11 +31,9 @@ namespace TestStack.Seleno.Configuration
             WebServer.Stop();
         }
 
-
         void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
             ShutDown();
         }
-
     }
 }

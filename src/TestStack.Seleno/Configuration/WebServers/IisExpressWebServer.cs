@@ -29,7 +29,7 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public string BaseUrl
         {
-            get { return string.Format("http://localhost:{0}/", _application.PortNumber); }
+            get { return string.Format("http://localhost:{0}", _application.PortNumber); }
         }
 
         private static void StartIisExpress()

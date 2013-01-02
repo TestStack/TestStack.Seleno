@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Microsoft.Web.Mvc;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Fakes;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -39,7 +39,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer());
             var relativeUrl = helper.BuildUrlFromExpression(action);
 
-            return To<TPage>(IISExpressRunner.HomePage + relativeUrl);
+            return To<TPage>(SelenoApplicationRunner.Host.WebServer.BaseUrl + relativeUrl);
         }
 
         public void To(By clickDestination)

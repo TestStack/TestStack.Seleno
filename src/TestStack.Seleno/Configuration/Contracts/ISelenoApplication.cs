@@ -8,6 +8,7 @@ namespace TestStack.Seleno.Configuration.Contracts
         void ShutDown();
 
         IWebDriver Browser { get; }
+        IWebServer WebServer { get; }
         ICamera Camera { get; }
     }
 }
