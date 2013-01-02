@@ -1,5 +1,6 @@
 ﻿using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.Samples.Movies.Controllers;
 using TestStack.Seleno.Samples.Movies.ViewModels;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies
