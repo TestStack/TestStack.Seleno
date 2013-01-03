@@ -63,6 +63,13 @@
   <ItemGroup>
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_clearing_and_send_keys_to_web_element.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_getting_strongly_typed_attribute_value.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_only_sending_keys_to_web_element.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_replacing_input_value_with_another.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_not_wrapping_the_web_driver.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver_with_no_javascript_executor.cs" />
     <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
