@@ -64,6 +64,8 @@
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="Extensions\WebElementExtensions\When_clearing_and_send_keys_to_web_element.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_getting_a_strongly_typed_textBox_value.cs" />
+    <Compile Include="Extensions\WebElementExtensions\When_getting_a_web_element_strongly_typed_text.cs" />
     <Compile Include="Extensions\WebElementExtensions\When_getting_strongly_typed_attribute_value.cs" />
     <Compile Include="Extensions\WebElementExtensions\When_only_sending_keys_to_web_element.cs" />
     <Compile Include="Extensions\WebElementExtensions\When_replacing_input_value_with_another.cs" />
