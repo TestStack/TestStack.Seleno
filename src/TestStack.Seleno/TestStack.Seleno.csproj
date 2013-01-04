@@ -173,9 +173,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Configuration\WebDrivers\chromedriver.exe" />
-    <EmbeddedResource Include="Configuration\WebDrivers\IEDriverServer_Win32_2.28.0.exe" />
-    <EmbeddedResource Include="Configuration\WebDrivers\IEDriverServer_x64_2.28.0.exe" />
     <Content Include="Funq\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
