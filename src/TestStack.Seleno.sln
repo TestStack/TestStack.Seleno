@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelIoTesting", "ModelIoTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Samples.ModelIoTesting", "Samples\ModelIoTesting\TestStack.Samples.ModelIoTesting\TestStack.Samples.ModelIoTesting.csproj", "{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.AcceptanceTests", "TestStack.Seleno.AcceptanceTests\TestStack.Seleno.AcceptanceTests.csproj", "{C3317E81-5C4C-41F5-927F-0A9E6CA26317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3317E81-5C4C-41F5-927F-0A9E6CA26317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3317E81-5C4C-41F5-927F-0A9E6CA26317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3317E81-5C4C-41F5-927F-0A9E6CA26317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3317E81-5C4C-41F5-927F-0A9E6CA26317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
