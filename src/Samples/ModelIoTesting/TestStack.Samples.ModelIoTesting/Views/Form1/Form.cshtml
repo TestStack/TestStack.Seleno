@@ -1,0 +1,36 @@
+﻿@using ChameleonForms
+@using ChameleonForms.Component
+@model TestStack.Samples.ModelIoTesting.ViewModels.Form1ViewModel
+
+@{
+    ViewBag.Title = ViewContext.RouteData.Values["action"];
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection("Form"))
+    {
+        @s.FieldFor(m => m.RequiredString)
+        @s.FieldFor(m => m.RequiredInt)
+        @s.FieldFor(m => m.RequiredBool)
+        @s.FieldFor(m => m.RequiredNullableBool)
+        @s.FieldFor(m => m.OptionalBool)
+        @s.FieldFor(m => m.OptionalBool2)
+        @s.FieldFor(m => m.OptionalBool3)
+        @s.FieldFor(m => m.OptionalInt)
+        @s.FieldFor(m => m.RequiredEnum)
+        @s.FieldFor(m => m.RequiredNullableEnum)
+        @s.FieldFor(m => m.OptionalEnum)
+        @s.FieldFor(m => m.RequiredEnums)
+        @s.FieldFor(m => m.RequiredNullableEnums)
+        @s.FieldFor(m => m.OptionalEnums)
+        @s.FieldFor(m => m.OptionalNullableEnums)
+        @s.FieldFor(m => m.RequiredListId)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Submit")
+    }
+}
