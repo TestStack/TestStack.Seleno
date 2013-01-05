@@ -36,7 +36,7 @@ namespace TestStack.Seleno.Extensions
 
         public static T GetAttributeAsType<T>(this IWebElement element, string attributeName)
         {
-            string value = element.GetAttribute(attributeName) ?? string.Empty;
+            var value = element.GetAttribute(attributeName) ?? string.Empty;
             return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
         }
 
@@ -47,7 +47,8 @@ namespace TestStack.Seleno.Extensions
 
         public static T TextAsType<T>(this IWebElement element)
         {
-            string value = element.Text;
+            var value = element.Text;
+
             return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
         }
     }
