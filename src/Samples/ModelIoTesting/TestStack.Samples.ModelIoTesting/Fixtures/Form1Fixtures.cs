@@ -22,10 +22,10 @@ namespace TestStack.Samples.ModelIoTesting.Fixtures
                     RequiredEnum = SomeEnum.Value2,
                     RequiredNullableEnum = SomeEnum.Value1,
                     OptionalEnum = null,
-                    RequiredEnums = new List<SomeEnum> { SomeEnum.Value2, SomeEnum.Value3 },
+                    /*RequiredEnums = new List<SomeEnum> { SomeEnum.Value2, SomeEnum.Value3 },
                     RequiredNullableEnums = new List<SomeEnum?> { SomeEnum.Value1 },
                     OptionalEnums = null,
-                    OptionalNullableEnums = new List<SomeEnum?>(),
+                    OptionalNullableEnums = new List<SomeEnum?>(),*/
                     RequiredListId = 3
                 };
             }

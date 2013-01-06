@@ -30,12 +30,12 @@ namespace TestStack.Samples.ModelIoTesting.ViewModels
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
-        [Required]
+        /*[Required]
         public IEnumerable<SomeEnum> RequiredEnums { get; set; }
         [Required]
         public IEnumerable<SomeEnum?> RequiredNullableEnums { get; set; }
         public IEnumerable<SomeEnum> OptionalEnums { get; set; }
-        public IEnumerable<SomeEnum?> OptionalNullableEnums { get; set; }
+        public IEnumerable<SomeEnum?> OptionalNullableEnums { get; set; }*/
 
         [ReadOnly(true)]
         public List<ListItem> List { get; set; }
