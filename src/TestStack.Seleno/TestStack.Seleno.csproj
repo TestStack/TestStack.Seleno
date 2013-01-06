@@ -138,6 +138,7 @@
     <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
+    <Compile Include="PageObjects\Actions\Fields\ModelFieldValue.cs" />
     <Compile Include="PageObjects\Actions\IPageNavigator.cs" />
     <Compile Include="PageObjects\Actions\IScriptExecutor.cs" />
     <Compile Include="PageObjects\Actions\PageWriter.cs" />
