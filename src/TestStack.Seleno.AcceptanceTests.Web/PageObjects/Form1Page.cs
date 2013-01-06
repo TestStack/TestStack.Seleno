@@ -1,9 +1,9 @@
-﻿using TestStack.Samples.ModelIoTesting.Fixtures;
-using TestStack.Samples.ModelIoTesting.ViewModels;
+﻿using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
+using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Locators;
 
-namespace TestStack.Samples.ModelIoTesting.PageObjects
+namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
 {
     public class Form1Page : Page<Form1ViewModel>
     {

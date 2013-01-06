@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestStack.Samples.ModelIoTesting</RootNamespace>
-    <AssemblyName>TestStack.Samples.ModelIoTesting</AssemblyName>
+    <RootNamespace>TestStack.Seleno.AcceptanceTests.Web</RootNamespace>
+    <AssemblyName>TestStack.Seleno.AcceptanceTests.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -44,16 +44,18 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ChameleonForms, Version=0.1.42.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\ChameleonForms.0.1.42\lib\NET40\ChameleonForms.dll</HintPath>
+    <Reference Include="ChameleonForms">
+      <HintPath>..\packages\ChameleonForms.0.1.42\lib\NET40\ChameleonForms.dll</HintPath>
     </Reference>
     <Reference Include="Humanizer">
-      <HintPath>..\..\..\packages\Humanizer.0.2\lib\NET40\Humanizer.dll</HintPath>
+      <HintPath>..\packages\Humanizer.0.2\lib\NET40\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,9 +82,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -149,7 +148,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TestStack.Seleno\TestStack.Seleno.csproj">
+    <ProjectReference Include="..\TestStack.Seleno\TestStack.Seleno.csproj">
       <Project>{32a3eb53-458f-42f1-8780-77950ffb9972}</Project>
       <Name>TestStack.Seleno</Name>
     </ProjectReference>

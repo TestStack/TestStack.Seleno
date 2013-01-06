@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ChameleonForms.Attributes;
 
-namespace TestStack.Samples.ModelIoTesting.ViewModels
+namespace TestStack.Seleno.AcceptanceTests.Web.ViewModels
 {
     public class Form1ViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TestStack.Samples.ModelIoTesting.Controllers
+namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
 {
     public class HomeController : Controller
     {

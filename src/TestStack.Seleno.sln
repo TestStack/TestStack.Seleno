@@ -34,9 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "Samples\Mu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore.FunctionalTests", "Samples\MusicStore\MvcMusicStore.FunctionalTests\MvcMusicStore.FunctionalTests.csproj", "{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelIoTesting", "ModelIoTesting", "{C9BCBA88-DAD3-46BB-8A7D-CAB66B7FDDA3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Samples.ModelIoTesting", "Samples\ModelIoTesting\TestStack.Samples.ModelIoTesting\TestStack.Samples.ModelIoTesting.csproj", "{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.AcceptanceTests.Web", "TestStack.Seleno.AcceptanceTests.Web\TestStack.Seleno.AcceptanceTests.Web.csproj", "{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.AcceptanceTests", "TestStack.Seleno.AcceptanceTests\TestStack.Seleno.AcceptanceTests.csproj", "{C3317E81-5C4C-41F5-927F-0A9E6CA26317}"
 EndProject

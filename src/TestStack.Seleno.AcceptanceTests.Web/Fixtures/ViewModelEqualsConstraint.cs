@@ -5,7 +5,7 @@ using System.Reflection;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace TestStack.Samples.ModelIoTesting.Fixtures
+namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
 {
     public static class IsSame
     {

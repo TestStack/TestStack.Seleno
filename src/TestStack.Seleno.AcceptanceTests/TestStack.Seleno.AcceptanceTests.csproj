@@ -55,9 +55,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Samples\ModelIoTesting\TestStack.Samples.ModelIoTesting\TestStack.Samples.ModelIoTesting.csproj">
+    <ProjectReference Include="..\TestStack.Seleno.AcceptanceTests.Web\TestStack.Seleno.AcceptanceTests.Web.csproj">
       <Project>{b8359de7-3953-448c-a9ab-3e5c7f26afce}</Project>
-      <Name>TestStack.Samples.ModelIoTesting</Name>
+      <Name>TestStack.Seleno.AcceptanceTests.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestStack.Seleno\TestStack.Seleno.csproj">
       <Project>{32a3eb53-458f-42f1-8780-77950ffb9972}</Project>

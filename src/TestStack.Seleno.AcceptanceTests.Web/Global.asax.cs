@@ -1,6 +1,7 @@
 ﻿using System.Web.Routing;
+using TestStack.Seleno.AcceptanceTests.Web.App_Start;
 
-namespace TestStack.Samples.ModelIoTesting
+namespace TestStack.Seleno.AcceptanceTests.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

@@ -2,7 +2,7 @@
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
-namespace TestStack.Samples.ModelIoTesting.PageObjects
+namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
 {
     public class HomePage : Page
     {

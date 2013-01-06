@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using NUnit.Framework;
-using TestStack.Samples.ModelIoTesting.Fixtures;
-using TestStack.Samples.ModelIoTesting.ViewModels;
+using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
+using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
-namespace TestStack.Samples.ModelIoTesting.Controllers
+namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
 {
     public class Form1Controller : Controller
     {

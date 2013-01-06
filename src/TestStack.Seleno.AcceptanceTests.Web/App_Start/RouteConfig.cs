@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TestStack.Samples.ModelIoTesting
+namespace TestStack.Seleno.AcceptanceTests.Web.App_Start
 {
     public class RouteConfig
     {

@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using TestStack.Samples.ModelIoTesting.Fixtures;
-using TestStack.Samples.ModelIoTesting.PageObjects;
-using TestStack.Samples.ModelIoTesting.ViewModels;
 using TestStack.BDDfy;
+using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
+using TestStack.Seleno.AcceptanceTests.Web.PageObjects;
+using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
 namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 {

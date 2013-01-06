@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using TestStack.Samples.ModelIoTesting.ViewModels;
+﻿using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
-namespace TestStack.Samples.ModelIoTesting.Fixtures
+namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
 {
     public static class Form1Fixtures
     {
