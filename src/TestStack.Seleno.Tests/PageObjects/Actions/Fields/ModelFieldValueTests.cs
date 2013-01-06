@@ -5,6 +5,7 @@ using TestStack.BDDfy.Core;
 using TestStack.Seleno.PageObjects.Actions.Fields;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Scanners.StepScanners.Fluent;
+using FluentAssertions;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
 {
@@ -22,17 +23,17 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
 
             public void Then_IsTrue_should_be(bool expected)
             {
-                Assert.That(SUT.IsTrue, Is.EqualTo(expected));
+                SUT.IsTrue.Should().Be(expected);
             }
 
             public void And_Value_should_be(string expected)
             {
-                Assert.That(SUT.Value, Is.EqualTo(expected));
+                SUT.Value.Should().Be(expected);
             }
 
             public void And_HasMultipleValues_should_be_false()
             {
-                Assert.That(SUT.HasMultipleValues, Is.False);
+                SUT.HasMultipleValues.Should().BeFalse();
             }
 
             public void And_Values_should_throw_exception()
