@@ -64,14 +64,29 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
             TestSpec("Boolean", modelValue, expectedIsTrueValue, expectedValue);
         }
 
-        [TestCase(1, false, "1")]
-        [TestCase(2.3, false, "2.3")]
-        [TestCase(2.333f, false, "2.333")]
-        [TestCase(2.3355551111111, false, "2.3355551111111")]
-        [TestCase((short)5, false, "5")]
-        public void NumericTests(object modelValue, bool expectedIsTrueValue, string expectedValue)
+        [TestCase(1, "1")]
+        [TestCase(2.3, "2.3")]
+        [TestCase(2.333f, "2.333")]
+        [TestCase(2.3355551111111, "2.3355551111111")]
+        [TestCase((short)5, "5")]
+        public void NumericTests(object modelValue, string expectedValue)
         {
-            TestSpec("Numeric", modelValue, expectedIsTrueValue, expectedValue);
+            TestSpec("Numeric", modelValue, false, expectedValue);
+        }
+
+        [TestCase(null, "")]
+        [TestCase(2, "2")]
+        public void NullableIntTests(int? modelValue, string expectedValue)
+        {
+            TestSpec("Nullable Int", modelValue, false, expectedValue);
+        }
+
+        [TestCase(null, "")]
+        [TestCase("", "")]
+        [TestCase("asdf", "asdf")]
+        public void StringTests(string modelValue, string expectedValue)
+        {
+            TestSpec("String", modelValue, false, expectedValue);
         }
     }
 }
