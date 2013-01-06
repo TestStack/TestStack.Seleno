@@ -156,7 +156,6 @@
     <Compile Include="Configuration\Fakes\FakeHttpRequest.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpResponse.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpSessionState.cs" />
-    <Compile Include="Configuration\Contracts\IISExpressRunner.cs" />
     <Compile Include="PageObjects\Locators\jQueryBy.cs" />
     <Compile Include="PageObjects\Locators\jQueryExtensions.cs" />
     <Compile Include="SelenoException.cs" />

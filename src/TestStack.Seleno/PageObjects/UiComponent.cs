@@ -21,7 +21,7 @@ namespace TestStack.Seleno.PageObjects
             _camera = SelenoApplicationRunner.Host.Camera;
             ElementFinder = new ElementFinder(Browser);
             ScriptExecutor = new ScriptExecutor(Browser, ElementFinder, _camera);
-            _navigator = new PageNavigator(Browser, ScriptExecutor);
+            _navigator = new PageNavigator(Browser, ScriptExecutor, SelenoApplicationRunner.Host.WebServer);
         }
 
         protected IPageNavigator Navigate()
