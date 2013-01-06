@@ -18,15 +18,8 @@ namespace TestStack.Seleno.Configuration
         private Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
         private ILogFactory _logFactory = new ConsoleLogFactory();
 
-        private void Validate()
-        {
-            if (_webServer.GetType() == typeof(IisExpressWebServer) && _webApplication == null)
-                throw new AppConfigurationException("The web application must be set.");
-        }
-
         public ISelenoApplication CreateApplication()
         {
-            Validate();
             _logFactory
                 .GetLogger(GetType())
                 .InfoFormat("Seleno v{0}, .NET Framework v{1}", 
