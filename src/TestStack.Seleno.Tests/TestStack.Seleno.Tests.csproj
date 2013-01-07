@@ -93,6 +93,7 @@
     <Compile Include="Specify\SpecificationFor.cs" />
     <Compile Include="Specify\SpecifySpecs.cs" />
     <Compile Include="Specify\SpecStoryMetaDataScanner.cs" />
+    <Compile Include="TestInfrastructure\TestObjectFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

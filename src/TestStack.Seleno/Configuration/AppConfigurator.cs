@@ -12,17 +12,17 @@ namespace TestStack.Seleno.Configuration
 {
     public class AppConfigurator : IAppConfigurator
     {
-        private WebApplication _webApplication;
-        private IWebServer _webServer;
-        private ICamera _camera = new NullCamera();
-        private Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
-        private ILogFactory _logFactory = new ConsoleLogFactory();
+        protected WebApplication _webApplication;
+        protected IWebServer _webServer;
+        protected ICamera _camera = new NullCamera();
+        protected Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
+        protected ILogFactory _logFactory = new ConsoleLogFactory();
 
         public ISelenoApplication CreateApplication()
         {
             _logFactory
                 .GetLogger(GetType())
-                .InfoFormat("Seleno v{0}, .NET Framework v{1}", 
+                .InfoFormat("Seleno v{0}, .NET Framework v{1}",
                     typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
 
             var container = BuildContainer();
@@ -40,29 +40,34 @@ namespace TestStack.Seleno.Configuration
             return container;
         }
 
-        public void ProjectToTest(WebApplication webApplication)
+        public AppConfigurator ProjectToTest(WebApplication webApplication)
         {
             _webApplication = webApplication;
+            return this;
         }
 
-        public void WithWebServer(IWebServer webServer)
+        public AppConfigurator WithWebServer(IWebServer webServer)
         {
             _webServer = webServer;
-        } 
+            return this;
+        }
 
-        public void WithWebDriver(Func<IWebDriver> webDriver)
+        public AppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
         {
             _webDriver = webDriver;
+            return this;
         }
 
-        public void UsingCamera(ICamera camera)
+        public AppConfigurator UsingCamera(ICamera camera)
         {
             _camera = camera;
+            return this;
         }
 
-        public void UsingLogger(ILogFactory logFactory)
+        public AppConfigurator UsingLogger(ILogFactory logFactory)
         {
             _logFactory = logFactory;
+            return this;
         }
     }
 }
