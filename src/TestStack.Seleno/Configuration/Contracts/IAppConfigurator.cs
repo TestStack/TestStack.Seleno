@@ -7,10 +7,10 @@ namespace TestStack.Seleno.Configuration.Contracts
 {
     public interface IAppConfigurator
     {
-        void ProjectToTest(WebApplication webApplication);
-        void WithWebServer(IWebServer webServer);
-        void WithWebDriver(Func<IWebDriver> webDriver);
-        void UsingCamera(ICamera camera);
-        void UsingLogger(ILogFactory logFactory);
+        AppConfigurator ProjectToTest(WebApplication webApplication);
+        AppConfigurator WithWebServer(IWebServer webServer);
+        AppConfigurator WithWebDriver(Func<IWebDriver> webDriver);
+        AppConfigurator UsingCamera(ICamera camera);
+        AppConfigurator UsingLogger(ILogFactory logFactory);
     }
 }
