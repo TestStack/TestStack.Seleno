@@ -1,14 +1,18 @@
 ﻿using System;
 using Humanizer;
-using NUnit.Framework;
 using TestStack.BDDfy;
 
 namespace TestStack.Seleno.Tests.Specify
 {
-    [TestFixture]
-    public abstract class Specification : ISpecification
+    public abstract class TestCaseSpecificationFor<T> : ISpecification
     {
-        [Test]
+        public T SUT { get; set; }
+
+        public virtual Type Story
+        {
+            get { return typeof(T); }
+        }
+
         public virtual void Run()
         {
             string title = BuildTitle();
@@ -25,7 +29,6 @@ namespace TestStack.Seleno.Tests.Specify
         public virtual void Setup() { }
         public virtual void TearDown() { }
 
-        public virtual Type Story { get { return GetType(); } }
         public virtual string Title { get; set; }
         public string Category { get; set; }
     }

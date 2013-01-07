@@ -89,11 +89,13 @@
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specify\ISpecification.cs" />
     <Compile Include="Specify\SelenoDesignSpecsHtmlReportConfig.cs" />
     <Compile Include="Specify\Specification.cs" />
     <Compile Include="Specify\SpecificationFor.cs" />
     <Compile Include="Specify\SpecifySpecs.cs" />
     <Compile Include="Specify\SpecStoryMetaDataScanner.cs" />
+    <Compile Include="Specify\TestCaseSpecificationFor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
