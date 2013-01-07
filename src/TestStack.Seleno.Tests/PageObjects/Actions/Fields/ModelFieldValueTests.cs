@@ -1,34 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using NUnit.Framework;
-using TestStack.BDDfy.Core;
 using TestStack.Seleno.PageObjects.Actions.Fields;
-using TestStack.BDDfy;
-using TestStack.BDDfy.Scanners.StepScanners.Fluent;
 using FluentAssertions;
+using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
 {
     class ModelFieldValueTests
     {
-        [Story(Title = "ModelFieldValue - Single value")]
-        public class SingleValueModelFieldValueSpec
+        #region Single Value Spec
+        public class Single_value_ModelFieldValue_spec : TestCaseSpecificationFor<ModelFieldValue>
         {
-            private ModelFieldValue SUT;
+            private readonly string _testTitle;
+            private readonly object _modelValue;
+            private readonly bool _expectedIsTrueValue;
+            private readonly string _expectedValue;
 
-            public void Given_a_ModelFieldValue_of(object modelValue)
+            public Single_value_ModelFieldValue_spec(string testTitle, object modelValue, bool expectedIsTrueValue, string expectedValue)
             {
-                SUT = new ModelFieldValue(modelValue);
+                _testTitle = testTitle;
+                _modelValue = modelValue;
+                _expectedIsTrueValue = expectedIsTrueValue;
+                _expectedValue = expectedValue;
             }
 
-            public void Then_IsTrue_should_be(bool expected)
+            public override string Title
             {
-                SUT.IsTrue.Should().Be(expected);
+                get { return string.Format("{0} - {1}", _testTitle, _modelValue ?? "(null)"); }
+                set { base.Title = value; }
             }
 
-            public void And_Value_should_be(string expected)
+            public void Given_a_ModelFieldValue_of()
             {
-                SUT.Value.Should().Be(expected);
+                SUT = new ModelFieldValue(_modelValue);
+            }
+
+            public void Then_IsTrue_should_be()
+            {
+                SUT.IsTrue.Should().Be(_expectedIsTrueValue);
+            }
+
+            public void And_Value_should_be()
+            {
+                SUT.Value.Should().Be(_expectedValue);
             }
 
             public void And_HasMultipleValues_should_be_false()
@@ -44,24 +60,67 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
                 Assert.Throws<InvalidOperationException>(() => x = SUT.Values);
             }
         }
+        #endregion
 
-        private void TestSpec(string testTitle, object modelValue, bool expectedIsTrueValue, string expectedValue)
+        #region Multiple Values Spec
+        public class Multiple_values_ModelFieldValue_spec : TestCaseSpecificationFor<ModelFieldValue>
         {
-            new SingleValueModelFieldValueSpec()
-                .Given(s => s.Given_a_ModelFieldValue_of(modelValue))
-                .Then(s => s.Then_IsTrue_should_be(expectedIsTrueValue))
-                .And(s => s.And_Value_should_be(expectedValue))
-                .And(s => s.And_HasMultipleValues_should_be_false())
-                .And(s => s.And_Values_should_throw_exception())
-                .BDDfy<SingleValueModelFieldValueSpec>(string.Format("{0} - {1}", testTitle, modelValue ?? "(null)"));
+            private readonly string _testTitle;
+            private readonly MultipleValuesTestCase _testCase;
+
+            public Multiple_values_ModelFieldValue_spec(string testTitle, MultipleValuesTestCase testCase)
+            {
+                _testTitle = testTitle;
+                _testCase = testCase;
+            }
+
+            public override string Title
+            {
+                get { return string.Format("{0} - {1}", _testTitle, _testCase.ModelValue ?? "(null)"); }
+                set { base.Title = value; }
+            }
+
+            public void Given_a_ModelFieldValue_of()
+            {
+                SUT = new ModelFieldValue(_testCase.ModelValue);
+            }
+
+            public void Then_IsTrue_should_be_false()
+            {
+                SUT.IsTrue.Should().BeFalse();
+            }
+
+            public void And_Value_should_be()
+            {
+                SUT.Value.Should().Be(_testCase.ExpectedValue);
+            }
+
+            public void And_HasMultipleValues_should_be_true()
+            {
+                SUT.HasMultipleValues.Should().BeTrue();
+            }
+
+            public void And_Values_should_be()
+            {
+                SUT.Values.Should().Equal(_testCase.ExpectedValues);
+            }
         }
 
+        internal class MultipleValuesTestCase
+        {
+            public object ModelValue { get; set; }
+            public string ExpectedValue { get; set; }
+            public IEnumerable<string> ExpectedValues { get; set; }
+        }
+        #endregion
+        
         [TestCase(true, true, "true")]
         [TestCase(false, false, "false")]
         [TestCase(null, false, "")]
         public void BooleanTests(bool? modelValue, bool expectedIsTrueValue, string expectedValue)
         {
-            TestSpec("Boolean", modelValue, expectedIsTrueValue, expectedValue);
+            new Single_value_ModelFieldValue_spec("Boolean", modelValue, expectedIsTrueValue, expectedValue)
+                .Run();
         }
 
         [TestCase(1, "1")]
@@ -71,14 +130,16 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
         [TestCase((short)5, "5")]
         public void NumericTests(object modelValue, string expectedValue)
         {
-            TestSpec("Numeric", modelValue, false, expectedValue);
+            new Single_value_ModelFieldValue_spec("Numeric", modelValue, false, expectedValue)
+                .Run();
         }
 
         [TestCase(null, "")]
         [TestCase(2, "2")]
         public void NullableIntTests(int? modelValue, string expectedValue)
         {
-            TestSpec("Nullable Int", modelValue, false, expectedValue);
+            new Single_value_ModelFieldValue_spec("Nullable Int", modelValue, false, expectedValue)
+                .Run();
         }
 
         [TestCase(null, "")]
@@ -86,7 +147,38 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
         [TestCase("asdf", "asdf")]
         public void StringTests(string modelValue, string expectedValue)
         {
-            TestSpec("String", modelValue, false, expectedValue);
+            new Single_value_ModelFieldValue_spec("String", modelValue, false, expectedValue)
+                .Run();
+        }
+
+        #region Setup Multiple Values
+        private IEnumerable<MultipleValuesTestCase> MultipleValuesTestCases()
+        {
+            yield return new MultipleValuesTestCase { ModelValue = new object[] {}, ExpectedValue = string.Empty, ExpectedValues = new string[] {}};
+            yield return new MultipleValuesTestCase { ModelValue = new [] {"1", "2", "3"}, ExpectedValue = "1,2,3", ExpectedValues = new[] {"1", "2", "3"}};
+            yield return new MultipleValuesTestCase { ModelValue = new List<int> { 1, 2, 3 }, ExpectedValue = "1,2,3", ExpectedValues = new[] {"1", "2", "3"}};
+            yield return new MultipleValuesTestCase { ModelValue = new Collection<ExampleObject> { new ExampleObject("asdf"), new ExampleObject("1"), new ExampleObject("!@#") }, ExpectedValue = "asdf,1,!@#", ExpectedValues = new string[] {"asdf", "1", "!@#"}};
+        }
+        internal class ExampleObject
+        {
+            private readonly string _value;
+
+            public ExampleObject(string value)
+            {
+                _value = value;
+            }
+
+            public override string ToString()
+            {
+                return _value;
+            }
+        }
+        #endregion
+        [TestCaseSource("MultipleValuesTestCases")]
+        public void EnumerableTests(MultipleValuesTestCase testCase)
+        {
+            new Multiple_values_ModelFieldValue_spec("Enumerable", testCase)
+                .Run();
         }
     }
 }
