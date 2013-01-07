@@ -20,3 +20,4 @@ Build/*
 *.sdf
 *.vsdoc
 TestResult.xml
+*.DotSettings
