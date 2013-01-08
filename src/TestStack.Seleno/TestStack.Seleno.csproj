@@ -109,7 +109,6 @@
     <Compile Include="Configuration\WebServers\WebApplication.cs" />
     <Compile Include="Extensions\PropertyExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Funq\Action.cs" />
     <Compile Include="Funq\AutoWireHelpers.cs" />
     <Compile Include="Funq\ReflectionExtensions.cs" />

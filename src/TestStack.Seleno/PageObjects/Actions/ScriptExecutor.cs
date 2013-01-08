@@ -72,5 +72,11 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             return result;
         }
+
+        public void ExecuteScript(string javascriptToBeExecuted, IJavaScriptExecutor javaScriptExecutor = null)
+        {
+            javaScriptExecutor = javaScriptExecutor ?? Browser;
+            javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
+        }
     }
 }

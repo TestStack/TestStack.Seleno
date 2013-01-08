@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
@@ -12,11 +13,11 @@ namespace TestStack.Seleno.PageObjects.Actions
     public class PageReader<TViewModel> 
         where TViewModel : class ,new()
     {
-        private RemoteWebDriver _browser;
+        private IWebDriver _browser;
         private readonly IScriptExecutor _execute;
         private readonly IElementFinder _finder;
 
-        public PageReader(RemoteWebDriver browser, IScriptExecutor executor, IElementFinder finder)
+        public PageReader(IWebDriver browser, IScriptExecutor executor, IElementFinder finder)
         {
             _browser = browser;
             _execute = executor;
@@ -70,6 +71,24 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             var javascriptExpression = string.Format("$('#{0}').is(':visible')", name);
             return _browser.ExecuteScriptAndReturn<bool>(javascriptExpression);
+        }
+
+        public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName)
+        {
+            var element = ElementFor(propertySelector);
+            var value = element.GetAttribute(attributeName) ?? string.Empty;
+            return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
+        }
+
+        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
+        {
+            return GetAttributeAsType(propertySelector, "value");
+        }
+
+        public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
+        {
+            string value = ElementFor(propertySelector).Text;
+            return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
         }
 
     }
