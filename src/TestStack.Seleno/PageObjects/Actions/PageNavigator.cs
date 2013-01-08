@@ -18,6 +18,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         internal PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer)
         {
+            if (browser == null) throw new ArgumentNullException("browser");
+            if (executor == null) throw new ArgumentNullException("executor");
             Browser = browser;
             _executor = executor;
             _webServer = webServer;

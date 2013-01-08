@@ -17,6 +17,8 @@ namespace TestStack.Seleno.PageObjects
 
         public UiComponent()
         {
+            if (SelenoApplicationRunner.Host == null)
+                throw new AppConfigurationException("SelenoApplicationRunner.Host is not set");
             Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
             _camera = SelenoApplicationRunner.Host.Camera;
             ElementFinder = new ElementFinder(Browser);
