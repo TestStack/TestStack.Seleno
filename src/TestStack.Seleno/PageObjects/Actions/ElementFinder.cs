@@ -13,6 +13,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         internal ElementFinder(RemoteWebDriver browser)
         {
+            if(browser == null)
+                throw new ArgumentNullException("browser");
             Browser = browser;
         }
 
@@ -49,7 +51,5 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             return result;
         }
-
-
     }
 }

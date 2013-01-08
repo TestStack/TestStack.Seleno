@@ -13,6 +13,8 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public IisExpressWebServer(WebApplication application)
         {
+            if (application == null)
+                throw new AppConfigurationException("The web application must be set.");
             _application = application;
         }
 

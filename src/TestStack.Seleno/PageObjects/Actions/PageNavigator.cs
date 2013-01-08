@@ -16,6 +16,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         internal PageNavigator(RemoteWebDriver browser, IScriptExecutor executor)
         {
+            if (browser == null) throw new ArgumentNullException("browser");
+            if (executor == null) throw new ArgumentNullException("executor");
             Browser = browser;
             _executor = executor;
         }

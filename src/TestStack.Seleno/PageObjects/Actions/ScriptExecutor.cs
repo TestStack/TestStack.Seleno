@@ -14,6 +14,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         internal ScriptExecutor(RemoteWebDriver browser, IElementFinder finder, ICamera camera)
         {
+            if (browser == null) throw new ArgumentNullException("browser");
+            if (finder == null) throw new ArgumentNullException("finder");
+            if (camera == null) throw new ArgumentNullException("camera");
             Browser = browser;
             _finder = finder;
             _camera = camera;
@@ -67,8 +70,8 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             javaScriptExecutor = javaScriptExecutor ?? Browser;
 
-            object untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
-            object result = untypedValue.TryConvertTo(returnType, null);
+            var untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
+            var result = untypedValue.TryConvertTo(returnType, null);
 
             return result;
         }
