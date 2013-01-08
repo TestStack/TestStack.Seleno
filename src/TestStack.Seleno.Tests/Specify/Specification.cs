@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutofacContrib.NSubstitute;
 using Humanizer;
 using NUnit.Framework;
 using TestStack.BDDfy;
@@ -8,6 +11,10 @@ namespace TestStack.Seleno.Tests.Specify
     [TestFixture]
     public abstract class Specification 
     {
+        protected AutoSubstitute _autoSubstitute = new AutoSubstitute();
+        
+
+
         [Test]
         public virtual void Run()
         {
@@ -19,6 +26,22 @@ namespace TestStack.Seleno.Tests.Specify
         {
             return Title ?? GetType().Name.Humanize(LetterCasing.Title);
         }
+
+        public virtual TService Fake<TService>()
+            where TService : class
+        {
+            return _autoSubstitute.ResolveAndSubstituteFor<TService>();
+        }
+
+        public virtual TService Fake<TService>(IEnumerable<Type> implementedTypes)
+            where TService : class
+        {
+            var types = implementedTypes.ToList();
+            types.Insert(0,typeof(TService));
+            return (TService)_autoSubstitute.SubstituteFor(types);
+        }
+
+      
 
         // BDDfy methods
         public virtual void EstablishContext() { }

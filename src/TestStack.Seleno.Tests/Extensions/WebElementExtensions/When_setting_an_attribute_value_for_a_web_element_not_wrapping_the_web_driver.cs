@@ -1,4 +1,5 @@
 ﻿using System;
+using AutofacContrib.NSubstitute;
 using FluentAssertions;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
