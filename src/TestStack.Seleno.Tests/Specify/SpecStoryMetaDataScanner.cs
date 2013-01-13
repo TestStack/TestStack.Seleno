@@ -8,7 +8,7 @@ namespace TestStack.Seleno.Tests.Specify
     {
         public virtual StoryMetaData Scan(object testObject, Type explicityStoryType = null)
         {
-            var specification = testObject as Specification;
+            var specification = testObject as ISpecification;
             if (specification == null)
                 return null;
 

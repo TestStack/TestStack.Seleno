@@ -30,6 +30,8 @@ namespace TestStack.Seleno.Extensions
         {
             try
             {
+                var underlyingType = Nullable.GetUnderlyingType(returnType) ?? returnType;
+
                 if (from == null)
                     return defaultValue;
 
@@ -37,15 +39,15 @@ namespace TestStack.Seleno.Extensions
                 {
                     string value = from as string;
 
-                    if (returnType.IsEnum)
-                        return Enum.Parse(returnType, value, true);
+                    if (underlyingType.IsEnum)
+                        return Enum.Parse(underlyingType, value, true);
 
                     if (string.IsNullOrEmpty(value))
                         return defaultValue;
                 }
 
                 if ((from as IConvertible) != null)
-                    return Convert.ChangeType(from, returnType);
+                    return Convert.ChangeType(from, underlyingType);
 
                 if (returnType.IsAssignableFrom(from.GetType()))
                     return from;
