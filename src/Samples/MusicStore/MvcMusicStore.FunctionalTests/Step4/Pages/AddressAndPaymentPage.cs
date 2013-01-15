@@ -15,10 +15,10 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
             //Order model = ModelFromPage();
             //var element = ElementFor(x => x.Phone);
             ////model.Should().BeSameAs(order);
-
             return Navigate().To<Page>(By.CssSelector("input[type=submit]"));
+            
         }
 
-        string PromoCode { set { Execute().ActionOnLocator(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
+        public string PromoCode { set { Input().ClearAndSendKeys("PromoCode",value); } }
     }
 }

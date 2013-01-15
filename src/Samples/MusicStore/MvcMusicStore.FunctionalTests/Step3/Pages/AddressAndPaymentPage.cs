@@ -14,6 +14,6 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
             return Navigate().To<Page>(By.CssSelector("input[type=submit]"));
         }
 
-        string PromoCode { set { Execute().ActionOnLocator(By.Name("PromoCode"), e => e.ClearAndSendKeys(value)); } }
+        string PromoCode { set { Input().ClearAndSendKeys("PromoCode",value);} }
     }
 }

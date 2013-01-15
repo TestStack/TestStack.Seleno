@@ -2,19 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
     public class PageWriter<TModel> where TModel : class, new()
     {
-        private readonly IScriptExecutor _execute;
+        private readonly IScriptExecutor _scriptExecutor;
+        private readonly IElementFinder _elementFinder;
 
-        public PageWriter(IScriptExecutor executor)
+        public PageWriter(IScriptExecutor scriptExecutor, IElementFinder elementFinder)
         {
-            _execute = executor;
+            _scriptExecutor = scriptExecutor;
+            _elementFinder = elementFinder;
         }
 
         public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
@@ -44,7 +48,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             if (String.IsNullOrEmpty(value)) return;
 
-            _execute
+            _scriptExecutor
                 .ActionOnLocator(
                     By.Name(fieldName),
                     element =>
@@ -86,6 +90,35 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
 
             return propertyValue.ToString();
+        }
+
+        public void ClearAndSendKeys<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, string value, bool clearFirst = true)
+        {
+            ClearAndSendKeys(ExpressionHelper.GetExpressionText(propertySelector), value, clearFirst);
+        }
+
+        public void ClearAndSendKeys(string elementName, string value, bool clearFirst = true)
+        {
+            var element = _elementFinder.ElementWithWait(By.Name(elementName));
+            if (clearFirst) element.Clear();
+            element.SendKeys(value);
+        }
+
+        public void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector,String attributeName, TProperty attributeValue)
+        {
+            var name = ExpressionHelper.GetExpressionText(propertySelector);
+
+            var scriptToExecute = string.Format("$('#{0}').attr('{1}','{2}'))", name, attributeName, attributeValue);
+
+            _scriptExecutor.ExecuteScript(scriptToExecute);
+        }
+
+        public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
+        {
+
+            var name = ExpressionHelper.GetExpressionText(propertySelector);
+            var scriptToExecute = string.Format("$('{0}').val('{1}')", name, inputValue);
+            _scriptExecutor.ExecuteScript(scriptToExecute);
         }
     }
 }

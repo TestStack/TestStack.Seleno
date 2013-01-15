@@ -80,14 +80,14 @@
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
-    <Compile Include="Extensions\WebElementExtensions\when_clearing_and_sending_keys_to_web_element.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_getting_a_strongly_typed_textBox_value.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_getting_a_web_element_strongly_typed_text.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_getting_strongly_typed_attribute_value.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_only_sending_keys_to_web_element.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_not_wrapping_the_web_driver.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
-    <Compile Include="Extensions\WebElementExtensions\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver_with_no_javascript_executor.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\PageWriterSpecification.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_clearing_and_sending_keys_to_web_element.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_getting_a_strongly_typed_textBox_value.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_getting_a_web_element_strongly_typed_text.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_getting_strongly_typed_attribute_value.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_only_sending_keys_to_web_element.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
     <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specify\AutoFacContribNSubstituteExtensions.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Specify\SpecificationFor.cs" />
     <Compile Include="Specify\SpecifySpecs.cs" />
     <Compile Include="Specify\SpecStoryMetaDataScanner.cs" />
+    <Compile Include="ViewModels\TestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

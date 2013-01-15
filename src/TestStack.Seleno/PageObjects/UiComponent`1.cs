@@ -12,7 +12,7 @@ namespace TestStack.Seleno.PageObjects
 
         protected PageWriter<TModel> Input()
         {
-            return new PageWriter<TModel>(ScriptExecutor);
+            return new PageWriter<TModel>(ScriptExecutor, ElementFinder);
         } 
     }
 }
