@@ -89,7 +89,7 @@
     <Compile Include="PageObjects\Actions\PageReader\When_getting_strongly_typed_attribute_value.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_only_sending_keys_to_web_element.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
-    <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
+    <Compile Include="PageObjects\ScriptAndReturn_specification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specify\ISpecification.cs" />
     <Compile Include="Specify\SelenoDesignSpecsHtmlReportConfig.cs" />

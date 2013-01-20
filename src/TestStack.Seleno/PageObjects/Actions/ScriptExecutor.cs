@@ -1,6 +1,5 @@
 using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
 
@@ -8,16 +7,19 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     public class ScriptExecutor : IScriptExecutor
     {
-        protected RemoteWebDriver Browser;
+        protected IWebDriver Browser;
+        private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        internal ScriptExecutor(RemoteWebDriver browser, IElementFinder finder, ICamera camera)
+        internal ScriptExecutor(IWebDriver browser, IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
             if (browser == null) throw new ArgumentNullException("browser");
+            if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
             if (finder == null) throw new ArgumentNullException("finder");
             if (camera == null) throw new ArgumentNullException("camera");
             Browser = browser;
+            _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;
         }
@@ -66,20 +68,17 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType, IJavaScriptExecutor javaScriptExecutor = null)
+        public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType)
         {
-            javaScriptExecutor = javaScriptExecutor ?? Browser;
-
-            var untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
+            var untypedValue = _javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
             var result = untypedValue.TryConvertTo(returnType, null);
 
             return result;
         }
 
-        public void ExecuteScript(string javascriptToBeExecuted, IJavaScriptExecutor javaScriptExecutor = null)
+        public void ExecuteScript(string javascriptToBeExecuted)
         {
-            javaScriptExecutor = javaScriptExecutor ?? Browser;
-            javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
+            _javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
         }
     }
 }
