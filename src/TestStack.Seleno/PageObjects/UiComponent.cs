@@ -22,7 +22,7 @@ namespace TestStack.Seleno.PageObjects
             Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
             _camera = SelenoApplicationRunner.Host.Camera;
             ElementFinder = new ElementFinder(Browser);
-            ScriptExecutor = new ScriptExecutor(Browser, ElementFinder, _camera);
+            ScriptExecutor = new ScriptExecutor(Browser, Browser, ElementFinder, _camera);
             _navigator = new PageNavigator(Browser, ScriptExecutor, SelenoApplicationRunner.Host.WebServer);
         }
 
