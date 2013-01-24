@@ -2,8 +2,6 @@
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
-using TestStack.Seleno.Tests.ViewModels;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
@@ -13,7 +11,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         private const string AttributeName = "data-value";
 
         public void Given_a_web_element_has_an_attribute_data_value()
-        {
+        { 
             Fake<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(Fake<IWebElement>());
 
         }

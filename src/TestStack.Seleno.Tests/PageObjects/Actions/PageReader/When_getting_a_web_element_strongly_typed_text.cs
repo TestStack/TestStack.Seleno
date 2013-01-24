@@ -4,8 +4,6 @@ using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.BDDfy.Scanners.StepScanners.ExecutableAttribute.GwtAttributes;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
-using TestStack.Seleno.Tests.ViewModels;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {

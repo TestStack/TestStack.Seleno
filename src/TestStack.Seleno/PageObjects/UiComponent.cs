@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Remote;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
@@ -22,7 +23,8 @@ namespace TestStack.Seleno.PageObjects
             Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
             _camera = SelenoApplicationRunner.Host.Camera;
             ElementFinder = new ElementFinder(Browser);
-            ScriptExecutor = new ScriptExecutor(Browser, ElementFinder, _camera);
+            IJavaScriptExecutor javascriptExecutor = Browser;
+            ScriptExecutor = new ScriptExecutor(Browser, javascriptExecutor, ElementFinder, _camera);
             _navigator = new PageNavigator(Browser, ScriptExecutor, SelenoApplicationRunner.Host.WebServer);
         }
 

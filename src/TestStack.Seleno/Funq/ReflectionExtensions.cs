@@ -7,6 +7,18 @@ namespace Funq
 {
     public static class ReflectionExtensions
     {
+        public static Object[] GetPublicPropertyValues<T>(this T instance)
+           where T : class
+        {
+            var values = Enumerable.Empty<Object>();
+            if (instance != null)
+            {
+                values = typeof(T).GetPublicProperties().Select(p => p.GetValue(instance, null));
+            }
+
+            return values.ToArray();
+        }
+
         public static PropertyInfo[] GetPublicProperties(this Type type)
         {
             if (type.IsInterface)

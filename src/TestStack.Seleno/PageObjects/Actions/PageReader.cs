@@ -31,9 +31,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             var instance = new TViewModel();
             foreach (var property in type.GetProperties())
             {
-                var propertyName = property.Name;
-                var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
-                var typedValue = _execute.ScriptAndReturn(javascriptExtractor, property.PropertyType);
+                var typedValue = _execute.ScriptAndReturn("$('#{0}').val()", property.PropertyType, property.Name);
 
                 if (property.CanWriteToProperty(typedValue))
                 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using AutofacContrib.NSubstitute;
 
 namespace TestStack.Seleno.Tests.Specify
@@ -7,10 +8,11 @@ namespace TestStack.Seleno.Tests.Specify
     {
         public T SUT { get; set; }
         protected AutoSubstitute _autoSubstitute;
+        private Action<ContainerBuilder> _emptyBuilderAction = builder => { };
 
-        public SpecificationFor()
+        protected SpecificationFor(Action<ContainerBuilder> containerBuilderAction = null)
         {
-            _autoSubstitute = new AutoSubstitute();
+            _autoSubstitute = new AutoSubstitute(containerBuilderAction ?? _emptyBuilderAction);
             InitialiseSystemUnderTest();
         }
 

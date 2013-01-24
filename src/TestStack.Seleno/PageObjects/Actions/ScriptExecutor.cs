@@ -8,16 +8,20 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     public class ScriptExecutor : IScriptExecutor
     {
-        protected RemoteWebDriver Browser;
+        protected IWebDriver Browser;
+        private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        internal ScriptExecutor(RemoteWebDriver browser, IElementFinder finder, ICamera camera)
+        internal ScriptExecutor(IWebDriver browser, IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (finder == null) throw new ArgumentNullException("finder");
             if (camera == null) throw new ArgumentNullException("camera");
+            if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
+
             Browser = browser;
+            _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;
         }
@@ -66,20 +70,24 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType, IJavaScriptExecutor javaScriptExecutor = null)
+        public TReturn ScriptAndReturn<TReturn>(string javascriptToBeExecuted, params object[] arguments)
         {
-            javaScriptExecutor = javaScriptExecutor ?? Browser;
+            return (TReturn)ScriptAndReturn(javascriptToBeExecuted, typeof(TReturn), arguments);
+        }
 
-            var untypedValue = javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);
-            var result = untypedValue.TryConvertTo(returnType, null);
+
+
+        public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType, params object[] arguments)
+        {
+            object untypedValue = _javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted, arguments);
+            object result = untypedValue.TryConvertTo(returnType, null);
 
             return result;
         }
 
-        public void ExecuteScript(string javascriptToBeExecuted, IJavaScriptExecutor javaScriptExecutor = null)
+        public void ExecuteScript(string javascriptToBeExecuted, params object[] arguments)
         {
-            javaScriptExecutor = javaScriptExecutor ?? Browser;
-            javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
+            _javaScriptExecutor.ExecuteScript(javascriptToBeExecuted, arguments);
         }
     }
 }

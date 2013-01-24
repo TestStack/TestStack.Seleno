@@ -15,10 +15,9 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         public void Given_a_web_element_has_an_attribute_data_value()
         {
             Fake<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(Fake<IWebElement>());
-
         }
 
-        public void AndGiven_the_web_element_attribute_value_is_false()
+        public void AndGiven_the_web_element_attribute_value_is_true()
         {
             Fake<IWebElement>().GetAttribute("value").Returns("true");
         }

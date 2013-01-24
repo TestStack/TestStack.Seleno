@@ -82,6 +82,7 @@
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_populating_view_model_from_the_Page.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\PageWriterSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_clearing_and_sending_keys_to_web_element.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_strongly_typed_textBox_value.cs" />
@@ -89,9 +90,15 @@
     <Compile Include="PageObjects\Actions\PageReader\When_getting_strongly_typed_attribute_value.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_only_sending_keys_to_web_element.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
-    <Compile Include="PageObjects\when_executing_script_and_changing_return_type.cs" />
+    <Compile Include="PageObjects\Actions\ScriptExecutor\ScriptExecutorSpecification.cs" />
+    <Compile Include="PageObjects\Actions\ScriptExecutor\when_executing_script_with_formatting_arguments.cs" />
+    <Compile Include="PageObjects\Actions\ScriptExecutor\when_executing_script_and_changing_return_type.cs" />
+    <Compile Include="PageObjects\Actions\ScriptExecutor\when_failing_at_performing_action_on_locator.cs" />
+    <Compile Include="PageObjects\Actions\ScriptExecutor\when_successfully_performing_action_on_locator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specify\InternalActionSpecificationFor.cs" />
     <Compile Include="Specify\ISpecification.cs" />
+    <Compile Include="Specify\NSubstituteExtensions.cs" />
     <Compile Include="Specify\SelenoDesignSpecsHtmlReportConfig.cs" />
     <Compile Include="Specify\Specification.cs" />
     <Compile Include="Specify\SpecificationFor.cs" />
