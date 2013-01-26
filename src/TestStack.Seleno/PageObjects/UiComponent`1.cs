@@ -1,18 +1,29 @@
+using OpenQA.Selenium;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent<TModel> : UiComponent
-        where TModel: class, new()
+        where TModel : class, new()
     {
+        public UiComponent()
+        {
+            throw new InaccessibleSelenoException();
+        }
+
+        internal UiComponent(IWebDriver browser, IPageNavigator pageNavigator, IElementFinder elementFinder,
+            IScriptExecutor scriptExecutor, ICamera camera, IComponentFactory componentFactory)
+            : base(browser, pageNavigator, elementFinder, scriptExecutor, camera, componentFactory) { }
+
         protected PageReader<TModel> Read()
         {
-            return new PageReader<TModel>(Browser, ScriptExecutor, ElementFinder);
+            return ComponentFactory.CreatePageReader<TModel>();
         }
 
         protected PageWriter<TModel> Input()
         {
-            return new PageWriter<TModel>(ScriptExecutor, ElementFinder);
-        } 
+            return ComponentFactory.CreatePageWriter<TModel>();
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.PageObjects.Locators;
 using By = OpenQA.Selenium.By;
@@ -9,9 +8,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     public class ElementFinder : IElementFinder
     {
-        protected RemoteWebDriver Browser;
+        protected IWebDriver Browser;
 
-        internal ElementFinder(RemoteWebDriver browser)
+        internal ElementFinder(IWebDriver browser)
         {
             if(browser == null)
                 throw new ArgumentNullException("browser");

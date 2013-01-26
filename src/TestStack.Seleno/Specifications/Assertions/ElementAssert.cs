@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Specifications.Assertions
@@ -10,26 +9,20 @@ namespace TestStack.Seleno.Specifications.Assertions
     {
         private readonly By _selector;
         private readonly ICamera _camera;
+        readonly IWebDriver _browser;
 
-        public ElementAssert(By selector, ICamera camera)
+        public ElementAssert(By selector, ICamera camera, IWebDriver browser)
         {
             _selector = selector;
             _camera = camera;
-        }
-
-        IWebDriver Browser
-        {
-            get
-            {
-                return SelenoApplicationRunner.Host.Browser;
-            }
+            _browser = browser;
         }
 
         public ElementAssert DoNotExist(string message = null)
         {
             try
             {
-                Browser.FindElement(_selector);
+                _browser.FindElement(_selector);
             }
             catch (NoSuchElementException)
             {
@@ -47,7 +40,7 @@ namespace TestStack.Seleno.Specifications.Assertions
         {
             try
             {
-                Browser.FindElement(_selector);
+                _browser.FindElement(_selector);
             }
             catch (NoSuchElementException ex)
             {
@@ -62,7 +55,7 @@ namespace TestStack.Seleno.Specifications.Assertions
         {
             try
             {
-                var elements = Browser.FindElements(_selector);
+                var elements = _browser.FindElements(_selector);
                 assertion(elements);
             }
             catch (Exception)

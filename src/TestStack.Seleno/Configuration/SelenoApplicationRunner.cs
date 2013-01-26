@@ -12,7 +12,7 @@ namespace TestStack.Seleno.Configuration
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
-        public static ISelenoApplication Host { get; private set; }
+        public static ISelenoApplication Host { get; internal set; }
        
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.

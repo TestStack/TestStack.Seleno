@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InaccessibleSelenoException.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />
     <Compile Include="Configuration\Resources.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="PageObjects\Actions\PageNavigator.cs" />
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
+    <Compile Include="PageObjects\IComponentFactory.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />
