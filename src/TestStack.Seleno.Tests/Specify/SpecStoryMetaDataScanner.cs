@@ -12,8 +12,18 @@ namespace TestStack.Seleno.Tests.Specify
             if (specification == null)
                 return null;
 
-            var story = new StoryAttribute() {Title = specification.Story.Name};
+            string specificationTitle = CreateSpecificationTitle(specification);
+            var story = new StoryAttribute() {Title = specificationTitle};
             return new StoryMetaData(specification.Story, story);
+        }
+
+        private string CreateSpecificationTitle(ISpecification specification)
+        {
+            string suffix = "Specification";
+            string title = specification.Story.Name;
+            if (title.EndsWith(suffix))
+                title = title.Remove(title.Length - suffix.Length, suffix.Length);
+            return title;
         }
     }
 }
