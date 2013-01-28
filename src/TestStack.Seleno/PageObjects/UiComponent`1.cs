@@ -25,5 +25,10 @@ namespace TestStack.Seleno.PageObjects
         {
             return ComponentFactory.CreatePageWriter<TModel>();
         }
+
+        internal static UiComponent<TModel> Create()
+        {
+            return new UiComponent<TModel>(null, null, null, null, null, null);
+        } 
     }
 }

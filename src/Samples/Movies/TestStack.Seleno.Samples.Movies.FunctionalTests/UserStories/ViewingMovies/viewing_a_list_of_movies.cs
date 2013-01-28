@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Samples.Movies.Controllers;
 using TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMovies
@@ -16,7 +18,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMov
 
         public void When_I_navigate_to_the_Movie_List_page()
         {
-            _page = new MovieListPage();
+            _page = SelenoApplicationRunner.NavigateToInitialPage<MoviesController, MovieListPage>(x => x.Index());
         }
 
         public void Then_I_should_see_10_items_in_the_list()

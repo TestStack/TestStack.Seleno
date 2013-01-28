@@ -140,6 +140,7 @@
     <Compile Include="PageObjects\Actions\PageNavigator.cs" />
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
+    <Compile Include="PageObjects\ComponentFactory.cs" />
     <Compile Include="PageObjects\IComponentFactory.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />

@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using TestStack.Seleno.Extensions;
 
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -14,14 +13,14 @@ namespace TestStack.Seleno.PageObjects.Actions
         where TViewModel : class ,new()
     {
         private IWebDriver _browser;
-        private readonly IScriptExecutor _execute;
-        private readonly IElementFinder _finder;
+        private readonly IScriptExecutor _scriptExecutor;
+        private readonly IElementFinder _elementFinder;
 
-        public PageReader(IWebDriver browser, IScriptExecutor executor, IElementFinder finder)
+        public PageReader(IWebDriver browser, IScriptExecutor scriptExecutor, IElementFinder elementFinder)
         {
             _browser = browser;
-            _execute = executor;
-            _finder = finder;
+            _scriptExecutor = scriptExecutor;
+            _elementFinder = elementFinder;
         }
 
         public TViewModel ModelFromPage()
@@ -33,7 +32,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             {
                 var propertyName = property.Name;
                 var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
-                var typedValue = _execute.ScriptAndReturn(javascriptExtractor, property.PropertyType);
+                var typedValue = _scriptExecutor.ScriptAndReturn(javascriptExtractor, property.PropertyType);
 
                 if (property.CanWriteToProperty(typedValue))
                 {
@@ -61,7 +60,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             string name = ExpressionHelper.GetExpressionText(field);
             string id = TagBuilder.CreateSanitizedId(name);
-            var element = _finder.TryFindElement(By.Id(id));
+            var element = _elementFinder.TryFindElement(By.Id(id));
             return element;
         }
 

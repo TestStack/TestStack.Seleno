@@ -1,6 +1,10 @@
 using System;
+using System.Linq.Expressions;
+using System.Web.Mvc;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
+using TestStack.Seleno.PageObjects;
+using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -70,6 +74,21 @@ namespace TestStack.Seleno.Configuration
             Host.Initialize();
 
             return Host;
+        }
+
+        /// <summary>
+        /// Navigate to the given controller action and return an initialised page object of the specified type.
+        /// </summary>
+        /// <typeparam name="TController">The controller to navigate to</typeparam>
+        /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
+        /// <param name="action">The controller action to navigate to</param>
+        /// <returns>The initialised page object</returns>
+        public static TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+            where TController : Controller
+            where TPage : UiComponent, new()
+        {
+            var navigator = Host.Container.Resolve<IPageNavigator>();
+            return navigator.To<TController, TPage>(action);
         }
     }
 }

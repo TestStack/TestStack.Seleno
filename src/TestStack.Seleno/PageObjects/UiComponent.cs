@@ -53,7 +53,7 @@ namespace TestStack.Seleno.PageObjects
 
         public ElementAssert AssertThatElements(By selector)
         {
-            return ComponentFactory.CreateElementAssert(selector);
+            return new ElementAssert(selector, _camera, Browser);
         }
 
         public TComponent GetComponent<TComponent>()

@@ -15,7 +15,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
 
         public navigating_by_null_relative_url()
         {
-            SelenoApplicationRunner.Host = Fake<ISelenoApplication>();
             Fake<IWebServer>().BaseUrl.Returns(_baseUrl);
         }
 
@@ -28,11 +27,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
         {
             Fake<IWebDriver>().Received().Navigate().GoToUrl(_baseUrl);
         }
-
-        public override void InitialiseSystemUnderTest()
-        {
-            SUT = new PageNavigator(Fake<IWebDriver>(), Fake<IScriptExecutor>(), Fake<IWebServer>(), Fake<IComponentFactory>());
-        }
     }
 
     public class navigating_by_relative_url : SpecificationFor<PageNavigator>
@@ -42,7 +36,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
 
         public navigating_by_relative_url()
         {
-            SelenoApplicationRunner.Host = Fake<ISelenoApplication>();
             Fake<IWebServer>().BaseUrl.Returns(_baseUrl);
         }
 
@@ -54,11 +47,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
         public void should_navigate_to_absolute_url()
         {
             Fake<IWebDriver>().Received().Navigate().GoToUrl(_baseUrl + _relativeUrl);
-        }
-
-        public override void InitialiseSystemUnderTest()
-        {
-            SUT = new PageNavigator(Fake<IWebDriver>(), Fake<IScriptExecutor>(), Fake<IWebServer>(), Fake<IComponentFactory>());
         }
     }
 }
