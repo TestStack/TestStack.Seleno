@@ -8,6 +8,7 @@ namespace TestStack.Seleno.PageObjects
 {
     public class ComponentFactory : IComponentFactory
     {
+        readonly Container _container;
         private readonly IWebDriver _browser;
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
@@ -16,6 +17,7 @@ namespace TestStack.Seleno.PageObjects
 
         public ComponentFactory(Container container)
         {
+            _container = container;
             _browser = container.Resolve<IWebDriver>();
             _scriptExecutor = container.Resolve<IScriptExecutor>();
             _elementFinder = container.Resolve<IElementFinder>();
@@ -40,7 +42,8 @@ namespace TestStack.Seleno.PageObjects
 
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
-            return (TPage)new UiComponent(_browser, _pageNavigator, _elementFinder, _scriptExecutor, _camera, this);
+            return _container.Resolve<TPage>();
+            //return (TPage)new UiComponent(_browser, _pageNavigator, _elementFinder, _scriptExecutor, _camera, this);
         }
     }
 }

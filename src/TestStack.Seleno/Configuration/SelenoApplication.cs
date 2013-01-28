@@ -8,6 +8,7 @@ namespace TestStack.Seleno.Configuration
 {
     internal class SelenoApplication : ISelenoApplication
     {
+        private readonly ILogger _logger;
         public Container Container { get; private set; }
         public IWebDriver Browser { get { return Container.Resolve<IWebDriver>(); } }
         public ICamera Camera { get { return Container.Resolve<ICamera>(); } }

@@ -1,5 +1,6 @@
 using System;
 using Castle.Core.Logging;
+using System.Reflection;
 using Funq;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
@@ -18,6 +19,7 @@ namespace TestStack.Seleno.Configuration
         protected Func<Container, ICamera> Camera = c => new NullCamera();
         protected Func<IWebDriver> WebDriver = BrowserFactory.FireFox;
         private ILoggerFactory _loggerFactory = new NullLogFactory();
+        protected Assembly[] _pageObjectAssemblies;
 
         public ISelenoApplication CreateApplication()
         {
@@ -87,6 +89,28 @@ namespace TestStack.Seleno.Configuration
         {
             _loggerFactory = loggerFactory;
             return this;
+        }
+
+        public IAppConfigurator WithPageObjectsFrom(Assembly[] assemblies)
+        {
+            _pageObjectAssemblies = assemblies;
+            return this;
+        }
+    }
+
+    internal class PageObjectScanner : IFunqlet
+    {
+        readonly Assembly[] _assemblies;
+
+        public PageObjectScanner(Assembly[] assemblies)
+        {
+            _assemblies = assemblies;
+        }
+
+        public void Configure(Container container)
+        {
+            // scan assemblies for classes implementing UiComponent
+            // register them with container
         }
     }
 }

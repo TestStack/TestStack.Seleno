@@ -1,5 +1,6 @@
 using System;
 using Castle.Core.Logging;
+using System.Reflection;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.WebServers;
 
@@ -46,7 +47,15 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// By default a null logger is used.
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
-        /// <returns></returns>
+        /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory);
+
+        /// <summary>
+        /// Specify the assembly/ies to scan to find page objects.
+        /// By default Seleno will scan all assemblies currently loaded into the App Domain.
+        /// </summary>
+        /// <param name="assemblies">The assembly/ies to scan</param>
+        /// <returns>The configurator to allow for method chaining</returns>
+        IAppConfigurator WithPageObjectsFrom(Assembly[] assemblies);
     }
 }
