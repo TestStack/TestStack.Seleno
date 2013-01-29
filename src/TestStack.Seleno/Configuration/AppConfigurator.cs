@@ -1,7 +1,6 @@
 using System;
 using Castle.Core.Logging;
 using System.Reflection;
-using Funq;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -9,6 +8,7 @@ using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using Funq;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Configuration
         protected Func<Container, ICamera> Camera = c => new NullCamera();
         protected Func<IWebDriver> WebDriver = BrowserFactory.FireFox;
         private ILoggerFactory _loggerFactory = new NullLogFactory();
-        protected Assembly[] _pageObjectAssemblies;
+        protected Assembly[] PageObjectAssemblies;
 
         public ISelenoApplication CreateApplication()
         {
@@ -50,7 +50,11 @@ namespace TestStack.Seleno.Configuration
                 c => new PageNavigator(c.Resolve<IWebDriver>(), c.Resolve<IScriptExecutor>(),
                                        c.Resolve<IWebServer>(), c.Resolve<IComponentFactory>()));
             container.Register<IComponentFactory>(
-                c => new ComponentFactory(c));
+                c => new ComponentFactory(c, c.LazyResolve<IWebDriver>(), c.LazyResolve<IScriptExecutor>(),
+                    c.LazyResolve<IElementFinder>(), c.LazyResolve<ICamera>(), c.LazyResolve<IPageNavigator>()));
+
+            var pageObjectTypes = new PageObjectScanner(PageObjectAssemblies).Scan();
+            pageObjectTypes.Each(type => container.RegisterAutoWiredType(type));
 
             return container;
         }
@@ -93,24 +97,8 @@ namespace TestStack.Seleno.Configuration
 
         public IAppConfigurator WithPageObjectsFrom(Assembly[] assemblies)
         {
-            _pageObjectAssemblies = assemblies;
+            PageObjectAssemblies = assemblies;
             return this;
-        }
-    }
-
-    internal class PageObjectScanner : IFunqlet
-    {
-        readonly Assembly[] _assemblies;
-
-        public PageObjectScanner(Assembly[] assemblies)
-        {
-            _assemblies = assemblies;
-        }
-
-        public void Configure(Container container)
-        {
-            // scan assemblies for classes implementing UiComponent
-            // register them with container
         }
     }
 }
