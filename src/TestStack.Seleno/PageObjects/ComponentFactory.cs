@@ -14,15 +14,18 @@ namespace TestStack.Seleno.PageObjects
         private readonly Func<IElementFinder> _elementFinder;
         private readonly Func<ICamera> _camera;
         private readonly Func<IPageNavigator> _pageNavigator;
+        readonly Container _container;
 
         public ComponentFactory(Func<IWebDriver> browser, Func<IScriptExecutor> scriptExecutor, 
-            Func<IElementFinder> elementFinder, Func<ICamera> camera, Func<IPageNavigator> pageNavigator)
+            Func<IElementFinder> elementFinder, Func<ICamera> camera, Func<IPageNavigator> pageNavigator,
+            Container container)
         {
             _browser = browser;
             _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
             _camera = camera;
             _pageNavigator = pageNavigator;
+            _container = container;
         }
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
@@ -42,11 +45,12 @@ namespace TestStack.Seleno.PageObjects
 
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
-            var page = new TPage();
+            return _container.Resolve<TPage>();
+            //var page = new TPage();
 
-            page.Setup(_browser(), _pageNavigator(), _elementFinder(), _scriptExecutor(), _camera(), this);
+            ////page.Setup(_browser(), _pageNavigator(), _elementFinder(), _scriptExecutor(), _camera(), this);
 
-            return page;
+            //return page;
         }
     }
 }

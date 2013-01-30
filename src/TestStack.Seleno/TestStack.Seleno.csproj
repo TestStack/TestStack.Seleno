@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ContainerTypeExtensions.cs" />
     <Compile Include="Configuration\PageObjectScanner.cs" />
+    <Compile Include="Configuration\SelenoContainerTypeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="InaccessibleSelenoException.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />

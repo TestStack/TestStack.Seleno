@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.Specifications.Assertions;
@@ -9,71 +8,42 @@ namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent
     {
-        private bool _isSetup;
-
         protected internal IWebDriver Browser;
-        protected internal IComponentFactory ComponentFactory;
-        private IPageNavigator _pageNavigator;
-        private IElementFinder _elementFinder;
-        private IScriptExecutor _scriptExecutor;
-        private ICamera _camera;
-
-        internal void Setup(IWebDriver browser, IPageNavigator pageNavigator, IElementFinder elementFinder,
-            IScriptExecutor scriptExecutor, ICamera camera, IComponentFactory componentFactory)
-        {
-            _isSetup = true;
-            Browser = browser;
-            ComponentFactory = componentFactory;
-            _pageNavigator = pageNavigator;
-            _elementFinder = elementFinder;
-            _scriptExecutor = scriptExecutor;
-            _camera = camera;
-        }
-
-        private void EnsureSetup()
-        {
-            if (!_isSetup)
-                throw new InvalidOperationException("This property cannot be used since the Setup() method hasn't been called on the page object / component. The likely reason for this is that the page object was explicitly created rather than creating via a Seleno Navigate method or GetComponent method.");
-        }
+        internal IComponentFactory ComponentFactory;
+        internal IPageNavigator PageNavigator;
+        internal IElementFinder ElementFinder;
+        internal IScriptExecutor ScriptExecutor;
+        internal ICamera Camera;
 
         protected IPageNavigator Navigate()
         {
-            EnsureSetup();
-            return _pageNavigator;
+            return PageNavigator;
         }
 
         protected IScriptExecutor Execute()
         {
-            EnsureSetup();
-            return _scriptExecutor;
+            return ScriptExecutor;
         }
 
         protected IElementFinder Find()
         {
-            EnsureSetup();
-            return _elementFinder;
+            return ElementFinder;
         }
 
         protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
-            EnsureSetup();
             return new TableReader<TModel>(gridId) { Browser = Browser };
         }
 
         public ElementAssert AssertThatElements(By selector)
         {
-            EnsureSetup();
-            return new ElementAssert(selector, _camera, Browser);
+            return new ElementAssert(selector, Camera, Browser);
         }
 
         public TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
-            var component = new TComponent();
-
-            component.Setup(Browser, _pageNavigator, _elementFinder, _scriptExecutor, _camera, ComponentFactory);
-
-            return component;
+            return ComponentFactory.CreatePage<TComponent>();
         }
     }
 }
