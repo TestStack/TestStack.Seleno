@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="AssemblySetupFixtue.cs" />
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
+    <Compile Include="Configuration\SelenoContainerTypeExtensionsTests.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />

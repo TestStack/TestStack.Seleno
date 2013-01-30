@@ -92,7 +92,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ContainerTypeExtensions.cs" />
     <Compile Include="Configuration\PageObjectScanner.cs" />
     <Compile Include="Configuration\SelenoContainerTypeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
