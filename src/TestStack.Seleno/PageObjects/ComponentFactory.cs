@@ -25,17 +25,17 @@ namespace TestStack.Seleno.PageObjects
             _pageNavigator = pageNavigator;
         }
 
-        public PageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
+        public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
             return new PageReader<TModel>(_browser(), _scriptExecutor(), _elementFinder());
         }
 
-        public PageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
+        public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
         {
             return new PageWriter<TModel>(_scriptExecutor(), _elementFinder());
         }
 
-        public ElementAssert CreateElementAssert(By selector)
+        public IElementAssert CreateElementAssert(By selector)
         {
             return new ElementAssert(selector, _camera(), _browser());
         }

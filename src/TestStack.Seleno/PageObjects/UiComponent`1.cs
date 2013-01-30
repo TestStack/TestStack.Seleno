@@ -5,12 +5,12 @@ namespace TestStack.Seleno.PageObjects
     public class UiComponent<TModel> : UiComponent
         where TModel : class, new()
     {
-        protected PageReader<TModel> Read()
+        protected IPageReader<TModel> Read()
         {
             return ComponentFactory.CreatePageReader<TModel>();
         }
 
-        protected PageWriter<TModel> Input()
+        protected IPageWriter<TModel> Input()
         {
             return ComponentFactory.CreatePageWriter<TModel>();
         }

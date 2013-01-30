@@ -5,7 +5,7 @@ using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Specifications.Assertions
 {
-    public class ElementAssert
+    public class ElementAssert : IElementAssert
     {
         private readonly By _selector;
         private readonly ICamera _camera;

@@ -9,8 +9,7 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageReader<TViewModel> 
-        where TViewModel : class ,new()
+    public class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
     {
         private IWebDriver _browser;
         private readonly IScriptExecutor _scriptExecutor;

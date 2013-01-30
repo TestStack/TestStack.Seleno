@@ -81,7 +81,7 @@
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
-    <Compile Include="PageObjects\Actions\Navigator\PageNavigatorSpecification.cs" />
+    <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\PageWriterSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_clearing_and_sending_keys_to_web_element.cs" />

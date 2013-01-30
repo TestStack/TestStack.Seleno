@@ -12,8 +12,7 @@ namespace TestStack.Seleno.PageObjects
         private bool _isSetup;
 
         protected internal IWebDriver Browser;
-        // todo: Should this be internal?
-        protected IComponentFactory ComponentFactory;
+        protected internal IComponentFactory ComponentFactory;
         private IPageNavigator _pageNavigator;
         private IElementFinder _elementFinder;
         private IScriptExecutor _scriptExecutor;

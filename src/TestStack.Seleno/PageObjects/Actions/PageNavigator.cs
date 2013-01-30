@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using Microsoft.Web.Mvc;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration;
+
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
+
+using Microsoft.Web.Mvc;
+using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {

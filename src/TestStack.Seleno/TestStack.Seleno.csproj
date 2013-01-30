@@ -135,6 +135,8 @@
     <Compile Include="Guard.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValue.cs" />
     <Compile Include="PageObjects\Actions\IPageNavigator.cs" />
+    <Compile Include="PageObjects\Actions\IPageReader.cs" />
+    <Compile Include="PageObjects\Actions\IPageWriter.cs" />
     <Compile Include="PageObjects\Actions\IScriptExecutor.cs" />
     <Compile Include="PageObjects\Actions\PageWriter.cs" />
     <Compile Include="PageObjects\Actions\ScriptExecutor.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\RemoteWebDriverExtensions.cs" />
     <Compile Include="PageObjects\Actions\ActionHelpers.cs" />
+    <Compile Include="Specifications\Assertions\IElementAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Funq\Container.xdoc" />
