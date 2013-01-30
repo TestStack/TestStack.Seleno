@@ -6,8 +6,8 @@ namespace TestStack.Seleno.Specifications.Assertions
 {
     public interface IElementAssert
     {
-        ElementAssert DoNotExist(string message = null);
-        ElementAssert Exist(string message = null);
-        ElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion);
+        IElementAssert DoNotExist(string message = null);
+        IElementAssert Exist(string message = null);
+        IElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion);
     }
 }

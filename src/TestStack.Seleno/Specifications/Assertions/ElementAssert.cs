@@ -18,7 +18,7 @@ namespace TestStack.Seleno.Specifications.Assertions
             _browser = browser;
         }
 
-        public ElementAssert DoNotExist(string message = null)
+        public IElementAssert DoNotExist(string message = null)
         {
             try
             {
@@ -32,11 +32,14 @@ namespace TestStack.Seleno.Specifications.Assertions
             if (string.IsNullOrEmpty(message))
                 message = string.Format("'{0}' was in fact found!", _selector);
 
+            // todo: Can we move the screenshots to a central place that catches any
+            //  uncaught exceptions rather than having them in a number of places just
+            //  before throwing an exception
             _camera.TakeScreenshot();
             throw new SelenoException(message);
         }
 
-        public ElementAssert Exist(string message = null)
+        public IElementAssert Exist(string message = null)
         {
             try
             {
@@ -51,7 +54,7 @@ namespace TestStack.Seleno.Specifications.Assertions
             return this;
         }
 
-        public ElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion)
+        public IElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion)
         {
             try
             {
