@@ -102,7 +102,7 @@
     <Compile Include="Configuration\Contracts\IContainerAdapter.cs" />
     <Compile Include="Configuration\Contracts\ISelenoApplication.cs" />
     <Compile Include="Configuration\AppConfigurator.cs" />
-    <Compile Include="Configuration\SelenoApplicationRunner.cs" />
+    <Compile Include="Configuration\SelenoHost.cs" />
     <Compile Include="Configuration\Contracts\IAppConfigurator.cs" />
     <Compile Include="Configuration\Contracts\ILifecycleTask.cs" />
     <Compile Include="Configuration\Screenshots\FileCamera.cs" />

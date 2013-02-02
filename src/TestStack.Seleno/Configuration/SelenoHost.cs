@@ -11,7 +11,7 @@ namespace TestStack.Seleno.Configuration
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
-    public static class SelenoApplicationRunner
+    public static class SelenoHost
     {
         /// <summary>
         /// The currently running seleno application.

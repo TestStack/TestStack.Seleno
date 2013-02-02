@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Configurator = TestStack.BDDfy.Configuration.Configurator;
+﻿using Configurator = TestStack.BDDfy.Configuration.Configurator;
 using TestStack.BDDfy.Processors.HtmlReporter;
 using TestStack.Seleno.Configuration;
 using NUnit.Framework;
@@ -12,8 +11,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("TestStack.Seleno.Samples.Movies", 19456,
-                c => c.WithPageObjectsFrom(new[]{Assembly.GetExecutingAssembly()}));
+            SelenoHost.Run("TestStack.Seleno.Samples.Movies", 19456);
             InitializeBDDfyReport();
         }
 

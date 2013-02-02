@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Tests.Specify;
@@ -8,7 +9,7 @@ namespace TestStack.Seleno.Tests.Configuration
 {
     internal abstract class WithAppConfigurator : SpecificationFor<AppConfigurator>
     {
-        protected ISelenoApplication Host;
+        protected ISelenoApplication Application;
 
         public override void InitialiseSystemUnderTest()
         {
@@ -20,17 +21,17 @@ namespace TestStack.Seleno.Tests.Configuration
     {
         public when_creating_default_Application_with_no_overrides()
         {
-            Host = SUT.CreateApplication();
+            Application = SUT.CreateApplication();
         }
 
         public void Then_it_should_create_the_application()
         {
-            Host.Should().NotBeNull();
+            Application.Should().NotBeNull();
         }
 
         public void AndThen_it_should_be_a_SelenoApplication()
         {
-            Host.Should().BeOfType<SelenoApplication>();
+            Application.Should().BeOfType<SelenoApplication>();
         }
     }
 }

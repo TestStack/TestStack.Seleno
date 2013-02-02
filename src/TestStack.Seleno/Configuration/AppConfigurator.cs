@@ -26,7 +26,7 @@ namespace TestStack.Seleno.Configuration
             _loggerFactory
                 .Create(GetType())
                 .InfoFormat("Seleno v{0}, .NET Framework v{1}",
-                    typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
+                    typeof(SelenoHost).Assembly.GetName().Version, Environment.Version);
 
             var container = BuildContainer();
             var app = new SelenoApplication(container);

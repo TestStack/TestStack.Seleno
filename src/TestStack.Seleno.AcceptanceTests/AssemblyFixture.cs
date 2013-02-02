@@ -10,7 +10,7 @@ namespace TestStack.Seleno.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
+            SelenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
                 c => c.UsingLoggerFactory(new ConsoleFactory())
             );
         }
