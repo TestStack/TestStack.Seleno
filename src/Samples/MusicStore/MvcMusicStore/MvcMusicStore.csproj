@@ -77,6 +77,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\SqlCeMembershipProvider.cs" />
+    <Content Include="App_Code\SqlCeMembershipUtils.cs" />
+    <Content Include="App_Code\SqlCeProfileProvider.cs" />
+    <Content Include="App_Code\SqlCeRoleProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
