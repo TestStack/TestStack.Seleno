@@ -87,8 +87,26 @@ namespace TestStack.Seleno.Configuration
             where TController : Controller
             where TPage : UiComponent, new()
         {
-            var navigator = Host.Container.Resolve<IPageNavigator>();
-            return navigator.To<TController, TPage>(action);
+            ThrowIfHostNotInitialised();
+            return Host.Container.Resolve<IPageNavigator>().To<TController, TPage>(action);
+        }
+
+        /// <summary>
+        /// Navigate to the given URL and return an initialised page object of the specified type.
+        /// </summary>
+        /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
+        /// <param name="relativeUrl">The URL to navigate to (relative to the base URL of the site)</param>
+        /// <returns>The initialised page object</returns>
+        public static TPage NavigateToInitialPage<TPage>(string relativeUrl) where TPage : UiComponent, new()
+        {
+            ThrowIfHostNotInitialised();
+            return Host.Container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
+        }
+
+        private static void ThrowIfHostNotInitialised()
+        {
+            if (Host == null)
+                throw new InvalidOperationException("You must call SelenoHost.Run(...) before using SelenoHost to navigate to a page.");
         }
     }
 }
