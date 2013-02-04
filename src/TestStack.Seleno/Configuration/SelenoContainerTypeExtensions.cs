@@ -39,6 +39,9 @@ namespace TestStack.Seleno.Configuration
                 var invocation = method.MakeGenericMethod(serviceType);
                 invocation.Invoke(null, new object[]{container, scope});
             }
+
+            RegisterPageObject<Page>(container, scope);
+            RegisterPageObject<UiComponent>(container, scope);
         }
     }
 }
