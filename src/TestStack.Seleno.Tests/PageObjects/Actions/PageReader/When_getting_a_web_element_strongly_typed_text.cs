@@ -17,11 +17,11 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         [Given("Given a web element contains the text 03/01/2012 21:21")]
         public void Given_a_web_element_contains_the_text_03_01_2012_21_21()
         {
-            Fake<IElementFinder>()
+            SubstituteFor<IElementFinder>()
                 .TryFindElement(Arg.Any<By>())
-                .Returns(Fake<IWebElement>());
+                .Returns(SubstituteFor<IWebElement>());
 
-            Fake<IWebElement>().Text.Returns("03/01/2012 21:21");
+            SubstituteFor<IWebElement>().Text.Returns("03/01/2012 21:21");
         }
 
 

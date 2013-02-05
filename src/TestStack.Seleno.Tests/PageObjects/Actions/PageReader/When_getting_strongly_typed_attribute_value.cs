@@ -14,13 +14,13 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void Given_a_web_element_has_an_attribute_data_value()
         {
-            Fake<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(Fake<IWebElement>());
+            SubstituteFor<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(SubstituteFor<IWebElement>());
 
         }
 
         public void AndGiven_the_web_element_attribute_value_is_false()
         {
-            Fake<IWebElement>().GetAttribute(AttributeName).Returns("false");
+            SubstituteFor<IWebElement>().GetAttribute(AttributeName).Returns("false");
         }
 
         public void When_getting_attribute_value_as_boolean()

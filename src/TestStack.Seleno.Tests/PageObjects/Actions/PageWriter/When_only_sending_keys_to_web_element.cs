@@ -12,9 +12,9 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public void Given_there_is_a_web_element_matching_By_Name()
         {
-            Fake<IElementFinder>()
+            SubstituteFor<IElementFinder>()
                 .ElementWithWait(By.Name("Name"))
-                .Returns(Fake<IWebElement>());
+                .Returns(SubstituteFor<IWebElement>());
         }
 
         public void When_sending_keys()
@@ -24,12 +24,12 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public void Then_it_should_not_clear_any_existing_text_within_web_element()
         {
-            Fake<IWebElement>().DidNotReceive().Clear();
+            SubstituteFor<IWebElement>().DidNotReceive().Clear();
         }
 
         public void And_it_should_send_the_new_text_to_the_web_element()
         {
-            Fake<IWebElement>().Received(1).SendKeys(SentText);
+            SubstituteFor<IWebElement>().Received(1).SendKeys(SentText);
         }
     }
 }

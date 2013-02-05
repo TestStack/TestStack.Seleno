@@ -14,7 +14,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
 
         public PageNavigatorRelativeUrlSpecification()
         {
-            Fake<IWebServer>().BaseUrl.Returns(_baseUrl);
+            SubstituteFor<IWebServer>().BaseUrl.Returns(_baseUrl);
         }
 
         public void When_navigating_by_relative_url()
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
 
         public void Then_should_navigate_to_home_page()
         {
-            Fake<IWebDriver>().Navigate().Received().GoToUrl(_baseUrl);
+            SubstituteFor<IWebDriver>().Navigate().Received().GoToUrl(_baseUrl);
         }
     }
 
@@ -40,7 +40,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
     {
         public void Then_should_navigate_to_absolute_url()
         {
-            Fake<IWebDriver>().Navigate().Received().GoToUrl(_baseUrl + _relativeUrl);
+            SubstituteFor<IWebDriver>().Navigate().Received().GoToUrl(_baseUrl + _relativeUrl);
         }
     }
 }

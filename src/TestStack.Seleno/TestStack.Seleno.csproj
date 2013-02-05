@@ -95,6 +95,7 @@
     <Compile Include="Configuration\PageObjectScanner.cs" />
     <Compile Include="Configuration\SelenoContainerTypeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Funq\IContainer.cs" />
     <Compile Include="InaccessibleSelenoException.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />

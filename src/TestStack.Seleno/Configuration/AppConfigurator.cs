@@ -51,7 +51,7 @@ namespace TestStack.Seleno.Configuration
                                        c.Resolve<IWebServer>(), c.Resolve<IComponentFactory>()));
             container.Register<IComponentFactory>(
                 c => new ComponentFactory(c.LazyResolve<IWebDriver>(), c.LazyResolve<IScriptExecutor>(),
-                    c.LazyResolve<IElementFinder>(), c.LazyResolve<ICamera>(), c.LazyResolve<IPageNavigator>(),c));
+                    c.LazyResolve<IElementFinder>(), c.LazyResolve<ICamera>(), c.LazyResolve<IPageNavigator>(), c));
 
             var pageObjectTypes = new PageObjectScanner(PageObjectAssemblies).Scan();
             container.RegisterPageObjects(pageObjectTypes);

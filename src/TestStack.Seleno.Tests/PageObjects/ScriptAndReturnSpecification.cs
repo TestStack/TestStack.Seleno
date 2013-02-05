@@ -17,7 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects
 
         public void Given_javascript_executor_returns_true()
         {
-            Fake<IJavaScriptExecutor>()
+            SubstituteFor<IJavaScriptExecutor>()
                 .ExecuteScript(Arg.Any<string>())
                 .Returns("true");
         }
@@ -29,7 +29,7 @@ namespace TestStack.Seleno.Tests.PageObjects
 
         public void Then_it_should_have_executed_the_given_javascript()
         {
-            Fake<IJavaScriptExecutor>().Received().ExecuteScript("return " + ExecutedScript);
+            SubstituteFor<IJavaScriptExecutor>().Received().ExecuteScript("return " + ExecutedScript);
         }
 
         public void And_it_should_cast_the_return_type_to_the_specified_type()

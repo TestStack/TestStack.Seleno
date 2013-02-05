@@ -36,13 +36,13 @@ namespace TestStack.Seleno.Configuration
             _logger.Debug("Browser closed");
             WebServer.Stop();
             _logger.Debug("Webserver shutdown");
+            Container.Dispose();
         }
 
         void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
             _logger.Info("Starting domain unload");
             ShutDown();
-            Container.Dispose();
             _logger.Debug("Domain unloaded");
         }
     }
