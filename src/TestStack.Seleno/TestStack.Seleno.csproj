@@ -36,8 +36,9 @@
     <DocumentationFile>bin\Release\TestStack.Seleno.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -128,17 +129,6 @@
     <Compile Include="Funq\ServiceKey.cs" />
     <Compile Include="Funq\Syntax.cs" />
     <Compile Include="Guard.cs" />
-    <Compile Include="Infrastructure\Logging\ILog.cs" />
-    <Compile Include="Infrastructure\Logging\ILogFactory.cs" />
-    <Compile Include="Infrastructure\Logging\LogManager.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogFactory.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogger.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\DebugLogFactory.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\DebugLogger.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\NullDebugLogger.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\NullLogFactory.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\TestLogFactory.cs" />
-    <Compile Include="Infrastructure\Logging\Loggers\TestLogger.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValue.cs" />
     <Compile Include="PageObjects\Actions\IPageNavigator.cs" />
     <Compile Include="PageObjects\Actions\IScriptExecutor.cs" />
