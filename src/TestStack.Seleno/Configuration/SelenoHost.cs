@@ -26,10 +26,11 @@ namespace TestStack.Seleno.Configuration
         /// <param name="configure">Any configuration changes you would like to make</param>
         public static void Run(string webProjectFolder, 
                                int portNumber, 
-                               Action<IAppConfigurator> configure = null)
+                               Action<IAppConfigurator> configure = null,
+                               IAppConfigurator appConfigurator = null)
         {
             var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
-            Run(webApplication, configure);
+            Run(webApplication, configure, appConfigurator);
         }
 
         /// <summary>
@@ -37,14 +38,14 @@ namespace TestStack.Seleno.Configuration
         /// </summary>
         /// <param name="app">The web application to test</param>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(WebApplication app, Action<IAppConfigurator> configure)
+        public static void Run(WebApplication app, Action<IAppConfigurator> configure, IAppConfigurator appConfigurator = null)
         {
             Run(c =>
                 {
                     c.ProjectToTest(app);
                     if (configure != null)
                         configure(c);
-                }
+                }, appConfigurator
             );
         }
 

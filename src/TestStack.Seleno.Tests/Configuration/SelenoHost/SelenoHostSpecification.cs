@@ -12,13 +12,12 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         protected readonly IPageNavigator PageNavigator = Substitute.For<IPageNavigator>();
         protected readonly IAppConfigurator AppConfigurator = Substitute.For<IAppConfigurator>();
         protected readonly ISelenoApplication SelenoApplication = Substitute.For<ISelenoApplication>();
-
+        
         protected SelenoHostSpecification()
         {
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
             SelenoApplication.Container.Returns(x => Container);
             Container.Register(c => PageNavigator);
         }
-        
     }
 }
