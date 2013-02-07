@@ -11,6 +11,7 @@ namespace TestStack.Seleno.Configuration.Contracts
     /// </summary>
     public interface IAppConfigurator
     {
+        ISelenoApplication CreateApplication();
         /// <summary>
         /// Specify the details of the project you are testing.
         /// </summary>

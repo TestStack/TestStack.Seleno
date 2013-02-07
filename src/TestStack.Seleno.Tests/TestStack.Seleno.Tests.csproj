@@ -79,6 +79,9 @@
     <Compile Include="AssemblySetupFixtue.cs" />
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
     <Compile Include="Configuration\SelenoContainerTypeExtensionsTests.cs" />
+    <Compile Include="Configuration\SelenoHost\SelenoHostSpecification.cs" />
+    <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_controller_action.cs" />
+    <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_relativeUrl.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
@@ -102,8 +105,9 @@
     <Compile Include="Specify\SpecStoryMetaDataScanner.cs" />
     <Compile Include="TestInfrastructure\TestObjectFactory.cs" />
     <Compile Include="Specify\TestCaseSpecificationFor.cs" />
-    <Compile Include="ViewModels\TestPage.cs" />
-    <Compile Include="ViewModels\TestViewModel.cs" />
+    <Compile Include="TestObjects\TestController.cs" />
+    <Compile Include="TestObjects\TestPage.cs" />
+    <Compile Include="TestObjects\TestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

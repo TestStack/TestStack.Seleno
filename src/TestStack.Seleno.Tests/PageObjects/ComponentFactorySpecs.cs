@@ -7,7 +7,7 @@ using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.Specifications.Assertions;
 using TestStack.Seleno.Tests.Specify;
-using TestStack.Seleno.Tests.ViewModels;
+using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects
 {

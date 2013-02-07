@@ -52,7 +52,7 @@ namespace TestStack.Seleno.Configuration
         /// Begin a Seleno test.
         /// </summary>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(Action<IAppConfigurator> configure)
+        public static void Run(Action<IAppConfigurator> configure = null, IAppConfigurator appConfigurator = null)
         {
             Action<IAppConfigurator> action = x =>
             {
@@ -60,15 +60,15 @@ namespace TestStack.Seleno.Configuration
                     configure(x);
             };
 
-            Host = CreateApplication(action);
+            Host = CreateApplication(action, appConfigurator);
         }
 
-        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
+        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure,IAppConfigurator appConfigurator  = null)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            var configurator = new AppConfigurator();
+            var configurator = appConfigurator ?? new AppConfigurator();
             configure(configurator);
             Host = configurator.CreateApplication();
             Host.Initialize();

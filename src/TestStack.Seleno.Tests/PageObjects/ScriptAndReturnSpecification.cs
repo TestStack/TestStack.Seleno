@@ -18,7 +18,7 @@ namespace TestStack.Seleno.Tests.PageObjects
         public void Given_javascript_executor_returns_true()
         {
             SubstituteFor<IJavaScriptExecutor>()
-                .ExecuteScript(Arg.Any<string>())
+                .ExecuteScript("return " + ExecutedScript)
                 .Returns("true");
         }
 

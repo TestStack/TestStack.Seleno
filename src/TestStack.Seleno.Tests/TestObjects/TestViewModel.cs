@@ -1,6 +1,6 @@
 using System;
 
-namespace TestStack.Seleno.Tests.ViewModels
+namespace TestStack.Seleno.Tests.TestObjects
 {
     public class TestViewModel
     {
