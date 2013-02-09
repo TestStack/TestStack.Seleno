@@ -10,8 +10,4 @@ namespace TestStack.Seleno.PageObjects
             }
         }
     }
-
-    public class MyViewModel {}
-
-    public class MyPage : Page<MyViewModel> {}
 }
