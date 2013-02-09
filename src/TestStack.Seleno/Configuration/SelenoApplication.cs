@@ -1,13 +1,14 @@
 using System;
+using Castle.Core.Logging;
 using Funq;
 using TestStack.Seleno.Configuration.Contracts;
-
 using OpenQA.Selenium;
 
 namespace TestStack.Seleno.Configuration
 {
-    public class SelenoApplication : ISelenoApplication
+    internal class SelenoApplication : ISelenoApplication
     {
+        private readonly ILogger _logger;
         public Container Container { get; set; }
         public IWebDriver Browser { get { return Container.Resolve<IWebDriver>(); } }
         public ICamera Camera { get { return Container.Resolve<ICamera>(); } }
@@ -17,24 +18,33 @@ namespace TestStack.Seleno.Configuration
         {
             Container = container;
             AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
+            _logger = Container.Resolve<ILoggerFactory>()
+                .Create(GetType());
         }
 
         public void Initialize()
         {
+            _logger.Debug("Starting Webserver");
             WebServer.Start();
+            _logger.Debug("Browsing to base URL");
             Browser.Navigate().GoToUrl(WebServer.BaseUrl);
         }
 
         public void ShutDown()
         {
             Browser.Close();
+            _logger.Debug("Browser closed");
             WebServer.Stop();
+            _logger.Debug("Webserver shutdown");
         }
 
 
         void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
+            _logger.Info("Starting domain unload");
             ShutDown();
+            Container.Dispose();
+            _logger.Debug("Domain unloaded");
         }
 
     }

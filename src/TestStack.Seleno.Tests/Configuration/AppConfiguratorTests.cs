@@ -7,7 +7,7 @@ using TestStack.Seleno.Tests.TestInfrastructure;
 
 namespace TestStack.Seleno.Tests.Configuration
 {
-    public abstract class WithAppConfigurator : SpecificationFor<AppConfigurator>
+    internal abstract class WithAppConfigurator : SpecificationFor<AppConfigurator>
     {
         protected ISelenoApplication Host;
 
@@ -17,7 +17,7 @@ namespace TestStack.Seleno.Tests.Configuration
         }
     }
 
-    public class when_creating_default_Application_with_no_overrides : WithAppConfigurator
+    class when_creating_default_Application_with_no_overrides : WithAppConfigurator
     {
         public when_creating_default_Application_with_no_overrides()
         {

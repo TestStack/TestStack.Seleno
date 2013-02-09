@@ -1,16 +1,25 @@
 using System;
-
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
-using TestStack.Seleno.Infrastructure.Logging;
 
 namespace TestStack.Seleno.Configuration
 {
+    /// <summary>
+    /// The entry point for Seleno.
+    /// </summary>
     public static class SelenoApplicationRunner
     {
-        private static readonly ILog Log = LogManager.GetLogger("Seleno");
+        /// <summary>
+        /// The currently running seleno application.
+        /// </summary>
         public static ISelenoApplication Host { get; private set; }
        
+        /// <summary>
+        /// Begin a Seleno test for a Visual Studio web project.
+        /// </summary>
+        /// <param name="webProjectFolder">The name of the web project to run</param>
+        /// <param name="portNumber">The port number to run the project under</param>
+        /// <param name="configure">Any configuration changes you would like to make</param>
         public static void Run(string webProjectFolder, 
                                int portNumber, 
                                Action<IAppConfigurator> configure = null)
@@ -19,47 +28,38 @@ namespace TestStack.Seleno.Configuration
             Run(webApplication, configure);
         }
 
+        /// <summary>
+        /// Begin a Seleno test for a web application.
+        /// </summary>
+        /// <param name="app">The web application to test</param>
+        /// <param name="configure">Any configuration changes you would like to make</param>
         public static void Run(WebApplication app, Action<IAppConfigurator> configure)
         {
-            try
-            {
-                Action<IAppConfigurator> action = x =>
+            Run(c =>
                 {
-                    x.ProjectToTest(app);
-
+                    c.ProjectToTest(app);
                     if (configure != null)
-                        configure(x);
-                };
-                
-               Host = New(action);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("The Seleno Application exited abnormally with an exception", ex);
-                throw;
-            }
+                        configure(c);
+                }
+            );
         }
 
+        /// <summary>
+        /// Begin a Seleno test.
+        /// </summary>
+        /// <param name="configure">Any configuration changes you would like to make</param>
         public static void Run(Action<IAppConfigurator> configure)
         {
-            try
+            Action<IAppConfigurator> action = x =>
             {
-                Action<IAppConfigurator> action = x =>
-                {
-                    if (configure != null)
-                        configure(x);
-                };
+                if (configure != null)
+                    configure(x);
+            };
 
-                Host = New(action);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("The Seleno Application exited abnormally with an exception", ex);
-                throw;
-            }
+            Host = CreateApplication(action);
         }
 
-        private static ISelenoApplication New(Action<IAppConfigurator> configure)
+        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");

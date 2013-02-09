@@ -8,7 +8,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
     {
         public HomePage()
         {
-            Browser.Navigate().GoToUrl(((SelenoApplication)SelenoApplicationRunner.Host).WebServer.BaseUrl);
+            Browser.Navigate().GoToUrl(SelenoApplicationRunner.Host.WebServer.BaseUrl);
         }
 
         public Form1Page GoToReadModelPage()

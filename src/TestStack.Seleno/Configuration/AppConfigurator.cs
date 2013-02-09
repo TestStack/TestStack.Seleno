@@ -1,27 +1,25 @@
 using System;
+using Castle.Core.Logging;
 using Funq;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
-using TestStack.Seleno.Infrastructure.Logging;
-using TestStack.Seleno.Infrastructure.Logging.Loggers;
-
 using OpenQA.Selenium;
 
 namespace TestStack.Seleno.Configuration
 {
-    public class AppConfigurator : IAppConfigurator
+    internal class AppConfigurator : IAppConfigurator
     {
-        protected WebApplication _webApplication;
-        protected IWebServer _webServer;
-        protected ICamera _camera = new NullCamera();
-        protected Func<IWebDriver> _webDriver = BrowserFactory.FireFox;
-        protected ILogFactory _logFactory = new ConsoleLogFactory();
+        protected WebApplication WebApplication;
+        protected IWebServer WebServer;
+        protected ICamera Camera = new NullCamera();
+        protected Func<IWebDriver> WebDriver = BrowserFactory.FireFox;
+        private ILoggerFactory _loggerFactory = new NullLogFactory();
 
         public ISelenoApplication CreateApplication()
         {
-            _logFactory
-                .GetLogger(GetType())
+            _loggerFactory
+                .Create(GetType())
                 .InfoFormat("Seleno v{0}, .NET Framework v{1}",
                     typeof(SelenoApplicationRunner).Assembly.GetName().Version, Environment.Version);
 
@@ -34,39 +32,40 @@ namespace TestStack.Seleno.Configuration
         private Container BuildContainer()
         {
             var container = new Container();
-            container.Register(c => _webServer ?? new IisExpressWebServer(_webApplication));
-            container.Register(c => _webDriver.Invoke());
-            container.Register(c => _camera);
+            container.Register(c => WebServer ?? new IisExpressWebServer(WebApplication));
+            container.Register(c => WebDriver.Invoke());
+            container.Register(c => Camera);
+            container.Register(c => _loggerFactory);
             return container;
         }
 
-        public AppConfigurator ProjectToTest(WebApplication webApplication)
+        public IAppConfigurator ProjectToTest(WebApplication webApplication)
         {
-            _webApplication = webApplication;
+            WebApplication = webApplication;
             return this;
         }
 
-        public AppConfigurator WithWebServer(IWebServer webServer)
+        public IAppConfigurator WithWebServer(IWebServer webServer)
         {
-            _webServer = webServer;
+            WebServer = webServer;
             return this;
         }
 
-        public AppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
+        public IAppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
         {
-            _webDriver = webDriver;
+            WebDriver = webDriver;
             return this;
         }
 
-        public AppConfigurator UsingCamera(ICamera camera)
+        public IAppConfigurator UsingCamera(ICamera camera)
         {
-            _camera = camera;
+            Camera = camera;
             return this;
         }
 
-        public AppConfigurator UsingLogger(ILogFactory logFactory)
+        public IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory)
         {
-            _logFactory = logFactory;
+            _loggerFactory = loggerFactory;
             return this;
         }
     }
