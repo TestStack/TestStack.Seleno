@@ -39,7 +39,8 @@ namespace TestStack.Seleno.Configuration
             var container = new Container();
             container.Register(c => WebServer ?? new IisExpressWebServer(WebApplication));
             container.Register(c => WebDriver.Invoke());
-            container.Register(c => Camera);
+            container.Register(Camera);
+
             container.Register(c => _loggerFactory);
 
             container.Register<IElementFinder>(c => new ElementFinder(c.Resolve<IWebDriver>()));
