@@ -98,7 +98,7 @@ namespace TestStack.Seleno.Configuration
         /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
         /// <param name="relativeUrl">The URL to navigate to (relative to the base URL of the site)</param>
         /// <returns>The initialised page object</returns>
-        public static TPage NavigateToInitialPage<TPage>(string relativeUrl) where TPage : UiComponent, new()
+        public static TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
             return Host.Container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);

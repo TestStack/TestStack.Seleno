@@ -57,6 +57,6 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// </summary>
         /// <param name="assemblies">The assembly/ies to scan</param>
         /// <returns>The configurator to allow for method chaining</returns>
-        IAppConfigurator WithPageObjectsFrom(Assembly[] assemblies);
+        IAppConfigurator WithPageObjectsFrom(params Assembly[] assemblies);
     }
 }

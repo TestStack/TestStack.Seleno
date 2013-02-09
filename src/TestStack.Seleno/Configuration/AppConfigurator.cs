@@ -95,16 +95,10 @@ namespace TestStack.Seleno.Configuration
             return this;
         }
 
-        public IAppConfigurator WithPageObjectsFrom(Assembly[] assemblies)
+        public AppConfigurator WithPageObjectsFrom(params Assembly[] assemblies)
         {
             PageObjectAssemblies = assemblies;
             return this;
         }
     }
-
-
-    public class MyViewModel { }
-
-    public class MyPage : Page<PageObjects.MyViewModel> { }
-
 }
