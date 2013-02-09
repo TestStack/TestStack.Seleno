@@ -7,7 +7,6 @@ using System.Reflection;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -17,7 +16,7 @@ namespace TestStack.Seleno.PageObjects.Actions
     {
         public const string PropertyNameAttribute = "data-property-name";
 
-        protected internal RemoteWebDriver Browser;
+        protected internal IWebDriver Browser;
    
         readonly string _gridId;
         private IEnumerable<PropertyInfo> _displayedPropertiesInGrids;

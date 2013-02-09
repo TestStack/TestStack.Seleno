@@ -9,7 +9,7 @@ namespace TestStack.Seleno.Configuration
     internal class SelenoApplication : ISelenoApplication
     {
         private readonly ILogger _logger;
-        public Container Container { get; set; }
+        public IContainer Container { get; private set; }
         public IWebDriver Browser { get { return Container.Resolve<IWebDriver>(); } }
         public ICamera Camera { get { return Container.Resolve<ICamera>(); } }
         public IWebServer WebServer { get { return Container.Resolve<IWebServer>(); } }
@@ -36,16 +36,14 @@ namespace TestStack.Seleno.Configuration
             _logger.Debug("Browser closed");
             WebServer.Stop();
             _logger.Debug("Webserver shutdown");
+            Container.Dispose();
         }
-
 
         void CurrentDomain_DomainUnload(object sender, EventArgs e)
         {
             _logger.Info("Starting domain unload");
             ShutDown();
-            Container.Dispose();
             _logger.Debug("Domain unloaded");
         }
-
     }
 }

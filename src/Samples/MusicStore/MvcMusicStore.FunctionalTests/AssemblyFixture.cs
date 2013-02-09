@@ -9,7 +9,7 @@ namespace MvcMusicStore.FunctionalTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("MvcMusicStore", 12345);
+            SelenoHost.Run("MvcMusicStore", 12345);
         }
     }
 }

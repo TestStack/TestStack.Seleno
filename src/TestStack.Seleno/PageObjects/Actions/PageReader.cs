@@ -2,26 +2,24 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-
-using TestStack.Seleno.Extensions;
-
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+using TestStack.Seleno.Extensions;
+using By = TestStack.Seleno.PageObjects.Locators.By;
+
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageReader<TViewModel> 
-        where TViewModel : class ,new()
+    public class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
     {
         private IWebDriver _browser;
-        private readonly IScriptExecutor _execute;
-        private readonly IElementFinder _finder;
+        private readonly IScriptExecutor _scriptExecutor;
+        private readonly IElementFinder _elementFinder;
 
-        public PageReader(IWebDriver browser, IScriptExecutor executor, IElementFinder finder)
+        public PageReader(IWebDriver browser, IScriptExecutor scriptExecutor, IElementFinder elementFinder)
         {
             _browser = browser;
-            _execute = executor;
-            _finder = finder;
+            _scriptExecutor = scriptExecutor;
+            _elementFinder = elementFinder;
         }
 
         public TViewModel ModelFromPage()
@@ -33,7 +31,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             {
                 var propertyName = property.Name;
                 var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
-                var typedValue = _execute.ScriptAndReturn(javascriptExtractor, property.PropertyType);
+                var typedValue = _scriptExecutor.ScriptAndReturn(javascriptExtractor, property.PropertyType);
 
                 if (property.CanWriteToProperty(typedValue))
                 {
@@ -61,7 +59,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             string name = ExpressionHelper.GetExpressionText(field);
             string id = TagBuilder.CreateSanitizedId(name);
-            var element = _finder.TryFindElement(By.Id(id));
+            var element = _elementFinder.TryFindElement(By.Id(id));
             return element;
         }
 
@@ -75,9 +73,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName)
         {
-            var element = ElementFor(propertySelector);
-            var value = element.GetAttribute(attributeName) ?? string.Empty;
-            return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
+            return 
+                ElementFor(propertySelector)
+                .GetAttributeAs<TProperty>(attributeName);
         }
 
         public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
@@ -91,5 +89,13 @@ namespace TestStack.Seleno.PageObjects.Actions
             return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
         }
 
+        public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
+        {
+            var dropDownId = ExpressionHelper.GetExpressionText(dropDownSelector);
+            var selector = string.Format("$('#{0} option:selected')",dropDownId);
+            var dropDownElement = _elementFinder.ElementWithWait(By.jQuery(selector), waitInSeconds);
+
+            return dropDownElement.GetAttributeAs<TField>("value");
+        }
     }
 }

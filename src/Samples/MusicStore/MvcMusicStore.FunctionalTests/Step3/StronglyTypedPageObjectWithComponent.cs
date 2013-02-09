@@ -1,6 +1,8 @@
-﻿using MvcMusicStore.FunctionalTests.Step3.Pages;
+﻿using MvcMusicStore.Controllers;
+using MvcMusicStore.FunctionalTests.Step3.Pages;
 using NUnit.Framework;
 using FluentAssertions;
+using TestStack.Seleno.Configuration;
 
 namespace MvcMusicStore.FunctionalTests.Step3
 {
@@ -9,7 +11,7 @@ namespace MvcMusicStore.FunctionalTests.Step3
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var orderedPage = new HomePage()
+            var orderedPage = SelenoHost.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

@@ -1,16 +1,10 @@
 ﻿using OpenQA.Selenium;
-using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
 {
     public class HomePage : Page
     {
-        public HomePage()
-        {
-            Browser.Navigate().GoToUrl(SelenoApplicationRunner.Host.WebServer.BaseUrl);
-        }
-
         public Form1Page GoToReadModelPage()
         {
             return Navigate().To<Form1Page>(By.LinkText("Fixture A values"));

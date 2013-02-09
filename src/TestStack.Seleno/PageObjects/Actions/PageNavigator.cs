@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using Microsoft.Web.Mvc;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration;
+
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
+
+using Microsoft.Web.Mvc;
+using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -15,26 +15,28 @@ namespace TestStack.Seleno.PageObjects.Actions
         protected IWebDriver Browser;
         readonly IScriptExecutor _executor;
         private readonly IWebServer _webServer;
+        readonly IComponentFactory _componentFactory;
 
-        internal PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer)
+        internal PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (executor == null) throw new ArgumentNullException("executor");
             Browser = browser;
             _executor = executor;
             _webServer = webServer;
+            _componentFactory = componentFactory;
         }
 
         public TPage To<TPage>(By clickDestination) where TPage : UiComponent, new()
         {
             To(clickDestination);
-            return new TPage();
+            return _componentFactory.CreatePage<TPage>();
         }
 
-        public TPage To<TPage>(string url) where TPage : UiComponent, new()
+        public TPage To<TPage>(string relativeUrl) where TPage : UiComponent, new()
         {
-            Browser.Navigate().GoToUrl(url);
-            return new TPage();
+            Browser.Navigate().GoToUrl(_webServer.BaseUrl + relativeUrl);
+            return _componentFactory.CreatePage<TPage>();
         }
 
         // This will move to MVC project once that is established

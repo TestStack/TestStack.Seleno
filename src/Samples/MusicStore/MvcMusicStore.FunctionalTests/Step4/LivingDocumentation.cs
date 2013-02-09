@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
+using MvcMusicStore.Controllers;
 using MvcMusicStore.FunctionalTests.Step4.Pages;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Core;
 using NUnit.Framework;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step4
@@ -28,7 +30,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
         // should be straight to the db, not through the UI
         public void Given_that_I_am_a_logged_in_user()
         {
-            _homePage = new HomePage()
+            _homePage = SelenoHost.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

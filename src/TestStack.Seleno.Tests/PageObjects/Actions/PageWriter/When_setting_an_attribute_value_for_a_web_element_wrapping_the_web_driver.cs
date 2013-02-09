@@ -15,7 +15,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public void Then_it_should_execute_javascript_to_set_attribute()
         {
-            Fake<IScriptExecutor>()
+            SubstituteFor<IScriptExecutor>()
                 .Received(1)
                 .ExecuteScript(string.Format("$('#Name').attr('{0}','{1}'))", AttributeName, AttributeValue));
 

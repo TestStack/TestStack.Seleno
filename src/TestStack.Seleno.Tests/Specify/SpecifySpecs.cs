@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.Specify
         {
             var spec = new TestComponentSpecification();
             spec.SUT.RunAll();
-            spec.Fake<IServiceA>().Received().RunA();
+            spec.SubstituteFor<IServiceA>().Received().RunA();
         }
 
         [Test]
