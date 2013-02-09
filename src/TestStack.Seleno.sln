@@ -23,7 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Movies", "Movies", "{626175
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC3B3288-38DE-41B1-B98D-374BEF0FD645}"
 	ProjectSection(SolutionItems) = preProject
-		..\NuGet\TestStack.Seleno\TestStack.Seleno.nuspec = ..\NuGet\TestStack.Seleno\TestStack.Seleno.nuspec
+		..\BREAKING_CHANGES.txt = ..\BREAKING_CHANGES.txt
+		..\license.txt = ..\license.txt
+		..\logo.png = ..\logo.png
+		..\readme.md = ..\readme.md
+		..\TestStack.Seleno.nuspec = ..\TestStack.Seleno.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies", "Samples\Movies\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj", "{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}"
@@ -83,11 +87,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{66ABFE42-A2AB-4C04-BB5E-CF721DD194DC} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
 		{62617568-5C2B-4DB1-A8CB-2C8A9E256E40} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
-		{C9BCBA88-DAD3-46BB-8A7D-CAB66B7FDDA3} = {B191C546-DEDD-4BA9-8C6D-150E0C89CAD9}
 		{32DCD27D-A84C-4250-B657-408B3620A9AC} = {66ABFE42-A2AB-4C04-BB5E-CF721DD194DC}
 		{2BEF34DC-D529-4DD7-AA5E-40AD4C31220E} = {66ABFE42-A2AB-4C04-BB5E-CF721DD194DC}
 		{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25} = {62617568-5C2B-4DB1-A8CB-2C8A9E256E40}
 		{44695C43-6AF4-4D46-A121-8C9B8326F9EA} = {62617568-5C2B-4DB1-A8CB-2C8A9E256E40}
-		{B8359DE7-3953-448C-A9AB-3E5C7F26AFCE} = {C9BCBA88-DAD3-46BB-8A7D-CAB66B7FDDA3}
 	EndGlobalSection
 EndGlobal
