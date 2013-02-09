@@ -33,9 +33,7 @@ namespace TestStack.Seleno.Configuration
         /// <param name="webProjectFolder">The name of the web project to run</param>
         /// <param name="portNumber">The port number to run the project under</param>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(string webProjectFolder, 
-                               int portNumber, 
-                               Action<IAppConfigurator> configure = null)
+        public static void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null)
         {
             var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
             Run(webApplication, configure);
