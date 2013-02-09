@@ -8,6 +8,14 @@ using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
+    [Obsolete("Please use SelenoHost instead of SelenoApplicationRunner", true)]
+    public static class SelenoApplicationRunner
+    {
+        public static void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null) {}
+        public static void Run(WebApplication app, Action<IAppConfigurator> configure) {}
+        public static void Run(Action<IAppConfigurator> configure) {}
+    }
+
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
@@ -64,7 +72,7 @@ namespace TestStack.Seleno.Configuration
             Host = CreateApplication(action, appConfigurator);
         }
 
-        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure,IAppConfigurator appConfigurator  = null)
+        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure, IAppConfigurator appConfigurator  = null)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");

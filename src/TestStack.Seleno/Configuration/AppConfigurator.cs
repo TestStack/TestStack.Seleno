@@ -95,7 +95,7 @@ namespace TestStack.Seleno.Configuration
             return this;
         }
 
-        public AppConfigurator WithPageObjectsFrom(params Assembly[] assemblies)
+        public IAppConfigurator WithPageObjectsFrom(params Assembly[] assemblies)
         {
             PageObjectAssemblies = assemblies;
             return this;

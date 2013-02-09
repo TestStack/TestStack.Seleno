@@ -11,9 +11,9 @@ namespace TestStack.Seleno.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            SelenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
-                c => c.UsingLoggerFactory(new ConsoleFactory()
-                    .WithPageObjectsFrom(typeof(HomePage).Assembly)
+            SelenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346, c => c
+                .UsingLoggerFactory(new ConsoleFactory())
+                .WithPageObjectsFrom(typeof(HomePage).Assembly)
             );
         }
     }
