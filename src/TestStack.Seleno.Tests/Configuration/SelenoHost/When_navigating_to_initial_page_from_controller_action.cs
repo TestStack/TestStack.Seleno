@@ -12,7 +12,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 
         public void Given_the_Seleno_Application_is_configured()
         {
-            SUT.Run(appConfigurator: AppConfigurator);
+            SUT.Run(c => {});
         }
         
         public void When_navigating_to_initial_page()

@@ -12,7 +12,7 @@ using Funq;
 
 namespace TestStack.Seleno.Configuration
 {
-    internal class AppConfigurator : IAppConfigurator
+    internal class AppConfigurator : IInternalAppConfigurator
     {
         protected WebApplication WebApplication;
         protected IWebServer WebServer;

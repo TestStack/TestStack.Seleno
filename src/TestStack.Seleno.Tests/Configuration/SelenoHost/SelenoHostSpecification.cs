@@ -8,16 +8,17 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {
     public abstract class SelenoHostSpecification : Specification
     {
-        protected readonly Container Container = new Container();
+        protected readonly IContainer Container = Substitute.For<IContainer>();
         protected readonly IPageNavigator PageNavigator = Substitute.For<IPageNavigator>();
-        protected readonly IAppConfigurator AppConfigurator = Substitute.For<IAppConfigurator>();
+        internal readonly IInternalAppConfigurator AppConfigurator = Substitute.For<IInternalAppConfigurator>();
         protected readonly ISelenoApplication SelenoApplication = Substitute.For<ISelenoApplication>();
         
         protected SelenoHostSpecification()
         {
+            Seleno.Configuration.SelenoHost.AppConfigurator = () => AppConfigurator;
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
             SelenoApplication.Container.Returns(x => Container);
-            Container.Register(c => PageNavigator);
+            Container.Resolve<IPageNavigator>().Returns(PageNavigator);
         }
     }
 }

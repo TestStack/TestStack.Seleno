@@ -1,6 +1,8 @@
-﻿namespace Funq
+﻿using System;
+
+namespace Funq
 {
-    public interface IContainer
+    public interface IContainer : IDisposable
     {
         TService Resolve<TService>();
     }

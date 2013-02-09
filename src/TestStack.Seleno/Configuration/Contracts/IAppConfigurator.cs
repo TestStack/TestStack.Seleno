@@ -11,7 +11,7 @@ namespace TestStack.Seleno.Configuration.Contracts
     /// </summary>
     public interface IAppConfigurator
     {
-        ISelenoApplication CreateApplication();
+
         /// <summary>
         /// Specify the details of the project you are testing.
         /// </summary>
@@ -58,5 +58,10 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="assemblies">The assembly/ies to scan</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator WithPageObjectsFrom(params Assembly[] assemblies);
+    }
+
+    internal interface IInternalAppConfigurator : IAppConfigurator
+    {
+        ISelenoApplication CreateApplication();
     }
 }

@@ -21,6 +21,7 @@ namespace TestStack.Seleno.Configuration
     /// </summary>
     public static class SelenoHost
     {
+        internal static Func<IInternalAppConfigurator> AppConfigurator = () => new AppConfigurator(); 
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
@@ -34,11 +35,10 @@ namespace TestStack.Seleno.Configuration
         /// <param name="configure">Any configuration changes you would like to make</param>
         public static void Run(string webProjectFolder, 
                                int portNumber, 
-                               Action<IAppConfigurator> configure = null,
-                               IAppConfigurator appConfigurator = null)
+                               Action<IAppConfigurator> configure = null)
         {
             var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
-            Run(webApplication, configure, appConfigurator);
+            Run(webApplication, configure);
         }
 
         /// <summary>
@@ -46,14 +46,14 @@ namespace TestStack.Seleno.Configuration
         /// </summary>
         /// <param name="app">The web application to test</param>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(WebApplication app, Action<IAppConfigurator> configure, IAppConfigurator appConfigurator = null)
+        public static void Run(WebApplication app, Action<IAppConfigurator> configure)
         {
             Run(c =>
                 {
                     c.ProjectToTest(app);
                     if (configure != null)
                         configure(c);
-                }, appConfigurator
+                }
             );
         }
 
@@ -61,7 +61,7 @@ namespace TestStack.Seleno.Configuration
         /// Begin a Seleno test.
         /// </summary>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(Action<IAppConfigurator> configure = null, IAppConfigurator appConfigurator = null)
+        public static void Run(Action<IAppConfigurator> configure)
         {
             Action<IAppConfigurator> action = x =>
             {
@@ -69,15 +69,15 @@ namespace TestStack.Seleno.Configuration
                     configure(x);
             };
 
-            Host = CreateApplication(action, appConfigurator);
+            Host = CreateApplication(action);
         }
 
-        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure, IAppConfigurator appConfigurator  = null)
+        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            var configurator = appConfigurator ?? new AppConfigurator();
+            var configurator = AppConfigurator();
             configure(configurator);
             Host = configurator.CreateApplication();
             Host.Initialize();

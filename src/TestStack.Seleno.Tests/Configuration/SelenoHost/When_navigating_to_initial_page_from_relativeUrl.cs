@@ -1,8 +1,4 @@
-﻿using Funq;
-using NSubstitute;
-using TestStack.Seleno.Configuration.Contracts;
-using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
+﻿using NSubstitute;
 using TestStack.Seleno.Tests.TestObjects;
 using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
@@ -14,7 +10,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 
         public void Given_the_Seleno_Application_is_configured()
         {
-            SUT.Run(appConfigurator: AppConfigurator);
+            SUT.Run(c => {});
         }
         
         public void When_navigating_to_initial_page()

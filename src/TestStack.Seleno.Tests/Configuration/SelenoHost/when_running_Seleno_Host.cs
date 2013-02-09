@@ -18,7 +18,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         
         public void When_running_Seleno_Application()
         {
-            SUT.Run(_configureAction,AppConfigurator);
+            SUT.Run(_configureAction);
         }
 
         public void Then_it_should_invoke_configure_action()
