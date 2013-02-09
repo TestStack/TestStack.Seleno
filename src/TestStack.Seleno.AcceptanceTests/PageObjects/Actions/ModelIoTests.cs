@@ -31,6 +31,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
             }
         }
 
+        // This test doesn't pass yet - it's pending
         public class Writing_a_model : ModelIoTests
         {
             private Form1Page _page;
