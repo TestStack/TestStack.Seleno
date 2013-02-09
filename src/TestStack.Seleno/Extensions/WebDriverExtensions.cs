@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.PageObjects.Locators;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
@@ -11,6 +12,12 @@ namespace TestStack.Seleno.Extensions
     public static class WebDriverExtensions
     {
         public const int DefaultSecondTimeout = 60;
+
+        public static IWebElement ElementWithWait(this IWebDriver driver,Func<IWebDriver, IWebElement> elementIsFound, int waitInSeconds = 20)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitInSeconds));
+            return wait.Until(elementIsFound);
+        }
 
         public static void WaitForSeconds(this IWebDriver driver, int seconds)
         {

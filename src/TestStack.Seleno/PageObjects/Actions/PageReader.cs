@@ -2,10 +2,10 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-
-using TestStack.Seleno.Extensions;
-
 using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
+using By = TestStack.Seleno.PageObjects.Locators.By;
+
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -73,9 +73,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName)
         {
-            var element = ElementFor(propertySelector);
-            var value = element.GetAttribute(attributeName) ?? string.Empty;
-            return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
+            return 
+                ElementFor(propertySelector)
+                .GetAttributeAs<TProperty>(attributeName);
         }
 
         public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
@@ -89,5 +89,13 @@ namespace TestStack.Seleno.PageObjects.Actions
             return (TProperty)TypeDescriptor.GetConverter(typeof(TProperty)).ConvertFromString(value);
         }
 
+        public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
+        {
+            var dropDownId = ExpressionHelper.GetExpressionText(dropDownSelector);
+            var selector = string.Format("$('#{0} option:selected')",dropDownId);
+            var dropDownElement = _elementFinder.ElementWithWait(By.jQuery(selector), waitInSeconds);
+
+            return dropDownElement.GetAttributeAs<TField>("value");
+        }
     }
 }
