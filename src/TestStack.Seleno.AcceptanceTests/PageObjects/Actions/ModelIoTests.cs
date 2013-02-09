@@ -3,6 +3,7 @@ using TestStack.BDDfy;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.PageObjects;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
+using TestStack.Seleno.Configuration;
 
 namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 {
@@ -15,7 +16,8 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_a_filled_in_form()
             {
-                _page = new HomePage().GoToReadModelPage();
+                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                    .GoToReadModelPage();
             }
 
             public void When_reading_a_model()
@@ -29,6 +31,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
             }
         }
 
+        // This test doesn't pass yet - it's pending
         public class Writing_a_model : ModelIoTests
         {
             private Form1Page _page;
@@ -36,7 +39,8 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_an_empty_form()
             {
-                _page = new HomePage().GoToWriteModelPage();
+                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                    .GoToWriteModelPage();
             }
 
             public void When_writing_a_model()

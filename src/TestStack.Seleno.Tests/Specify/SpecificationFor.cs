@@ -22,9 +22,9 @@ namespace TestStack.Seleno.Tests.Specify
             SUT = _autoSubstitute.Resolve<T>();
         }
 
-        public TFake Fake<TFake>() where TFake : class
+        public TSubstitute SubstituteFor<TSubstitute>() where TSubstitute : class
         {
-            return _autoSubstitute.ResolveAndSubstituteFor<TFake>();
+            return _autoSubstitute.ResolveAndSubstituteFor<TSubstitute>();
         }
 
         public override Type Story
@@ -36,7 +36,8 @@ namespace TestStack.Seleno.Tests.Specify
         {
             Action<ContainerBuilder> autofacCustomisation = c => c
                 .RegisterType<T>()
-                .FindConstructorsWith(new BindingFlagsConstructorFinder(BindingFlags.Public | BindingFlags.NonPublic));
+                .FindConstructorsWith(new BindingFlagsConstructorFinder(BindingFlags.Public | BindingFlags.NonPublic))
+                .PropertiesAutowired();
             return new AutoSubstitute(autofacCustomisation);
         }
     }

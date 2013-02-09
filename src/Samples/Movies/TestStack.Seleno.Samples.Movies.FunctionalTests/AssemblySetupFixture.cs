@@ -11,7 +11,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("TestStack.Seleno.Samples.Movies", 19456);
+            SelenoHost.Run("TestStack.Seleno.Samples.Movies", 19456);
             InitializeBDDfyReport();
         }
 

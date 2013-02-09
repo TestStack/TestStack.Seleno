@@ -1,5 +1,5 @@
-﻿using OpenQA.Selenium.Remote;
-using TestStack.Seleno.Configuration;
+﻿using System;
+using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.Specifications.Assertions;
@@ -9,52 +9,54 @@ namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent
     {
-        protected internal readonly RemoteWebDriver Browser;
-        private readonly PageNavigator _navigator;
-        protected readonly ElementFinder ElementFinder;
-        protected readonly ScriptExecutor ScriptExecutor;
-        readonly ICamera _camera;
-
-        public UiComponent()
-        {
-            if (SelenoApplicationRunner.Host == null)
-                throw new AppConfigurationException("SelenoApplicationRunner.Host is not set");
-            Browser = SelenoApplicationRunner.Host.Browser as RemoteWebDriver;
-            _camera = SelenoApplicationRunner.Host.Camera;
-            ElementFinder = new ElementFinder(Browser);
-            ScriptExecutor = new ScriptExecutor(Browser, Browser, ElementFinder, _camera);
-            _navigator = new PageNavigator(Browser, ScriptExecutor, SelenoApplicationRunner.Host.WebServer);
-        }
+        protected internal IWebDriver Browser;
+        internal IComponentFactory ComponentFactory;
+        internal IPageNavigator PageNavigator;
+        internal IElementFinder ElementFinder;
+        internal IScriptExecutor ScriptExecutor;
+        internal ICamera Camera;
 
         protected IPageNavigator Navigate()
         {
-            return _navigator;
+            ThrowIfComponentNotCreatedCorrectly();
+            return PageNavigator;
         }
 
         protected IScriptExecutor Execute()
         {
+            ThrowIfComponentNotCreatedCorrectly();
             return ScriptExecutor;
         }
 
         protected IElementFinder Find()
         {
+            ThrowIfComponentNotCreatedCorrectly();
             return ElementFinder;
         }
 
         protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
+            ThrowIfComponentNotCreatedCorrectly();
             return new TableReader<TModel>(gridId) { Browser = Browser };
         }
 
         public ElementAssert AssertThatElements(By selector)
         {
-            return new ElementAssert(selector, _camera);
+            ThrowIfComponentNotCreatedCorrectly();
+            return new ElementAssert(selector, Camera, Browser);
         }
 
         public TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
-            return new TComponent();
+            ThrowIfComponentNotCreatedCorrectly();
+            return ComponentFactory.CreatePage<TComponent>();
+        }
+
+        private void ThrowIfComponentNotCreatedCorrectly()
+        {
+            if (PageNavigator == null)
+                throw new InvalidOperationException("Don't new up Page Objects; instead use SelenoHost.NavigateToInitialPage");
         }
     }
 }

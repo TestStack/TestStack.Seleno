@@ -3,16 +3,16 @@ using TestStack.Seleno.PageObjects.Actions;
 namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent<TModel> : UiComponent
-        where TModel: class, new()
+        where TModel : class, new()
     {
-        protected PageReader<TModel> Read()
+        protected IPageReader<TModel> Read()
         {
-            return new PageReader<TModel>(Browser, ScriptExecutor, ElementFinder);
+            return ComponentFactory.CreatePageReader<TModel>();
         }
 
-        protected PageWriter<TModel> Input()
+        protected IPageWriter<TModel> Input()
         {
-            return new PageWriter<TModel>(ScriptExecutor, ElementFinder);
-        } 
+            return ComponentFactory.CreatePageWriter<TModel>();
+        }
     }
 }

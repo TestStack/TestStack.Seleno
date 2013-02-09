@@ -6,11 +6,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
-using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageWriter<TModel> where TModel : class, new()
+    public class PageWriter<TModel> : IPageWriter<TModel> where TModel : class, new()
     {
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;

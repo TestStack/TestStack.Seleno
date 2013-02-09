@@ -1,35 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Specifications.Assertions
 {
-    public class ElementAssert
+    public class ElementAssert : IElementAssert
     {
         private readonly By _selector;
         private readonly ICamera _camera;
+        readonly IWebDriver _browser;
 
-        public ElementAssert(By selector, ICamera camera)
+        public ElementAssert(By selector, ICamera camera, IWebDriver browser)
         {
             _selector = selector;
             _camera = camera;
+            _browser = browser;
         }
 
-        IWebDriver Browser
-        {
-            get
-            {
-                return SelenoApplicationRunner.Host.Browser;
-            }
-        }
-
-        public ElementAssert DoNotExist(string message = null)
+        public IElementAssert DoNotExist(string message = null)
         {
             try
             {
-                Browser.FindElement(_selector);
+                _browser.FindElement(_selector);
             }
             catch (NoSuchElementException)
             {
@@ -39,15 +32,18 @@ namespace TestStack.Seleno.Specifications.Assertions
             if (string.IsNullOrEmpty(message))
                 message = string.Format("'{0}' was in fact found!", _selector);
 
+            // todo: Can we move the screenshots to a central place that catches any
+            //  uncaught exceptions rather than having them in a number of places just
+            //  before throwing an exception
             _camera.TakeScreenshot();
             throw new SelenoException(message);
         }
 
-        public ElementAssert Exist(string message = null)
+        public IElementAssert Exist(string message = null)
         {
             try
             {
-                Browser.FindElement(_selector);
+                _browser.FindElement(_selector);
             }
             catch (NoSuchElementException ex)
             {
@@ -58,11 +54,11 @@ namespace TestStack.Seleno.Specifications.Assertions
             return this;
         }
 
-        public ElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion)
+        public IElementAssert ConformTo(Action<IEnumerable<IWebElement>> assertion)
         {
             try
             {
-                var elements = Browser.FindElements(_selector);
+                var elements = _browser.FindElements(_selector);
                 assertion(elements);
             }
             catch (Exception)
