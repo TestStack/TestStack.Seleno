@@ -9,7 +9,7 @@ namespace TestStack.Seleno.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("TestStack.Seleno.AcceptanceTests.Web", 12345);
+            SelenoApplicationRunner.Run("TestStack.Seleno.AcceptanceTests.Web", 12346);
         }
     }
 }

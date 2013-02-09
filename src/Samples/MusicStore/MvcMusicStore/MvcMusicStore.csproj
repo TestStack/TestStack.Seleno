@@ -77,6 +77,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\SqlCeMembershipProvider.cs" />
+    <Content Include="App_Code\SqlCeMembershipUtils.cs" />
+    <Content Include="App_Code\SqlCeProfileProvider.cs" />
+    <Content Include="App_Code\SqlCeRoleProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MvcMusicStore.sdf" />
     <Content Include="Content\Images\home-showcase.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\placeholder.gif" />
@@ -210,9 +215,7 @@
   <ItemGroup>
     <Content Include="Views\Store\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\StoreManager\Index.cshtml" />
   </ItemGroup>

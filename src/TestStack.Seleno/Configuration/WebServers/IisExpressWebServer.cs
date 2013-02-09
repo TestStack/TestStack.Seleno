@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
-
+using System.Linq;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    public class IisExpressWebServer : IWebServer
+    internal class IisExpressWebServer : IWebServer
     {
         private static WebApplication _application;
         private static Process _webHostProcess;
@@ -20,37 +19,27 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public void Start()
         {
-            var thread = new Thread(StartIisExpress) { IsBackground = true };
-            thread.Start();
+            var webHostStartInfo = ProcessStartInfo(_application.Location.FullPath, _application.PortNumber);
+            _webHostProcess = Process.Start(webHostStartInfo);
         }
 
         public void Stop()
         {
-            KillHosts();
+            if (_webHostProcess == null)
+                return;
+            if (!_webHostProcess.HasExited)
+                _webHostProcess.Kill();
+            _webHostProcess.Dispose();
         }
 
         public string BaseUrl
         {
             get { return string.Format("http://localhost:{0}", _application.PortNumber); }
         }
-
-        private static void StartIisExpress()
-        {
-            var webHostStartInfo = ProcessStartInfo(_application.Location.FullPath, _application.PortNumber);
-
-            try
-            {
-                _webHostProcess = Process.Start(webHostStartInfo);
-                _webHostProcess.WaitForExit();
-            }
-            catch
-            {
-                KillHosts();
-            }
-        }
-
+        
         private static ProcessStartInfo ProcessStartInfo(string applicationPath, int port)
         {
+            // todo: grab stdout and/or stderr for logging purposes?
             var key = Environment.Is64BitOperatingSystem ? "programfiles(x86)" : "programfiles";
             var programfiles = Environment.GetEnvironmentVariable(key);
 
@@ -64,21 +53,6 @@ namespace TestStack.Seleno.Configuration.WebServers
                 Arguments = String.Format("/path:\"{0}\" /port:{1}", applicationPath, port),
                 FileName = string.Format("{0}\\IIS Express\\iisexpress.exe", programfiles)
             };
-        }
-
-        private static void KillHosts()
-        {
-            try
-            {
-                _webHostProcess.CloseMainWindow();
-                _webHostProcess.Dispose();
-            }
-            // ReSharper disable EmptyGeneralCatchClause
-            catch
-            // ReSharper restore EmptyGeneralCatchClause
-            {
-                // Whatever dude. I do not care               
-            }
         }
     }
 }

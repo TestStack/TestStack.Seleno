@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>TestStack.Seleno</id>
+    <version>1.0.0</version>
+    <title>Seleno</title>
+    <authors>Mehdi Khalili, Michael Whelan, TestStack</authors>
+    <owners>Mehdi Khalili, Michael Whelan, TestStack</owners>
+    <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Seleno helps you write automated UI tests in the right way (using Selenium WebDriver)</description>
+    <copyright>Copyright 2012 TestStack</copyright>
+    <licenseUrl>https://github.com/TestStack/TestStack.Seleno/blob/master/license.txt</licenseUrl>
+    <iconUrl>https://raw.github.com/TestStack/TestStack.Seleno/master/logo.png</iconUrl>
+    <tags>web, mvc, asp.net, testing, ui, selenium</tags>
+    <dependencies> 
+      <dependency id="Selenium.WebDriver" version="2.28" />
+      <dependency id="Selenium.Support" version="2.28" />
+    </dependencies>
+  </metadata>
+  <files>
+     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.dll" target="lib\NET40" />
+     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.pdb" target="lib\NET40" />
+     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.xml" target="lib\NET40" />
+  </files>
+</package>
