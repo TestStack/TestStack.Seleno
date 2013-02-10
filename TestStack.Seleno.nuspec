@@ -20,8 +20,8 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.dll" target="lib\NET40" />
-     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.pdb" target="lib\NET40" />
-     <file src="src\TestStack.Seleno\bin\Release\TestStack.Seleno.xml" target="lib\NET40" />
+     <file src="src\TestStack.Seleno\bin\Release\Combined\TestStack.Seleno.dll" target="lib\NET40" />
+     <file src="src\TestStack.Seleno\bin\Release\Combined\TestStack.Seleno.pdb" target="lib\NET40" />
+     <file src="src\TestStack.Seleno\bin\Release\Combined\TestStack.Seleno.xml" target="lib\NET40" />
   </files>
 </package>
