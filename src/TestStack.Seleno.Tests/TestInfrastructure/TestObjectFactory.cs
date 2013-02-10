@@ -13,8 +13,10 @@ namespace TestStack.Seleno.Tests.TestInfrastructure
         {
             var webApplication = new WebApplication(Substitute.For<IProjectLocation>(), 45123);
             var configurator = new AppConfigurator();
+            configurator.WithJavaScriptExecutor(() => Substitute.For<IJavaScriptExecutor>());
+            configurator.WithWebDriver(() => Substitute.For<IWebDriver>());
+
             configurator
-                .WithWebDriver(() => Substitute.For<IWebDriver>())
                 .ProjectToTest(webApplication)
                 .WithWebServer(Substitute.For<IWebServer>())
                 .UsingCamera(new NullCamera());

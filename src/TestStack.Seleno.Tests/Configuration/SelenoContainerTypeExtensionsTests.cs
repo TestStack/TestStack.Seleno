@@ -21,6 +21,7 @@ namespace TestStack.Seleno.Tests.Configuration
         {
             _webDriver = Substitute.For<IWebDriver>();
             SUT.WithWebDriver(() => _webDriver);
+            SUT.WithJavaScriptExecutor(() => Substitute.For<IJavaScriptExecutor>());
         }
 
         public void AndGiven_there_is_a_registered_camera()

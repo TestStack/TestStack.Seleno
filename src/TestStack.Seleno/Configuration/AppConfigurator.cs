@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
@@ -107,8 +106,9 @@ namespace TestStack.Seleno.Configuration
 
         public IAppConfigurator WithRemoteWebDriver(Func<RemoteWebDriver> webDriver)
         {
-            WithWebDriver(webDriver);
-            WithJavaScriptExecutor(webDriver);
+            var driver = new Lazy<RemoteWebDriver>(webDriver);
+            WithWebDriver(() => driver.Value);
+            WithJavaScriptExecutor(() => driver.Value);
             return this;
         }
 
