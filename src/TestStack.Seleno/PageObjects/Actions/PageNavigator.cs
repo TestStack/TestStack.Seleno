@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
-
 using Microsoft.Web.Mvc;
 using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageNavigator : IPageNavigator
+    internal class PageNavigator : IPageNavigator
     {
         protected IWebDriver Browser;
         readonly IScriptExecutor _executor;
         private readonly IWebServer _webServer;
         readonly IComponentFactory _componentFactory;
 
-        internal PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
+        public PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (executor == null) throw new ArgumentNullException("executor");

@@ -1,5 +1,8 @@
-﻿using Funq;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web.Mvc;
 using OpenQA.Selenium;
+using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.Configuration.Contracts
 {
@@ -7,10 +10,14 @@ namespace TestStack.Seleno.Configuration.Contracts
     {
         void Initialize();
         void ShutDown();
-
-        IContainer Container { get; }
         IWebDriver Browser { get; }
         IWebServer WebServer { get; }
         ICamera Camera { get; }
+
+        TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+            where TController : Controller
+            where TPage : UiComponent, new();
+
+        TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new();
     }
 }

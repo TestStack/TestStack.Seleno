@@ -1,63 +1,84 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Autofac;
+using Autofac.Builder;
+using Autofac.Core;
 using Castle.Core.Logging;
-using System.Reflection;
+using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
 using OpenQA.Selenium;
-using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
-using Funq;
 
 namespace TestStack.Seleno.Configuration
 {
     internal class AppConfigurator : IInternalAppConfigurator
     {
+        protected ContainerBuilder ContainerBuilder = new ContainerBuilder();
         protected WebApplication WebApplication;
-        protected IWebServer WebServer;
-        protected Func<Container, ICamera> Camera = c => new NullCamera();
-        protected Func<IWebDriver> WebDriver = BrowserFactory.FireFox;
-        private ILoggerFactory _loggerFactory = new NullLogFactory();
-        protected Assembly[] PageObjectAssemblies;
+
+        public AppConfigurator()
+        {
+            UsingCamera(new NullCamera());
+            UsingLoggerFactory(new NullLogFactory());
+            WithRemoteWebDriver(BrowserFactory.FireFox);
+            ContainerBuilder.Register(c => new IisExpressWebServer(WebApplication))
+                .As<IWebServer>().SingleInstance();
+        }
 
         public ISelenoApplication CreateApplication()
         {
-            _loggerFactory
+            var container = BuildContainer();
+
+            container.Resolve<ILoggerFactory>()
                 .Create(GetType())
                 .InfoFormat("Seleno v{0}, .NET Framework v{1}",
-                    typeof(SelenoHost).Assembly.GetName().Version, Environment.Version);
+                    typeof(SelenoHost).Assembly.GetName().Version,
+                    Environment.Version
+                );
 
-            var container = BuildContainer();
-            var app = new SelenoApplication(container);
-
-            return app;
+            return new SelenoApplication(container);
         }
 
-        private Container BuildContainer()
+        private IContainer BuildContainer()
         {
-            var container = new Container();
-            container.Register(c => WebServer ?? new IisExpressWebServer(WebApplication));
-            container.Register(c => WebDriver.Invoke());
-            container.Register(Camera);
+            ContainerBuilder.RegisterType<ElementFinder>()
+                .AsImplementedInterfaces().InstancePerDependency();
+            ContainerBuilder.RegisterType<ScriptExecutor>()
+                .AsImplementedInterfaces().InstancePerDependency();
+            ContainerBuilder.RegisterType<PageNavigator>()
+                .AsImplementedInterfaces().InstancePerDependency();
+            ContainerBuilder.RegisterType<ComponentFactory>()
+                .AsImplementedInterfaces().InstancePerDependency();
+            ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
 
-            container.Register(c => _loggerFactory);
+            return ContainerBuilder.Build();
+        }
 
-            container.Register<IElementFinder>(c => new ElementFinder(c.Resolve<IWebDriver>()));
-            container.Register<IScriptExecutor>(
-                c => new ScriptExecutor(c.Resolve<IWebDriver>(), c.Resolve<IWebDriver>().GetJavaScriptExecutor(),
-                                        c.Resolve<IElementFinder>(), c.Resolve<ICamera>()));
-            container.Register<IPageNavigator>(
-                c => new PageNavigator(c.Resolve<IWebDriver>(), c.Resolve<IScriptExecutor>(),
-                                       c.Resolve<IWebServer>(), c.Resolve<IComponentFactory>()));
-            container.Register<IComponentFactory>(
-                c => new ComponentFactory(c.LazyResolve<IWebDriver>(), c.LazyResolve<IScriptExecutor>(),
-                    c.LazyResolve<IElementFinder>(), c.LazyResolve<ICamera>(), c.LazyResolve<IPageNavigator>(), c));
+        // todo: move to separate file
+        class PageObjectRegistrationSource : IRegistrationSource
+        {
+            public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
+            {
+                if (service == null)
+                    throw new ArgumentNullException("service");
 
-            var pageObjectTypes = new PageObjectScanner(PageObjectAssemblies).Scan();
-            container.RegisterPageObjects(pageObjectTypes);
+                var typedService = service as TypedService;
+                if (typedService == null || !typeof(UiComponent).IsAssignableFrom(typedService.ServiceType))
+                    return Enumerable.Empty<IComponentRegistration>();
 
-            return container;
+                var rb = RegistrationBuilder.ForType(typedService.ServiceType)
+                    .As(service)
+                    .InstancePerDependency()
+                    .PropertiesAutowired();
+
+                return new[] { rb.CreateRegistration() };
+            }
+
+            public bool IsAdapterForIndividualComponents { get { return false; } }
         }
 
         public IAppConfigurator ProjectToTest(WebApplication webApplication)
@@ -68,37 +89,50 @@ namespace TestStack.Seleno.Configuration
 
         public IAppConfigurator WithWebServer(IWebServer webServer)
         {
-            WebServer = webServer;
+            ContainerBuilder.Register(c => webServer)
+                .As<IWebServer>().SingleInstance();
             return this;
         }
 
-        public IAppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
+        public IAppConfigurator WithRemoteWebDriver(Func<RemoteWebDriver> webDriver)
         {
-            WebDriver = webDriver;
+            WithWebDriver(webDriver);
+            WithJavaScriptExecutor(webDriver);
+            return this;
+        }
+
+        internal IAppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
+        {
+            ContainerBuilder.Register(c => webDriver())
+                .As<IWebDriver>().SingleInstance();
+            return this;
+        }
+
+        internal IAppConfigurator WithJavaScriptExecutor(Func<IJavaScriptExecutor> javaScriptExecutor)
+        {
+            ContainerBuilder.Register(c => javaScriptExecutor())
+                .As<IJavaScriptExecutor>().SingleInstance();
             return this;
         }
 
         public IAppConfigurator UsingCamera(ICamera camera)
         {
-            Camera = c => camera;
+            ContainerBuilder.Register(c => camera)
+                .As<ICamera>().SingleInstance();
             return this;
         }
 
         public IAppConfigurator UsingCamera(string screenShotPath)
         {
-            Camera = c => new FileCamera(c.Resolve<IWebDriver>(), screenShotPath);
+            ContainerBuilder.Register(c => new FileCamera(c.Resolve<IWebDriver>(), screenShotPath))
+                .As<ICamera>().SingleInstance();
             return this;
         }
 
         public IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory;
-            return this;
-        }
-
-        public IAppConfigurator WithPageObjectsFrom(params Assembly[] assemblies)
-        {
-            PageObjectAssemblies = assemblies;
+            ContainerBuilder.Register(c => loggerFactory)
+                .As<ILoggerFactory>().SingleInstance();
             return this;
         }
     }

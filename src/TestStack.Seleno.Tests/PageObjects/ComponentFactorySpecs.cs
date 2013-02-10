@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Autofac;
 using FluentAssertions;
-using Funq;
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
@@ -11,12 +10,12 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects
 {
-    public abstract class ComponentFactorySpecification : SpecificationFor<ComponentFactory>
+    abstract class ComponentFactorySpecification : SpecificationFor<ComponentFactory>
     {
         protected object Result;
     }
 
-    public class creating_a_PageReader : ComponentFactorySpecification
+    class creating_a_PageReader : ComponentFactorySpecification
     {
         public void When_asked_to_create_a_PageReader_for_a_view_model()
         {
@@ -29,7 +28,7 @@ namespace TestStack.Seleno.Tests.PageObjects
         }
     }
 
-    public class creating_a_PageWriter : ComponentFactorySpecification
+    class creating_a_PageWriter : ComponentFactorySpecification
     {
         public void When_asked_to_create_a_PageWriter_for_a_view_model()
         {
@@ -42,7 +41,7 @@ namespace TestStack.Seleno.Tests.PageObjects
         }
     }
 
-    public class creating_an_ElementAssert : ComponentFactorySpecification
+    class creating_an_ElementAssert : ComponentFactorySpecification
     {
         public void When_asked_to_create_an_ElementAssert()
         {
@@ -55,11 +54,11 @@ namespace TestStack.Seleno.Tests.PageObjects
         }
     }
 
-    public class creating_a_Page : ComponentFactorySpecification
+    class creating_a_Page : ComponentFactorySpecification
     {
         public creating_a_Page()
         {
-            SubstituteFor<IContainer>().Resolve<TestPage>().Returns(new TestPage());
+            SubstituteFor<ILifetimeScope>().Resolve<TestPage>().Returns(new TestPage());
         }
 
         public void When_asked_to_create_a_Page()
@@ -77,5 +76,4 @@ namespace TestStack.Seleno.Tests.PageObjects
             Result.Should().BeOfType<TestPage>();
         }
     }
-
 }

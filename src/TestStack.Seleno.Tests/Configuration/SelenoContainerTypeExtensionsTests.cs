@@ -1,75 +1,50 @@
-﻿using Funq;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.Tests.Specify;
-using TestStack.Seleno.Configuration;
 
 namespace TestStack.Seleno.Tests.Configuration
 {
-    class SelenoContainerTypeExtensionsTests : Specification
+    class when_creating_application_and_resolving_page_object : SpecificationFor<AppConfigurator>
     {
-        private Container _container;
         private ExamplePageObject _pageObject;
         private IWebDriver _webDriver;
         private ICamera _camera;
-        private IElementFinder _elementFinder;
-        private IPageNavigator _pageNavigator;
-        private IScriptExecutor _scriptExecutor;
-        private IComponentFactory _componentFactory;
+        private ISelenoApplication _application;
+        private string _baseUrl;
 
-        public void Given_a_container()
-        {
-            _container = new Container();
-        }
-
-        public void AndGiven_there_is_a_registered_web_driver()
+        public void Given_there_is_a_registered_web_driver()
         {
             _webDriver = Substitute.For<IWebDriver>();
-            _container.Register(c => _webDriver);
+            SUT.WithWebDriver(() => _webDriver);
         }
 
         public void AndGiven_there_is_a_registered_camera()
         {
             _camera = Substitute.For<ICamera>();
-            _container.Register(c => _camera);
+            SUT.UsingCamera(_camera);
         }
 
-        public void AndGiven_there_is_a_registered_element_finder()
+        public void AndGiven_a_web_server_is_registered_with_a_base_url()
         {
-            _elementFinder = Substitute.For<IElementFinder>();
-            _container.Register(c => _elementFinder);
+            var webserver = Substitute.For<IWebServer>();
+            _baseUrl = "http://localhost:3000";
+            webserver.BaseUrl.Returns(_baseUrl);
+            SUT.WithWebServer(webserver);
         }
 
-        public void AndGiven_there_is_a_registered_page_navigator()
+        public void AndGiven_the_application_is_created()
         {
-            _pageNavigator = Substitute.For<IPageNavigator>();
-            _container.Register(c => _pageNavigator);
+            _application = SUT.CreateApplication();
         }
 
-        public void AndGiven_there_is_a_registered_script_executor()
+        public void When_navigating_to_a_page_and_returning_a_page_object()
         {
-            _scriptExecutor = Substitute.For<IScriptExecutor>();
-            _container.Register(c => _scriptExecutor);
-        }
-
-        public void AndGiven_there_is_a_registered_component_factory()
-        {
-            _componentFactory = Substitute.For<IComponentFactory>();
-            _container.Register(c => _componentFactory);
-        }
-
-        public void AndGiven_a_page_object_is_registered()
-        {
-            _container.RegisterPageObjects(new [] {typeof(ExamplePageObject)});
-        }
-
-        public void When_resolving_the_page_object()
-        {
-            _pageObject = _container.Resolve<ExamplePageObject>();
+            _pageObject = _application.NavigateToInitialPage<ExamplePageObject>();
         }
 
         public void Then_the_page_is_instantiated()
@@ -89,24 +64,29 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void And_the_element_finder_is_populated()
         {
-            Assert.That(_pageObject.ElementFinder, Is.EqualTo(_elementFinder));
+            Assert.That(_pageObject.ElementFinder, Is.TypeOf<ElementFinder>());
         }
 
         public void And_the_page_navigator_is_populated()
         {
-            Assert.That(_pageObject.PageNavigator, Is.EqualTo(_pageNavigator));
+            Assert.That(_pageObject.PageNavigator, Is.TypeOf<PageNavigator>());
         }
 
         public void And_the_script_executor_is_populated()
         {
-            Assert.That(_pageObject.ScriptExecutor, Is.EqualTo(_scriptExecutor));
+            Assert.That(_pageObject.ScriptExecutor, Is.TypeOf<ScriptExecutor>());
         }
 
         public void And_the_component_factory_is_populated()
         {
-            Assert.That(_pageObject.ComponentFactory, Is.EqualTo(_componentFactory));
+            Assert.That(_pageObject.ComponentFactory, Is.TypeOf<ComponentFactory>());
+        }
+
+        public void And_the_browser_was_navigated_to_the_correct_url()
+        {
+            _webDriver.Navigate().Received().GoToUrl(_baseUrl);
         }
     }
 
-    class ExamplePageObject : Page {}
+    public class ExamplePageObject : Page {}
 }

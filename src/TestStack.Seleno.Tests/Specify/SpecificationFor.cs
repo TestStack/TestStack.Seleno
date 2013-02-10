@@ -36,7 +36,7 @@ namespace TestStack.Seleno.Tests.Specify
         {
             Action<ContainerBuilder> autofacCustomisation = c => c
                 .RegisterType<T>()
-                .FindConstructorsWith(new BindingFlagsConstructorFinder(BindingFlags.Public | BindingFlags.NonPublic))
+                .FindConstructorsWith(t => t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                 .PropertiesAutowired();
             return new AutoSubstitute(autofacCustomisation);
         }

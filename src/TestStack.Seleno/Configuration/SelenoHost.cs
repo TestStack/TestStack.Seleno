@@ -26,6 +26,8 @@ namespace TestStack.Seleno.Configuration
         /// The currently running seleno application.
         /// </summary>
         public static ISelenoApplication Host { get; internal set; }
+
+        private static IPageNavigator PageNavigator { get; set; }
        
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.
@@ -75,6 +77,8 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
+            // todo: throw if host is not null
+
             var configurator = AppConfigurator();
             configure(configurator);
             Host = configurator.CreateApplication();
@@ -95,7 +99,7 @@ namespace TestStack.Seleno.Configuration
             where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.Container.Resolve<IPageNavigator>().To<TController, TPage>(action);
+            return Host.NavigateToInitialPage<TController, TPage>(action);
         }
 
         /// <summary>
@@ -107,7 +111,7 @@ namespace TestStack.Seleno.Configuration
         public static TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.Container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
+            return Host.NavigateToInitialPage<TPage>(relativeUrl);
         }
 
         private static void ThrowIfHostNotInitialised()

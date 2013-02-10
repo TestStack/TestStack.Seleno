@@ -1,4 +1,4 @@
-﻿using Funq;
+﻿using Autofac;
 using NSubstitute;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
@@ -17,8 +17,6 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         {
             Seleno.Configuration.SelenoHost.AppConfigurator = () => AppConfigurator;
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
-            SelenoApplication.Container.Returns(x => Container);
-            Container.Resolve<IPageNavigator>().Returns(PageNavigator);
         }
     }
 }
