@@ -15,6 +15,7 @@ namespace TestStack.Seleno.Configuration
         public static void Run(Action<IAppConfigurator> configure) {}
     }
 
+    // todo: Should there be a way to shutdown the current test programmatically to give more flexibility?
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
@@ -25,6 +26,7 @@ namespace TestStack.Seleno.Configuration
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
+        // todo: should this be internal?
         public static ISelenoApplication Host { get; internal set; }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            // todo: throw if host is not null
+            // todo: throw if host is not null or at least dispose of it / shutdown etc.
 
             var configurator = AppConfiguratorFactory();
             configure(configurator);

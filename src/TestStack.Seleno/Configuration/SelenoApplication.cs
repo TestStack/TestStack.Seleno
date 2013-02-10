@@ -10,6 +10,8 @@ using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
+    // todo: make this disposable?
+    // todo: unit test this class
     internal class SelenoApplication : ISelenoApplication
     {
         private readonly ILogger _logger;
