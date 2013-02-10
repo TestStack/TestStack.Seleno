@@ -11,7 +11,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         
         protected SelenoHostSpecification()
         {
-            Seleno.Configuration.SelenoHost.AppConfigurator = () => AppConfigurator;
+            Seleno.Configuration.SelenoHost.AppConfiguratorFactory = () => AppConfigurator;
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
         }
     }

@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
-using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -21,14 +20,13 @@ namespace TestStack.Seleno.Configuration
     /// </summary>
     public static class SelenoHost
     {
-        internal static Func<IInternalAppConfigurator> AppConfigurator = () => new AppConfigurator(); 
+        internal static Func<IInternalAppConfigurator> AppConfiguratorFactory = () => new AppConfigurator();
+
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
         public static ISelenoApplication Host { get; internal set; }
 
-        private static IPageNavigator PageNavigator { get; set; }
-       
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.
         /// </summary>
@@ -79,7 +77,7 @@ namespace TestStack.Seleno.Configuration
 
             // todo: throw if host is not null
 
-            var configurator = AppConfigurator();
+            var configurator = AppConfiguratorFactory();
             configure(configurator);
             Host = configurator.CreateApplication();
             Host.Initialize();
