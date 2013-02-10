@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageWriter<TModel> : IPageWriter<TModel> where TModel : class, new()
+    internal class PageWriter<TModel> : IPageWriter<TModel> where TModel : class, new()
     {
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;

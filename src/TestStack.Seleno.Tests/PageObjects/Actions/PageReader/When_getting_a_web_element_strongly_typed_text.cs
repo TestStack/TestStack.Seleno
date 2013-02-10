@@ -4,11 +4,10 @@ using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.BDDfy.Scanners.StepScanners.ExecutableAttribute.GwtAttributes;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    public class When_getting_a_web_element_strongly_typed_text : PageReaderSpecification
+    class When_getting_a_web_element_strongly_typed_text : PageReaderSpecification
     {
         private DateTime _result;
         private readonly DateTime _the03rdOfJanuary2012At21h21 = new DateTime(2012, 01, 03, 21, 21, 00);

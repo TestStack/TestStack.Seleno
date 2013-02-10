@@ -5,7 +5,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    public abstract class PageReaderSpecification : SpecificationFor<PageReader<TestViewModel>>
+    abstract class PageReaderSpecification : SpecificationFor<PageReader<TestViewModel>>
     {
         public override Type Story
         {

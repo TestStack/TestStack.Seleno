@@ -9,9 +9,9 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
+    internal class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
     {
-        private IWebDriver _browser;
+        private readonly IWebDriver _browser;
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
 
@@ -45,21 +45,21 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             var name = ExpressionHelper.GetExpressionText(field);
 
-            return _browser.FindElement(By.Name(name)).Selected;
+            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).Selected;
         }
 
         public string TextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
         {
             var name = ExpressionHelper.GetExpressionText(field);
 
-            return _browser.FindElement(By.Name(name)).GetAttribute("value");
+            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).GetAttribute("value");
         }
 
         public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field)
         {
             string name = ExpressionHelper.GetExpressionText(field);
             string id = TagBuilder.CreateSanitizedId(name);
-            var element = _elementFinder.TryFindElement(By.Id(id));
+            var element = _elementFinder.TryFindElement(OpenQA.Selenium.By.Id(id));
             return element;
         }
 

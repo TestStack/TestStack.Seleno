@@ -6,7 +6,7 @@ using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    public class When_getting_strongly_typed_attribute_value : PageReaderSpecification
+    class When_getting_strongly_typed_attribute_value : PageReaderSpecification
     {
         private bool? _result;
         private const string AttributeName = "data-value";
