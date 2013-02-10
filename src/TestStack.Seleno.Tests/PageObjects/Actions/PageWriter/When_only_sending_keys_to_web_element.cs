@@ -1,11 +1,10 @@
 ﻿using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 {
-    public class When_only_sending_keys_to_web_element : PageWriterSpecification
+    class When_only_sending_keys_to_web_element : PageWriterSpecification
     {
         private const string SentText = "Some text";
 

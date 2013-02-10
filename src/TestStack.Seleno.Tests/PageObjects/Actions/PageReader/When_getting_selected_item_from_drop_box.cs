@@ -6,7 +6,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    public class When_getting_selected_item_from_drop_box : PageReaderSpecification
+    class When_getting_selected_item_from_drop_box : PageReaderSpecification
     {
         private int _result;
         private IWebElement _selectedOption;

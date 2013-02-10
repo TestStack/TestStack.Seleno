@@ -5,14 +5,14 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class ScriptExecutor : IScriptExecutor
+    internal class ScriptExecutor : IScriptExecutor
     {
         protected IWebDriver Browser;
         private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        internal ScriptExecutor(IWebDriver browser, IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
+        public ScriptExecutor(IWebDriver browser, IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");

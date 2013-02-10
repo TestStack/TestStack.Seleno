@@ -3,11 +3,10 @@ using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    public class When_getting_a_strongly_typed_textBox_value : PageReaderSpecification
+    class When_getting_a_strongly_typed_textBox_value : PageReaderSpecification
     {
         private Boolean _result;
 

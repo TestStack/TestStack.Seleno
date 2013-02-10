@@ -1,7 +1,6 @@
 using System;
 using Castle.Core.Logging;
-using System.Reflection;
-using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.WebServers;
 
 namespace TestStack.Seleno.Configuration.Contracts
@@ -33,7 +32,7 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// </summary>
         /// <param name="webDriver">The web driver</param>
         /// <returns>The configurator to allow for method chaining</returns>
-        IAppConfigurator WithWebDriver(Func<IWebDriver> webDriver);
+        IAppConfigurator WithRemoteWebDriver(Func<RemoteWebDriver> webDriver);
 
         /// <summary>
         /// Specify the camera you would like to use.
@@ -50,14 +49,6 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="loggerFactory">The logger factory</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory);
-
-        /// <summary>
-        /// Specify the assembly/ies to scan to find page objects.
-        /// By default Seleno will scan all assemblies currently loaded into the App Domain.
-        /// </summary>
-        /// <param name="assemblies">The assembly/ies to scan</param>
-        /// <returns>The configurator to allow for method chaining</returns>
-        IAppConfigurator WithPageObjectsFrom(params Assembly[] assemblies);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator
