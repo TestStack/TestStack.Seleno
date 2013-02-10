@@ -33,9 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\..\..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -54,9 +60,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\TestStack.BDDfy.3.13\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
+    <Reference Include="TestStack.Seleno">
+      <HintPath>bin\TestStack.Seleno.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.28.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\..\packages\Selenium.Support.2.28.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -78,10 +90,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TestStack.Seleno\TestStack.Seleno.csproj">
-      <Project>{32A3EB53-458F-42F1-8780-77950FFB9972}</Project>
-      <Name>TestStack.Seleno</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj">
       <Project>{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}</Project>
       <Name>TestStack.Seleno.Samples.Movies</Name>
