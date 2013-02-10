@@ -1,6 +1,5 @@
 using System;
 using Castle.Core.Logging;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.WebServers;
 

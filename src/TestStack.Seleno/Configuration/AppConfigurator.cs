@@ -46,13 +46,13 @@ namespace TestStack.Seleno.Configuration
         private IContainer BuildContainer()
         {
             ContainerBuilder.RegisterType<ElementFinder>()
-                .AsImplementedInterfaces().InstancePerDependency();
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ScriptExecutor>()
-                .AsImplementedInterfaces().InstancePerDependency();
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<PageNavigator>()
-                .AsImplementedInterfaces().InstancePerDependency();
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ComponentFactory>()
-                .AsImplementedInterfaces().InstancePerDependency();
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
 
             return ContainerBuilder.Build();
