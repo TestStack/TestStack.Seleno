@@ -24,7 +24,7 @@ namespace TestStack.Seleno.Tests.PageObjects
 
         public void Then_ComponentFactory_should_create_a_PageReader_for_that_view_model()
         {
-            Result.Should().BeOfType<PageReader<TestViewModel>>();            
+            Result.Should().BeOfType<PageReader<TestViewModel>>();
         }
     }
 
@@ -56,9 +56,12 @@ namespace TestStack.Seleno.Tests.PageObjects
 
     class creating_a_Page : ComponentFactorySpecification
     {
+        private readonly TestPage _testPage;
+
         public creating_a_Page()
         {
-            SubstituteFor<ILifetimeScope>().Resolve<TestPage>().Returns(new TestPage());
+            _testPage = new TestPage();
+            AutoSubstitute.Provide(_testPage);
         }
 
         public void When_asked_to_create_a_Page()
@@ -66,14 +69,9 @@ namespace TestStack.Seleno.Tests.PageObjects
             Result = SUT.CreatePage<TestPage>();
         }
 
-        public void Then_it_should_get_the_page_from_the_Container()
+        public void AndThen_ComponentFactory_should_create_the_Page_from_the_container()
         {
-            SubstituteFor<IContainer>().Received().Resolve<TestPage>();
-        }
-
-        public void AndThen_ComponentFactory_should_create_the_Page()
-        {
-            Result.Should().BeOfType<TestPage>();
+            Result.Should().Be(_testPage);
         }
     }
 }

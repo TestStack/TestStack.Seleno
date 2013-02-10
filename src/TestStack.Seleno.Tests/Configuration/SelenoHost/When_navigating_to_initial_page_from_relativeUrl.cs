@@ -18,11 +18,9 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
             SUT.NavigateToInitialPage<TestPage>(RelativeUrl);
         }
 
-        public void Then_it_should_invoke_PageNavigator_To_method_with_controller_action()
+        public void Then_it_should_navigate_using_the_seleno_application()
         {
-            PageNavigator
-                .Received()
-                .To<TestPage>(RelativeUrl);
+            SelenoApplication.Received().NavigateToInitialPage<TestPage>(RelativeUrl);
         }
     }
 }
