@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -11,32 +10,32 @@ namespace TestStack.Seleno.Configuration
 {
     public static class BrowserFactory
     {
-        public static IWebDriver Chrome()
+        public static ChromeDriver Chrome()
         {
             CreateDriver("chromedriver.exe");
             return new ChromeDriver();
         }
 
-        public static IWebDriver FireFox()
+        public static FirefoxDriver FireFox()
         {
             var browser = new FirefoxDriver();
             browser.SetImplicitTimeout(10);
             return browser;
         }
 
-        public static IWebDriver InternetExplorer32(InternetExplorerOptions options = null)
+        public static InternetExplorerDriver InternetExplorer32(InternetExplorerOptions options = null)
         {
             CreateDriver("IEDriverServer_Win32_2.28.0.exe", "IEDriverServer.exe");
             return InternetExplorer(options);
         }
 
-        public static IWebDriver InternetExplorer64(InternetExplorerOptions options = null)
+        public static InternetExplorerDriver InternetExplorer64(InternetExplorerOptions options = null)
         {
             CreateDriver("IEDriverServer_x64_2.28.0.exe", "IEDriverServer.exe");
             return InternetExplorer(options);
         }
 
-        private static IWebDriver InternetExplorer(InternetExplorerOptions options = null)
+        private static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options = null)
         {
             if (options == null)
             {

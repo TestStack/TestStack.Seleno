@@ -5,7 +5,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 {
-    public abstract class PageWriterSpecification : SpecificationFor<PageWriter<TestViewModel>>
+    abstract class PageWriterSpecification : SpecificationFor<PageWriter<TestViewModel>>
     {
         public override Type Story
         {

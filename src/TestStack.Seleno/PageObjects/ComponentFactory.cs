@@ -1,5 +1,4 @@
-﻿using System;
-using Funq;
+﻿using Autofac;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
@@ -7,45 +6,33 @@ using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
 {
-    public class ComponentFactory : IComponentFactory
+    internal class ComponentFactory : IComponentFactory
     {
-        private readonly Func<IWebDriver> _browser;
-        private readonly Func<IScriptExecutor> _scriptExecutor;
-        private readonly Func<IElementFinder> _elementFinder;
-        private readonly Func<ICamera> _camera;
-        private readonly Func<IPageNavigator> _pageNavigator;
-        private readonly IContainer _container;
+        private readonly ILifetimeScope _scope;
 
-        public ComponentFactory(Func<IWebDriver> browser, Func<IScriptExecutor> scriptExecutor, 
-            Func<IElementFinder> elementFinder, Func<ICamera> camera, Func<IPageNavigator> pageNavigator,
-            IContainer container)
+        public ComponentFactory(ILifetimeScope scope)
         {
-            _browser = browser;
-            _scriptExecutor = scriptExecutor;
-            _elementFinder = elementFinder;
-            _camera = camera;
-            _pageNavigator = pageNavigator;
-            _container = container;
+            _scope = scope;
         }
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_browser(), _scriptExecutor(), _elementFinder());
+            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
         {
-            return new PageWriter<TModel>(_scriptExecutor(), _elementFinder());
+            return new PageWriter<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>());
         }
 
         public IElementAssert CreateElementAssert(By selector)
         {
-            return new ElementAssert(selector, _camera(), _browser());
+            return new ElementAssert(selector, _scope.Resolve<ICamera>(), _scope.Resolve<IWebDriver>());
         }
 
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
-            return _container.Resolve<TPage>();
+            return _scope.Resolve<TPage>();
         }
     }
 }

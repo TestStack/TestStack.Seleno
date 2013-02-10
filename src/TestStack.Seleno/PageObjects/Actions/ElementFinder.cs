@@ -6,11 +6,11 @@ using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    public class ElementFinder : IElementFinder
+    internal class ElementFinder : IElementFinder
     {
         protected IWebDriver Browser;
 
-        internal ElementFinder(IWebDriver browser)
+        public ElementFinder(IWebDriver browser)
         {
             if(browser == null)
                 throw new ArgumentNullException("browser");

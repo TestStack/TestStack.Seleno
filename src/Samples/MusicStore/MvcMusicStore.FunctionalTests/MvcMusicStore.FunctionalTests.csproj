@@ -104,7 +104,6 @@
     <Compile Include="Step4\Pages\NavigationComponent.cs" />
     <Compile Include="Step4\Pages\RegisterPage.cs" />
     <Compile Include="Step4\Pages\ShoppingCartPage.cs" />
-    <Compile Include="WebTestBase.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

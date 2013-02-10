@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
-using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -16,17 +15,20 @@ namespace TestStack.Seleno.Configuration
         public static void Run(Action<IAppConfigurator> configure) {}
     }
 
+    // todo: Should there be a way to shutdown the current test programmatically to give more flexibility?
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
     public static class SelenoHost
     {
-        internal static Func<IInternalAppConfigurator> AppConfigurator = () => new AppConfigurator(); 
+        internal static Func<IInternalAppConfigurator> AppConfiguratorFactory = () => new AppConfigurator();
+
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
+        // todo: should this be internal?
         public static ISelenoApplication Host { get; internal set; }
-       
+
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.
         /// </summary>
@@ -75,7 +77,9 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            var configurator = AppConfigurator();
+            // todo: throw if host is not null or at least dispose of it / shutdown etc.
+
+            var configurator = AppConfiguratorFactory();
             configure(configurator);
             Host = configurator.CreateApplication();
             Host.Initialize();
@@ -95,7 +99,7 @@ namespace TestStack.Seleno.Configuration
             where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.Container.Resolve<IPageNavigator>().To<TController, TPage>(action);
+            return Host.NavigateToInitialPage<TController, TPage>(action);
         }
 
         /// <summary>
@@ -107,7 +111,7 @@ namespace TestStack.Seleno.Configuration
         public static TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.Container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
+            return Host.NavigateToInitialPage<TPage>(relativeUrl);
         }
 
         private static void ThrowIfHostNotInitialised()
