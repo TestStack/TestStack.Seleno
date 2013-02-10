@@ -164,7 +164,7 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(TargetDir)Combined"
-"$(ProjectDir)..\packages\ilmerge.2.12.0803\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"
+"$(ProjectDir)..\packages\ilmerge.2.12.0803\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"
 copy "$(TargetDir)TestStack.Seleno.XML" "$(TargetDir)Combined\TestStack.Seleno.XML"
 mkdir "$(ProjectDir)..\Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\bin\"
 copy "$(TargetDir)Combined\TestStack.Seleno.dll" "$(ProjectDir)..\Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\bin\"
