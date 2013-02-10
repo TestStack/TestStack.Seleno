@@ -9,13 +9,13 @@ namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent
     {
-        protected internal IWebDriver Browser;
-        internal IComponentFactory ComponentFactory;
-        internal IPageNavigator PageNavigator;
-        internal IElementFinder ElementFinder;
-        internal IScriptExecutor ScriptExecutor;
-        internal ICamera Camera;
-
+        internal protected IWebDriver Browser { get; internal set; }
+        internal IComponentFactory ComponentFactory { get; set; }
+        internal IPageNavigator PageNavigator { get; set; }
+        internal IScriptExecutor ScriptExecutor { get; set; }
+        internal ICamera Camera { get; set; }
+        internal IElementFinder ElementFinder { get; set; }
+        
         protected IPageNavigator Navigate()
         {
             ThrowIfComponentNotCreatedCorrectly();
@@ -40,13 +40,13 @@ namespace TestStack.Seleno.PageObjects
             return new TableReader<TModel>(gridId) { Browser = Browser };
         }
 
-        public ElementAssert AssertThatElements(By selector)
+        protected ElementAssert AssertThatElements(By selector)
         {
             ThrowIfComponentNotCreatedCorrectly();
             return new ElementAssert(selector, Camera, Browser);
         }
 
-        public TComponent GetComponent<TComponent>()
+        protected TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
