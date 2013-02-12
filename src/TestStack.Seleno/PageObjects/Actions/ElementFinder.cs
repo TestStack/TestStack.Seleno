@@ -12,7 +12,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public ElementFinder(IWebDriver browser)
         {
-            if(browser == null)
+            if (browser == null)
                 throw new ArgumentNullException("browser");
             Browser = browser;
         }
@@ -27,12 +27,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             return Browser.ElementWithWait(d => d.FindElementByjQuery(by));
         }
 
-        public IWebElement TryFindElement(By by)
+        public IWebElement TryFindElement(By by, int waitInSeconds = 0)
         {
             IWebElement result = null;
             try
             {
-                result = Browser.FindElement(by);
+                result = ElementWithWait(by, waitInSeconds);
             }
             catch (NoSuchElementException)
             { }
@@ -41,12 +41,12 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public IWebElement TryFindElement(Locators.By.jQueryBy by)
+        public IWebElement TryFindElement(Locators.By.jQueryBy by, int waitInSeconds = 0)
         {
             IWebElement result = null;
             try
             {
-                result = Browser.FindElementByjQuery(by);
+                result = ElementWithWait(by, waitInSeconds);
             }
             catch (NoSuchElementException)
             { }

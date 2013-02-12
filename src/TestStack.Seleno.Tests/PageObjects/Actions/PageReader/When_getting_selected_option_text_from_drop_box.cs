@@ -6,35 +6,36 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    class When_getting_selected_item_from_drop_box : PageReaderSpecification
+    class When_getting_selected_option_text_from_drop_box : PageReaderSpecification
     {
-        private int _result;
+        private string _result;
         private IWebElement _selectedOption;
         private By.jQueryBy _actualJqueryBy;
+        private const string ExpectedOptionText = "Selected option";
 
         public void Given_a_drop_down_has_a_selected_option()
         {
             _selectedOption = SubstituteFor<IWebElement>();
-
+ 
             SubstituteFor<IElementFinder>()
-               .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
-               .Returns(_selectedOption);
+                .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
+                .Returns(_selectedOption);
 
             SubstituteFor<IElementFinder>()
                 .WhenForAnyArgs(x => x.ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
         }
 
-        public void AndGiven_the_selected_option_has_a_value()
+        public void AndGiven_the_selected_option_has_text()
         {
             _selectedOption
-                .GetAttribute(Arg.Any<string>())
-                .Returns("5");
+                .Text
+                .Returns(ExpectedOptionText);
         }
 
-        public void When_getting_the_selected_option()
+        public void When_getting_the_selected_option_text()
         {
-            _result = SUT.SelectedOptionValueInDropDown(x => x.Item);
+            _result = SUT.SelectedOptionTextInDropDown(x => x.Item);
         }
 
         public void Then_it_should_retrieve_the_selected_option()
@@ -42,14 +43,9 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
             _actualJqueryBy.Selector.Should().Contain("$('#Item option:selected')");
         }
 
-        public void AndThen_it_should_get_the_value_of_the_selected_drop_down_list_option()
-        {
-            _selectedOption.Received().GetAttribute("value");
-        }
-
         public void AndThen_the_selected_value_should_be_casted_to_the_drop_down_property_type()
         {
-            _result.Should().Be(5);
+            _result.Should().Be(ExpectedOptionText);
         }
     }
 }

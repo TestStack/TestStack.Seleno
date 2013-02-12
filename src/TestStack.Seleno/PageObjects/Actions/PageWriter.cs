@@ -103,7 +103,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             element.SendKeys(value);
         }
 
-        public void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector,String attributeName, TProperty attributeValue)
+        public void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, String attributeName, TProperty attributeValue)
         {
             var name = ExpressionHelper.GetExpressionText(propertySelector);
 
@@ -114,9 +114,29 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
+            var id = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(propertySelector));
+            var scriptToExecute = string.Format("$('#{0}').val('{1}')", id, inputValue);
+            _scriptExecutor.ExecuteScript(scriptToExecute);
+        }
 
-            var name = ExpressionHelper.GetExpressionText(propertySelector);
-            var scriptToExecute = string.Format("$('{0}').val('{1}')", name, inputValue);
+        public void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, TProperty optionValue)
+        {
+            ReplaceInputValueWith(dropDownSelector, optionValue);
+        }
+
+        public void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, string optionText)
+        {
+            var dropDownId = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(dropDownSelector));
+            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", dropDownId, optionText);
+
+            _scriptExecutor.ExecuteScript(scriptToExecute);
+        }
+
+        public void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue)
+        {
+            var scriptToExecute = string.Format("$('input[type=radio][name={0}][value={1}]').attr('checked',true)",
+                                                ExpressionHelper.GetExpressionText(radioGroupButtonSelector),
+                                                buttonValue);
             _scriptExecutor.ExecuteScript(scriptToExecute);
         }
     }
