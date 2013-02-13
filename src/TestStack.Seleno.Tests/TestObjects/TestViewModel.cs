@@ -10,6 +10,13 @@ namespace TestStack.Seleno.Tests.TestObjects
         public Boolean Exists { get; set; }
 
         public int Item { get; set; }
-        public SelectList Items { get; set; }
+        public ChoiceType Choice { get; set; }
+    }
+
+    public enum ChoiceType
+    {
+        None,
+        Other,
+        Another
     }
 }
