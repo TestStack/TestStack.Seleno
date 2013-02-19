@@ -1,7 +1,10 @@
-﻿using Autofac;
+﻿using System.Linq.Expressions;
+using Autofac;
+using Autofac.Core;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Components;
 using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
@@ -17,7 +20,7 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>());
+            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
@@ -33,6 +36,22 @@ namespace TestStack.Seleno.PageObjects
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
             return _scope.Resolve<TPage>();
+        }
+
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
+            where THtmlControl : IHTMLControl
+        {
+            return _scope.Resolve<THtmlControl>(new Parameter[]
+                                                    {
+                                                        new NamedParameter("propertySelector",propertySelector),
+                                                        new NamedParameter("waitInSecondsBeforeRetrievingElement",20),
+                                                    });
+        }
+
+        public THtmlControl HtmlControlFor<THtmlControl>(string id, int waitInSeconds = 20) 
+            where THtmlControl : IHTMLControl
+        {
+            return _scope.Resolve<THtmlControl>(new Parameter[] {new NamedParameter("id", id)});
         }
     }
 }

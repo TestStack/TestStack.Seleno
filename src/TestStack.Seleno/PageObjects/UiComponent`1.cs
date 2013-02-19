@@ -1,10 +1,14 @@
+using System;
+using System.Linq.Expressions;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Components;
 
 namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent<TModel> : UiComponent
         where TModel : class, new()
     {
+
         protected IPageReader<TModel> Read()
         {
             return ComponentFactory.CreatePageReader<TModel>();
@@ -14,5 +18,13 @@ namespace TestStack.Seleno.PageObjects
         {
             return ComponentFactory.CreatePageWriter<TModel>();
         }
+
+        protected THtmlControl HtmlControlFor<THtmlControl,TProperty>(Expression<Func<TModel,TProperty>> propertySelector, int waitInSeconds = 20)
+            where THtmlControl : HTMLControl,new()
+        {
+            return ComponentFactory.HtmlControlFor<THtmlControl>(propertySelector, waitInSeconds);
+        }
+
+        
     }
 }

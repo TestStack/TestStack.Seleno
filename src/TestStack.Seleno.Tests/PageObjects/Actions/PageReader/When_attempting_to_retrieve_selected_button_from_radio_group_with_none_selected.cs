@@ -4,6 +4,7 @@ using FluentAssertions.Specialized;
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Components;
 using TestStack.Seleno.Tests.TestObjects;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 

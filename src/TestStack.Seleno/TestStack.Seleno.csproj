@@ -135,7 +135,12 @@
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
     <Compile Include="PageObjects\ComponentFactory.cs" />
+    <Compile Include="PageObjects\Components\DropDown.cs" />
+    <Compile Include="PageObjects\Components\HTMLControl.cs" />
+    <Compile Include="PageObjects\Components\RadioButtonGroup.cs" />
     <Compile Include="PageObjects\IComponentFactory.cs" />
+    <Compile Include="PageObjects\IHTMLControl.cs" />
+    <Compile Include="PageObjects\ISelectableHtmlControl.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />

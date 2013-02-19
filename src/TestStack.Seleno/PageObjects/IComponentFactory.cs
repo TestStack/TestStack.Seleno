@@ -1,5 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Linq.Expressions;
+using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Components;
 using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
@@ -10,5 +13,14 @@ namespace TestStack.Seleno.PageObjects
         IPageWriter<T> CreatePageWriter<T>() where T : class, new();
         IElementAssert CreateElementAssert(By selector);
         TPage CreatePage<TPage>() where TPage : UiComponent, new();
+
+        THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
+            where THtmlControl : IHTMLControl;
+
+
+        THtmlControl HtmlControlFor<THtmlControl>(string id, int waitInSeconds = 20)
+            where THtmlControl : IHTMLControl;
+
+
     }
 }
