@@ -16,7 +16,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         private readonly IElementFinder _elementFinder;
         private readonly IComponentFactory _componentFactory;
 
-        public PageReader(IWebDriver browser, IScriptExecutor scriptExecutor, IElementFinder elementFinder, IComponentFactory componentFactory)
+        public PageReader(IWebDriver browser,
+                          IScriptExecutor scriptExecutor,
+                          IElementFinder elementFinder,
+                          IComponentFactory componentFactory)
         {
             _browser = browser;
             _scriptExecutor = scriptExecutor;
@@ -89,14 +92,10 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
         {
-            //var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
-
             return
                 _componentFactory
                     .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementAs<TField>();
-
-            /*return dropDownElement.GetControlValueAs<TField>();*/
         }
         
         public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
@@ -105,19 +104,14 @@ namespace TestStack.Seleno.PageObjects.Actions
                 _componentFactory
                     .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementText;
-
-            /*var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
-            return dropDownElement.Text;*/
         }
 
         public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
         {
-
             return
                 _componentFactory
                     .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
                     .HasSelectedElement;
-            //return FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds) != null;
         }
 
         public TProperty SelectedButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
@@ -126,30 +120,7 @@ namespace TestStack.Seleno.PageObjects.Actions
                 _componentFactory
                     .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
                     .SelectedElementAs<TProperty>();
-
-            //var selectedRadioButtonElement = FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds);
-            //if (selectedRadioButtonElement == null)
-            //{
-            //    throw new NoSuchElementException("No selected radio button has been found");
-            //}
-            //return selectedRadioButtonElement.GetControlValueAs<TProperty>();
         }
-
-        //private IWebElement FindSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds)
-        //{
-        //    var selector = string.Format("$('input[type=radio][name={0}]:checked')",
-        //                               ExpressionHelper.GetExpressionText(radioGroupButtonSelector));
-
-        //    return _elementFinder.TryFindElement(By.jQuery(selector), waitInSeconds);
-        //}
-
-        //private IWebElement FindSelectionOptionForDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds)
-        //{
-        //    var dropDownId = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(dropDownSelector));
-        //    var selector = string.Format("$('#{0} option:selected')", dropDownId);
-
-        //    return _elementFinder.ElementWithWait(By.jQuery(selector), waitInSeconds);
-        //}
 
     }
 }

@@ -16,7 +16,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         private readonly IElementFinder _elementFinder;
         private readonly IComponentFactory _componentFactory;
 
-        public PageWriter(IScriptExecutor scriptExecutor, IElementFinder elementFinder, IComponentFactory componentFactory)
+        public PageWriter(IScriptExecutor scriptExecutor,
+                          IElementFinder elementFinder,
+                          IComponentFactory componentFactory)
         {
             _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
