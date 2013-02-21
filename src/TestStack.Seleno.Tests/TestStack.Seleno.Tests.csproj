@@ -92,6 +92,7 @@
     <Compile Include="Configuration\SelenoHost\when_running_Seleno_Host.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
+    <Compile Include="PageObjects\Actions\ControlSpecification.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected.cs" />

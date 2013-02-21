@@ -43,7 +43,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public string Name
         {
-            get { return ViewModelProperty.Name; }
+            get { return ViewModelProperty != null ? ViewModelProperty.Name : Id; }
         }
 
         public TReturn AttributeValueAs<TReturn>(string attributeName)

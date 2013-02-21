@@ -11,7 +11,5 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages.Movies
         {
             get { return TableFor<MovieListViewModel>("ApplicationsListGrid"); }
         }
-
-        
     }
 }
