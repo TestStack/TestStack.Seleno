@@ -2,6 +2,7 @@
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
@@ -11,16 +12,18 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         private int _result;
         private IWebElement _selectedOption;
         private By.jQueryBy _actualJqueryBy;
+        private DropDown _dropDown;
 
         public void Given_a_drop_down_has_a_selected_option()
         {
+            _dropDown = HtmlControl<DropDown>(x => x.Item);
             _selectedOption = SubstituteFor<IWebElement>();
 
-            SubstituteFor<IElementFinder>()
+            ElementFinder
                .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                .Returns(_selectedOption);
 
-            SubstituteFor<IElementFinder>()
+            ElementFinder
                 .WhenForAnyArgs(x => x.ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
         }

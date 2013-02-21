@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
@@ -12,7 +12,9 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void Given_a_radio_group_has_no_selected_radio_button()
         {
-            SubstituteFor<IElementFinder>()
+            HtmlControl<RadioButtonGroup>(x => x.Choice);
+
+            ElementFinder
                 .TryFindElement(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                 .Returns(null as IWebElement);
         }

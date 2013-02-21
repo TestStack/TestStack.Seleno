@@ -11,5 +11,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
             string selector = string.Format("img[alt=\"{0}\"]", name);
             return Navigate().To<AlbumDetailPage>(By.CssSelector(selector));
         }
+
+        
     }
 }

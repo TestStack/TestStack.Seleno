@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Autofac;
+using Autofac.Core;
 using AutofacContrib.NSubstitute;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.Tests.Specify
 {
@@ -21,9 +24,14 @@ namespace TestStack.Seleno.Tests.Specify
             SUT = AutoSubstitute.Resolve<T>();
         }
 
-        public TSubstitute SubstituteFor<TSubstitute>() where TSubstitute : class
+        public TSubstitute SubstituteFor<TSubstitute>(object anonynousParameterObject) where TSubstitute : class
         {
-            return AutoSubstitute.ResolveAndSubstituteFor<TSubstitute>();
+            return SubstituteFor<TSubstitute>(anonynousParameterObject.ToNamedParameters());
+        }
+
+        public TSubstitute SubstituteFor<TSubstitute>(params Parameter[] parameters) where TSubstitute : class
+        {
+            return AutoSubstitute.ResolveAndSubstituteFor<TSubstitute>(parameters);
         }
 
         public override Type Story

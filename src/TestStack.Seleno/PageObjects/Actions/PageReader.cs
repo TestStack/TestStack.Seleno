@@ -1,10 +1,9 @@
 using System;
-using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
-using TestStack.Seleno.PageObjects.Components;
+using TestStack.Seleno.PageObjects.Controls;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 
@@ -91,9 +90,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
         {
             //var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
+
             return
                 _componentFactory
-                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                    .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementAs<TField>();
 
             /*return dropDownElement.GetControlValueAs<TField>();*/
@@ -103,7 +103,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                    .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementText;
 
             /*var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
@@ -112,11 +112,11 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
         {
-            
+
             return
                 _componentFactory
-                .HtmlControlFor<ISelectableHtmlControl>(radioGroupButtonSelector,waitInSeconds)
-                .HasSelectedElement;
+                    .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                    .HasSelectedElement;
             //return FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds) != null;
         }
 
@@ -124,7 +124,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<ISelectableHtmlControl>(radioGroupButtonSelector, waitInSeconds)
+                    .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
                     .SelectedElementAs<TProperty>();
 
             //var selectedRadioButtonElement = FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds);

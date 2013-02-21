@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.PageObjects.Components;
+using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.PageObjects
 {
@@ -19,12 +19,10 @@ namespace TestStack.Seleno.PageObjects
             return ComponentFactory.CreatePageWriter<TModel>();
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl,TProperty>(Expression<Func<TModel,TProperty>> propertySelector, int waitInSeconds = 20)
-            where THtmlControl : HTMLControl,new()
+        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel,Object>> propertySelector, int waitInSeconds = 20)
+            where THtmlControl : HTMLControl, new()
         {
             return ComponentFactory.HtmlControlFor<THtmlControl>(propertySelector, waitInSeconds);
         }
-
-        
     }
 }

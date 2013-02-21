@@ -90,6 +90,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.BDDfy">
+      <HintPath>..\Samples\MusicStore\MvcMusicStore.FunctionalTests\bin\Debug\TestStack.BDDfy.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver, Version=2.28.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.WebDriver.2.28.0\lib\net40\WebDriver.dll</HintPath>
@@ -100,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\AutoFacExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="InaccessibleSelenoException.cs" />
@@ -135,12 +139,15 @@
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
     <Compile Include="PageObjects\ComponentFactory.cs" />
-    <Compile Include="PageObjects\Components\DropDown.cs" />
-    <Compile Include="PageObjects\Components\HTMLControl.cs" />
-    <Compile Include="PageObjects\Components\RadioButtonGroup.cs" />
+    <Compile Include="PageObjects\Controls\DropDown.cs" />
+    <Compile Include="PageObjects\Controls\HTMLControl.cs" />
+    <Compile Include="PageObjects\Controls\IHTMLControl.cs" />
+    <Compile Include="PageObjects\Controls\IInputHtmlControl.cs" />
+    <Compile Include="PageObjects\Controls\InputHtmlControl.cs" />
+    <Compile Include="PageObjects\Controls\RadioButtonGroup.cs" />
+    <Compile Include="PageObjects\Controls\SelectableHtmlControl.cs" />
+    <Compile Include="PageObjects\Controls\TextBox.cs" />
     <Compile Include="PageObjects\IComponentFactory.cs" />
-    <Compile Include="PageObjects\IHTMLControl.cs" />
-    <Compile Include="PageObjects\ISelectableHtmlControl.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
     <Compile Include="Specifications\Assertions\ElementAssert.cs" />

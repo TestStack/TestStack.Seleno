@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Linq.Expressions;
 using FluentAssertions;
 using FluentAssertions.Specialized;
 using NSubstitute;
 using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.PageObjects.Components;
+using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Tests.TestObjects;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
@@ -14,17 +14,20 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
     {
         private Action _selectedButtonInRadioGroupAction;
         private ExceptionAssertions<NoSuchElementException> _exceptionThrown;
+        private readonly Expression<Func<TestViewModel, Object>> _radioButtonGroupSelector = viewModel => viewModel.Choice;
 
         public void Given_a_radio_group_has_no_selected_radio_button()
         {
-            SubstituteFor<IElementFinder>()
+            HtmlControl<RadioButtonGroup>(_radioButtonGroupSelector);
+
+            ElementFinder
                 .TryFindElement(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                 .Returns(null as IWebElement);
         }
 
         public void When_getting_selected_radio_button()
         {
-            _selectedButtonInRadioGroupAction = () => SUT.SelectedButtonInRadioGroup(x => x.Choice);
+            _selectedButtonInRadioGroupAction = () => SUT.SelectedButtonInRadioGroup(_radioButtonGroupSelector);
         }
 
         public void Then_it_should_throw_NoSuchElementException()
@@ -34,7 +37,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void AndThen_exception_message_should_be_No_selected_radio_button_has_been_found()
         {
-            _exceptionThrown.WithMessage("No selected radio button has been found");
+            _exceptionThrown.WithMessage("No selected element has been found");
         }
     }
 }

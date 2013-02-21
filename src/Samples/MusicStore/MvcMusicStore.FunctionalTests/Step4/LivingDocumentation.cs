@@ -45,6 +45,8 @@ namespace MvcMusicStore.FunctionalTests.Step4
                 .SelectGenreByName(AlbumGenre.Disco)
                 .SelectAlbumByName("Le Freak")
                 .AddToCart();
+
+            
         }
 
         public void When_I_Checkout()

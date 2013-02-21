@@ -1,7 +1,11 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Linq.Expressions;
+using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
+using TestStack.Seleno.Tests.TestObjects;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
@@ -12,16 +16,20 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         private IWebElement _selectedOption;
         private By.jQueryBy _actualJqueryBy;
         private const string ExpectedOptionText = "Selected option";
+        private readonly Expression<Func<TestViewModel, Object>> _dropDownSelector = viewModel => viewModel.Item;
+        private DropDown _dropDown;
 
         public void Given_a_drop_down_has_a_selected_option()
         {
             _selectedOption = SubstituteFor<IWebElement>();
+
+            _dropDown =HtmlControl<DropDown>(_dropDownSelector);
  
-            SubstituteFor<IElementFinder>()
+            ElementFinder
                 .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                 .Returns(_selectedOption);
 
-            SubstituteFor<IElementFinder>()
+            ElementFinder
                 .WhenForAnyArgs(x => x.ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
         }
@@ -42,7 +50,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _actualJqueryBy.Selector.Should().Contain("$('#Item option:selected')");
         }
-
+        
         public void AndThen_the_selected_value_should_be_casted_to_the_drop_down_property_type()
         {
             _result.Should().Be(ExpectedOptionText);
