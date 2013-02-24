@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
-using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls

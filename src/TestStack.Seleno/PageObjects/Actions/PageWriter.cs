@@ -113,35 +113,35 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
             _componentFactory
-                .HtmlControlFor<TextBox>(propertySelector)
+                .HtmlControlFor<IInputHtmlControl>(propertySelector)
                 .ReplaceInputValueWith(inputValue);
         }
 
         public void ReplaceInputValueWith(string inputName, string value)
         {
             _componentFactory
-                .HtmlControlFor<TextBox>(inputName)
+                .HtmlControlFor<IInputHtmlControl>(inputName)
                 .ReplaceInputValueWith(value);
         }
 
         public void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, TProperty optionValue)
         {
             _componentFactory
-                .HtmlControlFor<DropDown>(dropDownSelector)
+                .HtmlControlFor<IDropDown>(dropDownSelector)
                 .SelectElement(optionValue);
         }
 
         public void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, string optionText)
         {
             _componentFactory
-               .HtmlControlFor<DropDown>(dropDownSelector)
+               .HtmlControlFor<IDropDown>(dropDownSelector)
                .SelectElementByText(optionText);
         }
 
         public void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue)
         {
             _componentFactory
-                .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector)
+                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector)
                 .SelectElement(buttonValue);
         }
     }

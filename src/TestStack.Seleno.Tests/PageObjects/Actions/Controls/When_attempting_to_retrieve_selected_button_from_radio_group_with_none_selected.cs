@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+using System;
 using FluentAssertions;
 using FluentAssertions.Specialized;
 using NSubstitute;
@@ -8,18 +7,19 @@ using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Tests.TestObjects;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
-namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
+namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected : PageReaderSpecification
+    class When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected : HtmlControlSpecificationFor<RadioButtonGroup>
     {
         private Action _selectedButtonInRadioGroupAction;
         private ExceptionAssertions<NoSuchElementException> _exceptionThrown;
-        private readonly Expression<Func<TestViewModel, Object>> _radioButtonGroupSelector = viewModel => viewModel.Choice;
+
+        public When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected() 
+            : base(viewModel => viewModel.Choice)
+        { }
 
         public void Given_a_radio_group_has_no_selected_radio_button()
         {
-            HtmlControl<RadioButtonGroup>(_radioButtonGroupSelector);
-
             ElementFinder
                 .TryFindElement(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                 .Returns(null as IWebElement);
@@ -27,12 +27,12 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void When_getting_selected_radio_button()
         {
-            _selectedButtonInRadioGroupAction = () => SUT.SelectedButtonInRadioGroup(_radioButtonGroupSelector);
+            _selectedButtonInRadioGroupAction = () => SUT.SelectedElementAs<ChoiceType>();
         }
 
         public void Then_it_should_throw_NoSuchElementException()
         {
-            _exceptionThrown =_selectedButtonInRadioGroupAction.ShouldThrow<NoSuchElementException>();
+            _exceptionThrown = _selectedButtonInRadioGroupAction.ShouldThrow<NoSuchElementException>();
         }
 
         public void AndThen_exception_message_should_be_No_selected_radio_button_has_been_found()

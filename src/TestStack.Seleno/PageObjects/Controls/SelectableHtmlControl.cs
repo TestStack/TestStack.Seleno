@@ -1,9 +1,11 @@
+using System;
+using System.Configuration;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public abstract class SelectableHtmlControl : HTMLControl
+    public abstract class SelectableHtmlControl : HTMLControl, ISelectableHtmlControl
     {
         public bool HasSelectedElement
         {
@@ -16,11 +18,12 @@ namespace TestStack.Seleno.PageObjects.Controls
             {
                 throw new NoSuchElementException("No selected element has been found");
             }
+
             return SelectedElement.GetControlValueAs<TProperty>();
         }
 
         public abstract void SelectElement<TProperty>(TProperty value);
 
-        protected abstract IWebElement SelectedElement { get; }
+        public abstract IWebElement SelectedElement { get; }
     }
 }

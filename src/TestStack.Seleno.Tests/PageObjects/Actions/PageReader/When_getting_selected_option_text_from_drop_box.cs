@@ -2,58 +2,46 @@
 using System.Linq.Expressions;
 using FluentAssertions;
 using NSubstitute;
-using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Tests.TestObjects;
-using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
     class When_getting_selected_option_text_from_drop_box : PageReaderSpecification
     {
+        private IDropDown _dropDown;
+        private IComponentFactory _componentFactory;
+        private readonly Expression<Func<TestViewModel, int>> _dropDownPropertySelector = x => x.Item;
         private string _result;
-        private IWebElement _selectedOption;
-        private By.jQueryBy _actualJqueryBy;
-        private const string ExpectedOptionText = "Selected option";
-        private readonly Expression<Func<TestViewModel, Object>> _dropDownSelector = viewModel => viewModel.Item;
-        private DropDown _dropDown;
 
         public void Given_a_drop_down_has_a_selected_option()
         {
-            _selectedOption = SubstituteFor<IWebElement>();
+            _componentFactory = SubstituteFor<IComponentFactory>();
+            _dropDown = SubstituteFor<IDropDown>();
 
-            _dropDown =HtmlControl<DropDown>(_dropDownSelector);
- 
-            ElementFinder
-                .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
-                .Returns(_selectedOption);
+            _componentFactory
+                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, Arg.Any<int>())
+                .Returns(_dropDown);
 
-            ElementFinder
-                .WhenForAnyArgs(x => x.ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
-                .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
-        }
-
-        public void AndGiven_the_selected_option_has_text()
-        {
-            _selectedOption
-                .Text
-                .Returns(ExpectedOptionText);
+            _dropDown.SelectedElementText.Returns("Selected option....");
         }
 
         public void When_getting_the_selected_option_text()
         {
-            _result = SUT.SelectedOptionTextInDropDown(x => x.Item);
+            _result = SUT.SelectedOptionTextInDropDown(_dropDownPropertySelector);
         }
 
-        public void Then_it_should_retrieve_the_selected_option()
+        public void Then_the_component_factory_should_retrieve_the_radio_button_group_control()
         {
-            _actualJqueryBy.Selector.Should().Contain("$('#Item option:selected')");
+            _componentFactory
+                .Received()
+                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, 0);
         }
-        
-        public void AndThen_the_selected_value_should_be_casted_to_the_drop_down_property_type()
+
+        public void AndThen_the_radio_button_group_was_retrieved_the_text_of_its_selected_option()
         {
-            _result.Should().Be(ExpectedOptionText);
+            _result.Should().Be("Selected option....");
         }
     }
 }

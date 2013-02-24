@@ -3,11 +3,11 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public class DropDown : SelectableHtmlControl
+    public class DropDown : SelectableHtmlControl, IDropDown
     {
         public string SelectedElementText { get { return SelectedElement.Text; } }
-        
-        protected override IWebElement SelectedElement
+
+        public override IWebElement SelectedElement
         {
             get
             {

@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Autofac;
-using Autofac.Core;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
@@ -39,23 +38,21 @@ namespace TestStack.Seleno.PageObjects
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
-            where THtmlControl : HTMLControl, new()
+            where THtmlControl : IHTMLControl
         {
-            var htmlControl = _scope.Resolve<THtmlControl>();
-            htmlControl.ViewModelPropertySelector = propertySelector;
-            htmlControl.WaitInSecondsUntilElementAvailable = waitInSeconds;
-
-            return htmlControl;
+            return
+                _scope
+                    .Resolve<THtmlControl>()
+                    .Initialize(propertySelector, waitInSeconds);
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
-           where THtmlControl : HTMLControl, new()
+           where THtmlControl : IHTMLControl
         {
-            var htmlControl = _scope.Resolve<THtmlControl>();
-            htmlControl.Id = controlId;
-            htmlControl.WaitInSecondsUntilElementAvailable = waitInSeconds;
-
-            return htmlControl;
+            return
+                _scope
+                    .Resolve<THtmlControl>()
+                    .Initialize(controlId, waitInSeconds);
         }
     }
 }

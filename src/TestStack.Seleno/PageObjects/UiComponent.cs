@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;

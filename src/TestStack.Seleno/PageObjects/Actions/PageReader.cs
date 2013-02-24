@@ -80,9 +80,13 @@ namespace TestStack.Seleno.PageObjects.Actions
             return ElementFor(propertySelector).GetAttributeAs<TProperty>(attributeName);
         }
 
-        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
+        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 0)
         {
-            return GetAttributeAsType(propertySelector, "value");
+            return
+                _componentFactory
+                    .HtmlControlFor<IInputHtmlControl>(propertySelector, waitInSeconds)
+                    .ValueAs<TProperty>();
+
         }
 
         public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
@@ -94,7 +98,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
+                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementAs<TField>();
         }
         
@@ -102,7 +106,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<DropDown>(dropDownSelector, waitInSeconds)
+                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
                     .SelectedElementText;
         }
 
@@ -110,7 +114,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
                     .HasSelectedElement;
         }
 
@@ -118,7 +122,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
                     .SelectedElementAs<TProperty>();
         }
 

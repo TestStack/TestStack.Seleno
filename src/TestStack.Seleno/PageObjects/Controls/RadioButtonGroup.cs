@@ -1,13 +1,12 @@
-﻿using System.Linq.Expressions;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using OpenQA.Selenium;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public class RadioButtonGroup : SelectableHtmlControl, IInputHtmlControl
+    public class RadioButtonGroup : SelectableHtmlControl, IRadioButtonGroup
     {
-        protected override IWebElement SelectedElement
+        public override IWebElement SelectedElement
         {
             get
             {

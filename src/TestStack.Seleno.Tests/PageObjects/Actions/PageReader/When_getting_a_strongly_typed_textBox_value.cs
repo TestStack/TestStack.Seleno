@@ -1,34 +1,43 @@
 ﻿using System;
-using FluentAssertions;
+using System.Linq.Expressions;
 using NSubstitute;
-using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects;
+using TestStack.Seleno.PageObjects.Controls;
+using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
     class When_getting_a_strongly_typed_textBox_value : PageReaderSpecification
     {
-        private Boolean _result;
+        private IComponentFactory _componentFactory;
+        private IInputHtmlControl _textBox;
+        private readonly Expression<Func<TestViewModel, bool>> _textBoxPropertySelector = x => x.Exists;
 
         public void Given_a_web_element_has_an_attribute_data_value()
         {
-            SubstituteFor<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(SubstituteFor<IWebElement>());
+            _componentFactory = SubstituteFor<IComponentFactory>();
+            _textBox = SubstituteFor<IInputHtmlControl>();
 
-        }
-
-        public void AndGiven_the_web_element_attribute_value_is_false()
-        {
-            SubstituteFor<IWebElement>().GetAttribute("value").Returns("true");
+            _componentFactory
+                .HtmlControlFor<IInputHtmlControl>(_textBoxPropertySelector,Arg.Any<int>())
+                .Returns(_textBox);
         }
         
         public void When_getting_the_textbox_value_for_matching_view_model_property()
         {
-            _result = SUT.GetValueFromTextBox(viewModel => viewModel.Exists);
+            SUT.GetValueFromTextBox(_textBoxPropertySelector);
+        }
+
+        public void Then_the_component_factory_should_retrieve_the_textBox_control()
+        {
+            _componentFactory
+                .Received()
+                .HtmlControlFor<IInputHtmlControl>(_textBoxPropertySelector, 0);
         }
 
         public void Then_it_should_get_the_value_of_the_textbox_value_attribute()
         {
-            _result.Should().BeTrue();
+            _textBox.Received().ValueAs<Boolean>();
         }
     }
 }

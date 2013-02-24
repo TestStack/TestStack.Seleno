@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Linq.Expressions;
-using System.Text;
 using NSubstitute;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
@@ -10,13 +7,12 @@ using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Tests.Specify;
 using TestStack.Seleno.Tests.TestObjects;
 
-namespace TestStack.Seleno.Tests.PageObjects.Actions
+namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
     abstract class ControlSpecification<T> : SpecificationFor<T>
-        where T: class
     {
         protected IPageNavigator PageNavigator { get; private set; }
-        protected IElementFinder ElementFinder { get; private set; }
+        protected IElementFinder ElementFinder { get; private  set; }
         protected IScriptExecutor ScriptExecutor { get; private set; }
         protected IComponentFactory ComponentFactory { get; private set; }
 
@@ -28,10 +24,13 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions
             ScriptExecutor = SubstituteFor<IScriptExecutor>();
         }
 
-        protected THtmlControl HtmlControl<THtmlControl>(Expression<Func<TestViewModel, Object>> htmlControlPropertySelector)
+        protected THtmlControl HtmlControl<THtmlControl>(Expression<Func<TestViewModel, object>> htmlControlPropertySelector, THtmlControl htmlControl = null)
             where THtmlControl : HTMLControl, new()
         {
-            var htmlControl = SubstituteFor<THtmlControl>();
+            if (htmlControl == null)
+            {
+                htmlControl = SubstituteFor<THtmlControl>();
+            }
 
             htmlControl.ViewModelPropertySelector = htmlControlPropertySelector;
             htmlControl.PageNavigator = PageNavigator;
