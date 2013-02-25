@@ -92,15 +92,17 @@
     <Compile Include="Configuration\SelenoHost\when_running_Seleno_Host.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
-    <Compile Include="PageObjects\Actions\Controls\ControlSpecification.cs" />
     <Compile Include="PageObjects\Actions\Controls\HTMLControlSpecificationFor.cs" />
+    <Compile Include="PageObjects\Actions\Controls\Input_Type_of_CheckBox_Control_Is_CheckBox.cs" />
     <Compile Include="PageObjects\Actions\Controls\Input_Type_of_TextBox_Is_Text.cs" />
     <Compile Include="PageObjects\Actions\Controls\Input_Type_of_Radio_button_group_Is_Radio.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_getting_selected_button_from_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_getting_selected_option_value_from_drop_box.cs" />
+    <Compile Include="PageObjects\Actions\Controls\When_getting_whether_checkBox_is_ticked.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_retrieving_multiline_content_of_TextArea.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_retrieving_TextBox_value.cs" />
+    <Compile Include="PageObjects\Actions\Controls\When_setting_an_attribute_value_for_any_element.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_updating_multiLine_content_of_TextArea.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_updating_TextBox_value.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_selected_option_text_from_drop_box.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_selected_option_value_from_drop_box.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_getting_whether_a_CheckBox_is_ticked.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\PageWriterSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_clearing_and_sending_keys_to_web_element.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_strongly_typed_textBox_value.cs" />
@@ -119,7 +122,7 @@
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_an_option_by_its_text_in_Drop_Down.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_an_option_by_its_value_in_Drop_Down.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_a_radio_button_in_Radio_Group.cs" />
-    <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_a_web_element_wrapping_the_web_driver.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_any_element.cs" />
     <Compile Include="PageObjects\ComponentFactorySpecs.cs" />
     <Compile Include="PageObjects\ScriptAndReturnSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

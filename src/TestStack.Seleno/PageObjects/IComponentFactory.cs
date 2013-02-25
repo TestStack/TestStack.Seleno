@@ -15,10 +15,10 @@ namespace TestStack.Seleno.PageObjects
         TPage CreatePage<TPage>() where TPage : UiComponent, new();
 
         THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
-            where THtmlControl : IHTMLControl;
+            where THtmlControl : IHtmlControl;
 
         THtmlControl HtmlControlFor<THtmlControl>(string controlId, int waitInSeconds = 20)
-            where THtmlControl : IHTMLControl;
+            where THtmlControl : IHtmlControl;
 
 
     }

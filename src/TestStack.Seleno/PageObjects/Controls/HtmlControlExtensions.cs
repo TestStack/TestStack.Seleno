@@ -5,7 +5,7 @@ namespace TestStack.Seleno.PageObjects.Controls
     internal static class HtmlControlExtensions
     {
         internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, LambdaExpression propertySelector, int waitInSecondsUntilElementAvailable = 20)
-            where THtmlControl : IHTMLControl
+            where THtmlControl : IHtmlControl
         {
             var result = htmlControl as HTMLControl;
 
@@ -14,14 +14,14 @@ namespace TestStack.Seleno.PageObjects.Controls
                 result.ViewModelPropertySelector = propertySelector;
                 result.WaitInSecondsUntilElementAvailable = waitInSecondsUntilElementAvailable;
 
-                return (THtmlControl)(IHTMLControl)result;
+                return (THtmlControl)(IHtmlControl)result;
             }
 
             return htmlControl;
         }
 
         internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, string id, int waitInSecondsUntilElementAvailable = 20)
-            where THtmlControl : IHTMLControl
+            where THtmlControl : IHtmlControl
         {
             var result = htmlControl as HTMLControl;
 
@@ -30,7 +30,7 @@ namespace TestStack.Seleno.PageObjects.Controls
                 result.Id = id;
                 result.WaitInSecondsUntilElementAvailable = waitInSecondsUntilElementAvailable;
 
-                return (THtmlControl)(IHTMLControl)result;
+                return (THtmlControl)(IHtmlControl)result;
             }
 
             return htmlControl;

@@ -1,14 +1,16 @@
-﻿using System;
-
-namespace TestStack.Seleno.PageObjects.Controls
+﻿namespace TestStack.Seleno.PageObjects.Controls
 {
-    public class TextArea : HTMLControl
+    public interface ITextArea
+    {
+        string[] MultiLineContent { get; set; }
+    }
+
+    public class TextArea : HTMLControl, ITextArea
     {
         public string[] MultiLineContent
         {
-            get { return Execute().ScriptAndReturn<String[]>(string.Format("$('#{0}').text().split('\n')", Id)); }
-            set { Execute().ExecuteScript(String.Format("$('#{0}').text({1})", Id, String.Join("\n", value))); }
+            get { return Execute().ScriptAndReturn<string[]>(string.Format("$('#{0}').text().split('\n')", Id)); }
+            set { Execute().ExecuteScript(string.Format("$('#{0}').text({1})", Id, string.Join("\n", value))); }
         }
-
     }
 }

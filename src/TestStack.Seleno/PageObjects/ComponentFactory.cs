@@ -38,7 +38,7 @@ namespace TestStack.Seleno.PageObjects
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
-            where THtmlControl : IHTMLControl
+            where THtmlControl : IHtmlControl
         {
             return
                 _scope
@@ -47,7 +47,7 @@ namespace TestStack.Seleno.PageObjects
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
-           where THtmlControl : IHTMLControl
+           where THtmlControl : IHtmlControl
         {
             return
                 _scope

@@ -139,15 +139,11 @@
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
     <Compile Include="PageObjects\ComponentFactory.cs" />
+    <Compile Include="PageObjects\Controls\CheckBox.cs" />
     <Compile Include="PageObjects\Controls\DropDown.cs" />
     <Compile Include="PageObjects\Controls\HTMLControl.cs" />
     <Compile Include="PageObjects\Controls\HtmlControlExtensions.cs" />
-    <Compile Include="PageObjects\Controls\IDropDown.cs" />
-    <Compile Include="PageObjects\Controls\IHTMLControl.cs" />
-    <Compile Include="PageObjects\Controls\IInputHtmlControl.cs" />
     <Compile Include="PageObjects\Controls\InputHtmlControl.cs" />
-    <Compile Include="PageObjects\Controls\IRadioButtonGroup.cs" />
-    <Compile Include="PageObjects\Controls\ISelectableHtmlControl.cs" />
     <Compile Include="PageObjects\Controls\RadioButtonGroup.cs" />
     <Compile Include="PageObjects\Controls\SelectableHtmlControl.cs" />
     <Compile Include="PageObjects\Controls\TextArea.cs" />

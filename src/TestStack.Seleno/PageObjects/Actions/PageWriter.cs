@@ -89,6 +89,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             return propertyValue.ToString();
         }
 
+        public void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked)
+        {
+            var checkBox =_componentFactory.HtmlControlFor<ICheckBox>(propertySelector);
+
+            checkBox.Checked = isTicked;
+        }
+
+
         public void ClearAndSendKeys<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, string value, bool clearFirst = true)
         {
             ClearAndSendKeys(ExpressionHelper.GetExpressionText(propertySelector), value, clearFirst);
@@ -103,11 +111,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, String attributeName, TProperty attributeValue)
         {
-            var name = ExpressionHelper.GetExpressionText(propertySelector);
-
-            var scriptToExecute = string.Format("$('#{0}').attr('{1}','{2}'))", name, attributeName, attributeValue);
-
-            _scriptExecutor.ExecuteScript(scriptToExecute);
+            _componentFactory
+                .HtmlControlFor<IHtmlControl>(propertySelector)
+                .SetAttributeValue(attributeName, attributeValue);
         }
 
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)

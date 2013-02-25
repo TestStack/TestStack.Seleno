@@ -2,7 +2,9 @@
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public class TextBox : InputHtmlControl
+    public interface ITextBox : IInputHtmlControl { }
+
+    public class TextBox : InputHtmlControl, ITextBox
     {
         public override InputType Type
         {

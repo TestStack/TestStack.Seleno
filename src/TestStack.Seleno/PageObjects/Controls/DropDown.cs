@@ -3,6 +3,12 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
+    public interface IDropDown : ISelectableHtmlControl
+    {
+        string SelectedElementText { get; }
+        void SelectElementByText(string optionText);
+    }
+
     public class DropDown : SelectableHtmlControl, IDropDown
     {
         public string SelectedElementText { get { return SelectedElement.Text; } }

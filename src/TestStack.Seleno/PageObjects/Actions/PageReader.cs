@@ -46,18 +46,20 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
-        public bool CheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector)
         {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).Selected;
+            return
+                _componentFactory
+                    .HtmlControlFor<ICheckBox>(checkBoxPropertySelector)
+                    .Checked;
         }
 
-        public string TextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector)
         {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).GetAttribute("value");
+            return 
+                _componentFactory
+                    .HtmlControlFor<IInputHtmlControl>(textBoxPropertySelector)
+                    .Value;
         }
 
         public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, int waitInSeconds = 0)
@@ -86,7 +88,6 @@ namespace TestStack.Seleno.PageObjects.Actions
                 _componentFactory
                     .HtmlControlFor<IInputHtmlControl>(propertySelector, waitInSeconds)
                     .ValueAs<TProperty>();
-
         }
 
         public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)

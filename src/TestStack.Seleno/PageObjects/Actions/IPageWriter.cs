@@ -14,5 +14,6 @@ namespace TestStack.Seleno.PageObjects.Actions
         void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector,String attributeName, TProperty attributeValue);
         void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue);
         void ReplaceInputValueWith(string inputName, string value);
+        void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked);
     }
 }

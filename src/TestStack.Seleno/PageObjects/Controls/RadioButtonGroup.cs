@@ -4,6 +4,8 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
+    public interface IRadioButtonGroup : ISelectableHtmlControl, IInputHtmlControl { }
+
     public class RadioButtonGroup : SelectableHtmlControl, IRadioButtonGroup
     {
         public override IWebElement SelectedElement
@@ -15,6 +17,8 @@ namespace TestStack.Seleno.PageObjects.Controls
                 return Find().TryFindElement(By.jQuery(selector), WaitInSecondsUntilElementAvailable);
             }
         }
+
+        public string Value { get { return ValueAs<string>(); }}
 
         public TReturn ValueAs<TReturn>()
         {
