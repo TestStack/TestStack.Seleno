@@ -16,10 +16,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         public void Given_a_web_element_has_an_attribute_data_value()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _textBox = SubstituteFor<IInputHtmlControl>();
+            _textBox = SubstituteFor<ITextBox>();
 
             _componentFactory
-                .HtmlControlFor<IInputHtmlControl>(_textBoxPropertySelector,Arg.Any<int>())
+                .HtmlControlFor<ITextBox>(_textBoxPropertySelector, Arg.Any<int>())
                 .Returns(_textBox);
         }
         
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IInputHtmlControl>(_textBoxPropertySelector, 0);
+                .HtmlControlFor<ITextBox>(_textBoxPropertySelector, 0);
         }
 
         public void Then_it_should_get_the_value_of_the_textbox_value_attribute()

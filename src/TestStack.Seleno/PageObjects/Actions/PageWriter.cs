@@ -119,14 +119,14 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
             _componentFactory
-                .HtmlControlFor<IInputHtmlControl>(propertySelector)
+                .HtmlControlFor<ITextBox>(propertySelector)
                 .ReplaceInputValueWith(inputValue);
         }
 
         public void ReplaceInputValueWith(string inputName, string value)
         {
             _componentFactory
-                .HtmlControlFor<IInputHtmlControl>(inputName)
+                .HtmlControlFor<ITextBox>(inputName)
                 .ReplaceInputValueWith(value);
         }
 
@@ -149,6 +149,20 @@ namespace TestStack.Seleno.PageObjects.Actions
             _componentFactory
                 .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector)
                 .SelectElement(buttonValue);
+        }
+
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int waitInSeconds = 0)
+        {
+            content = content ?? string.Empty;
+            UpdateTextAreaContent(textAreaPropertySelector, content.Split('\n'), waitInSeconds);
+        }
+
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string[] multiLineContent, int waitInSeconds = 0)
+        {
+
+            _componentFactory
+                .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
+                .MultiLineContent = multiLineContent;
         }
     }
 }

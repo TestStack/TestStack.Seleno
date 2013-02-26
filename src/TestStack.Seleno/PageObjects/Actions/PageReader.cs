@@ -6,7 +6,6 @@ using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Controls;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
-
 namespace TestStack.Seleno.PageObjects.Actions
 {
     internal class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
@@ -58,7 +57,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return 
                 _componentFactory
-                    .HtmlControlFor<IInputHtmlControl>(textBoxPropertySelector)
+                    .HtmlControlFor<ITextBox>(textBoxPropertySelector)
                     .Value;
         }
 
@@ -86,7 +85,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             return
                 _componentFactory
-                    .HtmlControlFor<IInputHtmlControl>(propertySelector, waitInSeconds)
+                    .HtmlControlFor<ITextBox>(propertySelector, waitInSeconds)
                     .ValueAs<TProperty>();
         }
 
@@ -127,5 +126,13 @@ namespace TestStack.Seleno.PageObjects.Actions
                     .SelectedElementAs<TProperty>();
         }
 
+
+        public string[] TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int waitInSeconds = 0)
+        {
+            return
+                _componentFactory
+                    .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
+                    .MultiLineContent;
+        }
     }
 }

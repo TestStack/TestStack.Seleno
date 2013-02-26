@@ -1,9 +1,6 @@
-using System;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 using FluentAssertions;
 using TestStack.Seleno.PageObjects.Controls;
-using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {

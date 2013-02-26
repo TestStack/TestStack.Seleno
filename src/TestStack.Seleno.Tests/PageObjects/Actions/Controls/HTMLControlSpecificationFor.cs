@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using NSubstitute;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
@@ -20,28 +19,22 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
         {
-            PageNavigator = SubstituteFor<IPageNavigator>();
-            ElementFinder = SubstituteFor<IElementFinder>();
-            ComponentFactory = SubstituteFor<IComponentFactory>();
-            ScriptExecutor = SubstituteFor<IScriptExecutor>();
+            SUT.ViewModelPropertySelector = htmlControlPropertySelector;
+        }
 
-            SUT = HtmlControl(htmlControlPropertySelector);
+        public override void InitialiseSystemUnderTest()
+        {
+            SUT = new THtmlControl
+                      {
+                          PageNavigator = PageNavigator = SubstituteFor<IPageNavigator>(),
+                          ElementFinder = ElementFinder = SubstituteFor<IElementFinder>(),
+                          ScriptExecutor = ScriptExecutor = SubstituteFor<IScriptExecutor>(),
+                          ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>()
+                      };
+
         }
         
-        private THtmlControl HtmlControl(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
-        {
-            SUT = SUT ?? SubstituteFor<THtmlControl>();
-
-            SUT.ViewModelPropertySelector = htmlControlPropertySelector;
-            SUT.PageNavigator = PageNavigator;
-            SUT.ElementFinder = ElementFinder;
-            SUT.ScriptExecutor = ScriptExecutor;
-            SUT.ComponentFactory = ComponentFactory;
-            
-            return SUT;
-
-        }
-
+     
         
     }
 }

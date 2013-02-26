@@ -5,7 +5,6 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    [Ignore("AutoSubstitue cannot resolve TextArea, works with any other controls")]
     class When_retrieving_multiLine_content_of_TextArea : HtmlControlSpecificationFor<TextArea>
     {
         private string[] _result;

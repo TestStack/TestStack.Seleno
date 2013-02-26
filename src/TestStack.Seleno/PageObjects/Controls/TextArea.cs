@@ -1,6 +1,6 @@
 ﻿namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface ITextArea
+    public interface ITextArea : IHtmlControl
     {
         string[] MultiLineContent { get; set; }
     }
@@ -10,7 +10,7 @@
         public string[] MultiLineContent
         {
             get { return Execute().ScriptAndReturn<string[]>(string.Format("$('#{0}').text().split('\n')", Id)); }
-            set { Execute().ExecuteScript(string.Format("$('#{0}').text({1})", Id, string.Join("\n", value))); }
+            set { Execute().ExecuteScript(string.Format("$('#{0}').text('{1}')", Id, string.Join("\n", value))); }
         }
     }
 }

@@ -108,6 +108,7 @@
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_getting_multiline_content_of_a_textarea.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_selected_button_from_radio_group.cs" />
     <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_selected_option_text_from_drop_box.cs" />
@@ -118,6 +119,8 @@
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_strongly_typed_textBox_value.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_web_element_strongly_typed_text.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_strongly_typed_attribute_value.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_updating_combined_content_as_a_single_string_with_return_separator_of_a_textarea.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_updating_multiline_content_of_a_textarea.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_only_sending_keys_to_web_element.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_an_option_by_its_text_in_Drop_Down.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_an_option_by_its_value_in_Drop_Down.cs" />
