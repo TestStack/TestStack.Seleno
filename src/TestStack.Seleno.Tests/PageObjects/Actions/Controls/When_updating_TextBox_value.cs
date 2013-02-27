@@ -6,7 +6,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
     class When_updating_TextBox_value : HtmlControlSpecificationFor<TextBox>
     {
-        private readonly DateTime _the03rdOfJanuary2012At21h21 = new DateTime(2012, 01, 03, 21, 21, 00);
+        private static readonly DateTime _the03rdOfJanuary2012At21h21 = new DateTime(2012, 01, 03, 21, 21, 00);
         private readonly string _expectedScriptToBeExecuted =
             string.Format("$('#Modified').val('{0}')",_the03rdOfJanuary2012At21h21.ToString(CultureInfo.CurrentCulture));
 
