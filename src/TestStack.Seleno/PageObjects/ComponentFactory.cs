@@ -1,7 +1,9 @@
-﻿using Autofac;
+﻿using System.Linq.Expressions;
+using Autofac;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
@@ -17,12 +19,12 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>());
+            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
         {
-            return new PageWriter<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>());
+            return new PageWriter<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IElementAssert CreateElementAssert(By selector)
@@ -33,6 +35,24 @@ namespace TestStack.Seleno.PageObjects
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
             return _scope.Resolve<TPage>();
+        }
+
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
+            where THtmlControl : IHtmlControl
+        {
+            return
+                _scope
+                    .Resolve<THtmlControl>()
+                    .Initialize(propertySelector, waitInSeconds);
+        }
+
+        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
+           where THtmlControl : IHtmlControl
+        {
+            return
+                _scope
+                    .Resolve<THtmlControl>()
+                    .Initialize(controlId, waitInSeconds);
         }
     }
 }
