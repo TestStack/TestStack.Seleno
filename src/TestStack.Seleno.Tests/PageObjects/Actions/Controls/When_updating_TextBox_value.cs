@@ -7,9 +7,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
     class When_updating_TextBox_value : HtmlControlSpecificationFor<TextBox>
     {
         private readonly DateTime _the03rdOfJanuary2012At21h21 = new DateTime(2012, 01, 03, 21, 21, 00);
+        private readonly string _expectedScriptToBeExecuted =
+            string.Format("$('#Modified').val('{0}')",_the03rdOfJanuary2012At21h21.ToString(CultureInfo.CurrentCulture));
 
         public When_updating_TextBox_value() : base(x => x.Modified) { }
-
 
         public void When_updating_the_TextBox_value()
         {
@@ -20,8 +21,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             ScriptExecutor
                 .Received()
-                .ExecuteScript("$('#Modified').val('03/01/2012 21:21:00')");
-
+                .ExecuteScript(_expectedScriptToBeExecuted);
         }
     }
 }
