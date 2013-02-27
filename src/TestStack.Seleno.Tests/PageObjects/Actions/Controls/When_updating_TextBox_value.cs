@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using NSubstitute;
 using TestStack.Seleno.PageObjects.Controls;
 
