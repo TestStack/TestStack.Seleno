@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 using OpenQA.Selenium;
+using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -13,16 +14,21 @@ namespace TestStack.Seleno.PageObjects.Actions
     {
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
+        private readonly IComponentFactory _componentFactory;
 
-        public PageWriter(IScriptExecutor scriptExecutor, IElementFinder elementFinder)
+        public PageWriter(IScriptExecutor scriptExecutor,
+                          IElementFinder elementFinder,
+                          IComponentFactory componentFactory)
         {
             _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
+            _componentFactory = componentFactory;
         }
 
         public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
         {
             var type = typeof(TModel);
+
             foreach (var property in type.GetProperties())
             {
                 var propertyName = property.Name;
@@ -39,23 +45,15 @@ namespace TestStack.Seleno.PageObjects.Actions
 
                 var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property);
 
-                TextInField(propertyName, stringValue);
+                var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
+                textBox.ReplaceInputValueWith(stringValue);
             }
         }
 
+        [Obsolete("Use ReplaceInputValueWith instead")]
         public void TextInField(string fieldName, string value)
         {
-            if (String.IsNullOrEmpty(value)) return;
-
-            _scriptExecutor
-                .ActionOnLocator(
-                    By.Name(fieldName),
-                    element =>
-                    {
-                        element.Clear();
-                        if (!string.IsNullOrEmpty(value))
-                            element.SendKeys(value);
-                    });
+            ReplaceInputValueWith(fieldName,value);
         }
 
         protected string GetStringValue(IDictionary<Type, Func<object, string>> propertyTypeHandling, object propertyValue, PropertyInfo property)
@@ -91,6 +89,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             return propertyValue.ToString();
         }
 
+        public void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked)
+        {
+            var checkBox =_componentFactory.HtmlControlFor<ICheckBox>(propertySelector);
+
+            checkBox.Checked = isTicked;
+        }
+
+
         public void ClearAndSendKeys<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, string value, bool clearFirst = true)
         {
             ClearAndSendKeys(ExpressionHelper.GetExpressionText(propertySelector), value, clearFirst);
@@ -105,39 +111,58 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void SetAttribute<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, String attributeName, TProperty attributeValue)
         {
-            var name = ExpressionHelper.GetExpressionText(propertySelector);
-
-            var scriptToExecute = string.Format("$('#{0}').attr('{1}','{2}'))", name, attributeName, attributeValue);
-
-            _scriptExecutor.ExecuteScript(scriptToExecute);
+            _componentFactory
+                .HtmlControlFor<IHtmlControl>(propertySelector)
+                .SetAttributeValue(attributeName, attributeValue);
         }
 
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
-            var id = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(propertySelector));
-            var scriptToExecute = string.Format("$('#{0}').val('{1}')", id, inputValue);
-            _scriptExecutor.ExecuteScript(scriptToExecute);
+            _componentFactory
+                .HtmlControlFor<ITextBox>(propertySelector)
+                .ReplaceInputValueWith(inputValue);
+        }
+
+        public void ReplaceInputValueWith(string inputName, string value)
+        {
+            _componentFactory
+                .HtmlControlFor<ITextBox>(inputName)
+                .ReplaceInputValueWith(value);
         }
 
         public void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, TProperty optionValue)
         {
-            ReplaceInputValueWith(dropDownSelector, optionValue);
+            _componentFactory
+                .HtmlControlFor<IDropDown>(dropDownSelector)
+                .SelectElement(optionValue);
         }
 
         public void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, string optionText)
         {
-            var dropDownId = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(dropDownSelector));
-            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", dropDownId, optionText);
-
-            _scriptExecutor.ExecuteScript(scriptToExecute);
+            _componentFactory
+               .HtmlControlFor<IDropDown>(dropDownSelector)
+               .SelectElementByText(optionText);
         }
 
         public void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue)
         {
-            var scriptToExecute = string.Format("$('input[type=radio][name={0}][value={1}]').attr('checked',true)",
-                                                ExpressionHelper.GetExpressionText(radioGroupButtonSelector),
-                                                buttonValue);
-            _scriptExecutor.ExecuteScript(scriptToExecute);
+            _componentFactory
+                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector)
+                .SelectElement(buttonValue);
+        }
+
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int waitInSeconds = 0)
+        {
+            content = content ?? string.Empty;
+            UpdateTextAreaContent(textAreaPropertySelector, content.Split('\n'), waitInSeconds);
+        }
+
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string[] multiLineContent, int waitInSeconds = 0)
+        {
+
+            _componentFactory
+                .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
+                .MultiLineContent = multiLineContent;
         }
     }
 }

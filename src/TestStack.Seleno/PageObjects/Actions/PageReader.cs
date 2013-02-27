@@ -1,11 +1,10 @@
 using System;
-using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
+using TestStack.Seleno.PageObjects.Controls;
 using By = TestStack.Seleno.PageObjects.Locators.By;
-
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -14,12 +13,17 @@ namespace TestStack.Seleno.PageObjects.Actions
         private readonly IWebDriver _browser;
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
+        private readonly IComponentFactory _componentFactory;
 
-        public PageReader(IWebDriver browser, IScriptExecutor scriptExecutor, IElementFinder elementFinder)
+        public PageReader(IWebDriver browser,
+                          IScriptExecutor scriptExecutor,
+                          IElementFinder elementFinder,
+                          IComponentFactory componentFactory)
         {
             _browser = browser;
             _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
+            _componentFactory = componentFactory;
         }
 
         public TViewModel ModelFromPage()
@@ -41,18 +45,20 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
-        public bool CheckBoxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector)
         {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).Selected;
+            return
+                _componentFactory
+                    .HtmlControlFor<ICheckBox>(checkBoxPropertySelector)
+                    .Checked;
         }
 
-        public string TextboxValue<TField>(Expression<Func<TViewModel, TField>> field)
+        public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector)
         {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            return _browser.FindElement(OpenQA.Selenium.By.Name(name)).GetAttribute("value");
+            return 
+                _componentFactory
+                    .HtmlControlFor<ITextBox>(textBoxPropertySelector)
+                    .Value;
         }
 
         public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, int waitInSeconds = 0)
@@ -75,9 +81,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             return ElementFor(propertySelector).GetAttributeAs<TProperty>(attributeName);
         }
 
-        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
+        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 0)
         {
-            return GetAttributeAsType(propertySelector, "value");
+            return
+                _componentFactory
+                    .HtmlControlFor<ITextBox>(propertySelector, waitInSeconds)
+                    .ValueAs<TProperty>();
         }
 
         public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
@@ -87,48 +96,43 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
         {
-            var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
-
-            return dropDownElement.GetControlValueAs<TField>();
+            return
+                _componentFactory
+                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                    .SelectedElementAs<TField>();
         }
         
         public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
         {
-            var dropDownElement = FindSelectionOptionForDropDown(dropDownSelector, waitInSeconds);
-            return dropDownElement.Text;
+            return
+                _componentFactory
+                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                    .SelectedElementText;
         }
 
         public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
         {
-            return FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds) != null;
+            return
+                _componentFactory
+                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                    .HasSelectedElement;
         }
 
         public TProperty SelectedButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
         {
-            
-            var selectedRadioButtonElement = FindSelectedRadioButtonInRadioGroup(radioGroupButtonSelector, waitInSeconds);
-            if (selectedRadioButtonElement == null)
-            {
-                throw new NoSuchElementException("No selected radio button has been found");
-            }
-            return selectedRadioButtonElement.GetControlValueAs<TProperty>();
+            return
+                _componentFactory
+                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                    .SelectedElementAs<TProperty>();
         }
 
-        private IWebElement FindSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds)
+
+        public string[] TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int waitInSeconds = 0)
         {
-            var selector = string.Format("$('input[type=radio][name={0}]:checked')",
-                                       ExpressionHelper.GetExpressionText(radioGroupButtonSelector));
-
-            return _elementFinder.TryFindElement(By.jQuery(selector), waitInSeconds);
+            return
+                _componentFactory
+                    .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
+                    .MultiLineContent;
         }
-
-        private IWebElement FindSelectionOptionForDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds)
-        {
-            var dropDownId = TagBuilder.CreateSanitizedId(ExpressionHelper.GetExpressionText(dropDownSelector));
-            var selector = string.Format("$('#{0} option:selected')", dropDownId);
-
-            return _elementFinder.ElementWithWait(By.jQuery(selector), waitInSeconds);
-        }
-
     }
 }

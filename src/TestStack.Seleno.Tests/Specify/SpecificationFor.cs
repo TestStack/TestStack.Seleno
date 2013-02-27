@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Autofac;
+using Autofac.Core.Activators.Reflection;
 using AutofacContrib.NSubstitute;
 
 namespace TestStack.Seleno.Tests.Specify
@@ -18,7 +19,7 @@ namespace TestStack.Seleno.Tests.Specify
 
         public virtual void InitialiseSystemUnderTest()
         {
-            SUT = AutoSubstitute.Resolve<T>();
+             SUT = AutoSubstitute.Resolve<T>();
         }
 
         public TSubstitute SubstituteFor<TSubstitute>() where TSubstitute : class
@@ -35,7 +36,7 @@ namespace TestStack.Seleno.Tests.Specify
         {
             Action<ContainerBuilder> autofacCustomisation = c => c
                 .RegisterType<T>()
-                .FindConstructorsWith(t => t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                .FindConstructorsWith(t =>  t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                 .PropertiesAutowired();
             return new AutoSubstitute(autofacCustomisation);
         }

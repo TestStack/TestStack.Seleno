@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FluentAssertions;
 using NSubstitute;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Controls;
@@ -7,37 +8,38 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    class When_getting_selected_option_value_from_drop_box : PageReaderSpecification
+    class When_getting_whether_a_CheckBox_is_ticked: PageReaderSpecification
     {
-        private IDropDown _dropDown;
+        private ICheckBox _checkBox;
         private IComponentFactory _componentFactory;
-        private readonly Expression<Func<TestViewModel, int>> _dropDownPropertySelector = x => x.Item;
+        private readonly Expression<Func<TestViewModel, bool>> _propertySelector = x => x.Exists;
+        private bool _result;
 
         public void Given_a_drop_down_has_a_selected_option()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _dropDown = SubstituteFor<IDropDown>();
+            _checkBox = SubstituteFor<ICheckBox>();
 
             _componentFactory
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, Arg.Any<int>())
-                .Returns(_dropDown);
+                .HtmlControlFor<ICheckBox>(_propertySelector, Arg.Any<int>())
+                .Returns(_checkBox);
         }
 
         public void When_getting_the_selected_option_value()
         {
-            SUT.SelectedOptionValueInDropDown(_dropDownPropertySelector);
+            _result = SUT.CheckBoxValue(_propertySelector);
         }
 
-        public void Then_the_component_factory_should_retrieve_the_drop_down_control()
+        public void Then_the_component_factory_should_retrieve_the_checkbox_control()
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, 0);
+                .HtmlControlFor<ICheckBox>(_propertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_value_of_its_selected_element()
         {
-            _dropDown.Received().SelectedElementAs<int>();
+            _result.Should().BeFalse();
         }
     }
 }

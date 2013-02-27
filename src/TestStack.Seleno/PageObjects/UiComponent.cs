@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Specifications.Assertions;
 using By = OpenQA.Selenium.By;
 
@@ -51,6 +52,13 @@ namespace TestStack.Seleno.PageObjects
         {
             ThrowIfComponentNotCreatedCorrectly();
             return ComponentFactory.CreatePage<TComponent>();
+        }
+
+        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, int waitInSeconds = 20)
+          where THtmlControl : HTMLControl, new()
+        {
+            ThrowIfComponentNotCreatedCorrectly();
+            return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, waitInSeconds);
         }
 
         private void ThrowIfComponentNotCreatedCorrectly()
