@@ -17,5 +17,10 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         {
             return Read().ModelFromPage();
         }
+
+        public bool RequiredBoolCheckBoxIsTicked
+        {
+            get { return Read().CheckBoxValue(x => x.RequiredBool); }
+        }
     }
 }

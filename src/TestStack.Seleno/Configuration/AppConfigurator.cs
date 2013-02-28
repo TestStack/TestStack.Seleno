@@ -12,6 +12,7 @@ using TestStack.Seleno.Configuration.WebServers;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -55,8 +56,16 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
 
+            var htmlControlType = typeof (HTMLControl);
+
+            ContainerBuilder.RegisterAssemblyTypes(htmlControlType.Assembly)
+                            .As<IHtmlControl>()
+                            .AsImplementedInterfaces();
+
             return ContainerBuilder.Build();
         }
+
+       
 
         // todo: move to separate file
         class PageObjectRegistrationSource : IRegistrationSource
@@ -67,8 +76,11 @@ namespace TestStack.Seleno.Configuration
                     throw new ArgumentNullException("service");
 
                 var typedService = service as TypedService;
+
                 if (typedService == null || !typeof(UiComponent).IsAssignableFrom(typedService.ServiceType))
+                {
                     return Enumerable.Empty<IComponentRegistration>();
+                }
 
                 var rb = RegistrationBuilder.ForType(typedService.ServiceType)
                     .As(service)
