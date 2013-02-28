@@ -18,13 +18,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
             if (finder == null) throw new ArgumentNullException("finder");
             if (camera == null) throw new ArgumentNullException("camera");
+            
             Browser = browser;
             _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;
         }
 
-        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action)
+        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
         {
             try
             {
@@ -39,7 +40,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func)
+        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func, int waitInSeconds = 20)
         {
             try
             {

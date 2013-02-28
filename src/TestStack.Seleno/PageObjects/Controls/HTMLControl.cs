@@ -92,7 +92,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public void RemoveAttribute(string attributeName)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}')..removeAttr('{1}')", Id, attributeName));
+            Execute().ExecuteScript(string.Format("$('#{0}').removeAttr('{1}')", Id, attributeName));
         }
 
         protected void AddOrRemoveAttribute(string attributeName, bool addOrRemove)

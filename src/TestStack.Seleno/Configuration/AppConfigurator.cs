@@ -1,17 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
 using Castle.Core.Logging;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
-using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -55,40 +53,12 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
 
+            ContainerBuilder.RegisterAssemblyTypes(typeof (HTMLControl).Assembly)
+                .As<IHtmlControl>()
+                .AsImplementedInterfaces()
+                .OnActivatedInitialiseUiComponent();
+
             return ContainerBuilder.Build();
-        }
-
-        // todo: move to separate file
-        class PageObjectRegistrationSource : IRegistrationSource
-        {
-            public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
-            {
-                if (service == null)
-                    throw new ArgumentNullException("service");
-
-                var typedService = service as TypedService;
-                if (typedService == null || !typeof(UiComponent).IsAssignableFrom(typedService.ServiceType))
-                    return Enumerable.Empty<IComponentRegistration>();
-
-                var rb = RegistrationBuilder.ForType(typedService.ServiceType)
-                    .As(service)
-                    .InstancePerDependency()
-                    .OnActivated(a =>
-                        {
-                            var component = ((UiComponent)a.Instance);
-                            component.Browser = a.Context.Resolve<IWebDriver>();
-                            component.Camera = a.Context.Resolve<ICamera>();
-                            component.ComponentFactory = a.Context.Resolve<IComponentFactory>();
-                            component.ElementFinder = a.Context.Resolve<IElementFinder>();
-                            component.PageNavigator = a.Context.Resolve<IPageNavigator>();
-                            component.ScriptExecutor = a.Context.Resolve<IScriptExecutor>();
-                        }
-                    );
-
-                return new[] { rb.CreateRegistration() };
-            }
-
-            public bool IsAdapterForIndividualComponents { get { return false; } }
         }
 
         public IAppConfigurator ProjectToTest(WebApplication webApplication)
