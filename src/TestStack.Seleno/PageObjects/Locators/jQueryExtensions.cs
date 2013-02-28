@@ -27,6 +27,15 @@ namespace TestStack.Seleno.PageObjects.Locators
             return result;
         }
 
+        public static void LoadjQuery(this IWebDriver driver, string version = "any", TimeSpan? timeout = null)
+        {
+            var remoteWebDriver = driver as RemoteWebDriver;
+            if (remoteWebDriver != null)
+            {
+                remoteWebDriver.LoadjQuery(version, timeout);
+            }
+        }
+
         /// <summary>
         /// Load jQuery from an external URL to the current page
         /// </summary>
