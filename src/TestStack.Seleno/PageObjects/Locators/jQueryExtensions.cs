@@ -35,7 +35,7 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
             return result;
         }
 
-        public static void LoadjQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
+        public static void LoadjQuery(this IWebDriver driver, string version = "any", TimeSpan? timeout = null)
         {
             var remoteWebDriver = driver as RemoteWebDriver;
             if (remoteWebDriver != null)
@@ -50,33 +50,25 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
         public static void LoadjQuery(this RemoteWebDriver driver, string version = "any", TimeSpan? timeout = null)
         {
             //Get the url to load jQuery from
-            var jQueryURL = "";
+            string jQueryUrl;
             if (version == "" || version.ToLower() == "latest")
-                jQueryURL = "http://code.jquery.com/jquery-latest.min.js";
+                jQueryUrl = "http://code.jquery.com/jquery-latest.min.js";
             else
-                jQueryURL = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
+                jQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
 
             //Script to load jQuery from external site
-            var versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
+            string versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
                                               : string.Empty;
-
-            const string loadingScript = 
-                @"try {
-                    var scriptSource = '" + CompiledJQuerySource + @"';
-                    var newScript = document.createElement('script');
-                    newScript.type = 'text/javascript';
-                    if (typeof newScript.appendChild == 'function') {
-                        var scriptContent = document.createTextNode(scriptSource);
-                        newScript.appendChild(scriptContent);
-                    } else {
-                        newScript.text = scriptSource;
-                    }
-                    var headTag = document.getElementByTagName('head')[0];
-                    headTag.appendChild(newScript);
-                    return (typeof jQuery == 'function');
-                } catch(e) {
-                    return false;
-                }";
+            string loadingScript =
+                @"if (typeof jQuery != 'function')
+                  {
+                      var headID = document.getElementsByTagName('head')[0];
+                      var newScript = document.createElement('script');
+                      newScript.type = 'text/javascript';
+                      newScript.src = '" + jQueryUrl + @"';
+                      headID.appendChild(newScript);
+                  }
+                  return (typeof jQuery == 'function');";
 
             bool loaded = (bool)driver.ExecuteScript(versionEnforceScript + loadingScript);
 
