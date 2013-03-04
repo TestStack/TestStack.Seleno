@@ -5,7 +5,7 @@ using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 
-namespace TestStack.Seleno.Configuration
+namespace TestStack.Seleno.Configuration.Registration
 {
     internal static class RegistrationExtensions
     {

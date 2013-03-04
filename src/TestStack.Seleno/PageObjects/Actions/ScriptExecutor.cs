@@ -2,7 +2,6 @@ using System;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
-using TestStack.Seleno.PageObjects.Locators;
 using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions

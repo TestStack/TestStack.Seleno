@@ -1,20 +1,15 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-
 using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
-
 using Castle.Core.Logging;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
-using TestStack.Seleno.Extensions;
+
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
@@ -72,30 +67,6 @@ namespace TestStack.Seleno.Configuration
        
 
         // todo: move to separate file
-        class PageObjectRegistrationSource : IRegistrationSource
-        {
-            public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
-            {
-                if (service == null)
-                    throw new ArgumentNullException("service");
-
-                var typedService = service as TypedService;
-
-                if (typedService == null || !typeof(UiComponent).IsAssignableFrom(typedService.ServiceType))
-                {
-                    return Enumerable.Empty<IComponentRegistration>();
-                }
-
-                var rb = RegistrationBuilder.ForType(typedService.ServiceType)
-                    .As(service)
-                    .InstancePerDependency()
-                    .OnActivatedInitialiseUiComponent();
-
-                return new[] { rb.CreateRegistration() };
-            }
-
-            public bool IsAdapterForIndividualComponents { get { return false; } }
-        }
 
         public IAppConfigurator ProjectToTest(WebApplication webApplication)
         {
