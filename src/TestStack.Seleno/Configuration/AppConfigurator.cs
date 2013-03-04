@@ -64,10 +64,6 @@ namespace TestStack.Seleno.Configuration
             return ContainerBuilder.Build();
         }
 
-       
-
-        // todo: move to separate file
-
         public IAppConfigurator ProjectToTest(WebApplication webApplication)
         {
             WebApplication = webApplication;
