@@ -27,7 +27,7 @@ namespace TestStack.Seleno.PageObjects.Locators
             return result;
         }
 
-        public static void LoadjQuery(this IWebDriver driver, string version = "any", TimeSpan? timeout = null)
+        public static void LoadjQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
             var remoteWebDriver = driver as RemoteWebDriver;
             if (remoteWebDriver != null)
@@ -56,8 +56,8 @@ namespace TestStack.Seleno.PageObjects.Locators
                   {
                       var headID = document.getElementsByTagName('head')[0];
                       var newScript = document.createElement('script');
-                      newScript.type = 'text/javascript';
-                      newScript.src = '" + jQueryURL + @"';
+                      newScript.setAttribute('type', 'text/javascript');
+                      newScript.setAttribute('src' , '" + jQueryURL + @"');
                       headID.appendChild(newScript);
                   }
                   return (typeof jQuery == 'function');";

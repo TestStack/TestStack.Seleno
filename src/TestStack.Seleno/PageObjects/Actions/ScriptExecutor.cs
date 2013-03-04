@@ -22,7 +22,6 @@ namespace TestStack.Seleno.PageObjects.Actions
             if (camera == null) throw new ArgumentNullException("camera");
             
             Browser = browser;
-            Browser.LoadjQuery();
             _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;

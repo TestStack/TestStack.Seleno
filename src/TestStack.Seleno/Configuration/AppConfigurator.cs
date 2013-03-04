@@ -1,15 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
+
 using Castle.Core.Logging;
+
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
-using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
@@ -56,11 +61,10 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
 
-            var htmlControlType = typeof (HTMLControl);
-
-            ContainerBuilder.RegisterAssemblyTypes(htmlControlType.Assembly)
+            ContainerBuilder.RegisterAssemblyTypes(typeof (HTMLControl).Assembly)
                             .As<IHtmlControl>()
-                            .AsImplementedInterfaces();
+                            .AsImplementedInterfaces()
+                            .OnActivatedInitialiseUiComponent();
 
             return ContainerBuilder.Build();
         }
@@ -85,17 +89,7 @@ namespace TestStack.Seleno.Configuration
                 var rb = RegistrationBuilder.ForType(typedService.ServiceType)
                     .As(service)
                     .InstancePerDependency()
-                    .OnActivated(a =>
-                        {
-                            var component = ((UiComponent)a.Instance);
-                            component.Browser = a.Context.Resolve<IWebDriver>();
-                            component.Camera = a.Context.Resolve<ICamera>();
-                            component.ComponentFactory = a.Context.Resolve<IComponentFactory>();
-                            component.ElementFinder = a.Context.Resolve<IElementFinder>();
-                            component.PageNavigator = a.Context.Resolve<IPageNavigator>();
-                            component.ScriptExecutor = a.Context.Resolve<IScriptExecutor>();
-                        }
-                    );
+                    .OnActivatedInitialiseUiComponent();
 
                 return new[] { rb.CreateRegistration() };
             }

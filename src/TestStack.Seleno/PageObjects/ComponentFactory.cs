@@ -41,37 +41,17 @@ namespace TestStack.Seleno.PageObjects
         public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
             where THtmlControl : IHtmlControl
         {
-            return GetHtmlControlFor<THtmlControl>(c => c.ViewModelPropertySelector = propertySelector, waitInSeconds);
+            return
+                _scope.Resolve<THtmlControl>()
+                      .Initialize(propertySelector, waitInSeconds);
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
            where THtmlControl : IHtmlControl
         {
-            return GetHtmlControlFor<THtmlControl>(c => c.Id = controlId, waitInSeconds);
+            return
+                _scope.Resolve<THtmlControl>()
+                      .Initialize(controlId, waitInSeconds);
         }
-
-
-        private THtmlControl GetHtmlControlFor<THtmlControl>(Action<HTMLControl> htmlControlInitialiser, int waitInSecondsUntilElementAvailable = 20) 
-            where THtmlControl : IHtmlControl
-        {
-            
-            var htmlControl = _scope.Resolve<THtmlControl>();
-            var result = htmlControl as HTMLControl;
-
-            if (result == null) throw new SelenoException(string.Format("{0} should derive from HTMLControl",typeof(THtmlControl).Name));
-
-            htmlControlInitialiser(result);
-            result.WaitInSecondsUntilElementAvailable = waitInSecondsUntilElementAvailable;
-
-            result.Browser = _scope.Resolve<IWebDriver>();
-            result.Camera = _scope.Resolve<ICamera>();
-            result.ComponentFactory = _scope.Resolve<IComponentFactory>();
-            result.ElementFinder = _scope.Resolve<IElementFinder>();
-            result.PageNavigator = _scope.Resolve<IPageNavigator>();
-            result.ScriptExecutor = _scope.Resolve<IScriptExecutor>();    
-
-            return (THtmlControl)(IHtmlControl)result;
-        }
-       
     }
 }
