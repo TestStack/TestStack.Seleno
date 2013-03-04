@@ -170,7 +170,9 @@
     <Compile Include="Specifications\Assertions\IElementAssert.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
   <ItemGroup />

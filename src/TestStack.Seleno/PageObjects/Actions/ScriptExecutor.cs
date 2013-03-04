@@ -2,6 +2,7 @@ using System;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
+using TestStack.Seleno.PageObjects.Locators;
 using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -21,6 +22,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             if (camera == null) throw new ArgumentNullException("camera");
             
             Browser = browser;
+            Browser.LoadjQuery();
             _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;

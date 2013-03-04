@@ -77,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BDDfy.readme.txt" />
-    <None Include="Resources\chromedriver.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
