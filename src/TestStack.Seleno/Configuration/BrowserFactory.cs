@@ -8,6 +8,9 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.Configuration
 {
+    /// <summary>
+    /// Allows the creation of Browser specific web drivers
+    /// </summary>
     public static class BrowserFactory
     {
         public static ChromeDriver Chrome()
