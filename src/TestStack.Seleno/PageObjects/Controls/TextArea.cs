@@ -27,7 +27,8 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
             set
             {
-                Execute().ExecuteScript(string.Format("$('#{0}').text('{1}')", Id, string.Join("\n", value)));
+                var scriptToExecute = string.Format("$('#{0}').text('{1}')", Id, string.Join("\\n", value));
+                Execute().ExecuteScript(scriptToExecute);
             }
         }
     }
