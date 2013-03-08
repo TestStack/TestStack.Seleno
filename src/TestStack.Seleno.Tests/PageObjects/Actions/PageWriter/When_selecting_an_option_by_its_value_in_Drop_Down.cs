@@ -39,7 +39,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         {
             _dropDown.Received().SelectElement(2);
         }
-
        
     }
 }
