@@ -30,6 +30,9 @@ namespace TestStack.Seleno.AcceptanceTests.Web.ViewModels
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        public string TextAreaField { get; set; }
+
         /*[Required]
         public IEnumerable<SomeEnum> RequiredEnums { get; set; }
         [Required]
@@ -41,6 +44,10 @@ namespace TestStack.Seleno.AcceptanceTests.Web.ViewModels
         public List<ListItem> List { get; set; }
         [ExistsIn("List", "Id", "Name")]
         public int RequiredListId { get; set; }
+        
+        
+        [ExistsIn("List", "Id", "Name")]
+        public int? OptionalListId { get; set; }
     }
 
     public class ListItem

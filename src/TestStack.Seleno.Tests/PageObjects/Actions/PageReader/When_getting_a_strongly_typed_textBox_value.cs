@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
             _textBox = SubstituteFor<ITextBox>();
 
             _componentFactory
-                .HtmlControlFor<ITextBox>(_textBoxPropertySelector, Arg.Any<int>())
+                .HtmlControlFor<ITextBox>(_textBoxPropertySelector)
                 .Returns(_textBox);
         }
         
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<ITextBox>(_textBoxPropertySelector, 0);
+                .HtmlControlFor<ITextBox>(_textBoxPropertySelector);
         }
 
         public void Then_it_should_get_the_value_of_the_textbox_value_attribute()

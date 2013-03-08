@@ -28,6 +28,9 @@
         @s.FieldFor(m => m.OptionalEnums)
         @s.FieldFor(m => m.OptionalNullableEnums)*@
         @s.FieldFor(m => m.RequiredListId)
+        @s.FieldFor(m => m.OptionalBool).AsList()
+        @s.FieldFor(m => m.OptionalListId).AsList()
+        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(4)
     }
     using (var n = f.BeginNavigation())
     {
