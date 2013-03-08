@@ -20,11 +20,11 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
             _selectedRadioButtonElement = SubstituteFor<IWebElement>();
 
             ElementFinder
-                .TryFindElement(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
+                .TryFindElement(Arg.Any<By.jQueryBy>())
                 .Returns(_selectedRadioButtonElement);
 
             ElementFinder
-                .WhenForAnyArgs(x => x.TryFindElement(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
+                .WhenForAnyArgs(x => x.TryFindElement(Arg.Any<By.jQueryBy>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
 
             SUT.SelectedElementAs<ChoiceType>().Returns(ChoiceType.Another);
@@ -42,7 +42,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_retrieve_the_selected_button()
         {
-            _actualJqueryBy.Selector.Should().Contain("$('input[type=radio][name=Choice]:checked')");
+            _actualJqueryBy.Selector.Should().Contain("input[type=radio][name=Choice]:checked");
         }
 
         public void AndThen_it_should_get_the_value_of_the_selected_button()

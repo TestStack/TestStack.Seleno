@@ -41,7 +41,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_retrieve_the_selected_option()
         {
-            _actualJqueryBy.Selector.Should().Contain("$('#Item option:selected')");
+            _actualJqueryBy.Selector.Should().Contain("#Item option:selected");
         }
 
         public void AndThen_it_should_get_the_value_of_the_selected_drop_down_list_option()

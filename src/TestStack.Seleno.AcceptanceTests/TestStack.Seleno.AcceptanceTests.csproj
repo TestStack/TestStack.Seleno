@@ -58,8 +58,8 @@
   <ItemGroup>
     <Compile Include="AssemblyFixture.cs" />
     <Compile Include="PageObjects\Actions\ModelIoTests.cs" />
-    <Compile Include="PageObjects\Controls\Reading_from_Form_HTML_Controls.cs" />
-    <Compile Include="PageObjects\Controls\Writing_To_Form_With_HTML_Controls.cs" />
+    <Compile Include="PageObjects\Controls\Reading_individual_HTML_Controls.cs" />
+    <Compile Include="PageObjects\Controls\Writing_individual_HTML_Controls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

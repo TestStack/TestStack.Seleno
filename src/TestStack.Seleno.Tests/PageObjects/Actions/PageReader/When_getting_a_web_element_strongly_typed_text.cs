@@ -16,7 +16,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         public void Given_a_web_element_contains_the_text_03_01_2012_21_21()
         {
             SubstituteFor<IElementFinder>()
-                .TryFindElement(Arg.Any<By>())
+                .ElementWithWait(Arg.Any<By>())
                 .Returns(SubstituteFor<IWebElement>());
 
             SubstituteFor<IWebElement>().Text.Returns("03/01/2012 21:21");

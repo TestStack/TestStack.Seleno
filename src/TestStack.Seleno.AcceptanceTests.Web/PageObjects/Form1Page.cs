@@ -22,5 +22,35 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         {
             get { return Read().CheckBoxValue(x => x.RequiredBool); }
         }
+
+        public SomeEnum RequiredEnumDropDownSelectedValue
+        {
+            get { return Read().SelectedOptionValueInDropDown(x => x.RequiredEnum); }
+        }
+
+        public string RequiredEnumDropDownSelectedText
+        {
+            get { return Read().SelectedOptionTextInDropDown(x => x.RequiredEnum); }
+        }
+
+        public int RequiredIntTextBoxValue
+        {
+            get { return Read().GetValueFromTextBox(x => x.RequiredInt); }
+        }
+
+        public string[] TextAreaFieldContent
+        {
+            get { return Read().TextAreaContent(x => x.TextAreaField); }
+        }
+
+        public bool? OptionalBoolSelectedButtonValue
+        {
+            get { return Read().SelectedButtonInRadioGroup(x => x.OptionalBool); }
+        }
+
+        public bool OptionalListHasSelectedButton
+        {
+            get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.OptionalListId); }
+        }
     }
 }
