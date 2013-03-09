@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
             _dropDown = SubstituteFor<IDropDown>();
 
             _componentFactory
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, Arg.Any<int>())
+                .HtmlControlFor<IDropDown>(_dropDownPropertySelector)
                 .Returns(_dropDown);
 
             _dropDown.SelectedElementText.Returns("Selected option....");
@@ -36,7 +36,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, 0);
+                .HtmlControlFor<IDropDown>(_dropDownPropertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_text_of_its_selected_option()

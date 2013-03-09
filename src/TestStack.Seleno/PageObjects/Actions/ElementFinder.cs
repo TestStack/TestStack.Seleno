@@ -27,12 +27,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             return Browser.ElementWithWait(d => d.FindElementByjQuery(by));
         }
 
-        public IWebElement TryFindElement(By by, int waitInSeconds = 0)
+        public IWebElement TryFindElement(By by)
         {
             IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                result =  Browser.FindElement(by);
             }
             catch (NoSuchElementException)
             { }
@@ -41,12 +41,12 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public IWebElement TryFindElement(Locators.By.jQueryBy by, int waitInSeconds = 0)
+        public IWebElement TryFindElement(Locators.By.jQueryBy by)
         {
             IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                result = Browser.FindElementByjQuery(by);
             }
             catch (NoSuchElementException)
             { }

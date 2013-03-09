@@ -19,15 +19,18 @@
         @s.FieldFor(m => m.OptionalBool)
         @s.FieldFor(m => m.OptionalBool2)
         @s.FieldFor(m => m.OptionalBool3)
+        
         @s.FieldFor(m => m.OptionalInt)
         @s.FieldFor(m => m.RequiredEnum)
         @s.FieldFor(m => m.RequiredNullableEnum)
         @s.FieldFor(m => m.OptionalEnum)
-        @*@s.FieldFor(m => m.RequiredEnums)
-        @s.FieldFor(m => m.RequiredNullableEnums)
-        @s.FieldFor(m => m.OptionalEnums)
-        @s.FieldFor(m => m.OptionalNullableEnums)*@
         @s.FieldFor(m => m.RequiredListId)
+
+        //Radio button Group
+        @s.FieldFor(m => m.OptionalBool).AsList()
+        @s.FieldFor(m => m.OptionalListId).AsList()
+        //Text area
+        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(4)
     }
     using (var n = f.BeginNavigation())
     {

@@ -17,5 +17,46 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         {
             return Read().ModelFromPage();
         }
+
+        public bool RequiredBoolCheckBoxIsTicked
+        {
+            get { return Read().CheckBoxValue(x => x.RequiredBool); }
+            set { Input().TickCheckbox(x => x.RequiredBool, value); }
+        }
+
+        public SomeEnum RequiredEnumDropDownSelectedValue
+        {
+            get { return Read().SelectedOptionValueInDropDown(x => x.RequiredEnum); }
+            set { Input().SelectByOptionValueInDropDown(x => x.RequiredEnum,value); }
+        }
+
+        public string RequiredEnumDropDownSelectedText
+        {
+            get { return Read().SelectedOptionTextInDropDown(x => x.RequiredEnum); }
+            set { Input().SelectByOptionTextInDropDown(x => x.RequiredEnum, value); }
+        }
+
+        public int RequiredIntTextBoxValue
+        {
+            get { return Read().GetValueFromTextBox(x => x.RequiredInt); }
+            set { Input().ReplaceInputValueWith(x=> x.RequiredInt,value); }
+        }
+
+        public string[] TextAreaFieldContent
+        {
+            get { return Read().TextAreaContent(x => x.TextAreaField); }
+            set {Input().UpdateTextAreaContent(x => x.TextAreaField,value); }
+        }
+
+        public bool? OptionalBoolSelectedButtonValue
+        {
+            get { return Read().SelectedButtonInRadioGroup(x => x.OptionalBool); }
+            set { Input().SelectButtonInRadioGroup(x => x.OptionalBool,value); }
+        }
+
+        public bool OptionalListHasSelectedButton
+        {
+            get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.OptionalListId); }
+        }
     }
 }

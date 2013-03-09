@@ -103,7 +103,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\AutoFacExtensions.cs" />
+    <Compile Include="Configuration\Registration\PageObjectRegistrationSource.cs" />
+    <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="InaccessibleSelenoException.cs" />
@@ -169,7 +170,9 @@
     <Compile Include="Specifications\Assertions\IElementAssert.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="PageObjects\PageObjects.cd" />
   </ItemGroup>
   <ItemGroup />

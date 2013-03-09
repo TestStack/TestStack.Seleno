@@ -159,7 +159,6 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string[] multiLineContent, int waitInSeconds = 0)
         {
-
             _componentFactory
                 .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
                 .MultiLineContent = multiLineContent;

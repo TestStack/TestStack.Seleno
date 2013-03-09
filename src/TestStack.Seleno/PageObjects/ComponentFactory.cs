@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using Autofac;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
@@ -37,22 +38,20 @@ namespace TestStack.Seleno.PageObjects
             return _scope.Resolve<TPage>();
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
             where THtmlControl : IHtmlControl
         {
             return
-                _scope
-                    .Resolve<THtmlControl>()
-                    .Initialize(propertySelector, waitInSeconds);
+                _scope.Resolve<THtmlControl>()
+                      .Initialize(propertySelector, waitInSeconds);
         }
 
         public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
            where THtmlControl : IHtmlControl
         {
             return
-                _scope
-                    .Resolve<THtmlControl>()
-                    .Initialize(controlId, waitInSeconds);
+                _scope.Resolve<THtmlControl>()
+                      .Initialize(controlId, waitInSeconds);
         }
     }
 }

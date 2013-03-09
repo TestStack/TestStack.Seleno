@@ -45,15 +45,15 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
-        public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector)
+        public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector, int waitInSeconds = 20)
         {
             return
                 _componentFactory
-                    .HtmlControlFor<ICheckBox>(checkBoxPropertySelector)
+                    .HtmlControlFor<ICheckBox>(checkBoxPropertySelector,waitInSeconds)
                     .Checked;
         }
 
-        public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector)
+        public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector, int waitInSeconds = 20)
         {
             return 
                 _componentFactory
@@ -61,11 +61,11 @@ namespace TestStack.Seleno.PageObjects.Actions
                     .Value;
         }
 
-        public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, int waitInSeconds = 0)
+        public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, int waitInSeconds = 20)
         {
             var name = ExpressionHelper.GetExpressionText(field);
             var id = TagBuilder.CreateSanitizedId(name);
-            return _elementFinder.TryFindElement(By.Id(id), waitInSeconds);
+            return _elementFinder.ElementWithWait(By.Id(id),waitInSeconds);
         }
 
         public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> field)
@@ -76,25 +76,25 @@ namespace TestStack.Seleno.PageObjects.Actions
             return _browser.ExecuteScriptAndReturn<bool>(javascriptExpression);
         }
 
-        public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName)
+        public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName, int waitInSeconds = 20)
         {
-            return ElementFor(propertySelector).GetAttributeAs<TProperty>(attributeName);
+            return ElementFor(propertySelector,waitInSeconds).GetAttributeAs<TProperty>(attributeName);
         }
 
-        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 0)
+        public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 20)
         {
             return
                 _componentFactory
                     .HtmlControlFor<ITextBox>(propertySelector, waitInSeconds)
                     .ValueAs<TProperty>();
         }
-
-        public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector)
+       
+        public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 20)
         {
-            return ElementFor(propertySelector).Text.TryConvertTo(default(TProperty));
+            return ElementFor(propertySelector, waitInSeconds).Text.TryConvertTo(default(TProperty));
         }
 
-        public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
+        public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 20)
         {
             return
                 _componentFactory
@@ -102,7 +102,7 @@ namespace TestStack.Seleno.PageObjects.Actions
                     .SelectedElementAs<TField>();
         }
         
-        public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 0)
+        public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 20)
         {
             return
                 _componentFactory
@@ -110,7 +110,7 @@ namespace TestStack.Seleno.PageObjects.Actions
                     .SelectedElementText;
         }
 
-        public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
+        public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 20)
         {
             return
                 _componentFactory
