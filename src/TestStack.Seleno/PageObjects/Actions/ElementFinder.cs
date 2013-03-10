@@ -17,12 +17,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             Browser = browser;
         }
 
-        public IWebElement ElementWithWait(By findElement, int waitInSeconds = 20)
+        public IWebElement Element(By findElement, int waitInSeconds = 20)
         {
             return Browser.ElementWithWait(d => d.FindElement(findElement));
         }
 
-        public IWebElement ElementWithWait(Locators.By.jQueryBy @by, int waitInSeconds = 20)
+        public IWebElement Element(Locators.By.jQueryBy @by, int waitInSeconds = 20)
         {
             return Browser.ElementWithWait(d => d.FindElementByjQuery(by));
         }
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                result = Element(by, waitInSeconds);
             }
             catch (NoSuchElementException)
             { }
@@ -46,7 +46,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                result = Element(by, waitInSeconds);
             }
             catch (NoSuchElementException)
             { }
