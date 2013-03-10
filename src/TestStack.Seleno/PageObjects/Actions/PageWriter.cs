@@ -104,7 +104,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void ClearAndSendKeys(string elementName, string value, bool clearFirst = true)
         {
-            var element = _elementFinder.ElementWithWait(By.Name(elementName));
+            var element = _elementFinder.Element(By.Name(elementName));
             if (clearFirst) element.Clear();
             element.SendKeys(value);
         }
