@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Castle.Core.Logging;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Configuration.WebServers
