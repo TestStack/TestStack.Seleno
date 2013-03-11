@@ -90,9 +90,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.BDDfy">
-      <HintPath>..\Samples\MusicStore\MvcMusicStore.FunctionalTests\bin\Debug\TestStack.BDDfy.dll</HintPath>
-    </Reference>
     <Reference Include="WebDriver, Version=2.31.2.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.WebDriver.2.31.2\lib\net40\WebDriver.dll</HintPath>
