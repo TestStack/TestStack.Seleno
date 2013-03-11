@@ -2,27 +2,22 @@ using System;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
-using TestStack.Seleno.PageObjects.Locators;
 using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
     internal class ScriptExecutor : IScriptExecutor
     {
-        protected IWebDriver Browser;
         private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        public ScriptExecutor(IWebDriver browser, IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
+        public ScriptExecutor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
-            if (browser == null) throw new ArgumentNullException("browser");
             if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
             if (finder == null) throw new ArgumentNullException("finder");
             if (camera == null) throw new ArgumentNullException("camera");
             
-            Browser = browser;
-            Browser.LoadjQuery();
             _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
             _camera = camera;
@@ -49,21 +44,6 @@ namespace TestStack.Seleno.PageObjects.Actions
             {
                 var element = _finder.ElementWithWait(findElement, waitInSeconds);
                 return func(element);
-            }
-            catch (Exception)
-            {
-                _camera.TakeScreenshot();
-                throw;
-            }
-        }
-
-        public IWebElement WithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
-        {
-            try
-            {
-                var element = _finder.ElementWithWait(findElement, waitInSeconds);
-                action(element);
-                return element;
             }
             catch (Exception)
             {
