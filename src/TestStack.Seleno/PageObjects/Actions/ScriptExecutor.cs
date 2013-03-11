@@ -23,6 +23,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             _camera = camera;
         }
 
+        // todo: Are these ActionOnLocator methods something that should be in ScriptExecutor or should ScriptExecutor be renamed?
+        // todo: Should we add jQuery By method overloads?
+
         public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
         {
             try
