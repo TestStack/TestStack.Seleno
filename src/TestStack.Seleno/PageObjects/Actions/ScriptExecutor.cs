@@ -32,7 +32,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             try
             {
-                var element = Browser.FindElement(findElement);
+                var element = _finder.ElementWithWait(findElement, waitInSeconds);
                 action(element);
                 return element;
             }
@@ -47,7 +47,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             try
             {
-                var element = Browser.FindElement(findElement);
+                var element = _finder.ElementWithWait(findElement, waitInSeconds);
                 return func(element);
             }
             catch (Exception)
