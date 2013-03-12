@@ -1,7 +1,7 @@
 ﻿using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 using TestStack.Seleno.PageObjects;
-using TestStack.Seleno.PageObjects.Locators;
+using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
 {
@@ -27,7 +27,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         public SomeEnum RequiredEnumDropDownSelectedValue
         {
             get { return Read().SelectedOptionValueInDropDown(x => x.RequiredEnum); }
-            set { Input().SelectByOptionValueInDropDown(x => x.RequiredEnum,value); }
+            set { Input().SelectByOptionValueInDropDown(x => x.RequiredEnum, value); }
         }
 
         public string RequiredEnumDropDownSelectedText
@@ -39,24 +39,24 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         public int RequiredIntTextBoxValue
         {
             get { return Read().GetValueFromTextBox(x => x.RequiredInt); }
-            set { Input().ReplaceInputValueWith(x=> x.RequiredInt,value); }
+            set { Input().ReplaceInputValueWith(x=> x.RequiredInt, value); }
         }
 
-        public string[] TextAreaFieldContent
+        public string TextAreaFieldContent
         {
             get { return Read().TextAreaContent(x => x.TextAreaField); }
-            set {Input().UpdateTextAreaContent(x => x.TextAreaField,value); }
+            set {Input().UpdateTextAreaContent(x => x.TextAreaField, value); }
         }
 
-        public bool? OptionalBoolSelectedButtonValue
+        public bool? OptionalBoolAsListSelectedButtonValue
         {
-            get { return Read().SelectedButtonInRadioGroup(x => x.OptionalBool); }
-            set { Input().SelectButtonInRadioGroup(x => x.OptionalBool,value); }
+            get { return Read().SelectedButtonInRadioGroup(x => x.OptionalBoolAsList); }
+            set { Input().SelectButtonInRadioGroup(x => x.OptionalBoolAsList, value); }
         }
 
-        public bool OptionalListHasSelectedButton
+        public bool RequiredListHasSelectedButton
         {
-            get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.OptionalListId); }
+            get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.RequiredListIdAsList); }
         }
     }
 }
