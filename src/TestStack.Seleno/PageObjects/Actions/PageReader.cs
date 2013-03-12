@@ -10,17 +10,12 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     internal class PageReader<TViewModel> : IPageReader<TViewModel> where TViewModel : class ,new()
     {
-        private readonly IWebDriver _browser;
         private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
         private readonly IComponentFactory _componentFactory;
 
-        public PageReader(IWebDriver browser,
-                          IScriptExecutor scriptExecutor,
-                          IElementFinder elementFinder,
-                          IComponentFactory componentFactory)
+        public PageReader(IScriptExecutor scriptExecutor, IElementFinder elementFinder, IComponentFactory componentFactory)
         {
-            _browser = browser;
             _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
             _componentFactory = componentFactory;
@@ -73,7 +68,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             var name = ExpressionHelper.GetExpressionText(field);
 
             var javascriptExpression = string.Format("$('#{0}').is(':visible')", name);
-            return _browser.ExecuteScriptAndReturn<bool>(javascriptExpression);
+            return _scriptExecutor.ScriptAndReturn<bool>(javascriptExpression);
         }
 
         public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName, int waitInSeconds = 20)

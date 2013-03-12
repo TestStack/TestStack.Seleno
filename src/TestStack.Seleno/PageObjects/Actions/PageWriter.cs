@@ -12,7 +12,6 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     internal class PageWriter<TModel> : IPageWriter<TModel> where TModel : class, new()
     {
-        private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
         private readonly IComponentFactory _componentFactory;
 
@@ -20,7 +19,6 @@ namespace TestStack.Seleno.PageObjects.Actions
                           IElementFinder elementFinder,
                           IComponentFactory componentFactory)
         {
-            _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
             _componentFactory = componentFactory;
         }
