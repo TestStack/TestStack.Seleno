@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using By = TestStack.Seleno.PageObjects.Locators.By;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
@@ -22,15 +23,17 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
         }
 
+        // todo: unit test these methods
+
         public void SelectElementByText(string optionText)
         {
-            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", Id, optionText);
+            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", Id, optionText.ToJavaScriptString());
             Execute().ExecuteScript(scriptToExecute);
         }
 
         public override void SelectElement<TProperty>(TProperty value)
         {
-            var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, value);
+            var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, value.ToString().ToJavaScriptString());
             Execute().ExecuteScript(scriptToExecute);
         }
     }
