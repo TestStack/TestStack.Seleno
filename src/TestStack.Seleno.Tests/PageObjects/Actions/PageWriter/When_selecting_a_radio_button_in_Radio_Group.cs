@@ -38,7 +38,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public void AndThen_the_radio_button_group_selected_the_element_matching_the_specified_value()
         {
-            _radioButtonGroup.SelectElement(ChoiceType.Another);
+            _radioButtonGroup.Received().SelectElement(ChoiceType.Another);
         }
     }
 }
