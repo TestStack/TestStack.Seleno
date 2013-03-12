@@ -13,14 +13,14 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         private ITextArea _textArea;
         private IComponentFactory _componentFactory;
         private readonly Expression<Func<TestViewModel, string>> _propertySelector = x => x.MultiLineContent;
-        private readonly string[] _expectedMultiLineContent = new[] { "something on first line", "something else on another line" };
-        private string[] _result;
+        private const string ExpectedMultiLineContent = "something on first line\nsomething else on another line";
+        private string _result;
 
         public void Given_a_text_area_contains_multiple_lines_of_content()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
             _textArea = SubstituteFor<ITextArea>();
-            _textArea.MultiLineContent.Returns(_expectedMultiLineContent);
+            _textArea.Content.Returns(ExpectedMultiLineContent);
 
             _componentFactory
                 .HtmlControlFor<ITextArea>(_propertySelector, Arg.Any<int>())
@@ -41,7 +41,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void AndThen_the_textarea_multi_lines_content_was_retrieved()
         {
-            _result.Should().Equal(_expectedMultiLineContent);
+            _result.Should().Be(ExpectedMultiLineContent);
         }
     }
 }

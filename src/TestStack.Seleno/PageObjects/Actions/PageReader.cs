@@ -127,12 +127,12 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public string[] TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int waitInSeconds = 0)
+        public string TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int waitInSeconds = 0)
         {
             return
                 _componentFactory
                     .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
-                    .MultiLineContent;
+                    .Content;
         }
     }
 }

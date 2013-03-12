@@ -1,33 +1,23 @@
-﻿using System.Linq;
-using OpenQA.Selenium;
-using TestStack.Seleno.Extensions;
-using By = TestStack.Seleno.PageObjects.Locators.By;
+﻿using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
     public interface ITextArea : IHtmlControl
     {
-        string[] MultiLineContent { get; set; }
+        string Content { get; set; }
     }
 
     public class TextArea : HTMLControl, ITextArea
     {
-        public string[] MultiLineContent
+        public string Content
         {
             get
             {
-                var textAreaElement = Find().ElementWithWait(By.Id(Id));
-
-                return
-                    textAreaElement
-                        .Text
-                        .Split('\n')
-                        .Select(line => line.Replace("\r", string.Empty))
-                        .ToArray();
+                return Find().ElementWithWait(By.Id(Id)).GetAttribute("value");
             }
             set
             {
-                var scriptToExecute = string.Format("$('#{0}').text('{1}')", Id, string.Join("\\n", value));
+                var scriptToExecute = string.Format(@"$(""#{0}"").text(""{1}"")", Id, value.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n").Replace("\r", "\\r"));
                 Execute().ExecuteScript(scriptToExecute);
             }
         }

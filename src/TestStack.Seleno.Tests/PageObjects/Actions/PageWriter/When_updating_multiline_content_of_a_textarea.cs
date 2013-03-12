@@ -12,7 +12,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         private ITextArea _textArea;
         private IComponentFactory _componentFactory;
         private readonly Expression<Func<TestViewModel, string>> _propertySelector = x => x.MultiLineContent;
-        private readonly string[] _newMultiLineContent = new[] { "something on first line", "something else on another line" };
+        private readonly string _newMultiLineContent = "something on first line\nsomething else on another line";
 
         public void Given_a_text_area_contains_multiple_lines_of_content()
         {
@@ -38,7 +38,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public void AndThen_the_textarea_multi_lines_content_was_retrieved()
         {
-            _textArea.Received().MultiLineContent = _newMultiLineContent;
+            _textArea.Received().Content = _newMultiLineContent;
 
         }
     }
