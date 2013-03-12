@@ -45,13 +45,5 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
                 .Received()
                 .SetAttributeValue(AttributeName,AttributeValue);
         }
-
-
-        //public void Then_it_should_execute_javascript_to_set_attribute()
-        //{
-        //    SubstituteFor<IScriptExecutor>()
-        //        .Received(1)
-        //        .ExecuteScript(string.Format("$('#Name').attr('{0}','{1}'))", AttributeName, AttributeValue));
-        //}
     }
 }
