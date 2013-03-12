@@ -48,6 +48,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             {
                 if (string.IsNullOrWhiteSpace(_id))
                 {
+                    // todo: Do we want something that uses MVC as part of the core code?
                     _id = TagBuilder.CreateSanitizedId(Name);
                 }
                 return _id;
