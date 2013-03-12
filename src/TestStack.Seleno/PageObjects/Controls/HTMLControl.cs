@@ -87,7 +87,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public void SetAttributeValue<TValue>(string attributeName, TValue value)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}').attr('{1}','{2}')", Id, attributeName, value));
+            Execute().ExecuteScript(string.Format(@"$('#{0}').attr('{1}', ""{2}"")", Id, attributeName, value.ToString().ToJavaScriptString()));
         }
 
         public void RemoveAttribute(string attributeName)
