@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
@@ -29,7 +30,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public void ReplaceInputValueWith<TProperty>(TProperty inputValue)
         {
-            var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, inputValue);
+            var scriptToExecute = string.Format(@"$('#{0}').val(""{1}"")", Id, inputValue.ToString().ToJavaScriptString());
             Execute().ExecuteScript(scriptToExecute);
         }
     }
