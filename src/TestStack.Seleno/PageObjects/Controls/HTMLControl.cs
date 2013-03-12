@@ -20,7 +20,6 @@ namespace TestStack.Seleno.PageObjects.Controls
     
     public abstract class HTMLControl : UiComponent, IHtmlControl
     {
-
         public const string TitleAttribute = "title";
         public const string ReadOnlyAttribute = "readonly";
         public const string DisabledAttribute = "disabled";
@@ -82,12 +81,12 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public TReturn AttributeValueAs<TReturn>(string attributeName)
         {
-            return Execute().ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')",Id,attributeName));
+            return Execute().ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')", Id, attributeName));
         }
 
         public void SetAttributeValue<TValue>(string attributeName, TValue value)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}').attr('{1}','{2}')", Id, attributeName,value));
+            Execute().ExecuteScript(string.Format("$('#{0}').attr('{1}','{2}')", Id, attributeName, value));
         }
 
         public void RemoveAttribute(string attributeName)
@@ -106,6 +105,5 @@ namespace TestStack.Seleno.PageObjects.Controls
                 RemoveAttribute(attributeName);
             }
         }
-
     }
 }

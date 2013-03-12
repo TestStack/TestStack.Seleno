@@ -1,4 +1,3 @@
-using System;
 using System.Web.Mvc;
 
 namespace TestStack.Seleno.PageObjects.Controls
@@ -32,7 +31,5 @@ namespace TestStack.Seleno.PageObjects.Controls
             var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, inputValue);
             Execute().ExecuteScript(scriptToExecute);
         }
-
-       
     }
 }

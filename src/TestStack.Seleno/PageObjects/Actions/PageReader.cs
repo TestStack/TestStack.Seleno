@@ -42,18 +42,16 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector, int waitInSeconds = 20)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<ICheckBox>(checkBoxPropertySelector,waitInSeconds)
-                    .Checked;
+            return _componentFactory
+                .HtmlControlFor<ICheckBox>(checkBoxPropertySelector,waitInSeconds)
+                .Checked;
         }
 
         public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector, int waitInSeconds = 20)
         {
-            return 
-                _componentFactory
-                    .HtmlControlFor<ITextBox>(textBoxPropertySelector)
-                    .Value;
+            return _componentFactory
+                .HtmlControlFor<ITextBox>(textBoxPropertySelector)
+                .Value;
         }
 
         public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, int waitInSeconds = 20)
@@ -78,10 +76,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 20)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<ITextBox>(propertySelector, waitInSeconds)
-                    .ValueAs<TProperty>();
+            return _componentFactory
+                .HtmlControlFor<ITextBox>(propertySelector, waitInSeconds)
+                .ValueAs<TProperty>();
         }
        
         public TProperty TextAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int waitInSeconds = 20)
@@ -91,43 +88,38 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 20)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
-                    .SelectedElementAs<TField>();
+            return _componentFactory
+                .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                .SelectedElementAs<TField>();
         }
         
         public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int waitInSeconds = 20)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
-                    .SelectedElementText;
+            return _componentFactory
+                .HtmlControlFor<IDropDown>(dropDownSelector, waitInSeconds)
+                .SelectedElementText;
         }
 
         public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 20)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
-                    .HasSelectedElement;
+            return _componentFactory
+                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                .HasSelectedElement;
         }
 
         public TProperty SelectedButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int waitInSeconds = 0)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
-                    .SelectedElementAs<TProperty>();
+            return _componentFactory
+                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, waitInSeconds)
+                .SelectedElementAs<TProperty>();
         }
 
 
         public string TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int waitInSeconds = 0)
         {
-            return
-                _componentFactory
-                    .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
-                    .Content;
+            return _componentFactory
+                .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
+                .Content;
         }
     }
 }
