@@ -1,4 +1,5 @@
-﻿using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
+﻿using System;
+using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
 namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
 {
@@ -21,7 +22,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
                     RequiredEnum = SomeEnum.Value2,
                     RequiredNullableEnum = SomeEnum.Value1,
                     OptionalEnum = null,
-                    TextAreaField = "Some text in line 1.\nMore Text in another line 2.\nSome more text in line 3.\nAnd finally last line 4.",
+                    TextAreaField = string.Format("Some text in line 1.{0}More Text in another line 2.{0}Some more text in line 3.{0}And finally last line 4.", Environment.NewLine),
                     /*RequiredEnums = new List<SomeEnum> { SomeEnum.Value2, SomeEnum.Value3 },
                     RequiredNullableEnums = new List<SomeEnum?> { SomeEnum.Value1 },
                     OptionalEnums = null,
