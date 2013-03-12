@@ -40,6 +40,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
+        // todo: Check for consistent default waitInSeconds params across codebase (should we change to lower value like 5s?)
         public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector, int waitInSeconds = 20)
         {
             return _componentFactory
