@@ -1,4 +1,5 @@
 ﻿using By = TestStack.Seleno.PageObjects.Locators.By;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
@@ -17,7 +18,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
             set
             {
-                var scriptToExecute = string.Format(@"$(""#{0}"").text(""{1}"")", Id, value.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\n", "\\n").Replace("\r", "\\r"));
+                var scriptToExecute = string.Format(@"$(""#{0}"").text(""{1}"")", Id, value.ToJavaScriptString());
                 Execute().ExecuteScript(scriptToExecute);
             }
         }

@@ -103,6 +103,7 @@
     <Compile Include="Configuration\Registration\PageObjectRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="InaccessibleSelenoException.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />

@@ -1,5 +1,4 @@
 using System;
-using System.Web.Mvc;
 
 namespace TestStack.Seleno.Tests.TestObjects
 {
@@ -12,6 +11,7 @@ namespace TestStack.Seleno.Tests.TestObjects
         public int Item { get; set; }
         public ChoiceType Choice { get; set; }
         public string MultiLineContent { get; set; }
+        public string AnotherChoice { get; set; }
     }
 
     public enum ChoiceType

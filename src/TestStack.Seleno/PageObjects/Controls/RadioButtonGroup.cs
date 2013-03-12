@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using OpenQA.Selenium;
 using By = TestStack.Seleno.PageObjects.Locators.By;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
@@ -38,10 +39,11 @@ namespace TestStack.Seleno.PageObjects.Controls
         public override void SelectElement<TProperty>(TProperty value)
         {
             var scriptToExecute = string.Format("$('input[type=radio][name={0}][value]')" +
-                                                    ".filter(function() {{return $(this).attr('value').toLowerCase() == '{1}'.toLowerCase()}})"+
-                                                    ".attr('checked',true)",
-                                                Name,
-                                                value);
+                @".filter(function() {{return $(this).attr('value').toLowerCase() == ""{1}"".toLowerCase()}})" +
+                ".attr('checked', true)",
+                Name,
+                value.ToString().ToJavaScriptString()
+            );
             Execute().ExecuteScript(scriptToExecute);
         }
        
