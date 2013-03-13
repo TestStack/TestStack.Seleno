@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using TestStack.BDDfy;
@@ -109,7 +110,11 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
         public class Reading_multiLine_textArea_content : Reading_individual_HTML_Controls
         {
             private string[] _actualMultiLinesContent;
-            private readonly string[] _expectedMultiLinesContent = Form1Fixtures.A.TextAreaField.Split('\n');
+
+            private readonly string[] _expectedMultiLinesContent =
+                Form1Fixtures.A.TextAreaField.Split('\r')
+                    .Select(line => line.Replace("\n", string.Empty))
+                    .ToArray();
 
             public void When_getting_the_textArea_content()
             {

@@ -21,7 +21,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
                     RequiredEnum = SomeEnum.Value2,
                     RequiredNullableEnum = SomeEnum.Value1,
                     OptionalEnum = null,
-                    TextAreaField = "Some text in line 1.\nMore Text in another line 2.\nSome more text in line 3.\nAnd finally last line 4.",
+                    TextAreaField = "Some text in line 1.\r\nMore Text in another line 2.\r\nSome more text in line 3.\r\nAnd finally last line 4.",
                     /*RequiredEnums = new List<SomeEnum> { SomeEnum.Value2, SomeEnum.Value3 },
                     RequiredNullableEnums = new List<SomeEnum?> { SomeEnum.Value1 },
                     OptionalEnums = null,

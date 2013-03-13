@@ -51,6 +51,9 @@
     <Reference Include="TestStack.BDDfy">
       <HintPath>..\packages\TestStack.BDDfy.3.13\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.31.2\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyFixture.cs" />
