@@ -26,11 +26,6 @@ namespace TestStack.Seleno.PageObjects.Controls
             return SelectedElementAs<TReturn>();
         }
 
-        public InputType Type
-        {
-            get { return InputType.Radio; }
-        }
-
         public void ReplaceInputValueWith<TProperty>(TProperty inputValue)
         {
             SelectElement(inputValue);

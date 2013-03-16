@@ -1,6 +1,4 @@
-﻿using System.Web.Mvc;
-
-namespace TestStack.Seleno.PageObjects.Controls
+﻿namespace TestStack.Seleno.PageObjects.Controls
 {
     public interface ICheckBox : IHtmlControl
     {
@@ -10,11 +8,6 @@ namespace TestStack.Seleno.PageObjects.Controls
     public class CheckBox : InputHtmlControl, ICheckBox
     {
         public const string CheckedAttribute = "checked";
-        
-        public override InputType Type
-        {
-            get { return InputType.CheckBox; }
-        }
 
         public bool Checked
         {

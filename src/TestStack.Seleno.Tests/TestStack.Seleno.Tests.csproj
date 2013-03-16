@@ -93,9 +93,6 @@
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Controls\HtmlControlSpecification.cs" />
-    <Compile Include="PageObjects\Actions\Controls\CheckboxControlTests.cs" />
-    <Compile Include="PageObjects\Actions\Controls\TextboxControlTests.cs" />
-    <Compile Include="PageObjects\Actions\Controls\RadioControlTests.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_getting_selected_button_from_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_getting_selected_option_value_from_drop_box.cs" />
