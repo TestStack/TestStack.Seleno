@@ -65,6 +65,11 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
             get { return Find().Element(By.Id("RequiredBool")); }
         }
 
+        public IWebElement FindOptionalNonExistantElement
+        {
+            get { return Find().OptionalElement(By.Id("RandomElement"), 1); }
+        }
+
         public IWebElement FindNonExistantElement(int timeout)
         {
             return Find().Element(By.Id("RandomElement"), timeout);
