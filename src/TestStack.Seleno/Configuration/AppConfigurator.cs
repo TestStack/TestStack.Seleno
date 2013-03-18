@@ -17,6 +17,7 @@ namespace TestStack.Seleno.Configuration
     {
         protected ContainerBuilder ContainerBuilder = new ContainerBuilder();
         protected WebApplication WebApplication;
+        private int _minimumWaitInSeconds = 10;
 
         public AppConfigurator()
         {
@@ -89,7 +90,8 @@ namespace TestStack.Seleno.Configuration
         internal IAppConfigurator WithWebDriver(Func<IWebDriver> webDriver)
         {
             ContainerBuilder.Register(c => webDriver())
-                .As<IWebDriver>().SingleInstance();
+                .As<IWebDriver>().SingleInstance()
+                .OnActivated(a => a.Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(_minimumWaitInSeconds)));
             return this;
         }
 
@@ -97,6 +99,12 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.Register(c => javaScriptExecutor())
                 .As<IJavaScriptExecutor>().SingleInstance();
+            return this;
+        }
+
+        public IAppConfigurator WithMinimumWaitTimeoutInSecondsOf(int minimumWaitInSeconds)
+        {
+            _minimumWaitInSeconds = minimumWaitInSeconds;
             return this;
         }
 
