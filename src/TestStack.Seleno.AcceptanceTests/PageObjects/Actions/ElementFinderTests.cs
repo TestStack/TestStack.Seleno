@@ -50,7 +50,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
                 var stopWatch = Stopwatch.StartNew();
                 try
                 {
-                    _maxWait = 1;
+                    _maxWait = 3;
                     #pragma warning disable 168
                     var x = _page.FindNonExistantElement(_maxWait);
                     #pragma warning restore 168
@@ -69,7 +69,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void And_the_find_call_waited_the_maximum_amount_of_time()
             {
-                Assert.That(_actualWait, Is.GreaterThan(_maxWait - 0.5).And.LessThan(_maxWait + 0.5));
+                Assert.That(_actualWait, Is.GreaterThan(_maxWait - 2).And.LessThan(_maxWait + 2));
             }
         }
 
