@@ -1,4 +1,5 @@
-﻿using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
+﻿using OpenQA.Selenium;
+using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 using TestStack.Seleno.PageObjects;
 using By = OpenQA.Selenium.By;
@@ -57,6 +58,16 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         public bool RequiredListHasSelectedButton
         {
             get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.RequiredListIdAsList); }
+        }
+
+        public IWebElement FindExistantElement
+        {
+            get { return Find().Element(By.Id("RequiredBool")); }
+        }
+
+        public IWebElement FindNonExistantElement(int timeout)
+        {
+            return Find().Element(By.Id("RandomElement"), timeout);
         }
     }
 }
