@@ -64,7 +64,7 @@ namespace TestStack.Seleno.PageObjects
         private void ThrowIfComponentNotCreatedCorrectly()
         {
             if (PageNavigator == null)
-                throw new InvalidOperationException("Don't new up Page Objects; instead use SelenoHost.NavigateToInitialPage");
+                throw new InvalidOperationException("Don't new up page objects / components / controls; instead use SelenoHost.NavigateToInitialPage, Navigate(), HtmlControlFor() or GetComponent() as appropriate.");
         }
     }
 }
