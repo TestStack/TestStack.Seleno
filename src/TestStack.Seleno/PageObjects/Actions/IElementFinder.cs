@@ -42,8 +42,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().OptionalElement(By.Id("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
+        /// <param name="waitInSeconds">Maximum number of seconds to wait for the element to become available</param>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement OptionalElement(By findExpression);
+        IWebElement OptionalElement(By findExpression, int waitInSeconds = 20);
 
         /// <summary>
         /// Locate an element that may or not be present using a jQuery expression and return the <see cref="IWebElement"/> corresponding to that element.
@@ -53,8 +54,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().OptionalElement(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
+        /// <param name="waitInSeconds">Maximum number of seconds to wait for the element to become available</param>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression);
+        IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int waitInSeconds = 20);
 
         /// <summary>
         /// Obsolete: Use OptionalElement instead.

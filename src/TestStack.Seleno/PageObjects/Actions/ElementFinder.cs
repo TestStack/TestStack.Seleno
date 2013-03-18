@@ -27,36 +27,34 @@ namespace TestStack.Seleno.PageObjects.Actions
             return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), waitInSeconds);
         }
 
-        public IWebElement OptionalElement(By findExpression)
+        public IWebElement OptionalElement(By findExpression, int waitInSeconds = 20)
         {
-            IWebElement result = null;
             try
             {
-                result = Browser.FindElement(findExpression);
+                return Element(findExpression, waitInSeconds);
             }
             catch (NoSuchElementException)
-            { }
-
-            return result;
+            {
+                return null;
+            }
         }
 
 
-        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression)
+        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int waitInSeconds = 20)
         {
-            IWebElement result = null;
             try
             {
-                result = Browser.FindElementByjQuery(jQueryFindExpression);
+                return Element(jQueryFindExpression, waitInSeconds);
             }
             catch (NoSuchElementException)
-            { }
-
-            return result;
+            {
+                return null;
+            }
         }
 
         public IWebElement TryFindElementByjQuery(Locators.By.jQueryBy @by)
         {
-            return OptionalElement(by);
+            throw new NotImplementedException("Obsolete");
         }
     }
 }
