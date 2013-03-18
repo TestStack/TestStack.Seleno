@@ -10,6 +10,7 @@ namespace TestStack.Seleno.PageObjects.Locators
 {
     public static class jQueryExtensions
     {
+       
         /// <summary>
         /// Return whether jQuery is loaded in the current page
         /// </summary>
@@ -27,33 +28,42 @@ namespace TestStack.Seleno.PageObjects.Locators
             return result;
         }
 
+        public static void LoadjQuery(this IWebDriver driver, string version = "any", TimeSpan? timeout = null)
+        {
+            var remoteWebDriver = driver as RemoteWebDriver;
+            if (remoteWebDriver != null)
+            {
+                remoteWebDriver.LoadjQuery(version, timeout);
+            }
+        }
+
         /// <summary>
         /// Load jQuery from an external URL to the current page
         /// </summary>
         public static void LoadjQuery(this RemoteWebDriver driver, string version = "any", TimeSpan? timeout = null)
         {
             //Get the url to load jQuery from
-            string jQueryURL = "";
+            string jQueryUrl;
             if (version == "" || version.ToLower() == "latest")
-                jQueryURL = "http://code.jquery.com/jquery-latest.min.js";
+                jQueryUrl = "http://code.jquery.com/jquery-latest.min.js";
             else
-                jQueryURL = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
+                jQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
 
             //Script to load jQuery from external site
-            string versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
+            var versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
                                               : string.Empty;
-            string loadingScript =
+            var loadingScript =
                 @"if (typeof jQuery != 'function')
                   {
                       var headID = document.getElementsByTagName('head')[0];
                       var newScript = document.createElement('script');
                       newScript.type = 'text/javascript';
-                      newScript.src = '" + jQueryURL + @"';
+                      newScript.src = '" + jQueryUrl + @"';
                       headID.appendChild(newScript);
                   }
                   return (typeof jQuery == 'function');";
 
-            bool loaded = (bool)driver.ExecuteScript(versionEnforceScript + loadingScript);
+            var loaded = (bool)driver.ExecuteScript(versionEnforceScript + loadingScript);
 
             if (!loaded)
             {

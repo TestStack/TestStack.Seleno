@@ -1,20 +1,19 @@
 ﻿using System.Web.Mvc;
 using OpenQA.Selenium;
 using By = TestStack.Seleno.PageObjects.Locators.By;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface IRadioButtonGroup : ISelectableHtmlControl, IInputHtmlControl { }
-
-    public class RadioButtonGroup : SelectableHtmlControl, IRadioButtonGroup
+    public class RadioButtonGroup : SelectableHtmlControl
     {
         public override IWebElement SelectedElement
         {
             get
             {
-                var selector = string.Format("$('input[type=radio][name={0}]:checked')", Name);
+                var selector = string.Format("input[type=radio][name={0}]:checked", Name);
 
-                return Find().TryFindElement(By.jQuery(selector), WaitInSecondsUntilElementAvailable);
+                return Find().OptionalElement(By.jQuery(selector));
             }
         }
 
@@ -25,11 +24,6 @@ namespace TestStack.Seleno.PageObjects.Controls
             return SelectedElementAs<TReturn>();
         }
 
-        public InputType Type
-        {
-            get { return InputType.Radio; }
-        }
-
         public void ReplaceInputValueWith<TProperty>(TProperty inputValue)
         {
             SelectElement(inputValue);
@@ -37,9 +31,13 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public override void SelectElement<TProperty>(TProperty value)
         {
-            var scriptToExecute = string.Format("$('input[type=radio][name={0}][value={1}]').attr('checked',true)",
-                                                Name,
-                                                value);
+            // todo: Is the .toLowerCase needed?
+            var scriptToExecute = string.Format("$('input[type=radio][name={0}][value]')" +
+                @".filter(function() {{return $(this).attr('value').toLowerCase() == ""{1}"".toLowerCase()}})" +
+                ".attr('checked', true)",
+                Name,
+                value.ToString().ToJavaScriptString()
+            );
             Execute().ExecuteScript(scriptToExecute);
         }
        

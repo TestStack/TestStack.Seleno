@@ -19,11 +19,11 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
             _selectedOption = SubstituteFor<IWebElement>();
 
             ElementFinder
-                .ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
+                .Element(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
                 .Returns(_selectedOption);
 
             ElementFinder
-                .WhenForAnyArgs(x => x.ElementWithWait(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
+                .WhenForAnyArgs(x => x.Element(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
         }
 
@@ -41,7 +41,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_retrieve_the_selected_option()
         {
-            _actualJqueryBy.Selector.Should().Contain("$('#Item option:selected')");
+            _actualJqueryBy.Selector.Should().Contain("#Item option:selected");
         }
 
         public void AndThen_it_should_get_the_value_of_the_selected_drop_down_list_option()

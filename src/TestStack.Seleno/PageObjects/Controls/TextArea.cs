@@ -1,16 +1,21 @@
-﻿namespace TestStack.Seleno.PageObjects.Controls
-{
-    public interface ITextArea : IHtmlControl
-    {
-        string[] MultiLineContent { get; set; }
-    }
+﻿using By = TestStack.Seleno.PageObjects.Locators.By;
+using TestStack.Seleno.Extensions;
 
-    public class TextArea : HTMLControl, ITextArea
+namespace TestStack.Seleno.PageObjects.Controls
+{
+    public class TextArea : HTMLControl
     {
-        public string[] MultiLineContent
+        public virtual string Content
         {
-            get { return Execute().ScriptAndReturn<string[]>(string.Format("$('#{0}').text().split('\n')", Id)); }
-            set { Execute().ExecuteScript(string.Format("$('#{0}').text('{1}')", Id, string.Join("\n", value))); }
+            get
+            {
+                return Find().Element(By.Id(Id)).GetAttribute("value");
+            }
+            set
+            {
+                var scriptToExecute = string.Format(@"$(""#{0}"").text(""{1}"")", Id, value.ToJavaScriptString());
+                Execute().ExecuteScript(scriptToExecute);
+            }
         }
     }
 }

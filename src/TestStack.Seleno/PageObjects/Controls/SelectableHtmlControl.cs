@@ -3,21 +3,14 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface ISelectableHtmlControl : IHtmlControl
-    {
-        bool HasSelectedElement { get; }
-        TProperty SelectedElementAs<TProperty>();
-        void SelectElement<TProperty>(TProperty value);
-    }
-
-    public abstract class SelectableHtmlControl : HTMLControl, ISelectableHtmlControl
+    public abstract class SelectableHtmlControl : HTMLControl
     {
         public bool HasSelectedElement
         {
             get { return SelectedElement != null; }
         }
 
-        public TProperty SelectedElementAs<TProperty>()
+        public virtual TProperty SelectedElementAs<TProperty>()
         {
             if (!HasSelectedElement)
             {

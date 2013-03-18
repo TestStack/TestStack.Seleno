@@ -6,7 +6,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
     class When_setting_an_attribute_value_for_any_element : HtmlControlSpecificationFor<TextBox>
     {
         private const string AttributeName = "data-myAttribute";
-        private const string AttributeValue = "someValue";
+        private const string AttributeValue = "someValue \\ \" \r\n";
 
         public When_setting_an_attribute_value_for_any_element() : base(x => x.Name)
         {
@@ -17,10 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             ScriptExecutor
                 .Received(1)
-                .ExecuteScript(string.Format("$('#Name').attr('{0}','{1}')", AttributeName, AttributeValue));
+                .ExecuteScript(string.Format(@"$('#Name').attr('{0}', ""someValue \\ \"" \r\n"")", AttributeName));
         }
-
-
-        
     }
 }

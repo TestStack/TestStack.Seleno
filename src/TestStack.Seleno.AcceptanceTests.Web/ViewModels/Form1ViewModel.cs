@@ -24,11 +24,15 @@ namespace TestStack.Seleno.AcceptanceTests.Web.ViewModels
         public bool? OptionalBool { get; set; }
         public bool? OptionalBool2 { get; set; }
         public bool? OptionalBool3 { get; set; }
+        public bool? OptionalBoolAsList { get; set; }
 
         public SomeEnum RequiredEnum { get; set; }
         [Required]
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string TextAreaField { get; set; }
 
         /*[Required]
         public IEnumerable<SomeEnum> RequiredEnums { get; set; }
@@ -39,8 +43,12 @@ namespace TestStack.Seleno.AcceptanceTests.Web.ViewModels
 
         [ReadOnly(true)]
         public List<ListItem> List { get; set; }
+
         [ExistsIn("List", "Id", "Name")]
         public int RequiredListId { get; set; }
+        
+        [ExistsIn("List", "Id", "Name")]
+        public int RequiredListIdAsList { get; set; }
     }
 
     public class ListItem

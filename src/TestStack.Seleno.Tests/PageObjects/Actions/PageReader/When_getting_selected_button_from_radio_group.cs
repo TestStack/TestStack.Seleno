@@ -9,7 +9,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
     class When_getting_selected_button_from_radio_group : PageReaderSpecification
     {
-        private IRadioButtonGroup _radioButtonGroup;
+        private RadioButtonGroup _radioButtonGroup;
         private readonly Expression<Func<TestViewModel, ChoiceType>> _radioGroupPropertySelector = x => x.Choice;
         private IComponentFactory _componentFactory;
 
@@ -17,17 +17,16 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
 
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _radioButtonGroup = SubstituteFor<IRadioButtonGroup>();
+            _radioButtonGroup = Substitute.For<RadioButtonGroup>();
 
             _componentFactory
-                .HtmlControlFor<IRadioButtonGroup>(_radioGroupPropertySelector,Arg.Any<int>())
+                .HtmlControlFor<RadioButtonGroup>(_radioGroupPropertySelector,Arg.Any<int>())
                 .Returns(_radioButtonGroup);
 
             
             _radioButtonGroup.SelectedElementAs<ChoiceType>().Returns(ChoiceType.Another);
         }
 
-        
         public void When_getting_selected_radio_button()
         {
             SUT.SelectedButtonInRadioGroup(_radioGroupPropertySelector);
@@ -37,14 +36,12 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IRadioButtonGroup>(_radioGroupPropertySelector, 0);
+                .HtmlControlFor<RadioButtonGroup>(_radioGroupPropertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_value_of_its_selected_element()
         {
             _radioButtonGroup.Received().SelectedElementAs<ChoiceType>();
         }
-
-     
     }
 }

@@ -15,7 +15,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue);
         void ReplaceInputValueWith(string inputName, string value);
         void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked);
-        void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content,int waitInSeconds = 0);
-        void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string[] multiLineContent, int waitInSeconds = 0);
+        void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int maxWaitInSeconds = 5);
+
+        void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector,TProperty optionValue);
+        void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector,string optionText);
+        void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue);
     }
 }

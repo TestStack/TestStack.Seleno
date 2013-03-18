@@ -1,22 +1,10 @@
-﻿using System.Web.Mvc;
-
-namespace TestStack.Seleno.PageObjects.Controls
+﻿namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface ICheckBox : IHtmlControl
-    {
-        bool Checked { get; set; }
-    }
-    
-    public class CheckBox : InputHtmlControl, ICheckBox
+    public class CheckBox : InputHtmlControl
     {
         public const string CheckedAttribute = "checked";
-        
-        public override InputType Type
-        {
-            get { return InputType.CheckBox; }
-        }
 
-        public bool Checked
+        public virtual bool Checked
         {
             get { return AttributeValueAs<object>(CheckedAttribute) != null; }
             set { AddOrRemoveAttribute(CheckedAttribute, value); }

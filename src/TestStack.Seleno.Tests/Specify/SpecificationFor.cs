@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Autofac;
-using Autofac.Core.Activators.Reflection;
 using AutofacContrib.NSubstitute;
 
 namespace TestStack.Seleno.Tests.Specify

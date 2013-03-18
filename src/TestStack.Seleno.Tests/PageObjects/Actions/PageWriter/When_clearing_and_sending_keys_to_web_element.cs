@@ -11,7 +11,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         public void Given_there_is_a_web_element_matching_By_Name()
         {
             SubstituteFor<IElementFinder>()
-                .ElementWithWait(By.Name("Name"))
+                .Element(By.Name("Name"))
                 .Returns(SubstituteFor<IWebElement>());
         }
 
