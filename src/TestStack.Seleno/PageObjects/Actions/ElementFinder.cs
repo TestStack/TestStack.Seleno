@@ -19,15 +19,15 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public IWebElement Element(By findElement, int waitInSeconds = 20)
         {
-            return Browser.ElementWithWait(d => d.FindElement(findElement));
+            return Browser.ElementWithWait(d => d.FindElement(findElement), waitInSeconds);
         }
 
         public IWebElement Element(Locators.By.jQueryBy @by, int waitInSeconds = 20)
         {
-            return Browser.ElementWithWait(d => d.FindElementByjQuery(by));
+            return Browser.ElementWithWait(d => d.FindElementByjQuery(by), waitInSeconds);
         }
 
-        public IWebElement TryFindElement(By by)
+        public IWebElement OptionalElement(By by)
         {
             IWebElement result = null;
             try
@@ -41,7 +41,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public IWebElement TryFindElement(Locators.By.jQueryBy by)
+        public IWebElement OptionalElement(Locators.By.jQueryBy by)
         {
             IWebElement result = null;
             try
@@ -54,10 +54,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             return result;
         }
 
-        [Obsolete("Use TryFindElement instead")]
         public IWebElement TryFindElementByjQuery(Locators.By.jQueryBy @by)
         {
-            return TryFindElement(by);
+            return OptionalElement(by);
         }
     }
 }

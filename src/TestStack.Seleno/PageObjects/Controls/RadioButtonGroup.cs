@@ -15,7 +15,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             {
                 var selector = string.Format("input[type=radio][name={0}]:checked", Name);
 
-                return Find().TryFindElement(By.jQuery(selector));
+                return Find().OptionalElement(By.jQuery(selector));
             }
         }
 

@@ -5,6 +5,7 @@ todo document these breaking changes:
 *	Renamed SelenoApplicationRunner to SelenoHost
 *	Can't new-up page objects anymore
 *	Changed ElementWithWait to Element
+*	Changed TryFindElement with OptionalElement
 
 Version 0.4
 -----------
