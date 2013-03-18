@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
                 .Returns(MultilineContent);
 
             ElementFinder
-                .ElementWithWait(Arg.Any<By>())
+                .Element(Arg.Any<By>())
                 .Returns(_textAreaElement);
             
         }

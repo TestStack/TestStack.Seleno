@@ -4,6 +4,7 @@ todo document these breaking changes:
 *	Removed waitInSeconds parameter from the TryFindElement methods in Find()
 *	Renamed SelenoApplicationRunner to SelenoHost
 *	Can't new-up page objects anymore
+*	Changed ElementWithWait to Element
 
 Version 0.4
 -----------

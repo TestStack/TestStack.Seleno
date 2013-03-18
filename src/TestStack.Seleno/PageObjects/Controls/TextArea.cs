@@ -14,7 +14,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         {
             get
             {
-                return Find().ElementWithWait(By.Id(Id)).GetAttribute("value");
+                return Find().Element(By.Id(Id)).GetAttribute("value");
             }
             set
             {

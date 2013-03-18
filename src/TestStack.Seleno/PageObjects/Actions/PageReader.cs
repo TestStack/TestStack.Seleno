@@ -59,7 +59,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             var name = ExpressionHelper.GetExpressionText(field);
             var id = TagBuilder.CreateSanitizedId(name);
-            return _elementFinder.ElementWithWait(By.Id(id),waitInSeconds);
+            return _elementFinder.Element(By.Id(id),waitInSeconds);
         }
 
         public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> field)
