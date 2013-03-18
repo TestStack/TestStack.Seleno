@@ -91,7 +91,8 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Retrieve a cell value in grid for specified row number
         /// </summary>
         /// <param name="rowIndex">number of the row in the grid to click on (1 based)</param>
-        /// <returns></returns>
+        /// <param name="propertySelector">An expression that indicates which property to get the value for in the given row</param>
+        /// <returns>The value of the requested cell</returns>
         public TProperty GetCellValueFor<TProperty>(int rowIndex, Expression<Func<TViewModel, TProperty>> propertySelector)
         {
             var property = propertySelector.GetPropertyFromLambda();
