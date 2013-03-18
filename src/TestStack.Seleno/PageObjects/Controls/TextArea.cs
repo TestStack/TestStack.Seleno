@@ -3,14 +3,9 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface ITextArea : IHtmlControl
+    public class TextArea : HTMLControl
     {
-        string Content { get; set; }
-    }
-
-    public class TextArea : HTMLControl, ITextArea
-    {
-        public string Content
+        public virtual string Content
         {
             get
             {

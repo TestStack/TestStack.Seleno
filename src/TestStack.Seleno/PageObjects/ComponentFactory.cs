@@ -24,7 +24,7 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
         {
-            return new PageWriter<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
+            return new PageWriter<TModel>(_scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IElementAssert CreateElementAssert(By selector)

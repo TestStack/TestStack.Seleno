@@ -4,15 +4,9 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface IDropDown : ISelectableHtmlControl
+    public class DropDown : SelectableHtmlControl
     {
-        string SelectedElementText { get; }
-        void SelectElementByText(string optionText);
-    }
-
-    public class DropDown : SelectableHtmlControl, IDropDown
-    {
-        public string SelectedElementText { get { return SelectedElement.Text; } }
+        public virtual string SelectedElementText { get { return SelectedElement.Text; } }
 
         public override IWebElement SelectedElement
         {
@@ -25,7 +19,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         // todo: unit test these methods
 
-        public void SelectElementByText(string optionText)
+        public virtual void SelectElementByText(string optionText)
         {
             var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", Id, optionText.ToJavaScriptString());
             Execute().ExecuteScript(scriptToExecute);

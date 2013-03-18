@@ -2,22 +2,14 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface IInputHtmlControl : IHtmlControl
-    {
-        string Value { get; }
-        TReturn ValueAs<TReturn>();
-
-        void ReplaceInputValueWith<TProperty>(TProperty inputValue);
-    }
-
-    public abstract class InputHtmlControl : HTMLControl, IInputHtmlControl
+    public abstract class InputHtmlControl : HTMLControl
     {
         public string Value
         {
             get { return ValueAs<string>(); }
         }
         
-        public TReturn ValueAs<TReturn>()
+        public virtual TReturn ValueAs<TReturn>()
         {
             var scriptToExecute = string.Format("$('#{0}').val()", Id);
             return Execute().ScriptAndReturn<TReturn>(scriptToExecute);

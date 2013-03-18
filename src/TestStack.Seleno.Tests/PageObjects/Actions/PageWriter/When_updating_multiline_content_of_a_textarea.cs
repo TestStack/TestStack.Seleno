@@ -9,7 +9,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 {
     class When_updating_multiline_content_of_a_textarea : PageWriterSpecification
     {
-        private ITextArea _textArea;
+        private TextArea _textArea;
         private IComponentFactory _componentFactory;
         private readonly Expression<Func<TestViewModel, string>> _propertySelector = x => x.MultiLineContent;
         private const string _newMultiLineContent = "something on first line\nsomething else on another line";
@@ -17,10 +17,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         public void Given_a_text_area_contains_multiple_lines_of_content()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _textArea = SubstituteFor<ITextArea>();
+            _textArea = Substitute.For<TextArea>();
 
             _componentFactory
-                .HtmlControlFor<ITextArea>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<TextArea>(_propertySelector, Arg.Any<int>())
                 .Returns(_textArea);
         }
 
@@ -33,7 +33,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<ITextArea>(_propertySelector);
+                .HtmlControlFor<TextArea>(_propertySelector);
         }
 
         public void AndThen_the_textarea_multi_lines_content_was_retrieved()

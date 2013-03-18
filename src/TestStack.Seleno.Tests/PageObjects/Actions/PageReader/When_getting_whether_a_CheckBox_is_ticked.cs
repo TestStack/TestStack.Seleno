@@ -8,9 +8,9 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    class When_getting_whether_a_CheckBox_is_ticked: PageReaderSpecification
+    class When_getting_whether_a_checkbox_is_ticked: PageReaderSpecification
     {
-        private ICheckBox _checkBox;
+        private CheckBox _checkBox;
         private IComponentFactory _componentFactory;
         private readonly Expression<Func<TestViewModel, bool>> _propertySelector = x => x.Exists;
         private bool _result;
@@ -18,10 +18,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         public void Given_a_drop_down_has_a_selected_option()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _checkBox = SubstituteFor<ICheckBox>();
+            _checkBox = Substitute.For<CheckBox>();
 
             _componentFactory
-                .HtmlControlFor<ICheckBox>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<CheckBox>(_propertySelector, Arg.Any<int>())
                 .Returns(_checkBox);
         }
 
@@ -34,7 +34,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<ICheckBox>(_propertySelector);
+                .HtmlControlFor<CheckBox>(_propertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_value_of_its_selected_element()

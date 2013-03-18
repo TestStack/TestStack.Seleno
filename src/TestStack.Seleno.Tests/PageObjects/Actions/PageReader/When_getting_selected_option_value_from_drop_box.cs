@@ -9,17 +9,17 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
     class When_getting_selected_option_value_from_drop_box : PageReaderSpecification
     {
-        private IDropDown _dropDown;
+        private DropDown _dropDown;
         private IComponentFactory _componentFactory;
         private readonly Expression<Func<TestViewModel, int>> _dropDownPropertySelector = x => x.Item;
 
         public void Given_a_drop_down_has_a_selected_option()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _dropDown = SubstituteFor<IDropDown>();
+            _dropDown = Substitute.For<DropDown>();
 
             _componentFactory
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector)
+                .HtmlControlFor<DropDown>(_dropDownPropertySelector)
                 .Returns(_dropDown);
         }
 
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector);
+                .HtmlControlFor<DropDown>(_dropDownPropertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_value_of_its_selected_element()

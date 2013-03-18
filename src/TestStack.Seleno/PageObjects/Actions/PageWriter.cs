@@ -87,7 +87,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked)
         {
-            var checkBox =_componentFactory.HtmlControlFor<ICheckBox>(propertySelector);
+            var checkBox =_componentFactory.HtmlControlFor<CheckBox>(propertySelector);
 
             checkBox.Checked = isTicked;
         }
@@ -115,42 +115,42 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
             _componentFactory
-                .HtmlControlFor<ITextBox>(propertySelector)
+                .HtmlControlFor<TextBox>(propertySelector)
                 .ReplaceInputValueWith(inputValue);
         }
 
         public void ReplaceInputValueWith(string inputName, string value)
         {
             _componentFactory
-                .HtmlControlFor<ITextBox>(inputName)
+                .HtmlControlFor<TextBox>(inputName)
                 .ReplaceInputValueWith(value);
         }
 
         public void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, TProperty optionValue)
         {
             _componentFactory
-                .HtmlControlFor<IDropDown>(dropDownSelector)
+                .HtmlControlFor<DropDown>(dropDownSelector)
                 .SelectElement(optionValue);
         }
 
         public void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, string optionText)
         {
             _componentFactory
-               .HtmlControlFor<IDropDown>(dropDownSelector)
+               .HtmlControlFor<DropDown>(dropDownSelector)
                .SelectElementByText(optionText);
         }
 
         public void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue)
         {
             _componentFactory
-                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector)
+                .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector)
                 .SelectElement(buttonValue);
         }
 
         public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int maxWaitInSeconds = 5)
         {
             _componentFactory
-                .HtmlControlFor<ITextArea>(textAreaPropertySelector, maxWaitInSeconds)
+                .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWaitInSeconds)
                 .Content = content;
         }
     }

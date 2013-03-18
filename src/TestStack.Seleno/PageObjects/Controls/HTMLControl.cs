@@ -24,7 +24,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         public const string ReadOnlyAttribute = "readonly";
         public const string DisabledAttribute = "disabled";
 
-        protected PropertyInfo ViewModelProperty
+        protected virtual PropertyInfo ViewModelProperty
         {
             get
             {

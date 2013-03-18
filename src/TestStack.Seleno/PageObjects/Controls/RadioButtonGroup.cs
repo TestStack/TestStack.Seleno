@@ -5,9 +5,7 @@ using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface IRadioButtonGroup : ISelectableHtmlControl, IInputHtmlControl { }
-
-    public class RadioButtonGroup : SelectableHtmlControl, IRadioButtonGroup
+    public class RadioButtonGroup : SelectableHtmlControl
     {
         public override IWebElement SelectedElement
         {

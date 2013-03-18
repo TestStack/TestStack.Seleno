@@ -10,16 +10,16 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
     class When_getting_a_strongly_typed_textBox_value : PageReaderSpecification
     {
         private IComponentFactory _componentFactory;
-        private IInputHtmlControl _textBox;
+        private InputHtmlControl _textBox;
         private readonly Expression<Func<TestViewModel, bool>> _textBoxPropertySelector = x => x.Exists;
 
         public void Given_a_web_element_has_an_attribute_data_value()
         {
             _componentFactory = SubstituteFor<IComponentFactory>();
-            _textBox = SubstituteFor<ITextBox>();
+            _textBox = Substitute.For<TextBox>();
 
             _componentFactory
-                .HtmlControlFor<ITextBox>(_textBoxPropertySelector)
+                .HtmlControlFor<TextBox>(_textBoxPropertySelector)
                 .Returns(_textBox);
         }
         
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<ITextBox>(_textBoxPropertySelector);
+                .HtmlControlFor<TextBox>(_textBoxPropertySelector);
         }
 
         public void Then_it_should_get_the_value_of_the_textbox_value_attribute()

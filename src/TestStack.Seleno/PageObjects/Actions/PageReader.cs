@@ -40,17 +40,17 @@ namespace TestStack.Seleno.PageObjects.Actions
             return instance;
         }
 
-        public bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector, int maxWaitInSeconds = 5)
+        public virtual bool CheckBoxValue<TProperty>(Expression<Func<TViewModel, TProperty>> checkBoxPropertySelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<ICheckBox>(checkBoxPropertySelector, maxWaitInSeconds)
+                .HtmlControlFor<CheckBox>(checkBoxPropertySelector, maxWaitInSeconds)
                 .Checked;
         }
 
         public string TextboxValue<TProperty>(Expression<Func<TViewModel, TProperty>> textBoxPropertySelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<ITextBox>(textBoxPropertySelector)
+                .HtmlControlFor<TextBox>(textBoxPropertySelector)
                 .Value;
         }
 
@@ -77,7 +77,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         public TProperty GetValueFromTextBox<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<ITextBox>(propertySelector, maxWaitInSeconds)
+                .HtmlControlFor<TextBox>(propertySelector, maxWaitInSeconds)
                 .ValueAs<TProperty>();
         }
        
@@ -89,28 +89,28 @@ namespace TestStack.Seleno.PageObjects.Actions
         public TField SelectedOptionValueInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<IDropDown>(dropDownSelector, maxWaitInSeconds)
+                .HtmlControlFor<DropDown>(dropDownSelector, maxWaitInSeconds)
                 .SelectedElementAs<TField>();
         }
         
         public string SelectedOptionTextInDropDown<TField>(Expression<Func<TViewModel, TField>> dropDownSelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<IDropDown>(dropDownSelector, maxWaitInSeconds)
+                .HtmlControlFor<DropDown>(dropDownSelector, maxWaitInSeconds)
                 .SelectedElementText;
         }
 
         public bool HasSelectedRadioButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, maxWaitInSeconds)
+                .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, maxWaitInSeconds)
                 .HasSelectedElement;
         }
 
         public TProperty SelectedButtonInRadioGroup<TProperty>(Expression<Func<TViewModel, TProperty>> radioGroupButtonSelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector, maxWaitInSeconds)
+                .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector, maxWaitInSeconds)
                 .SelectedElementAs<TProperty>();
         }
 
@@ -118,7 +118,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         public string TextAreaContent(Expression<Func<TViewModel, string>> textAreaPropertySelector, int maxWaitInSeconds = 5)
         {
             return _componentFactory
-                .HtmlControlFor<ITextArea>(textAreaPropertySelector, maxWaitInSeconds)
+                .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWaitInSeconds)
                 .Content;
         }
     }

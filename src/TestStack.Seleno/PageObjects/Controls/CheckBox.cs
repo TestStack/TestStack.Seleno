@@ -1,15 +1,10 @@
 ﻿namespace TestStack.Seleno.PageObjects.Controls
 {
-    public interface ICheckBox : IHtmlControl
-    {
-        bool Checked { get; set; }
-    }
-    
-    public class CheckBox : InputHtmlControl, ICheckBox
+    public class CheckBox : InputHtmlControl
     {
         public const string CheckedAttribute = "checked";
 
-        public bool Checked
+        public virtual bool Checked
         {
             get { return AttributeValueAs<object>(CheckedAttribute) != null; }
             set { AddOrRemoveAttribute(CheckedAttribute, value); }
