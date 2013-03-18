@@ -17,22 +17,22 @@ namespace TestStack.Seleno.PageObjects.Actions
             Browser = browser;
         }
 
-        public IWebElement Element(By findElement, int waitInSeconds = 20)
+        public IWebElement Element(By findExpression, int waitInSeconds = 20)
         {
-            return Browser.ElementWithWait(d => d.FindElement(findElement), waitInSeconds);
+            return Browser.ElementWithWait(d => d.FindElement(findExpression), waitInSeconds);
         }
 
-        public IWebElement Element(Locators.By.jQueryBy @by, int waitInSeconds = 20)
+        public IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, int waitInSeconds = 20)
         {
-            return Browser.ElementWithWait(d => d.FindElementByjQuery(by), waitInSeconds);
+            return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), waitInSeconds);
         }
 
-        public IWebElement OptionalElement(By by)
+        public IWebElement OptionalElement(By findExpression)
         {
             IWebElement result = null;
             try
             {
-                result =  Browser.FindElement(by);
+                result = Browser.FindElement(findExpression);
             }
             catch (NoSuchElementException)
             { }
@@ -41,12 +41,12 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public IWebElement OptionalElement(Locators.By.jQueryBy by)
+        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression)
         {
             IWebElement result = null;
             try
             {
-                result = Browser.FindElementByjQuery(by);
+                result = Browser.FindElementByjQuery(jQueryFindExpression);
             }
             catch (NoSuchElementException)
             { }
