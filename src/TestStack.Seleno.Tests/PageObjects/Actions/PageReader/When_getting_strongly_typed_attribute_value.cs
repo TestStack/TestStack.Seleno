@@ -13,7 +13,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void Given_a_web_element_has_an_attribute_data_value()
         {
-            SubstituteFor<IElementFinder>().TryFindElement(Arg.Any<By>()).Returns(SubstituteFor<IWebElement>());
+            SubstituteFor<IElementFinder>().OptionalElement(Arg.Any<By>()).Returns(SubstituteFor<IWebElement>());
 
         }
 

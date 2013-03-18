@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web.Mvc;
+using System.Text;
 using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
@@ -20,12 +20,11 @@ namespace TestStack.Seleno.PageObjects.Controls
     
     public abstract class HTMLControl : UiComponent, IHtmlControl
     {
-
         public const string TitleAttribute = "title";
         public const string ReadOnlyAttribute = "readonly";
         public const string DisabledAttribute = "disabled";
 
-        protected PropertyInfo ViewModelProperty
+        protected virtual PropertyInfo ViewModelProperty
         {
             get
             {
@@ -49,7 +48,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             {
                 if (string.IsNullOrWhiteSpace(_id))
                 {
-                    _id = TagBuilder.CreateSanitizedId(Name);
+                    _id = Html401IdUtil.CreateSanitizedId(Name);
                 }
                 return _id;
             }
@@ -82,17 +81,17 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public TReturn AttributeValueAs<TReturn>(string attributeName)
         {
-            return Execute().ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')",Id,attributeName));
+            return Execute().ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')", Id, attributeName));
         }
 
         public void SetAttributeValue<TValue>(string attributeName, TValue value)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}').attr('{1}','{2}')", Id, attributeName,value));
+            Execute().ExecuteScript(string.Format(@"$('#{0}').attr('{1}', ""{2}"")", Id, attributeName, value.ToString().ToJavaScriptString()));
         }
 
         public void RemoveAttribute(string attributeName)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}')..removeAttr('{1}')", Id, attributeName));
+            Execute().ExecuteScript(string.Format("$('#{0}').removeAttr('{1}')", Id, attributeName));
         }
 
         protected void AddOrRemoveAttribute(string attributeName, bool addOrRemove)
@@ -107,5 +106,67 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
         }
 
+
+        /// <summary>
+        /// Copied from System.Web.Mvc.TagBuilder
+        /// </summary>
+        private static class Html401IdUtil
+        {
+            public static string CreateSanitizedId(string originalId)
+            {
+                if (string.IsNullOrEmpty(originalId))
+                    return null;
+                char c1 = originalId[0];
+                if (!IsLetter(c1))
+                    return null;
+                var stringBuilder = new StringBuilder(originalId.Length);
+                stringBuilder.Append(c1);
+                for (var index = 1; index < originalId.Length; ++index)
+                {
+                    char c2 = originalId[index];
+                    if (IsValidIdCharacter(c2))
+                        stringBuilder.Append(c2);
+                    else
+                        stringBuilder.Append("_");
+                }
+                return stringBuilder.ToString();
+            }
+
+            private static bool IsAllowableSpecialCharacter(char c)
+            {
+                switch (c)
+                {
+                    case '-':
+                    case ':':
+                    case '_':
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            private static bool IsDigit(char c)
+            {
+                if (48 <= c)
+                    return c <= 57;
+                return false;
+            }
+
+            private static bool IsLetter(char c)
+            {
+                if (65 <= c && c <= 90)
+                    return true;
+                if (97 <= c)
+                    return c <= 122;
+                return false;
+            }
+
+            private static bool IsValidIdCharacter(char c)
+            {
+                if (!IsLetter(c) && !IsDigit(c))
+                    return IsAllowableSpecialCharacter(c);
+                return true;
+            }
+        }
     }
 }

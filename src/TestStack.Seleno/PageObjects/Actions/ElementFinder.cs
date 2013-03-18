@@ -17,47 +17,44 @@ namespace TestStack.Seleno.PageObjects.Actions
             Browser = browser;
         }
 
-        public IWebElement ElementWithWait(By findElement, int waitInSeconds = 20)
+        public IWebElement Element(By findExpression, int maxWaitInSeconds = 5)
         {
-            return Browser.ElementWithWait(d => d.FindElement(findElement));
+            return Browser.ElementWithWait(d => d.FindElement(findExpression), maxWaitInSeconds);
         }
 
-        public IWebElement ElementWithWait(Locators.By.jQueryBy @by, int waitInSeconds = 20)
+        public IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5)
         {
-            return Browser.ElementWithWait(d => d.FindElementByjQuery(by));
+            return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), maxWaitInSeconds);
         }
 
-        public IWebElement TryFindElement(By by, int waitInSeconds = 0)
+        public IWebElement OptionalElement(By findExpression, int maxWaitInSeconds = 5)
         {
-            IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                return Element(findExpression, maxWaitInSeconds);
             }
             catch (NoSuchElementException)
-            { }
-
-            return result;
+            {
+                return null;
+            }
         }
 
 
-        public IWebElement TryFindElement(Locators.By.jQueryBy by, int waitInSeconds = 0)
+        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5)
         {
-            IWebElement result = null;
             try
             {
-                result = ElementWithWait(by, waitInSeconds);
+                return Element(jQueryFindExpression, maxWaitInSeconds);
             }
             catch (NoSuchElementException)
-            { }
-
-            return result;
+            {
+                return null;
+            }
         }
 
-        [Obsolete("Use TryFindElement instead")]
         public IWebElement TryFindElementByjQuery(Locators.By.jQueryBy @by)
         {
-            return TryFindElement(by);
+            throw new NotImplementedException("Obsolete");
         }
     }
 }

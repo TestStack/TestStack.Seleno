@@ -11,7 +11,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
     abstract class HtmlControlSpecificationFor<THtmlControl> : SpecificationFor<THtmlControl>
         where THtmlControl : HTMLControl, new()
     {
-
         protected IPageNavigator PageNavigator { get; private set; }
         protected IElementFinder ElementFinder { get; private  set; }
         protected IScriptExecutor ScriptExecutor { get; private set; }
@@ -33,8 +32,5 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
                       };
 
         }
-        
-     
-        
     }
 }

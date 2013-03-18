@@ -19,12 +19,12 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_scope.Resolve<IWebDriver>(), _scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
+            return new PageReader<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
         {
-            return new PageWriter<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
+            return new PageWriter<TModel>(_scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IElementAssert CreateElementAssert(By selector)
@@ -37,22 +37,18 @@ namespace TestStack.Seleno.PageObjects
             return _scope.Resolve<TPage>();
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20) 
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int maxWaitInSeconds = 5)
             where THtmlControl : IHtmlControl
         {
-            return
-                _scope
-                    .Resolve<THtmlControl>()
-                    .Initialize(propertySelector, waitInSeconds);
+            return  _scope.Resolve<THtmlControl>()
+                .Initialize(propertySelector, maxWaitInSeconds);
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
+        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int maxWaitInSeconds = 5)
            where THtmlControl : IHtmlControl
         {
-            return
-                _scope
-                    .Resolve<THtmlControl>()
-                    .Initialize(controlId, waitInSeconds);
+            return _scope.Resolve<THtmlControl>()
+                .Initialize(controlId, maxWaitInSeconds);
         }
     }
 }

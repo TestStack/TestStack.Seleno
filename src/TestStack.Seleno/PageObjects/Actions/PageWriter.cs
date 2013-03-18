@@ -12,15 +12,11 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     internal class PageWriter<TModel> : IPageWriter<TModel> where TModel : class, new()
     {
-        private readonly IScriptExecutor _scriptExecutor;
         private readonly IElementFinder _elementFinder;
         private readonly IComponentFactory _componentFactory;
 
-        public PageWriter(IScriptExecutor scriptExecutor,
-                          IElementFinder elementFinder,
-                          IComponentFactory componentFactory)
+        public PageWriter(IElementFinder elementFinder, IComponentFactory componentFactory)
         {
-            _scriptExecutor = scriptExecutor;
             _elementFinder = elementFinder;
             _componentFactory = componentFactory;
         }
@@ -91,7 +87,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void TickCheckbox(Expression<Func<TModel, bool>> propertySelector, bool isTicked)
         {
-            var checkBox =_componentFactory.HtmlControlFor<ICheckBox>(propertySelector);
+            var checkBox =_componentFactory.HtmlControlFor<CheckBox>(propertySelector);
 
             checkBox.Checked = isTicked;
         }
@@ -104,7 +100,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public void ClearAndSendKeys(string elementName, string value, bool clearFirst = true)
         {
-            var element = _elementFinder.ElementWithWait(By.Name(elementName));
+            var element = _elementFinder.Element(By.Name(elementName));
             if (clearFirst) element.Clear();
             element.SendKeys(value);
         }
@@ -119,50 +115,43 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void ReplaceInputValueWith<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, TProperty inputValue)
         {
             _componentFactory
-                .HtmlControlFor<ITextBox>(propertySelector)
+                .HtmlControlFor<TextBox>(propertySelector)
                 .ReplaceInputValueWith(inputValue);
         }
 
         public void ReplaceInputValueWith(string inputName, string value)
         {
             _componentFactory
-                .HtmlControlFor<ITextBox>(inputName)
+                .HtmlControlFor<TextBox>(inputName)
                 .ReplaceInputValueWith(value);
         }
 
         public void SelectByOptionValueInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, TProperty optionValue)
         {
             _componentFactory
-                .HtmlControlFor<IDropDown>(dropDownSelector)
+                .HtmlControlFor<DropDown>(dropDownSelector)
                 .SelectElement(optionValue);
         }
 
         public void SelectByOptionTextInDropDown<TProperty>(Expression<Func<TModel, TProperty>> dropDownSelector, string optionText)
         {
             _componentFactory
-               .HtmlControlFor<IDropDown>(dropDownSelector)
+               .HtmlControlFor<DropDown>(dropDownSelector)
                .SelectElementByText(optionText);
         }
 
         public void SelectButtonInRadioGroup<TProperty>(Expression<Func<TModel, TProperty>> radioGroupButtonSelector, TProperty buttonValue)
         {
             _componentFactory
-                .HtmlControlFor<IRadioButtonGroup>(radioGroupButtonSelector)
+                .HtmlControlFor<RadioButtonGroup>(radioGroupButtonSelector)
                 .SelectElement(buttonValue);
         }
 
-        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int waitInSeconds = 0)
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int maxWaitInSeconds = 5)
         {
-            content = content ?? string.Empty;
-            UpdateTextAreaContent(textAreaPropertySelector, content.Split('\n'), waitInSeconds);
-        }
-
-        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string[] multiLineContent, int waitInSeconds = 0)
-        {
-
             _componentFactory
-                .HtmlControlFor<ITextArea>(textAreaPropertySelector, waitInSeconds)
-                .MultiLineContent = multiLineContent;
+                .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWaitInSeconds)
+                .Content = content;
         }
     }
 }

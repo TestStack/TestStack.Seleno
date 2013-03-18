@@ -4,13 +4,13 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_retrieving_TextBox_value : HtmlControlSpecificationFor<TextBox>
+    class When_retrieving_textbox_value : HtmlControlSpecificationFor<TextBox>
     {
 
-        public When_retrieving_TextBox_value() : base(x => x.Modified) { }
+        public When_retrieving_textbox_value() : base(x => x.Modified) { }
         
 
-        public void When_retrieving_the_TextBox_value()
+        public void When_retrieving_the_textbox_value()
         {
             SUT.ValueAs<DateTime>();
         }
