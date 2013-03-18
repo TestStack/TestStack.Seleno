@@ -26,11 +26,11 @@ namespace TestStack.Seleno.PageObjects.Actions
         // todo: Are these ActionOnLocator methods something that should be in ScriptExecutor or should ScriptExecutor be renamed?
         // todo: Should we add jQuery By method overloads?
 
-        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
+        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int maxWaitInSeconds = 5)
         {
             try
             {
-                var element = _finder.Element(findElement, waitInSeconds);
+                var element = _finder.Element(findElement, maxWaitInSeconds);
                 action(element);
                 return element;
             }
@@ -41,11 +41,11 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func, int waitInSeconds = 20)
+        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
         {
             try
             {
-                var element = _finder.Element(findElement, waitInSeconds);
+                var element = _finder.Element(findElement, maxWaitInSeconds);
                 return func(element);
             }
             catch (Exception)

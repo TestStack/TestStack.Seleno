@@ -37,7 +37,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IRadioButtonGroup>(_radioGroupPropertySelector, 0);
+                .HtmlControlFor<IRadioButtonGroup>(_radioGroupPropertySelector);
         }
 
         public void AndThen_the_radio_button_group_was_retrieved_the_value_of_its_selected_element()

@@ -37,18 +37,18 @@ namespace TestStack.Seleno.PageObjects
             return _scope.Resolve<TPage>();
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int maxWaitInSeconds = 5)
             where THtmlControl : IHtmlControl
         {
             return  _scope.Resolve<THtmlControl>()
-                .Initialize(propertySelector, waitInSeconds);
+                .Initialize(propertySelector, maxWaitInSeconds);
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int waitInSeconds = 20)
+        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int maxWaitInSeconds = 5)
            where THtmlControl : IHtmlControl
         {
             return _scope.Resolve<THtmlControl>()
-                .Initialize(controlId, waitInSeconds);
+                .Initialize(controlId, maxWaitInSeconds);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace TestStack.Seleno.PageObjects
         IElementAssert CreateElementAssert(By selector);
         TPage CreatePage<TPage>() where TPage : UiComponent, new();
 
-        THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int waitInSeconds = 20)
+        THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int maxWaitInSeconds = 5)
             where THtmlControl : IHtmlControl;
 
-        THtmlControl HtmlControlFor<THtmlControl>(string controlId, int waitInSeconds = 20)
+        THtmlControl HtmlControlFor<THtmlControl>(string controlId, int maxWaitInSeconds = 5)
             where THtmlControl : IHtmlControl;
 
 

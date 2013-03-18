@@ -17,21 +17,21 @@ namespace TestStack.Seleno.PageObjects.Actions
             Browser = browser;
         }
 
-        public IWebElement Element(By findExpression, int waitInSeconds = 20)
+        public IWebElement Element(By findExpression, int maxWaitInSeconds = 5)
         {
-            return Browser.ElementWithWait(d => d.FindElement(findExpression), waitInSeconds);
+            return Browser.ElementWithWait(d => d.FindElement(findExpression), maxWaitInSeconds);
         }
 
-        public IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, int waitInSeconds = 20)
+        public IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5)
         {
-            return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), waitInSeconds);
+            return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), maxWaitInSeconds);
         }
 
-        public IWebElement OptionalElement(By findExpression, int waitInSeconds = 20)
+        public IWebElement OptionalElement(By findExpression, int maxWaitInSeconds = 5)
         {
             try
             {
-                return Element(findExpression, waitInSeconds);
+                return Element(findExpression, maxWaitInSeconds);
             }
             catch (NoSuchElementException)
             {
@@ -40,11 +40,11 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
 
-        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int waitInSeconds = 20)
+        public IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5)
         {
             try
             {
-                return Element(jQueryFindExpression, waitInSeconds);
+                return Element(jQueryFindExpression, maxWaitInSeconds);
             }
             catch (NoSuchElementException)
             {

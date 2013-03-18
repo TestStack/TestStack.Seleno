@@ -34,7 +34,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<ITextArea>(_propertySelector, 0);
+                .HtmlControlFor<ITextArea>(_propertySelector);
         }
 
         public void AndThen_the_textarea_multi_lines_content_was_retrieved()

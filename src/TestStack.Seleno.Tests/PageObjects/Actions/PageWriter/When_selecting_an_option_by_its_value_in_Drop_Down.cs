@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         {
             _componentFactory
                 .Received()
-                .HtmlControlFor<IDropDown>(_dropDownPropertySelector, 20);
+                .HtmlControlFor<IDropDown>(_dropDownPropertySelector);
         }
 
         public void AndThen_the_radio_button_group_selected_the_element_matching_the_specified_value()

@@ -54,11 +54,11 @@ namespace TestStack.Seleno.PageObjects
             return ComponentFactory.CreatePage<TComponent>();
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, int waitInSeconds = 20)
+        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, int maxWaitInSeconds = 5)
           where THtmlControl : HTMLControl, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, waitInSeconds);
+            return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, maxWaitInSeconds);
         }
 
         private void ThrowIfComponentNotCreatedCorrectly()
