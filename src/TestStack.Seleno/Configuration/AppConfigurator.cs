@@ -52,16 +52,7 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterSource(new PageObjectRegistrationSource());
-
-            // todo: We can probably do this via registration source instead so that people can then use their own implementations
-            //  but then we'd have to resolve actual implementations not interfaces
-            //  we can probably do this later though and for now the html control stuff is internal only?
-            //  Only problem then is anyone using this stuff would be using the interfaces should we might then deprecate?
-            ContainerBuilder.RegisterAssemblyTypes(typeof (HTMLControl).Assembly)
-                .As<IHtmlControl>()
-                .AsImplementedInterfaces()
-                .OnActivatedInitialiseUiComponent();
+            ContainerBuilder.RegisterSource(new UiComponentRegistrationSource());
 
             return ContainerBuilder.Build();
         }

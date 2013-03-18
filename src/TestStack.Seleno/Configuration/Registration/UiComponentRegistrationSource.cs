@@ -7,7 +7,7 @@ using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.Configuration.Registration
 {
-    internal class PageObjectRegistrationSource : IRegistrationSource
+    internal class UiComponentRegistrationSource : IRegistrationSource
     {
         public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
         {
