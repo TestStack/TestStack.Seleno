@@ -58,10 +58,14 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
         IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5);
 
-        /// <summary>
-        /// Obsolete: Use OptionalElement instead.
-        /// </summary>
-        [Obsolete("Use OptionalElement instead")]
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use Element instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
+        IWebElement ElementWithWait(By findElement, int waitInSeconds = 20);
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use OptionalElement instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
+        IWebElement TryFindElement(By by);
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use OptionalElement instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         IWebElement TryFindElementByjQuery(Locators.By.jQueryBy by);
     }
 }
