@@ -17,7 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_script_executor_should_execute_relevant_script_to_retrieve_the_value()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ScriptAndReturn<DateTime>("$('#Modified').val()");
 

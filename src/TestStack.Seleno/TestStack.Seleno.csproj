@@ -129,9 +129,9 @@
     <Compile Include="PageObjects\Actions\IPageNavigator.cs" />
     <Compile Include="PageObjects\Actions\IPageReader.cs" />
     <Compile Include="PageObjects\Actions\IPageWriter.cs" />
-    <Compile Include="PageObjects\Actions\IScriptExecutor.cs" />
+    <Compile Include="PageObjects\Actions\IExecutor.cs" />
     <Compile Include="PageObjects\Actions\PageWriter.cs" />
-    <Compile Include="PageObjects\Actions\ScriptExecutor.cs" />
+    <Compile Include="PageObjects\Actions\Executor.cs" />
     <Compile Include="PageObjects\Actions\ElementFinder.cs" />
     <Compile Include="PageObjects\Actions\IElementFinder.cs" />
     <Compile Include="PageObjects\Actions\PageNavigator.cs" />

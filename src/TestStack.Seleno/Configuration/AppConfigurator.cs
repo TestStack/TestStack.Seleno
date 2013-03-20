@@ -46,7 +46,7 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.RegisterType<ElementFinder>()
                 .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<ScriptExecutor>()
+            ContainerBuilder.RegisterType<Executor>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<PageNavigator>()
                 .AsImplementedInterfaces().SingleInstance();

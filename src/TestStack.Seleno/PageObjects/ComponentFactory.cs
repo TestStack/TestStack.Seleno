@@ -19,7 +19,7 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
+            return new PageReader<TModel>(_scope.Resolve<IExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()

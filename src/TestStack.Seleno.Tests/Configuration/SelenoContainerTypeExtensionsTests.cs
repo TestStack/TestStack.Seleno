@@ -75,7 +75,7 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void And_the_script_executor_is_populated()
         {
-            Assert.That(_pageObject.ScriptExecutor, Is.TypeOf<ScriptExecutor>());
+            Assert.That(_pageObject.Executor, Is.TypeOf<Executor>());
         }
 
         public void And_the_component_factory_is_populated()

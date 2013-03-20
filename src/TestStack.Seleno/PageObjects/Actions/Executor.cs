@@ -6,13 +6,13 @@ using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    internal class ScriptExecutor : IScriptExecutor
+    internal class Executor : IExecutor
     {
         private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        public ScriptExecutor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
+        public Executor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
             if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
             if (finder == null) throw new ArgumentNullException("finder");

@@ -13,7 +13,7 @@ namespace TestStack.Seleno.PageObjects
         internal protected IWebDriver Browser { get; internal set; }
         internal IComponentFactory ComponentFactory { get; set; }
         internal IPageNavigator PageNavigator { get; set; }
-        internal IScriptExecutor ScriptExecutor { get; set; }
+        internal IExecutor Executor { get; set; }
         internal ICamera Camera { get; set; }
         internal IElementFinder ElementFinder { get; set; }
         
@@ -23,10 +23,10 @@ namespace TestStack.Seleno.PageObjects
             return PageNavigator;
         }
 
-        protected IScriptExecutor Execute()
+        protected IExecutor Execute()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return ScriptExecutor;
+            return Executor;
         }
 
         protected IElementFinder Find()

@@ -11,11 +11,11 @@ namespace TestStack.Seleno.PageObjects.Actions
     internal class PageNavigator : IPageNavigator
     {
         protected IWebDriver Browser;
-        readonly IScriptExecutor _executor;
+        readonly IExecutor _executor;
         private readonly IWebServer _webServer;
         readonly IComponentFactory _componentFactory;
 
-        public PageNavigator(IWebDriver browser, IScriptExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
+        public PageNavigator(IWebDriver browser, IExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (executor == null) throw new ArgumentNullException("executor");
