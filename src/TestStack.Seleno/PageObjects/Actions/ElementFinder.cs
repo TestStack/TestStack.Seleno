@@ -52,6 +52,16 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
+        public IWebElement ElementWithWait(By findElement, int waitInSeconds = 20)
+        {
+            throw new NotImplementedException("Obsolete");
+        }
+
+        public IWebElement TryFindElement(By @by)
+        {
+            throw new NotImplementedException("Obsolete");
+        }
+
         public IWebElement TryFindElementByjQuery(Locators.By.jQueryBy @by)
         {
             throw new NotImplementedException("Obsolete");

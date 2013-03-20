@@ -74,12 +74,12 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TResult ActionOnLocator<TResult>(By findExpression, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
 
         public IWebElement WithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
     }
 }

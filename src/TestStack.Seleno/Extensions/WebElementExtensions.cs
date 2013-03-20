@@ -42,37 +42,37 @@ namespace TestStack.Seleno.Extensions
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static void ClearAndSendKeys(this IWebElement element, string value, bool clearFirst = true)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static void SetAttribute(this IWebElement element, string attributeName, string value)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static void ReplaceInputValueWith(this IWebDriver driver, string inputSelector, string value)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static T GetAttributeAsType<T>(this IWebElement element, string attributeName)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static T GetValueFromTextBox<T>(this IWebElement element)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         public static T TextAsType<T>(this IWebElement element)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Obsolete");
         }
     }
 }
