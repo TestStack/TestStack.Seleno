@@ -10,7 +10,7 @@ namespace TestStack.Seleno.PageObjects.Actions
     {
         IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, int maxWaitInSeconds = 5);
 
-        TResult ActionOnLocator<TResult>(By findExpression, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5);
+        IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, int maxWaitInSeconds = 5);
 
         object ScriptAndReturn(string javascriptToBeExecuted, Type returnType);
 

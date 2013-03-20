@@ -23,14 +23,11 @@ namespace TestStack.Seleno.PageObjects.Actions
             _camera = camera;
         }
 
-        // todo: Are these ActionOnLocator methods something that should be in ScriptExecutor or should ScriptExecutor be renamed?
-        // todo: Should we add jQuery By method overloads?
-
-        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int maxWaitInSeconds = 5)
+        public IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, int maxWaitInSeconds = 5)
         {
             try
             {
-                var element = _finder.Element(findElement, maxWaitInSeconds);
+                var element = _finder.Element(findExpression, maxWaitInSeconds);
                 action(element);
                 return element;
             }
@@ -41,12 +38,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
+        // todo: unit/integration test this
+        public IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, int maxWaitInSeconds = 5)
         {
             try
             {
-                var element = _finder.Element(findElement, maxWaitInSeconds);
-                return func(element);
+                var element = _finder.Element(jQueryFindExpression, maxWaitInSeconds);
+                action(element);
+                return element;
             }
             catch (Exception)
             {
