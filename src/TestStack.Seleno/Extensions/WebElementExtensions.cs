@@ -3,8 +3,18 @@ using OpenQA.Selenium;
 
 namespace TestStack.Seleno.Extensions
 {
+    /// <summary>
+    /// Extension methods against an <see cref="IWebElement"/>.
+    /// </summary>
     public static class WebElementExtensions
     {
+        /// <summary>
+        /// Returns the value for the given HTML attribute on the <see cref="IWebElement"/> and type casts it the the requested type.
+        /// </summary>
+        /// <typeparam name="TReturn">The type to cast the value to</typeparam>
+        /// <param name="element">The element to return the attribute value from</param>
+        /// <param name="attributeName">The name of the attribute to return the value for</param>
+        /// <returns>The type-casted value</returns>
         public static TReturn GetAttributeAs<TReturn>(this IWebElement element, string attributeName)
         {
             var attributeValue = string.Empty;
@@ -17,6 +27,12 @@ namespace TestStack.Seleno.Extensions
             return attributeValue.TryConvertTo(default(TReturn));
         }
 
+        /// <summary>
+        /// Returns the value for the "value" HTML attribute on the <see cref="IWebElement"/> and type casts it the the requested type.
+        /// </summary>
+        /// <typeparam name="TReturn">The type to cast the value to</typeparam>
+        /// <param name="element">The element to return the value attribute value from</param>
+        /// <returns>The type-casted value attribute value</returns>
         public static TReturn GetControlValueAs<TReturn>(this IWebElement element)
         {
             return element.GetAttributeAs<TReturn>("value");
