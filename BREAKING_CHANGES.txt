@@ -1,11 +1,14 @@
 
 todo document these breaking changes:
 *	Remove WithPatience from Execute()
-*	Removed waitInSeconds parameter from the TryFindElement methods in Find()
 *	Renamed SelenoApplicationRunner to SelenoHost
 *	Can't new-up page objects anymore
 *	Changed ElementWithWait to Element
 *	Changed TryFindElement with OptionalElement
+*	Changed the default maximum wait in seconds from 20s to 5s and removed the default value from the ElementWithWait extension method
+*	Removed ActionOnLocator(Func) from Execute()
+*	Renamed IScriptExecutor to IExecutor
+*	Bunch of implementation classes now marked internal
 
 Version 0.4
 -----------
@@ -27,6 +30,7 @@ Fix
 * ClearAndSendKeys
 	* If you are inside a typed page object (e.g. extending Page<TModel>) then replace with Input().ClearAndSendKeys(...) [there are two overloads]
 	* Otherwise simply replace with element.Clear(); element.SendKeys(...);
+	* Alternatively, you can use the new HtmlControl support (e.g. HtmlControlFor<TextBox>()...) or the Input().ReplaceInputValueWith(...)
 * SetAttribute
 	* If you are inside a typed page object (e.g. extending Page<TModel>) then replace with Input().SetAttribute(...)
 * ReplaceInputValueWith
