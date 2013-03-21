@@ -23,11 +23,11 @@ namespace TestStack.Seleno.PageObjects.Actions
             _camera = camera;
         }
 
-        public IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, int maxWaitInSeconds = 5)
+        public IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
             try
             {
-                var element = _finder.Element(findExpression, maxWaitInSeconds);
+                var element = _finder.Element(findExpression, maxWait);
                 action(element);
                 return element;
             }
@@ -39,11 +39,11 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
         // todo: unit/integration test this
-        public IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, int maxWaitInSeconds = 5)
+        public IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
             try
             {
-                var element = _finder.Element(jQueryFindExpression, maxWaitInSeconds);
+                var element = _finder.Element(jQueryFindExpression, maxWait);
                 action(element);
                 return element;
             }

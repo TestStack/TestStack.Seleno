@@ -21,10 +21,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
         /// <param name="action">The action to perform when the element is found</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <exception cref="NoSuchElementException">When the element isn't found</exception>
         /// <returns>The <see cref="IWebElement"/> representing the found element</returns>
-        IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, int maxWaitInSeconds = 5);
+        IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
         /// Locate an element using a jQuery expression and performs an action on the element if found.
@@ -35,10 +35,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
         /// <param name="action">The action to perform when the element is found</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <exception cref="NoSuchElementException">When the element isn't found</exception>
         /// <returns>The <see cref="IWebElement"/> representing the found element</returns>
-        IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, int maxWaitInSeconds = 5);
+        IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
         /// Executes some JavaScript and returns the return value type-casted to the given type.

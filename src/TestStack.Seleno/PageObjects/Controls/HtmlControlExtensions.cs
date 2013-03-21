@@ -1,10 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
     internal static class HtmlControlExtensions
     {
-        internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, LambdaExpression propertySelector, int maxWaitInSeconds = 20)
+        internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, LambdaExpression propertySelector, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : IHtmlControl
         {
             var result = htmlControl as HTMLControl;
@@ -12,7 +13,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             if (result != null)
             {
                 result.ViewModelPropertySelector = propertySelector;
-                result.WaitInSecondsUntilElementAvailable = maxWaitInSeconds;
+                result.WaitUntilElementAvailable = maxWait;
 
                 return (THtmlControl)(IHtmlControl)result;
             }
@@ -20,7 +21,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             return htmlControl;
         }
 
-        internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, string id, int maxWaitInSeconds = 5)
+        internal static THtmlControl Initialize<THtmlControl>(this THtmlControl htmlControl, string id, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : IHtmlControl
         {
             var result = htmlControl as HTMLControl;
@@ -28,14 +29,12 @@ namespace TestStack.Seleno.PageObjects.Controls
             if (result != null)
             {
                 result.Id = id;
-                result.WaitInSecondsUntilElementAvailable = maxWaitInSeconds;
+                result.WaitUntilElementAvailable = maxWait;
 
                 return (THtmlControl)(IHtmlControl)result;
             }
 
             return htmlControl;
         }
-
-
     }
 }

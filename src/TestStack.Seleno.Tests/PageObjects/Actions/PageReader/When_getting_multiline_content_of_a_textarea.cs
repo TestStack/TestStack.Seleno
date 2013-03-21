@@ -23,7 +23,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
             _textArea.Content.Returns(ExpectedMultiLineContent);
 
             _componentFactory
-                .HtmlControlFor<TextArea>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<TextArea>(_propertySelector)
                 .Returns(_textArea);
         }
 

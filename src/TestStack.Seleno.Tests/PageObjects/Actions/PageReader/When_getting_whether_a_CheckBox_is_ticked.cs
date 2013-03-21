@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
             _checkBox = Substitute.For<CheckBox>();
 
             _componentFactory
-                .HtmlControlFor<CheckBox>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<CheckBox>(_propertySelector)
                 .Returns(_checkBox);
         }
 

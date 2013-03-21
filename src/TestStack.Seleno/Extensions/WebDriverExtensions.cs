@@ -13,11 +13,13 @@ namespace TestStack.Seleno.Extensions
     {
         public const int DefaultSecondTimeout = 60;
 
-        public static IWebElement ElementWithWait(this IWebDriver driver,Func<IWebDriver, IWebElement> elementIsFound, int maxWaitInSeconds)
+        public static IWebElement ElementWithWait(this IWebDriver driver, Func<IWebDriver, IWebElement> elementIsFound, TimeSpan maxWait)
         {
             try
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(maxWaitInSeconds));
+                if (maxWait == default(TimeSpan))
+                    maxWait = TimeSpan.FromSeconds(5);
+                var wait = new WebDriverWait(driver, maxWait);
                 return wait.Until(elementIsFound);
             }
             catch (WebDriverTimeoutException e)

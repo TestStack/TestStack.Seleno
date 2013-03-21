@@ -20,7 +20,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
             _textArea = Substitute.For<TextArea>();
 
             _componentFactory
-                .HtmlControlFor<TextArea>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<TextArea>(_propertySelector)
                 .Returns(_textArea);
         }
 

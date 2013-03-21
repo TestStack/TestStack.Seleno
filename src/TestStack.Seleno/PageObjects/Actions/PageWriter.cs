@@ -147,10 +147,10 @@ namespace TestStack.Seleno.PageObjects.Actions
                 .SelectElement(buttonValue);
         }
 
-        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, int maxWaitInSeconds = 5)
+        public void UpdateTextAreaContent(Expression<Func<TModel, string>> textAreaPropertySelector, string content, TimeSpan maxWait = default(TimeSpan))
         {
             _componentFactory
-                .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWaitInSeconds)
+                .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWait)
                 .Content = content;
         }
     }
