@@ -19,10 +19,10 @@ Seleno helps you to write automated UI tests in the right way by implementing Pa
             {
                 SelenoHost.Run("Name.Of.Your.Web.Project", 12346, c => c
                     .UsingLoggerFactory(new ConsoleFactory())
+                    // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
+                    // If you aren't using MVC then don't include this line
+                    .WithRouteConfig(RouteConfig.RegisterRoutes)
                 );
-                // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
-                // If you aren't using MVC then don't include this line
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
             }
         }
 	* The `123456` is the port number you want the site to run on - it can be anything you want, just make it unique and unused

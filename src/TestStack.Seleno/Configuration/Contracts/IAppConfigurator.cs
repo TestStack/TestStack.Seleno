@@ -1,4 +1,5 @@
 using System;
+using System.Web.Routing;
 using Castle.Core.Logging;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.WebServers;
@@ -57,6 +58,13 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="loggerFactory">The logger factory</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory);
+
+        /// <summary>
+        /// Define the routes for the application.
+        /// </summary>
+        /// <param name="routeCollectionUpdater">A method that takes a route collection and populates it with routes</param>
+        /// <returns>The configurator to allow for method chaining</returns>
+        IAppConfigurator WithRouteConfig(Action<RouteCollection> routeCollectionUpdater);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator

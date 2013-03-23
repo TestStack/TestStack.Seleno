@@ -16,8 +16,8 @@ namespace TestStack.Seleno.AcceptanceTests
             SelenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346, c => c
                 .UsingLoggerFactory(new ConsoleFactory())
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromSeconds(1))
+                .WithRouteConfig(RouteConfig.RegisterRoutes)
             );
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
 using Microsoft.Web.Mvc;
@@ -14,8 +15,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         readonly IExecutor _executor;
         private readonly IWebServer _webServer;
         readonly IComponentFactory _componentFactory;
+        private readonly RouteCollection _routeCollection;
 
-        public PageNavigator(IWebDriver browser, IExecutor executor, IWebServer webServer, IComponentFactory componentFactory)
+        public PageNavigator(IWebDriver browser, IExecutor executor, IWebServer webServer, IComponentFactory componentFactory, RouteCollection routeCollection)
         {
             if (browser == null) throw new ArgumentNullException("browser");
             if (executor == null) throw new ArgumentNullException("executor");
@@ -23,6 +25,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             _executor = executor;
             _webServer = webServer;
             _componentFactory = componentFactory;
+            _routeCollection = routeCollection;
         }
 
         public TPage To<TPage>(By clickDestination, TimeSpan maxWait = default(TimeSpan)) where TPage : UiComponent, new()
@@ -42,7 +45,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             where TController : Controller
             where TPage : UiComponent, new()
         {
-            var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer());
+            var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer(), _routeCollection);
             var relativeUrl = helper.BuildUrlFromExpression(action);
 
             return To<TPage>(relativeUrl);

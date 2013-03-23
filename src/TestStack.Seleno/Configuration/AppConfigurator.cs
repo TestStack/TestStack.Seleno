@@ -1,4 +1,5 @@
 using System;
+using System.Web.Routing;
 using Autofac;
 using Castle.Core.Logging;
 using OpenQA.Selenium;
@@ -17,6 +18,7 @@ namespace TestStack.Seleno.Configuration
         protected ContainerBuilder ContainerBuilder = new ContainerBuilder();
         protected WebApplication WebApplication;
         private TimeSpan _minimumWait = TimeSpan.FromSeconds(10);
+        private RouteCollection _routes = new RouteCollection();
 
         public AppConfigurator()
         {
@@ -51,6 +53,7 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.Register(c => _routes).SingleInstance();
             ContainerBuilder.RegisterSource(new UiComponentRegistrationSource());
 
             return ContainerBuilder.Build();
@@ -116,6 +119,12 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.Register(c => loggerFactory)
                 .As<ILoggerFactory>().SingleInstance();
+            return this;
+        }
+
+        public IAppConfigurator WithRouteConfig(Action<RouteCollection> routeCollectionUpdater)
+        {
+            routeCollectionUpdater(_routes);
             return this;
         }
     }

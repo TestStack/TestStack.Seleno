@@ -11,6 +11,7 @@ todo document these breaking changes:
 *	Bunch of implementation classes now marked internal
 *	IPageNavigator: void To(By elementToClick)
 *	WebDriverExtensions internal
+*	global route config isn't used anymore
 
 Version 0.4
 -----------

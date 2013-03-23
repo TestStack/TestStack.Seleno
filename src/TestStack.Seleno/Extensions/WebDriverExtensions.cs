@@ -15,11 +15,18 @@ namespace TestStack.Seleno.Extensions
 
         public static string TitleWithWait(this IWebDriver webDriver)
         {
-            return new WebDriverWait(webDriver, TimeSpan.FromSeconds(5))
-                .Until(d => new[] { d.Title }
-                    .Select(t => string.IsNullOrEmpty(t) ? null : t)
-                    .First()
-                );
+            try
+            {
+                return new WebDriverWait(webDriver, TimeSpan.FromSeconds(5))
+                    .Until(d => new[] {d.Title}
+                                    .Select(t => string.IsNullOrEmpty(t) ? null : t)
+                                    .First()
+                    );
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public static IWebElement ElementWithWait(this IWebDriver driver, Func<IWebDriver, IWebElement> elementIsFound, TimeSpan maxWait)
