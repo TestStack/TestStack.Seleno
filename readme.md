@@ -8,94 +8,102 @@ Seleno helps you to write automated UI tests in the right way by implementing Pa
 1. Install-Package TestStack.Seleno
 	* If you are using ASP.NET MVC then there are some helper methods for that that require you to install MVC if you want to use them: Install-Package Microsoft.AspNet.Mvc
 	* If you installed MVC then you will also need to add binding redirects: Add-BindingRedirect
-2. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be garaunteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
-    [SetUpFixture]
-    public class AssemblyFixture
-    {
-        [SetUp]
-        public void SetUp()
+
+2. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
+
+        [SetUpFixture]
+        public class AssemblyFixture
         {
-            SelenoHost.Run("Name.Of.Your.Web.Project", 12346, c => c
-                .UsingLoggerFactory(new ConsoleFactory())
-            );
-            // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
-            // If you aren't using MVC then don't include this line
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            [SetUp]
+            public void SetUp()
+            {
+                SelenoHost.Run("Name.Of.Your.Web.Project", 12346, c => c
+                    .UsingLoggerFactory(new ConsoleFactory())
+                );
+                // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
+                // If you aren't using MVC then don't include this line
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+            }
         }
-    }
 	* The `123456` is the port number you want the site to run on - it can be anything you want, just make it unique and unused
 	* The `c` variable is a fluent configurator - chain method calls off of it to configure the different parts of Seleno
 	* By default it uses Firefox so you will need to install that
 	* You might need to run Visual Studio / your test runner as an admin if you can an error when the port tries to get registered by IIS Express
+
 3. Create page objects by extending `Page`, or if you want to use strongly-typed view models, `Page<T>`, e.g.:
-    public class HomePage : Page
-    {
-        public Form1Page GoToRegisterPage()
+
+        public class HomePage : Page
         {
-            return Navigate().To<RegisterPage>(By.LinkText("Register"));
+            public Form1Page GoToRegisterPage()
+            {
+                return Navigate().To<RegisterPage>(By.LinkText("Register"));
+            }
         }
-    }
-    
-    public class RegisterPage : Page<RegisterModel>
-    {
-        public HomePage RegisterUser(RegisterModel registerModel)
+        
+        public class RegisterPage : Page<RegisterModel>
         {
-            Input().Model(registerModel);
-            return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
+            public HomePage RegisterUser(RegisterModel registerModel)
+            {
+                Input().Model(registerModel);
+                return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
+            }
         }
-    }
 	* Seleno provides a DSL that hides you from most of Selenium Web Driver, feel free to make use of intellisense within your page object to experiment with what's possible
 	* There are some links to advanced usage instructions and tutorials below
+
 4. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
-    public class HomePage : Page
-    {
-        public RegisterPage GoToRegisterPage()
+
+        public class HomePage : Page
         {
-            return Navigate().To<RegisterPage>(By.LinkText("Register"));
+            public RegisterPage GoToRegisterPage()
+            {
+                return Navigate().To<RegisterPage>(By.LinkText("Register"));
+            }
+    
+            public LoginPanel LoginPanel
+            {
+                get { return GetComponent<LoginPanel>(); }
+            }
+        }
+        
+        public class LoginPanel : UiComponent
+        {
+            public bool IsLoggedIn
+            {
+                get { return Find().OptionalElement(By.Id("login-panel")) == null; }
+            }
+    
+            public string LoggedInUserName
+            {
+                get { return Find().Element(By.Id("login-username")).Text; }
+            }
+        }
+        
+        public class RegisterPage : Page<RegisterModel>
+        {
+            public HomePage RegisterUser(RegisterModel registerModel)
+            {
+                Input().Model(registerModel);
+                return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
+            }
         }
 
-        public LoginPanel LoginPanel
-        {
-            get { return GetComponent<LoginPanel>(); }
-        }
-    }
+5. Create automated tests that use your page objects, e.g. this NUnit example:
 
-    public class LoginPanel : UiComponent
-    {
-        public bool IsLoggedIn
+        class RegistrationTests
         {
-            get { return Find().OptionalElement(By.Id("login-panel")) == null; }
+            [Test]
+            public void GivenAUserIsntRegistered_WhenRegisteringThem_TheyEndUpBackOnTheHomepageAndLoggedIn()
+            {
+                var page = SelenoHost.NavigateToInitialPage<HomePage>()
+                    .GoToRegisterPage()
+                    .RegisterUser(ObjectMother.NewUser);
+    
+                Assert.That(page.Title, Is.EqualTo("Home"));
+                Assert.That(page.LoginPanel.IsLoggedIn, Is.True);
+                Assert.That(page.LoginPanel.LoggedInUserName, Is.EqualTo(ObjectMother.NewUser.UserName));
+            }
         }
-
-        public string LoggedInUserName
-        {
-            get { return Find().Element(By.Id("login-username")).Text; }
-        }
-    }
-
-    public class RegisterPage : Page<RegisterModel>
-    {
-        public HomePage RegisterUser(RegisterModel registerModel)
-        {
-            Input().Model(registerModel);
-            return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
-        }
-    }
-4. Create automated tests that use your page objects, e.g. this NUnit example:
-    class RegistrationTests
-    {
-        [Test]
-        public void GivenAUserIsntRegistered_WhenRegisteringThem_TheyEndUpBackOnTheHomepageAndLoggedIn()
-        {
-            var page = SelenoHost.NavigateToInitialPage<HomePage>()
-                .GoToRegisterPage()
-                .RegisterUser(ObjectMother.NewUser);
-
-            Assert.That(page.Title, Is.EqualTo("Home"));
-            Assert.That(page.LoginPanel.IsLoggedIn, Is.True);
-            Assert.That(page.LoginPanel.LoggedInUserName, Is.EqualTo(ObjectMother.NewUser.UserName));
-        }
-    }
 
 ## Tutorials / advanced usage
 Stay tuned!
