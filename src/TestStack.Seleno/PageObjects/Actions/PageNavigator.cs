@@ -45,7 +45,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer());
             var relativeUrl = helper.BuildUrlFromExpression(action);
 
-            return To<TPage>(_webServer.BaseUrl + relativeUrl);
+            return To<TPage>(relativeUrl);
         }
 
         public void To(By clickDestination)
