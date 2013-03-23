@@ -3,6 +3,8 @@
 ## What is Seleno?
 Seleno helps you to write automated UI tests in the right way by implementing Page Objects and Page Components and by reading and writing web page data using strongly typed view models. It uses Selenium Web Driver for browser automation.
 
+If you are upgrading to v0.4 from an earlier version then note that there are a [number of breaking changes](BREAKING_CHANGES.md) that you need to take into account.
+
 ## How do I use it?
 
 1. Install-Package TestStack.Seleno
