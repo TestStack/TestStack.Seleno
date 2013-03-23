@@ -1,5 +1,8 @@
-﻿using Castle.Core.Logging;
+﻿using System;
+using System.Web.Routing;
+using Castle.Core.Logging;
 using NUnit.Framework;
+using TestStack.Seleno.AcceptanceTests.Web.App_Start;
 using TestStack.Seleno.Configuration;
 
 namespace TestStack.Seleno.AcceptanceTests
@@ -12,7 +15,8 @@ namespace TestStack.Seleno.AcceptanceTests
         {
             SelenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346, c => c
                 .UsingLoggerFactory(new ConsoleFactory())
-                .WithMinimumWaitTimeoutInSecondsOf(1)
+                .WithMinimumWaitTimeoutOf(TimeSpan.FromSeconds(1))
+                .WithRouteConfig(RouteConfig.RegisterRoutes)
             );
         }
     }

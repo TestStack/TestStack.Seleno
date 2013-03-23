@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 using TestStack.Seleno.PageObjects;
@@ -67,12 +68,12 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
 
         public IWebElement FindOptionalNonExistantElement
         {
-            get { return Find().OptionalElement(By.Id("RandomElement"), 1); }
+            get { return Find().OptionalElement(By.Id("RandomElement"), TimeSpan.FromSeconds(1)); }
         }
 
-        public IWebElement FindNonExistantElement(int timeout)
+        public IWebElement FindNonExistantElement(int timeoutInSeconds)
         {
-            return Find().Element(By.Id("RandomElement"), timeout);
+            return Find().Element(By.Id("RandomElement"), TimeSpan.FromSeconds(timeoutInSeconds));
         }
     }
 }

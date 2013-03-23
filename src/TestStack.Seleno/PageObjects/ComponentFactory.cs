@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using Autofac;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
@@ -19,7 +20,7 @@ namespace TestStack.Seleno.PageObjects
 
         public IPageReader<TModel> CreatePageReader<TModel>() where TModel : class, new()
         {
-            return new PageReader<TModel>(_scope.Resolve<IScriptExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
+            return new PageReader<TModel>(_scope.Resolve<IExecutor>(), _scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
         public IPageWriter<TModel> CreatePageWriter<TModel>() where TModel : class, new()
@@ -37,18 +38,18 @@ namespace TestStack.Seleno.PageObjects
             return _scope.Resolve<TPage>();
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int maxWaitInSeconds = 5)
+        public THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : IHtmlControl
         {
             return  _scope.Resolve<THtmlControl>()
-                .Initialize(propertySelector, maxWaitInSeconds);
+                .Initialize(propertySelector, maxWait);
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(string  controlId, int maxWaitInSeconds = 5)
+        public THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
            where THtmlControl : IHtmlControl
         {
             return _scope.Resolve<THtmlControl>()
-                .Initialize(controlId, maxWaitInSeconds);
+                .Initialize(controlId, maxWait);
         }
     }
 }

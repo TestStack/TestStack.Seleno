@@ -13,7 +13,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             get
             {
                 var selector = string.Format("#{0} option:selected", Id);
-                return Find().Element(By.jQuery(selector), WaitInSecondsUntilElementAvailable);
+                return Find().Element(By.jQuery(selector), WaitUntilElementAvailable);
             }
         }
 

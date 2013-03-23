@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
             _dropDown = Substitute.For<DropDown>();
 
             _componentFactory
-                .HtmlControlFor<DropDown>(_dropDownPropertySelector, Arg.Any<int>())
+                .HtmlControlFor<DropDown>(_dropDownPropertySelector)
                 .Returns(_dropDown);    
         }
         

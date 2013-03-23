@@ -20,7 +20,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_script_executor_should_execute_relevant_script_to_replace_the_value()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ExecuteScript(_expectedScriptToBeExecuted);
         }
@@ -37,7 +37,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_script_executor_should_execute_relevant_script_to_replace_the_value()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ExecuteScript(@"$('#Modified').val(""asdf \\ \"" \r\n"")");
         }

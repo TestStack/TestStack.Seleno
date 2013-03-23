@@ -78,18 +78,18 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
             private Form1Page _page;
             private IWebElement _element;
 
-            public void Given_an_element_exists_on_the_page()
+            public void Given_an_element_doesnt_exist_on_the_page()
             {
                 _page = SelenoHost.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
-            public void When_finding_that_element()
+            public void When_optionally_finding_that_element()
             {
                 _element = _page.FindOptionalNonExistantElement;
             }
 
-            public void Then_the_element_was_found()
+            public void Then_the_element_is_null()
             {
                 Assert.That(_element, Is.Null);
             }

@@ -23,7 +23,7 @@ namespace TestStack.Seleno.Configuration.Registration
                     component.ComponentFactory = e.Context.Resolve<IComponentFactory>();
                     component.ElementFinder = e.Context.Resolve<IElementFinder>();
                     component.PageNavigator = e.Context.Resolve<IPageNavigator>();
-                    component.ScriptExecutor = e.Context.Resolve<IScriptExecutor>();
+                    component.Executor = e.Context.Resolve<IExecutor>();
                 }
             );
         }

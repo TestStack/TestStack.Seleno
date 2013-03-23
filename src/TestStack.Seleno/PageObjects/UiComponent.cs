@@ -13,7 +13,7 @@ namespace TestStack.Seleno.PageObjects
         internal protected IWebDriver Browser { get; internal set; }
         internal IComponentFactory ComponentFactory { get; set; }
         internal IPageNavigator PageNavigator { get; set; }
-        internal IScriptExecutor ScriptExecutor { get; set; }
+        internal IExecutor Executor { get; set; }
         internal ICamera Camera { get; set; }
         internal IElementFinder ElementFinder { get; set; }
         
@@ -23,10 +23,10 @@ namespace TestStack.Seleno.PageObjects
             return PageNavigator;
         }
 
-        protected IScriptExecutor Execute()
+        protected IExecutor Execute()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return ScriptExecutor;
+            return Executor;
         }
 
         protected IElementFinder Find()
@@ -54,11 +54,11 @@ namespace TestStack.Seleno.PageObjects
             return ComponentFactory.CreatePage<TComponent>();
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, int maxWaitInSeconds = 5)
+        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
           where THtmlControl : HTMLControl, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, maxWaitInSeconds);
+            return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, maxWait);
         }
 
         private void ThrowIfComponentNotCreatedCorrectly()

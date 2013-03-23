@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
             _radioButtonGroup = Substitute.For<RadioButtonGroup>();
 
             _componentFactory
-                .HtmlControlFor<RadioButtonGroup>(_radioButtonGroupPropertySelector, Arg.Any<int>())
+                .HtmlControlFor<RadioButtonGroup>(_radioButtonGroupPropertySelector)
                 .Returns(_radioButtonGroup);    
         }
         

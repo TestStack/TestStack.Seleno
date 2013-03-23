@@ -15,7 +15,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_execute_javascript_to_set_attribute()
         {
-            ScriptExecutor
+            Executor
                 .Received(1)
                 .ExecuteScript(string.Format(@"$('#Name').attr('{0}', ""someValue \\ \"" \r\n"")", AttributeName));
         }

@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests.Pages
             where TDestinationPage : UiComponent, new()
         {
             Input().Model(logonModel);
-            Navigate().To(By.CssSelector("input[type=\"submit\"]"));
+            Find().Element(By.CssSelector("input[type=submit]")).Click();
             return Navigate().To<TController, TDestinationPage>(action);
         }
     }

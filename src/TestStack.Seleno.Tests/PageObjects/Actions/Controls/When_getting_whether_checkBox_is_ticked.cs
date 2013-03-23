@@ -17,7 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         
         public void Then_control_should_execute_relevant_script_to_verify_existence_of_checked_attribute()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ScriptAndReturn<object>("$('#Exists').attr('checked')");
         }
