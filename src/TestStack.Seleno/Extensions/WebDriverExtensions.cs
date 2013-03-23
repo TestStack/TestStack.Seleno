@@ -9,7 +9,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Extensions
 {
-    public static class WebDriverExtensions
+    internal static class WebDriverExtensions
     {
         public const int DefaultSecondTimeout = 60;
 
