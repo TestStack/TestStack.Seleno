@@ -1,3 +1,5 @@
+using TestStack.Seleno.Extensions;
+
 namespace TestStack.Seleno.PageObjects
 {
     public class Page<TViewModel> : UiComponent<TViewModel> where TViewModel : class, new()
@@ -6,7 +8,7 @@ namespace TestStack.Seleno.PageObjects
         {
             get
             {
-                return Browser.Title;
+                return Browser.TitleWithWait();
             }
         }
     }
