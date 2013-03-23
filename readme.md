@@ -55,10 +55,7 @@ Seleno helps you to write automated UI tests in the right way by implementing Pa
 
         public class HomePage : Page
         {
-            public RegisterPage GoToRegisterPage()
-            {
-                return Navigate().To<RegisterPage>(By.LinkText("Register"));
-            }
+            ...
     
             public LoginPanel LoginPanel
             {
@@ -76,15 +73,6 @@ Seleno helps you to write automated UI tests in the right way by implementing Pa
             public string LoggedInUserName
             {
                 get { return Find().Element(By.Id("login-username")).Text; }
-            }
-        }
-        
-        public class RegisterPage : Page<RegisterModel>
-        {
-            public HomePage RegisterUser(RegisterModel registerModel)
-            {
-                Input().Model(registerModel);
-                return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
             }
         }
 
@@ -106,7 +94,7 @@ Seleno helps you to write automated UI tests in the right way by implementing Pa
         }
 
 ## Tutorials / advanced usage
-Stay tuned!
+Check out [our documentation](http://teststack.github.com/pages/Seleno.html).
 
 ## Background information on Page Objects
 
