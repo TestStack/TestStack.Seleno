@@ -9,6 +9,8 @@ todo document these breaking changes:
 *	Removed ActionOnLocator(Func) from Execute()
 *	Renamed IScriptExecutor to IExecutor
 *	Bunch of implementation classes now marked internal
+*	IPageNavigator: void To(By elementToClick)
+*	WebDriverExtensions internal
 
 Version 0.4
 -----------
