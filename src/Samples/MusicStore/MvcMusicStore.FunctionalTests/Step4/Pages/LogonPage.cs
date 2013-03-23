@@ -19,7 +19,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
             where TDestinationPage : UiComponent, new()
         {
             Input().Model(logonModel);
-            Navigate().To(By.CssSelector("input[type=\"submit\"]"));
+            Find().Element(By.CssSelector("input[type=submit]")).Click();
             return Navigate().To<TController, TDestinationPage>(action);
         }
     }
