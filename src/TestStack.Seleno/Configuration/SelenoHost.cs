@@ -7,11 +7,21 @@ using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.Configuration
 {
-    [Obsolete("Please use SelenoHost instead of SelenoApplicationRunner", true)]
+    /// <summary>Obsolete</summary>
+    [Obsolete("Obsolete: Use SelenoHost instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
     public static class SelenoApplicationRunner
     {
+        /// <summary>
+        /// Obsolete
+        /// </summary>
         public static void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null) {}
+        /// <summary>
+        /// Obsolete
+        /// </summary>
         public static void Run(WebApplication app, Action<IAppConfigurator> configure) {}
+        /// <summary>
+        /// Obsolete
+        /// </summary>
         public static void Run(Action<IAppConfigurator> configure) {}
     }
 

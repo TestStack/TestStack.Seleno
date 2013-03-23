@@ -9,7 +9,7 @@ using TestStack.Seleno.Tests.Specify;
 namespace TestStack.Seleno.Tests.PageObjects
 {
     [TestFixture]
-    class ScriptAndReturnSpecification : SpecificationFor<ScriptExecutor>
+    class ScriptAndReturnSpecification : SpecificationFor<Executor>
     {
         private const string ExecutedScript = @"$('#id').is(':visible')";
         private readonly Type _expectedType = typeof(bool);

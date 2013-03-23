@@ -48,6 +48,7 @@ namespace MvcMusicStore.FunctionalTests
             driver.FindElement(By.Id("PromoCode")).SendKeys("FREE");
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
 
+            // Note: this will sometimes fail because there is no wait (sometimes the page source isn't ready)
             Assert.IsTrue(driver.PageSource.Contains("Checkout Complete"));
         }
     }

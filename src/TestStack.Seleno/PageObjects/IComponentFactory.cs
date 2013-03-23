@@ -7,19 +7,17 @@ using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
 {
-    public interface IComponentFactory
+    internal interface IComponentFactory
     {
         IPageReader<T> CreatePageReader<T>() where T : class, new();
         IPageWriter<T> CreatePageWriter<T>() where T : class, new();
         IElementAssert CreateElementAssert(By selector);
         TPage CreatePage<TPage>() where TPage : UiComponent, new();
 
-        THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, int maxWaitInSeconds = 5)
+        THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : IHtmlControl;
 
-        THtmlControl HtmlControlFor<THtmlControl>(string controlId, int maxWaitInSeconds = 5)
+        THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : IHtmlControl;
-
-
     }
 }

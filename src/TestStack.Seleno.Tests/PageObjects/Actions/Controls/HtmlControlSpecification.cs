@@ -13,7 +13,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
     {
         protected IPageNavigator PageNavigator { get; private set; }
         protected IElementFinder ElementFinder { get; private  set; }
-        protected IScriptExecutor ScriptExecutor { get; private set; }
+        protected IExecutor Executor { get; private set; }
         protected IComponentFactory ComponentFactory { get; private set; }
 
         protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
@@ -27,7 +27,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
                       {
                           PageNavigator = PageNavigator = SubstituteFor<IPageNavigator>(),
                           ElementFinder = ElementFinder = SubstituteFor<IElementFinder>(),
-                          ScriptExecutor = ScriptExecutor = SubstituteFor<IScriptExecutor>(),
+                          Executor = Executor = SubstituteFor<IExecutor>(),
                           ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>()
                       };
 

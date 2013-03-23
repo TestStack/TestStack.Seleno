@@ -19,11 +19,11 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
             _selectedOption = SubstituteFor<IWebElement>();
 
             ElementFinder
-                .Element(Arg.Any<By.jQueryBy>(), Arg.Any<int>())
+                .Element(Arg.Any<By.jQueryBy>())
                 .Returns(_selectedOption);
 
             ElementFinder
-                .WhenForAnyArgs(x => x.Element(Arg.Any<By.jQueryBy>(), Arg.Any<int>()))
+                .WhenForAnyArgs(x => x.Element(Arg.Any<By.jQueryBy>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
         }
 

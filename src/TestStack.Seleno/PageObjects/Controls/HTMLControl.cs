@@ -37,7 +37,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
         }
 
-        internal int WaitInSecondsUntilElementAvailable { get; set; }
+        internal TimeSpan WaitUntilElementAvailable { get; set; }
 
         internal LambdaExpression ViewModelPropertySelector { get; set; }
 

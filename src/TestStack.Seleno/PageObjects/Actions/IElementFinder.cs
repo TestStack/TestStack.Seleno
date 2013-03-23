@@ -16,10 +16,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().Element(By.Id("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <exception cref="NoSuchElementException">When the element isn't found</exception>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement Element(By findExpression, int maxWaitInSeconds = 5);
+        IWebElement Element(By findExpression, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
         /// Locate an element using a jQuery expression and return the <see cref="IWebElement"/> corresponding to that element.
@@ -29,10 +29,10 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().Element(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <exception cref="NoSuchElementException">When the element isn't found</exception>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5);
+        IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
         /// Locate an element that may or not be present using a Selenium Web Driver expression and return the <see cref="IWebElement"/> corresponding to that element.
@@ -42,9 +42,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().OptionalElement(By.Id("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement OptionalElement(By findExpression, int maxWaitInSeconds = 5);
+        IWebElement OptionalElement(By findExpression, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
         /// Locate an element that may or not be present using a jQuery expression and return the <see cref="IWebElement"/> corresponding to that element.
@@ -54,14 +54,18 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Find().OptionalElement(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
-        /// <param name="maxWaitInSeconds">Maximum number of seconds to wait for the element to become available</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
         /// <returns>The <see cref="IWebElement"/> representing the element</returns>
-        IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, int maxWaitInSeconds = 5);
+        IWebElement OptionalElement(Locators.By.jQueryBy jQueryFindExpression, TimeSpan maxWait = default(TimeSpan));
 
-        /// <summary>
-        /// Obsolete: Use OptionalElement instead.
-        /// </summary>
-        [Obsolete("Use OptionalElement instead")]
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use Element instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
+        IWebElement ElementWithWait(By findElement, int waitInSeconds = 20);
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use OptionalElement instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
+        IWebElement TryFindElement(By by);
+        /// <summary>Obsolete</summary>
+        [Obsolete("Obsolete: Use OptionalElement instead. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]
         IWebElement TryFindElementByjQuery(Locators.By.jQueryBy by);
     }
 }

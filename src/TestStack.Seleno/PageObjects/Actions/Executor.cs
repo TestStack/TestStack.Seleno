@@ -6,13 +6,13 @@ using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
-    internal class ScriptExecutor : IScriptExecutor
+    internal class Executor : IExecutor
     {
         private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly IElementFinder _finder;
         private readonly ICamera _camera;
 
-        public ScriptExecutor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
+        public Executor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
             if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
             if (finder == null) throw new ArgumentNullException("finder");
@@ -23,14 +23,11 @@ namespace TestStack.Seleno.PageObjects.Actions
             _camera = camera;
         }
 
-        // todo: Are these ActionOnLocator methods something that should be in ScriptExecutor or should ScriptExecutor be renamed?
-        // todo: Should we add jQuery By method overloads?
-
-        public IWebElement ActionOnLocator(By findElement, Action<IWebElement> action, int maxWaitInSeconds = 5)
+        public IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
             try
             {
-                var element = _finder.Element(findElement, maxWaitInSeconds);
+                var element = _finder.Element(findExpression, maxWait);
                 action(element);
                 return element;
             }
@@ -41,12 +38,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public TResult ActionOnLocator<TResult>(By findElement, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
+        // todo: unit/integration test this
+        public IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
             try
             {
-                var element = _finder.Element(findElement, maxWaitInSeconds);
-                return func(element);
+                var element = _finder.Element(jQueryFindExpression, maxWait);
+                action(element);
+                return element;
             }
             catch (Exception)
             {
@@ -71,6 +70,16 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void ExecuteScript(string javascriptToBeExecuted)
         {
             _javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
+        }
+
+        public TResult ActionOnLocator<TResult>(By findExpression, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
+        {
+            throw new NotImplementedException("Obsolete");
+        }
+
+        public IWebElement WithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
+        {
+            throw new NotImplementedException("Obsolete");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_script_executor_should_execute_script_to_update_multiline_content()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ExecuteScript(@"$(""#MultiLineContent"").text(""line 1\nline 2\nnew line 3"")");
         }

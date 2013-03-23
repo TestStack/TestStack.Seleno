@@ -1,4 +1,5 @@
 using System;
+using System.Web.Routing;
 using Castle.Core.Logging;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.WebServers;
@@ -38,9 +39,9 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// Specify the minimum amount of time in seconds to wait when trying to find elements on the page.
         /// By default the minimum wait is 10 seconds.
         /// </summary>
-        /// <param name="minimumWaitInSeconds">The minimum number of seconds to wait to find an element on the page</param>
+        /// <param name="minimumWait">The minimum number of seconds to wait to find an element on the page</param>
         /// <returns>The configurator to allow for method chaining</returns>
-        IAppConfigurator WithMinimumWaitTimeoutInSecondsOf(int minimumWaitInSeconds);
+        IAppConfigurator WithMinimumWaitTimeoutOf(TimeSpan minimumWait);
 
         /// <summary>
         /// Specify the camera you would like to use.
@@ -57,6 +58,13 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="loggerFactory">The logger factory</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory);
+
+        /// <summary>
+        /// Define the routes for the application.
+        /// </summary>
+        /// <param name="routeCollectionUpdater">A method that takes a route collection and populates it with routes</param>
+        /// <returns>The configurator to allow for method chaining</returns>
+        IAppConfigurator WithRouteConfig(Action<RouteCollection> routeCollectionUpdater);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator

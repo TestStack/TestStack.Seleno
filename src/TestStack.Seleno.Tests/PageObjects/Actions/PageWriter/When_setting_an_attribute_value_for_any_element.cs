@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
             _control = SubstituteFor<IHtmlControl>();
             
             _componentFactory
-                .HtmlControlFor<IHtmlControl>(_propertySelector, Arg.Any<int>())
+                .HtmlControlFor<IHtmlControl>(_propertySelector)
                 .Returns(_control);
 
         }

@@ -13,7 +13,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_throw_NoSuchElementException()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ExecuteScript("$('input[type=radio][name=Choice][value]')" +
                                @".filter(function() {return $(this).attr('value').toLowerCase() == ""Another"".toLowerCase()})"+
@@ -31,7 +31,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_throw_NoSuchElementException()
         {
-            ScriptExecutor
+            Executor
                 .Received()
                 .ExecuteScript("$('input[type=radio][name=AnotherChoice][value]')" +
                                @".filter(function() {return $(this).attr('value').toLowerCase() == ""Something with \"" and \r\n"".toLowerCase()})" +

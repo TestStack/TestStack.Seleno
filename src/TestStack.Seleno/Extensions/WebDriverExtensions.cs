@@ -9,15 +9,33 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Extensions
 {
-    public static class WebDriverExtensions
+    internal static class WebDriverExtensions
     {
         public const int DefaultSecondTimeout = 60;
 
-        public static IWebElement ElementWithWait(this IWebDriver driver,Func<IWebDriver, IWebElement> elementIsFound, int maxWaitInSeconds)
+        public static string TitleWithWait(this IWebDriver webDriver)
         {
             try
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(maxWaitInSeconds));
+                return new WebDriverWait(webDriver, TimeSpan.FromSeconds(5))
+                    .Until(d => new[] {d.Title}
+                                    .Select(t => string.IsNullOrEmpty(t) ? null : t)
+                                    .First()
+                    );
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static IWebElement ElementWithWait(this IWebDriver driver, Func<IWebDriver, IWebElement> elementIsFound, TimeSpan maxWait)
+        {
+            try
+            {
+                if (maxWait == default(TimeSpan))
+                    maxWait = TimeSpan.FromSeconds(5);
+                var wait = new WebDriverWait(driver, maxWait);
                 return wait.Until(elementIsFound);
             }
             catch (WebDriverTimeoutException e)

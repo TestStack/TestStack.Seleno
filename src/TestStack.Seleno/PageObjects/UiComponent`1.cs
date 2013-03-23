@@ -19,10 +19,10 @@ namespace TestStack.Seleno.PageObjects
             return ComponentFactory.CreatePageWriter<TModel>();
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel,Object>> propertySelector, int maxWaitInSeconds = 5)
+        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {
-            return ComponentFactory.HtmlControlFor<THtmlControl>(propertySelector, maxWaitInSeconds);
+            return ComponentFactory.HtmlControlFor<THtmlControl>(propertySelector, maxWait);
         }
     }
 }

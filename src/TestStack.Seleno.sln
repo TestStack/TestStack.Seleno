@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Movies", "Movies", "{626175
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC3B3288-38DE-41B1-B98D-374BEF0FD645}"
 	ProjectSection(SolutionItems) = preProject
-		..\BREAKING_CHANGES.txt = ..\BREAKING_CHANGES.txt
+		..\BREAKING_CHANGES.md = ..\BREAKING_CHANGES.md
 		..\license.txt = ..\license.txt
 		..\logo.png = ..\logo.png
 		..\readme.md = ..\readme.md
