@@ -25,9 +25,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             _componentFactory = componentFactory;
         }
 
-        public TPage To<TPage>(By clickDestination) where TPage : UiComponent, new()
+        public TPage To<TPage>(By clickDestination, TimeSpan maxWait = default(TimeSpan)) where TPage : UiComponent, new()
         {
-            To(clickDestination);
+            _executor.ActionOnLocator(clickDestination, e => e.Click(), maxWait);
             return _componentFactory.CreatePage<TPage>();
         }
 
@@ -37,7 +37,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             return _componentFactory.CreatePage<TPage>();
         }
 
-        // This will move to MVC project once that is established
+        // todo: Move to a Seleno.Mvc project if established
         public TPage To<TController, TPage>(Expression<Action<TController>> action)
             where TController : Controller
             where TPage : UiComponent, new()
