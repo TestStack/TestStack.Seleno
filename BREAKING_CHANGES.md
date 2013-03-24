@@ -11,7 +11,7 @@ Removed the following extension methods from IWebElement:
 * `T TextAsType<T>(this IWebElement element)`
 
 ### Reason
-We are trying to move away from exposing Selenium interfaces and classes in our public API so that we can provide a driver agnostic API for you to use. This gives us flexibility in the future to support other drivers e.g. Phantom etc.
+We are trying to move away from exposing Selenium interfaces and classes in our public API so that we can provide a driver agnostic API for you to use. 
 
 ### Fix
 * ClearAndSendKeys method
