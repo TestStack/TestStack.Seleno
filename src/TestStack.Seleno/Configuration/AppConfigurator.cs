@@ -18,7 +18,7 @@ namespace TestStack.Seleno.Configuration
         protected ContainerBuilder ContainerBuilder = new ContainerBuilder();
         protected WebApplication WebApplication;
         private TimeSpan _minimumWait = TimeSpan.FromSeconds(10);
-        private RouteCollection _routes = new RouteCollection();
+        private readonly RouteCollection _routes = new RouteCollection();
 
         public AppConfigurator()
         {
