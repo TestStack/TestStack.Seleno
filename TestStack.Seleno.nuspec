@@ -3,7 +3,6 @@
   <metadata>
     <id>TestStack.Seleno</id>
     <version>1.0.0</version>
-    <title>Seleno</title>
     <authors>Mehdi Khalili, Michael Whelan, TestStack</authors>
     <owners>Mehdi Khalili, Michael Whelan, TestStack</owners>
     <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
@@ -14,9 +13,9 @@
     <iconUrl>https://raw.github.com/TestStack/TestStack.Seleno/master/logo.png</iconUrl>
     <tags>web, mvc, asp.net, testing, ui, selenium</tags>
     <dependencies> 
-      <dependency id="Selenium.WebDriver" version="2.28" />
-      <dependency id="Selenium.Support" version="2.28" />
-      <dependency id="Castle.Core" version="3.1.0" />
+      <dependency id="Selenium.WebDriver" version="2.31.2" />
+      <dependency id="Selenium.Support" version="2.31.2" />
+      <dependency id="Castle.Core" version="3.2.0" />
     </dependencies>
   </metadata>
   <files>
