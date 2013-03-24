@@ -22,7 +22,6 @@ namespace TestStack.Seleno.Configuration
         public static FirefoxDriver FireFox()
         {
             var browser = new FirefoxDriver();
-            browser.SetImplicitTimeout(10);
             return browser;
         }
 
