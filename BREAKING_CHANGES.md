@@ -174,7 +174,7 @@ In order to hide the internal implementation of Seleno and provide a discoverabl
 
 If you are using these classes directly then you need to work out a different way of achieving your goal. If you think that any of these classes are useful in the public API then please [lodge an issue on the GitHub site](https://github.com/TestStack/TestStack.Seleno/issues).
 
-## Web driver specification
+## Web driver configuration
 
 The configuration method for specifying a different web driver has been renamed to `WithRemoteWebDriver` (from `WithWebDriver`) and now takes a `Func<RemoteWebDriver>` rather than a `Func<IWebDriver>`.
 
@@ -185,3 +185,15 @@ We need to register an `IJavaScriptExecutor` within our dependency injection con
 ### Fix
 
 IF you were using the Seleno `BrowserFactory` class then it's already been modified to return the correct factories for this change. If you implemented a custom browser implementation it will now need to extend `RemoteWebDriver`.
+
+## Logging configuration
+
+The custom logging API has been replaced with the [Castle.Core logging API](http://docs.castleproject.org/Windsor.logging-facility.ashx).
+
+### Reason
+
+Hand-rolling a logging library is like reinventing the wheel. Castle.Core is a widely used library so we are happy in taking it as a dependency (and it might come in handy in the future since we might use some aspect-oriented programming). It also handily has a bunch of integrations with common logging libraries.
+
+### Fix
+
+Replace any calls to `UsingLogger` in the configuration with a call to `UsingLoggerFactory` and passing in the relevant Castle.Core logger (or your own implementation of the Castle.Core `ILoggerFactory` interface to bridge the gap with your logging library.
