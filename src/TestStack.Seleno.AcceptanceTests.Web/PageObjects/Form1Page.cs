@@ -61,17 +61,17 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
             get { return Read().HasSelectedRadioButtonInRadioGroup(x => x.RequiredListIdAsList); }
         }
 
-        public IWebElement FindExistantElement
+        public IWebElement FindExistentElement
         {
             get { return Find().Element(By.Id("RequiredBool")); }
         }
 
-        public IWebElement FindOptionalNonExistantElement
+        public IWebElement FindOptionalNonExistentElement
         {
             get { return Find().OptionalElement(By.Id("RandomElement"), TimeSpan.FromSeconds(1)); }
         }
 
-        public IWebElement FindNonExistantElement(int timeoutInSeconds)
+        public IWebElement FindNonExistentElement(int timeoutInSeconds)
         {
             return Find().Element(By.Id("RandomElement"), TimeSpan.FromSeconds(timeoutInSeconds));
         }

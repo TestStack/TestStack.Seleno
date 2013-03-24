@@ -23,7 +23,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void When_finding_that_element()
             {
-                _element = _page.FindExistantElement;
+                _element = _page.FindExistentElement;
             }
 
             public void Then_the_element_was_found()
@@ -52,7 +52,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
                 {
                     _maxWait = 3;
                     #pragma warning disable 168
-                    var x = _page.FindNonExistantElement(_maxWait);
+                    var x = _page.FindNonExistentElement(_maxWait);
                     #pragma warning restore 168
                 }
                 catch (Exception e)
@@ -86,7 +86,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void When_optionally_finding_that_element()
             {
-                _element = _page.FindOptionalNonExistantElement;
+                _element = _page.FindOptionalNonExistentElement;
             }
 
             public void Then_the_element_is_null()

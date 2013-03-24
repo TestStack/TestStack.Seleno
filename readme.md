@@ -8,7 +8,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 ## How do I use it?
 
 1. Install-Package TestStack.Seleno
-	* If you are using ASP.NET MVC then there are some helper methods for that that require you to install MVC if you want to use them: Install-Package Microsoft.AspNet.Mvc
+	* If you are using ASP.NET MVC then there are some helper methods for that which require you to install MVC if you want to use them: Install-Package Microsoft.AspNet.Mvc
 	* If you installed MVC then you will also need to add binding redirects: Add-BindingRedirect
 
 2. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
@@ -50,7 +50,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
                 return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
             }
         }
-	* Seleno provides a DSL that hides you from most of Selenium Web Driver, feel free to make use of intellisense within your page object to experiment with what's possible
+	* Seleno provides a DSL that hides most of Selenium Web Driver from you. Feel free to make use of intellisense within your page object to experiment with what's possible
 	* There are some links to advanced usage instructions and tutorials below
 
 4. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
