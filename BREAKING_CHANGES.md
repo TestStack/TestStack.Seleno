@@ -1,4 +1,4 @@
-# Version 0.4.X
+# Version 0.4.55
 
 ## Web Element Extensions
 Removed the following extension methods from IWebElement:
