@@ -29,7 +29,7 @@ We are trying to move away from exposing Selenium interfaces and classes in our 
 * TextAsType method
 	* If you are inside a typed page object (e.g. extending Page<TModel>) then replace with Read().TextAsType(...)
 
-## Execute() (ScriptExecutor) changes
+## Execute() changes
 
 A number of changes have been made to the object returned from the Execute() method on `UiComponent` / `Page`:
 
@@ -173,3 +173,15 @@ In order to hide the internal implementation of Seleno and provide a discoverabl
 ### Fix
 
 If you are using these classes directly then you need to work out a different way of achieving your goal. If you think that any of these classes are useful in the public API then please [lodge an issue on the GitHub site](https://github.com/TestStack/TestStack.Seleno/issues).
+
+## Web driver specification
+
+The configuration method for specifying a different web driver has been renamed to `WithRemoteWebDriver` (from `WithWebDriver`) and now takes a `Func<RemoteWebDriver>` rather than a `Func<IWebDriver>`.
+
+### Reason
+
+We need to register an `IJavaScriptExecutor` within our dependency injection container so that our API wrappers for executing JavaScript can function correctly. Previously, the `IWebDriver` that was passed into the configuration was simply type-casted to an `IJavaScriptExecutor`. This is kind of nasty and makes it a bit harder to unit test (and also isn't very discoverable in our public API. Hence, we decided to take the dependency on `RemoteWebDriver` instead, which implements both `IWebDriver` and `IJavaScriptExecutor`.
+
+### Fix
+
+IF you were using the Seleno `BrowserFactory` class then it's already been modified to return the correct factories for this change. If you implemented a custom browser implementation it will now need to extend `RemoteWebDriver`.
