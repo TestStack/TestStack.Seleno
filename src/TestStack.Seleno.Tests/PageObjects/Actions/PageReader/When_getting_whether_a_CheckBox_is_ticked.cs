@@ -8,7 +8,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
-    class When_getting_whether_a_checkbox_is_ticked: PageReaderSpecification
+    class When_getting_whether_a_checkbox_is_ticked : PageReaderSpecification
     {
         private CheckBox _checkBox;
         private IComponentFactory _componentFactory;

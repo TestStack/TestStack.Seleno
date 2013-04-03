@@ -106,6 +106,8 @@
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_checking_an_element_exists_and_is_visible_with_property.cs" />
+    <Compile Include="PageObjects\Actions\PageReader\When_checking_whether_an_element_exists_or_not_with_jquery_selector.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_multiline_content_of_a_textarea.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_selected_button_from_radio_group.cs" />
     <Compile Include="PageObjects\Actions\PageReader\PageReaderSpecification.cs" />
