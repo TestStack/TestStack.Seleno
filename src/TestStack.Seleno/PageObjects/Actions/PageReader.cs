@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Controls;
+using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -53,19 +54,23 @@ namespace TestStack.Seleno.PageObjects.Actions
                 .Value;
         }
 
-        public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> field, TimeSpan maxWait = default(TimeSpan))
+        public IWebElement ElementFor<TField>(Expression<Func<TViewModel, TField>> propertySelector, TimeSpan maxWait = default(TimeSpan))
         {
-            var name = ExpressionHelper.GetExpressionText(field);
+            var name = ExpressionHelper.GetExpressionText(propertySelector);
             var id = TagBuilder.CreateSanitizedId(name);
             return _elementFinder.Element(By.Id(id), maxWait);
         }
 
-        public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> field)
+        public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> propertySelector)
         {
-            var name = ExpressionHelper.GetExpressionText(field);
-
-            var javascriptExpression = string.Format("$('#{0}').is(':visible')", name);
-            return _executor.ScriptAndReturn<bool>(javascriptExpression);
+            var jquerySelector = string.Format("#{0}", ExpressionHelper.GetExpressionText(propertySelector));
+            return ExistsAndIsVisible(By.jQuery(jquerySelector));
+        }
+        
+        public bool ExistsAndIsVisible(By.jQueryBy jqueryBy)
+        {
+            var elementIsVisibleScript = string.Format("${0}.is(':visible')", jqueryBy.Selector);
+            return _executor.ScriptAndReturn<bool>(elementIsVisibleScript);
         }
 
         public TProperty GetAttributeAsType<TProperty>(Expression<Func<TViewModel, TProperty>> propertySelector, string attributeName, TimeSpan maxWait = default(TimeSpan))
@@ -119,5 +124,6 @@ namespace TestStack.Seleno.PageObjects.Actions
                 .HtmlControlFor<TextArea>(textAreaPropertySelector, maxWait)
                 .Content;
         }
+       
     }
 }
