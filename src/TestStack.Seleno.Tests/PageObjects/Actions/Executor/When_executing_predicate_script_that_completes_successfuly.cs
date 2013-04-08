@@ -6,14 +6,12 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Executor
     class When_executing_predicate_script_that_completes_successfuly : ExecutorSpecification
     {
         private const string JqueryIsLoadedScript = "typeof jQuery == 'function'";
-        private int _index;
-        private readonly bool[] _returnedValues = new [] {false, true, false};
 
         public void Given_the_predicate_script_will_return_true_only_the_second_time()
         {
             SubstituteFor<IJavaScriptExecutor>()
                 .ExecuteScript("return " + JqueryIsLoadedScript)
-                .Returns(c => _returnedValues[_index++]);
+                .Returns(false,true,false);
         }
 
         public void When_executing_predicate_script()
