@@ -1,15 +1,11 @@
-﻿using System;
+using System;
 using FluentAssertions;
 using NSubstitute;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Tests.Specify;
 
-namespace TestStack.Seleno.Tests.PageObjects
+namespace TestStack.Seleno.Tests.PageObjects.Actions.Executor
 {
-    [TestFixture]
-    class ScriptAndReturnSpecification : SpecificationFor<Executor>
+    class When_executing_script_and_returning_to_converted_Type : ExecutorSpecification
     {
         private const string ExecutedScript = @"$('#id').is(':visible')";
         private readonly Type _expectedType = typeof(bool);

@@ -104,6 +104,11 @@
     <Compile Include="PageObjects\Actions\Controls\When_updating_multiLine_content_of_TextArea.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_updating_TextBox_value.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
+    <Compile Include="PageObjects\Actions\Executor\ExecutorSpecification.cs" />
+    <Compile Include="PageObjects\Actions\Executor\When_checking_whether_ajax_calls_are_completed.cs" />
+    <Compile Include="PageObjects\Actions\Executor\When_executing_predicate_script_that_completes_successfuly.cs" />
+    <Compile Include="PageObjects\Actions\Executor\When_executing_predicate_script_timing_out_before_it_completes.cs" />
+    <Compile Include="PageObjects\Actions\Executor\When_executing_script_and_returning_to_converted_Type.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_checking_an_element_exists_and_is_visible_with_property.cs" />
@@ -127,7 +132,6 @@
     <Compile Include="PageObjects\Actions\PageWriter\When_selecting_a_radio_button_in_Radio_Group.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_setting_an_attribute_value_for_any_element.cs" />
     <Compile Include="PageObjects\ComponentFactorySpecs.cs" />
-    <Compile Include="PageObjects\ScriptAndReturnSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specify\ISpecification.cs" />
     <Compile Include="Specify\SelenoDesignSpecsHtmlReportConfig.cs" />

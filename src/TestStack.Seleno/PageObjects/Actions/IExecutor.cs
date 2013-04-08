@@ -41,6 +41,21 @@ namespace TestStack.Seleno.PageObjects.Actions
         IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan));
 
         /// <summary>
+        /// Executes some JavaScript that returns a boolean and waits until its returned value is true
+        /// </summary>
+        /// <param name="predicateScriptToBeExecuted">The predicate javaScript to execute</param>
+        /// <param name="maxWait">Maximum amount of time to wait for predicate Javascript to return true (default is 5 seconds)</param>
+        /// <exception cref="TimeoutException">When the executed JavaScript took more than maxWait to execute</exception>
+        void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan));
+        
+        /// <summary>
+        /// Wait until ajax calls are complete
+        /// </summary>
+        /// <param name="maxWait">Maximum amount of time to wait for ajax calls to be completed (default is 5 seconds)</param>
+        /// <exception cref="TimeoutException">When the ajax calls took more than maxWait to execute</exception>
+        void WaitForAjaxCallsToComplete(TimeSpan maxWait = default(TimeSpan));
+
+        /// <summary>
         /// Executes some JavaScript and returns the return value type-casted to the given type.
         /// </summary>
         /// <param name="javascriptToBeExecuted">The JavaScript to execute</param>
