@@ -55,7 +55,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = new TimeSpan())
+        public void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan))
         {
             if (maxWait == default(TimeSpan)) maxWait = TimeSpan.FromSeconds(5);
             var end = DateTime.Now + maxWait;
@@ -80,9 +80,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public void WaitForAjaxCallsToComplete(TimeSpan maxWait = new TimeSpan())
+        public void WaitForAjaxCallsToComplete(TimeSpan maxWait = default(TimeSpan))
         {
-            PredicateScriptAndWaitToComplete("$.active == 0",maxWait);
+            PredicateScriptAndWaitToComplete("$.active == 0", maxWait);
         }
 
         public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType)
