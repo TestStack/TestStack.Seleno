@@ -13,8 +13,8 @@
     <iconUrl>https://raw.github.com/TestStack/TestStack.Seleno/master/logo.png</iconUrl>
     <tags>web, mvc, asp.net, testing, ui, selenium</tags>
     <dependencies> 
-      <dependency id="Selenium.WebDriver" version="2.31.2" />
-      <dependency id="Selenium.Support" version="2.31.2" />
+      <dependency id="Selenium.WebDriver" version="2.32.1" />
+      <dependency id="Selenium.Support" version="2.32.1" />
       <dependency id="Castle.Core" version="3.2.0" />
     </dependencies>
   </metadata>
