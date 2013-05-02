@@ -12,7 +12,7 @@
     <releaseNotes>The baseline for Seleno</releaseNotes>
     <copyright>Copyright 2012 TestStack</copyright>
 	<dependencies> 
-	  <dependency id="Selenium.WebDriver" version="2.28" />
+	  <dependency id="Selenium.WebDriver" version="2.32.1" />
 	</dependencies>
   </metadata>
 </package>
