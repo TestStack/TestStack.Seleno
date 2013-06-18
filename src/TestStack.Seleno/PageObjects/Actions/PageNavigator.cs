@@ -34,6 +34,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             return _componentFactory.CreatePage<TPage>();
         }
 
+        public TPage To<TPage>(Locators.By.jQueryBy jQueryElementToClick, TimeSpan maxWait = default(TimeSpan)) where TPage : UiComponent, new()
+        {
+            _executor.ActionOnLocator(jQueryElementToClick, e => e.Click(), maxWait);
+            return _componentFactory.CreatePage<TPage>();
+        }
+
         public TPage To<TPage>(string relativeUrl) where TPage : UiComponent, new()
         {
             Browser.Navigate().GoToUrl(_webServer.BaseUrl + relativeUrl);

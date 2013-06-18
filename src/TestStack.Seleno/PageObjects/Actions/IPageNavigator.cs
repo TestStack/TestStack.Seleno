@@ -21,6 +21,16 @@ namespace TestStack.Seleno.PageObjects.Actions
             where TPage : UiComponent, new();
 
         /// <summary>
+        /// Navigate to a different page by clicking on an element in the page.
+        /// </summary>
+        /// <typeparam name="TPage">The page object type for the expected resultant page</typeparam>
+        /// <param name="jQueryElementToClick">jQuery expression to find an element</param>
+        /// <param name="maxWait">Maximum amount of time to wait for the element to become available to click</param>
+        /// <returns>An instantiated and initialised <see cref="TPage"/> page object</returns>
+        TPage To<TPage>(Locators.By.jQueryBy jQueryElementToClick, TimeSpan maxWait = default(TimeSpan))
+            where TPage : UiComponent, new();
+
+        /// <summary>
         /// Navigate to a different page by going to a URL (relative to the root URL of the application under test).
         /// </summary>
         /// <typeparam name="TPage">The page object type for the expected resultant page</typeparam>
