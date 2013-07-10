@@ -8,15 +8,19 @@
     <projectUrl>http://teststack.github.com/TestStack.Seleno/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Seleno helps you write automated UI tests in the right way (using Selenium WebDriver)</description>
-    <copyright>Copyright 2012 TestStack</copyright>
+    <copyright>Copyright 2013 TestStack</copyright>
     <licenseUrl>https://github.com/TestStack/TestStack.Seleno/blob/master/license.txt</licenseUrl>
     <iconUrl>https://raw.github.com/TestStack/TestStack.Seleno/master/logo.png</iconUrl>
     <tags>web, mvc, asp.net, testing, ui, selenium</tags>
     <dependencies> 
-      <dependency id="Selenium.WebDriver" version="2.31.2" />
-      <dependency id="Selenium.Support" version="2.31.2" />
+      <dependency id="Selenium.WebDriver" version="2.33.0" />
+      <dependency id="Selenium.Support" version="2.33.0" />
       <dependency id="Castle.Core" version="3.2.0" />
     </dependencies>
+    <releaseNotes>
+      This version of Seleno is updated for Selenium 2.33.0. For breaking changes in previous
+      versions, see https://github.com/TestStack/TestStack.Seleno/blob/master/BREAKING_CHANGES.md
+    </releaseNotes>
   </metadata>
   <files>
      <file src="src\TestStack.Seleno\bin\Release\Combined\TestStack.Seleno.dll" target="lib\NET40" />
