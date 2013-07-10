@@ -137,6 +137,7 @@
     <Compile Include="Specify\SpecificationFor.cs" />
     <Compile Include="Specify\SpecifySpecs.cs" />
     <Compile Include="Specify\SpecStoryMetaDataScanner.cs" />
+    <Compile Include="TestInfrastructure\ChangeCulture.cs" />
     <Compile Include="TestInfrastructure\TestObjectFactory.cs" />
     <Compile Include="Specify\TestCaseSpecificationFor.cs" />
     <Compile Include="TestObjects\TestController.cs" />
