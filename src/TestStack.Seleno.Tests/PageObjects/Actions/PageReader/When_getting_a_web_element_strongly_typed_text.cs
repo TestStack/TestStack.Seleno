@@ -4,6 +4,7 @@ using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.BDDfy.Scanners.StepScanners.ExecutableAttribute.GwtAttributes;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.Tests.TestInfrastructure;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 {
@@ -25,7 +26,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageReader
 
         public void When_getting_the_web_element_matching_a_view_model_property()
         {
-            _result = SUT.TextAsType(viewModel => viewModel.Modified);
+            using (ChangeCulture.To("en-AU"))
+            {
+                _result = SUT.TextAsType(viewModel => viewModel.Modified);
+            }
         }
 
         public void Then_it_should_return_the_corresponding_typed_value_of_the_web_element_text()
