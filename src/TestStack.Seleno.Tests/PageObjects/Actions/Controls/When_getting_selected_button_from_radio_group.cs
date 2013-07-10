@@ -26,8 +26,6 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
             ElementFinder
                 .WhenForAnyArgs(x => x.OptionalElement(Arg.Any<By.jQueryBy>()))
                 .Do(c => _actualJqueryBy = (By.jQueryBy)c.Args()[0]);
-
-            SUT.SelectedElementAs<ChoiceType>().Returns(ChoiceType.Another);
         }
 
         public void AndGiven_the_selected_radio_button_has_a_value()
