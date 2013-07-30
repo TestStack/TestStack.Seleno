@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
@@ -52,6 +53,36 @@ namespace TestStack.Seleno.PageObjects.Actions
                 _camera.TakeScreenshot();
                 throw;
             }
+        }
+
+        public void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan))
+        {
+            if (maxWait == default(TimeSpan)) maxWait = TimeSpan.FromSeconds(5);
+            var end = DateTime.Now + maxWait;
+            
+            var isComplete = false;
+
+            while (DateTime.Now < end)
+            {
+                isComplete = ScriptAndReturn<bool>(predicateScriptToBeExecuted);
+                
+                if (isComplete)
+                {
+                    break;
+                }
+
+                Thread.Sleep(100);
+            }
+
+            if (!isComplete)
+            {
+                throw new TimeoutException(string.Format("The predicate script took longer than {0} seconds to verify statement",maxWait.TotalSeconds));
+            }
+        }
+
+        public void WaitForAjaxCallsToComplete(TimeSpan maxWait = default(TimeSpan))
+        {
+            PredicateScriptAndWaitToComplete("$.active == 0", maxWait);
         }
 
         public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType)
