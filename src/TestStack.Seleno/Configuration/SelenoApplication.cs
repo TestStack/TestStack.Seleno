@@ -10,60 +10,65 @@ using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.Configuration
 {
-    // todo: make this disposable?
-    // todo: unit test this class
     internal class SelenoApplication : ISelenoApplication
     {
+        private bool _disposed = true;
+
         private readonly ILogger _logger;
-        internal IContainer Container { get; private set; }
+        private readonly IWebServer _webServer;
+        private readonly IWebDriver _webDriver;
+        private readonly ICamera _camera;
+        private readonly IContainer _container;
 
-        public IWebDriver Browser { get { return Container.Resolve<IWebDriver>(); } }
-        public ICamera Camera { get { return Container.Resolve<ICamera>(); } }
+        public IWebDriver Browser { get { return _webDriver; } }
+        public ICamera Camera { get { return _camera; } }
+        public ILogger Logger { get { return _logger; } }
+        public IWebServer WebServer { get { return _webServer; } }
 
-        public IWebServer WebServer { get { return Container.Resolve<IWebServer>(); } }
-
+        /// <summary>
+        /// Create a SelenoApplication
+        /// </summary>
+        /// <param name="container">An Autofac container that will be owned by the SelenoApplication and disposed by the SelenoApplication</param>
         public SelenoApplication(IContainer container)
         {
-            Container = container;
-            AppDomain.CurrentDomain.DomainUnload += CurrentDomain_DomainUnload;
-            _logger = Container.Resolve<ILoggerFactory>()
-                .Create(GetType());
+            _container = container;
+            _webDriver = _container.Resolve<IWebDriver>();
+            _camera = _container.Resolve<ICamera>();
+            _logger = _container.Resolve<ILoggerFactory>().Create(GetType());
+            _webServer = _container.Resolve<IWebServer>();
         }
 
         public void Initialize()
         {
+            _disposed = false;
             _logger.Debug("Starting Webserver");
             WebServer.Start();
             _logger.Debug("Browsing to base URL");
             Browser.Navigate().GoToUrl(WebServer.BaseUrl);
         }
 
-        public void ShutDown()
+        public void Dispose()
         {
+            _container.Dispose();
+            if (_disposed)
+                return;
+            _disposed = true;
             Browser.Close();
             _logger.Debug("Browser closed");
             WebServer.Stop();
             _logger.Debug("Webserver shutdown");
-            Container.Dispose();
         }
 
         public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
             where TController : Controller
             where TPage : UiComponent, new()
         {
-            return Container.Resolve<IPageNavigator>().To<TController, TPage>(action);
+            return _container.Resolve<IPageNavigator>().To<TController, TPage>(action);
         }
 
         public TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
-            return Container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
-        }
-
-        void CurrentDomain_DomainUnload(object sender, EventArgs e)
-        {
-            _logger.Info("Starting domain unload");
-            ShutDown();
-            _logger.Debug("Domain unloaded");
+            return _container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
         }
     }
 }

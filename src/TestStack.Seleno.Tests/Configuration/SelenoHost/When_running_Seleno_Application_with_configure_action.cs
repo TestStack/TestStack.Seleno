@@ -6,7 +6,7 @@ using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {
-    public class When_running_Seleno_Application_with_configure_action : SelenoHostSpecification
+    class When_running_Seleno_Application_with_configure_action : SelenoHostSpecification
     {
         private static bool _configureActionHasBeenInvoked;
         private Action<IAppConfigurator> _configureAction = c => { _configureActionHasBeenInvoked = true; };

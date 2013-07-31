@@ -31,7 +31,7 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void AndThen_it_should_be_a_SelenoApplication()
         {
-            Application.Should().BeOfType<SelenoApplication>();
+            Application.Should().BeOfType<Seleno.Configuration.SelenoApplication>();
         }
     }
 }

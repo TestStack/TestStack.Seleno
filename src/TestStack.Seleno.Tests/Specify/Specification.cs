@@ -6,7 +6,7 @@ using TestStack.BDDfy;
 namespace TestStack.Seleno.Tests.Specify
 {
     [TestFixture]
-    public abstract class Specification : ISpecification
+    internal abstract class Specification : ISpecification
     {
         [Test]
         public virtual void Run()

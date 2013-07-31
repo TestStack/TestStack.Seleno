@@ -5,7 +5,7 @@ using AutofacContrib.NSubstitute;
 
 namespace TestStack.Seleno.Tests.Specify
 {
-    public abstract class SpecificationFor<T> : Specification
+    internal abstract class SpecificationFor<T> : Specification
     {
         public T SUT { get; set; }
         protected AutoSubstitute AutoSubstitute;
