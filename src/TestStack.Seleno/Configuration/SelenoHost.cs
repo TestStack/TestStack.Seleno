@@ -87,7 +87,8 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            // todo: throw if host is not null or at least dispose of it / shutdown etc.
+            if (Host != null)
+                throw new SelenoException("You have already created a Seleno application; Seleno currently only supports one application at a time per app domain");
 
             var configurator = AppConfiguratorFactory();
             configure(configurator);

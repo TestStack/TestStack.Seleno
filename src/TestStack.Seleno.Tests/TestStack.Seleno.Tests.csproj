@@ -87,6 +87,7 @@
     <Compile Include="AssemblySetupFixtue.cs" />
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
     <Compile Include="Configuration\SelenoContainerTypeExtensionsTests.cs" />
+    <Compile Include="Configuration\SelenoHost\When_running_twice.cs" />
     <Compile Include="Configuration\SelenoHost\SelenoHostSpecification.cs" />
     <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_controller_action.cs" />
     <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_relativeUrl.cs" />

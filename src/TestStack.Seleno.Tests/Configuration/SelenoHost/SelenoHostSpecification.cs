@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using NUnit.Framework;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Tests.Specify;
 
@@ -13,6 +14,12 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         {
             Seleno.Configuration.SelenoHost.AppConfiguratorFactory = () => AppConfigurator;
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            Seleno.Configuration.SelenoHost.Host = null;
         }
     }
 }
