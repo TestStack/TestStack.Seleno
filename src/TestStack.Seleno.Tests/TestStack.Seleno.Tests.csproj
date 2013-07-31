@@ -91,7 +91,7 @@
     <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_controller_action.cs" />
     <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_relativeUrl.cs" />
     <Compile Include="Configuration\SelenoHost\When_running_Seleno_Application_with_web_application.cs" />
-    <Compile Include="Configuration\SelenoHost\when_running_Seleno_Host.cs" />
+    <Compile Include="Configuration\SelenoHost\When_running_Seleno_Application_with_configure_action.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="PageObjects\Actions\Controls\HtmlControlSpecification.cs" />
