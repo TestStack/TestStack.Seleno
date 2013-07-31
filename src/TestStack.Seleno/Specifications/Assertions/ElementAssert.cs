@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Specifications.Assertions
