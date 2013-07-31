@@ -4,7 +4,7 @@ using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {
-    public class When_navigating_to_initial_page_from_relativeUrl : SelenoHostSpecification
+    class When_navigating_to_initial_page_from_relativeUrl : SelenoHostSpecification
     {
         private const string RelativeUrl = "/Host/SomeUrl";
 
