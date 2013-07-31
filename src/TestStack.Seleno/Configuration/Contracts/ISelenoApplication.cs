@@ -10,7 +10,7 @@ namespace TestStack.Seleno.Configuration.Contracts
     /// <summary>
     /// Defines an instance of a running Seleno Application and associated web browser and Seleno test entry points.
     /// </summary>
-    public interface ISelenoApplication
+    public interface ISelenoApplication : IDisposable
     {
         /// <summary>
         /// Initialise the application.

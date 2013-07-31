@@ -80,6 +80,14 @@ namespace TestStack.Seleno.Configuration
             };
 
             Host = CreateApplication(action);
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomainDomainUnload;
+        }
+
+        private static void CurrentDomainDomainUnload(object sender, EventArgs e)
+        {
+            Host.Logger.Info("Starting domain unload");
+            Host.Dispose();
+            Host.Logger.Debug("Domain unloaded");
         }
 
         private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
