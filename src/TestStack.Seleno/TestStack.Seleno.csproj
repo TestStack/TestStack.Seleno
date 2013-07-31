@@ -90,7 +90,6 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
-    <Compile Include="InaccessibleSelenoException.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />
     <Compile Include="Configuration\Contracts\ISelenoApplication.cs" />
@@ -109,7 +108,6 @@
     <Compile Include="Configuration\WebServers\WebApplication.cs" />
     <Compile Include="Extensions\PropertyExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Guard.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValue.cs" />
     <Compile Include="PageObjects\Actions\IPageNavigator.cs" />
     <Compile Include="PageObjects\Actions\IPageReader.cs" />
@@ -144,7 +142,7 @@
     <Compile Include="Configuration\Fakes\FakeHttpSessionState.cs" />
     <Compile Include="PageObjects\Locators\jQueryBy.cs" />
     <Compile Include="PageObjects\Locators\jQueryExtensions.cs" />
-    <Compile Include="SelenoException.cs" />
+    <Compile Include="Configuration\SelenoException.cs" />
     <Compile Include="PageObjects\UiComponent`1.cs" />
     <Compile Include="PageObjects\UiComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
