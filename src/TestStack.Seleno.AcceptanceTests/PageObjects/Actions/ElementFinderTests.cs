@@ -15,18 +15,23 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
     {
         public class Finding_an_existant_element : ElementFinderTests
         {
-            private Form1Page _page;
+            protected Form1Page Page;
             private IWebElement _element;
 
             public void Given_an_element_exists_on_the_page()
             {
-                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = SelenoHost.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
             public void When_finding_that_element()
             {
-                _element = _page.FindExistentElement;
+                _element = PerformFind();
+            }
+
+            protected virtual IWebElement PerformFind()
+            {
+                return Page.FindExistentElement;
             }
 
             public void Then_the_element_was_found()
@@ -35,16 +40,24 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
             }
         }
 
+        public class Finding_an_existant_element_by_jquery : Finding_an_existant_element
+        {
+            protected override IWebElement PerformFind()
+            {
+                return Page.FindExistentElementByJQuery;
+            }
+        }
+
         public class Finding_a_non_existant_element : ElementFinderTests
         {
-            private Form1Page _page;
+            protected Form1Page Page;
             private Exception _exception;
             private int _maxWait;
             private double _actualWait;
 
             public void Given_an_element_doesnt_exist_on_the_page()
             {
-                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = SelenoHost.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
@@ -55,7 +68,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
                 {
                     _maxWait = 3;
                     #pragma warning disable 168
-                    var x = _page.FindNonExistentElement(_maxWait);
+                    var x = PerformFind(_maxWait);
                     #pragma warning restore 168
                 }
                 catch (Exception e)
@@ -63,6 +76,11 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
                     _exception = e;
                 }
                 _actualWait = stopWatch.Elapsed.TotalSeconds;
+            }
+
+            protected virtual IWebElement PerformFind(int secondsToWait)
+            {
+                return Page.FindNonExistentElement(secondsToWait);
             }
 
             public void Then_an_exception_is_thrown()
@@ -76,25 +94,46 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
             }
         }
 
+        public class Finding_a_non_existant_element_by_jquery : Finding_a_non_existant_element
+        {
+            protected override IWebElement PerformFind(int secondsToWait)
+            {
+                return Page.FindNonExistentElementByJQuery(secondsToWait);
+            }
+        }
+
         public class Finding_an_optional_element : ElementFinderTests
         {
-            private Form1Page _page;
+            protected Form1Page Page;
             private IWebElement _element;
 
             public void Given_an_element_doesnt_exist_on_the_page()
             {
-                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = SelenoHost.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
             public void When_optionally_finding_that_element()
             {
-                _element = _page.FindOptionalNonExistentElement;
+                _element = PerformFind();
+            }
+
+            protected virtual IWebElement PerformFind()
+            {
+                return Page.FindOptionalNonExistentElement;
             }
 
             public void Then_the_element_is_null()
             {
                 Assert.That(_element, Is.Null);
+            }
+        }
+
+        public class Finding_an_optional_element_by_jquery : Finding_an_optional_element
+        {
+            protected override IWebElement PerformFind()
+            {
+                return Page.FindOptionalNonExistentElementByJQuery;
             }
         }
 

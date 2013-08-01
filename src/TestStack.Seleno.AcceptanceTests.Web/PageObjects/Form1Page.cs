@@ -66,14 +66,29 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
             get { return Find().Element(By.Id("RequiredBool")); }
         }
 
+        public IWebElement FindExistentElementByJQuery
+        {
+            get { return Find().Element(Seleno.PageObjects.Locators.By.jQuery("#RequiredBool")); }
+        }
+
         public IWebElement FindOptionalNonExistentElement
         {
             get { return Find().OptionalElement(By.Id("RandomElement"), TimeSpan.FromSeconds(1)); }
         }
 
+        public IWebElement FindOptionalNonExistentElementByJQuery
+        {
+            get { return Find().OptionalElement(Seleno.PageObjects.Locators.By.jQuery("#RandomElement"), TimeSpan.FromSeconds(1)); }
+        }
+
         public IWebElement FindNonExistentElement(int timeoutInSeconds)
         {
             return Find().Element(By.Id("RandomElement"), TimeSpan.FromSeconds(timeoutInSeconds));
+        }
+
+        public IWebElement FindNonExistentElementByJQuery(int timeoutInSeconds)
+        {
+            return Find().Element(Seleno.PageObjects.Locators.By.jQuery("#RandomElement"), TimeSpan.FromSeconds(timeoutInSeconds));
         }
     }
 }
