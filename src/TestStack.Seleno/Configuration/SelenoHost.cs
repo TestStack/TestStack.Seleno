@@ -80,6 +80,14 @@ namespace TestStack.Seleno.Configuration
             };
 
             Host = CreateApplication(action);
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomainDomainUnload;
+        }
+
+        private static void CurrentDomainDomainUnload(object sender, EventArgs e)
+        {
+            Host.Logger.Info("Starting domain unload");
+            Host.Dispose();
+            Host.Logger.Debug("Domain unloaded");
         }
 
         private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
@@ -87,7 +95,8 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            // todo: throw if host is not null or at least dispose of it / shutdown etc.
+            if (Host != null)
+                throw new SelenoException("You have already created a Seleno application; Seleno currently only supports one application at a time per app domain");
 
             var configurator = AppConfiguratorFactory();
             configure(configurator);

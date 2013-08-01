@@ -6,7 +6,7 @@ using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {
-    public class When_navigating_to_initial_page_from_controller_action : SelenoHostSpecification
+    class When_navigating_to_initial_page_from_controller_action : SelenoHostSpecification
     {
         private readonly Expression<Action<TestController>> _controllerAction = x => x.Index();
 
