@@ -36,7 +36,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
             _caughtException.Should().BeOfType<SelenoException>();
         }
 
-        public void And_it_should_have_the_right_message()
+        public void And_the_message_should_state_that_Seleno_only_supports_one_application()
         {
             _caughtException.Message.Should().Be("You have already created a Seleno application; Seleno currently only supports one application at a time per app domain");
         }
