@@ -1,0 +1,15 @@
+﻿@using TestStack.Seleno.AcceptanceTests.Web.Fixtures
+@model dynamic
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h1>List</h1>
+
+<ul id="ul">
+    @foreach (var item in ListFixtures.ListItems)
+    {
+        <li>@item</li>
+    }
+</ul>
