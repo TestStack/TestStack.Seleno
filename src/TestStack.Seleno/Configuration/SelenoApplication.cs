@@ -12,7 +12,8 @@ namespace TestStack.Seleno.Configuration
 {
     internal class SelenoApplication : ISelenoApplication
     {
-        private bool _disposed = true;
+        private bool _initialised = false;
+        private bool _disposed = false;
 
         private readonly ILogger _logger;
         private readonly IWebServer _webServer;
@@ -40,7 +41,7 @@ namespace TestStack.Seleno.Configuration
 
         public void Initialize()
         {
-            _disposed = false;
+            _initialised = true;
             _logger.Debug("Starting Webserver");
             WebServer.Start();
             _logger.Debug("Browsing to base URL");
@@ -49,14 +50,20 @@ namespace TestStack.Seleno.Configuration
 
         public void Dispose()
         {
-            _container.Dispose();
             if (_disposed)
                 return;
+            
             _disposed = true;
-            Browser.Close();
-            _logger.Debug("Browser closed");
-            WebServer.Stop();
-            _logger.Debug("Webserver shutdown");
+
+            if (_initialised)
+            {
+                Browser.Close();
+                _logger.Debug("Browser closed");
+                WebServer.Stop();
+                _logger.Debug("Webserver shutdown");
+            }
+            
+            _container.Dispose();
         }
 
         public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
