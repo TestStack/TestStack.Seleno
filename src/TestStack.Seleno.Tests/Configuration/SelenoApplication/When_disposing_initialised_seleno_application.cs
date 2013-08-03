@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using NSubstitute.Experimental;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoApplication
 {
@@ -14,19 +15,13 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoApplication
             SUT.Dispose();
         }
 
-        public void Then_dispose_container()
+        public void Then_dispose_browser_and_webserver_followed_by_container()
         {
-            ContainerDisposal.Received().Dispose();
-        }
-
-        public void And_close_browser()
-        {
-            WebDriver.Received().Close();
-        }
-
-        public void And_stop_webserver()
-        {
-            WebServer.Received().Stop();
+            Received.InOrder(() => {
+                WebDriver.Received().Close();
+                WebServer.Received().Stop();
+                ContainerDisposal.Received().Dispose();
+            });
         }
     }
 }
