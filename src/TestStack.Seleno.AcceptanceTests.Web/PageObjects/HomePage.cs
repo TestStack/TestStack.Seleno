@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Collections.Generic;
+using OpenQA.Selenium;
 using TestStack.Seleno.AcceptanceTests.Web.Controllers;
 using TestStack.Seleno.PageObjects;
 
@@ -34,6 +36,27 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
         public Form1Page GoToReadModelPageByButton()
         {
             return Navigate().To<Form1Page>(By.CssSelector("input[type=submit]"));
+        }
+
+        public ListPage GoToListPage()
+        {
+            return Navigate().To<HomeController, ListPage>(c => c.List());
+        }
+    }
+
+    public class ListPage : Page
+    {
+        public IEnumerable<IWebElement> Items { get { return Find().Elements(By.CssSelector("#ul li")); } }
+        public IEnumerable<IWebElement> ItemsByJQuery { get { return Find().Elements(Seleno.PageObjects.Locators.By.jQuery("#ul li")); } }
+
+        public IEnumerable<IWebElement> FindNonExistantItems(TimeSpan maxWait)
+        {
+            return Find().Elements(By.ClassName("nonexistant"), maxWait);
+        }
+
+        public IEnumerable<IWebElement> FindNonExistantItemsByJQuery(TimeSpan maxWait)
+        {
+            return Find().Elements(Seleno.PageObjects.Locators.By.jQuery(".nonexistant"), maxWait);
         }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
@@ -25,6 +27,24 @@ namespace TestStack.Seleno.PageObjects.Actions
         public IWebElement Element(Locators.By.jQueryBy jQueryFindExpression, TimeSpan maxWait = default(TimeSpan))
         {
             return Browser.ElementWithWait(d => d.FindElementByjQuery(jQueryFindExpression), maxWait);
+        }
+
+        public IEnumerable<IWebElement> Elements(By findExpression, TimeSpan maxWait = new TimeSpan())
+        {
+            var atLeastOneElement = OptionalElement(findExpression, maxWait);
+            if (atLeastOneElement == null)
+                return Enumerable.Empty<IWebElement>();
+
+            return Browser.FindElements(findExpression);
+        }
+
+        public IEnumerable<IWebElement> Elements(Locators.By.jQueryBy jQueryFindExpression, TimeSpan maxWait = new TimeSpan())
+        {
+            var atLeastOneElement = OptionalElement(jQueryFindExpression, maxWait);
+            if (atLeastOneElement == null)
+                return Enumerable.Empty<IWebElement>();
+
+            return Browser.FindElements(jQueryFindExpression);
         }
 
         public IWebElement OptionalElement(By findExpression, TimeSpan maxWait = default(TimeSpan))
