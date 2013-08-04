@@ -11,6 +11,13 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 	* If you are using ASP.NET MVC then there are some helper methods for that which require you to install MVC if you want to use them: Install-Package Microsoft.AspNet.Mvc
 	* If you installed MVC then you will also need to add binding redirects: Add-BindingRedirect
 
+2. Create a class that creates and holds a reference to an instance of SelenoHost. SelenoHost is your portal to Seleno. It does a lot of things, including running an IISExpress targeting the website you are testing, and as such is a relatively expective class to instantiate for each test. So you create one instance and use it in your tests (unless you want to point Seleno at multiple websites or multiple browsers in which case you will need one instance per website and browser):
+
+		public class Host
+		{
+			public static readonly SelenoHost Instance = new SelenoHost();
+		}
+
 2. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
 
         [SetUpFixture]
@@ -19,7 +26,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
             [SetUp]
             public void SetUp()
             {
-                SelenoHost.Run("Name.Of.Your.Web.Project", 12346, c => c
+                Host.Instance.Run("Name.Of.Your.Web.Project", 12346, c => c
                     .UsingLoggerFactory(new ConsoleFactory())
                     // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
                     // If you aren't using MVC then don't include this line
@@ -85,7 +92,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
             [Test]
             public void GivenAUserIsntRegistered_WhenRegisteringThem_TheyEndUpBackOnTheHomepageAndLoggedIn()
             {
-                var page = SelenoHost.NavigateToInitialPage<HomePage>()
+                var page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToRegisterPage()
                     .RegisterUser(ObjectMother.NewUser);
     
