@@ -18,7 +18,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 			public static readonly SelenoHost Instance = new SelenoHost();
 		}
 
-2. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
+3. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
 
         [SetUpFixture]
         public class AssemblyFixture
@@ -39,7 +39,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 	* By default it uses Firefox so you will need to install that
 	* You might need to run Visual Studio / your test runner as an admin if you can an error when the port tries to get registered by IIS Express
 
-3. Create page objects by extending `Page`, or if you want to use strongly-typed view models, `Page<T>`, e.g.:
+4. Create page objects by extending `Page`, or if you want to use strongly-typed view models, `Page<T>`, e.g.:
 
         public class HomePage : Page
         {
@@ -60,7 +60,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 	* Seleno provides a DSL that hides most of Selenium Web Driver from you. Feel free to make use of intellisense within your page object to experiment with what's possible
 	* There are some links to advanced usage instructions and tutorials below
 
-4. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
+5. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
 
         public class HomePage : Page
         {
@@ -85,7 +85,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
             }
         }
 
-5. Create automated tests that use your page objects, e.g. this NUnit example:
+6. Create automated tests that use your page objects, e.g. this NUnit example:
 
         class RegistrationTests
         {
