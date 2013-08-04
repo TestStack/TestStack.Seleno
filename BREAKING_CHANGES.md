@@ -1,3 +1,16 @@
+# Version 0.5
+
+ ## SelenoHost is no longer static
+ SelenoHost class and it's methods are no longer static. 
+
+ ### Reason
+ When SelenoHost was static you could only have one instance of the Seleno running in each AppDomain. 
+ This way it was impractical to have Seleno run on multiple websites or domains at the same time.
+ This also opens the door for adding features like running your tests on multiple browsers or with different settings.
+
+ ### Fix
+ You should instantiate a single instance of SelenoHost and use it in all your tests. 
+
 # Version 0.4.55
 
 ## Web Element Extensions
