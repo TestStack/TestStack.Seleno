@@ -109,7 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyFixture.cs" />
+    <Compile Include="Host.cs" />
     <Compile Include="PageObjects\Actions\ElementFinderTests.cs" />
     <Compile Include="PageObjects\Actions\ModelIoTests.cs" />
     <Compile Include="PageObjects\Actions\NavigationTests.cs" />
