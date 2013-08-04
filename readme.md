@@ -125,9 +125,9 @@ The usage of the Page Object design pattern creates a strong separation of conce
 ### Authors
 * Mehdi Khalili (@MehdiK)
 * Michael Whelan (@mwhelan)
+* Rob Moore (@robdmoore)
 
 ### Contributors
-* Rob Moore (@robdmoore)
 * Franck Theolade (@Gwayaboy)
 * Rhys Campbell (@RhysC)
 
