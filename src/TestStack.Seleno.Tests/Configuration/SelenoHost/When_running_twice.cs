@@ -1,6 +1,5 @@
 ﻿using System;
 using TestStack.Seleno.Configuration;
-using SUT = TestStack.Seleno.Configuration.SelenoHost;
 using FluentAssertions;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost

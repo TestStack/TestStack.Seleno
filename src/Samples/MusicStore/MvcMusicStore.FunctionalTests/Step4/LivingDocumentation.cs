@@ -30,7 +30,7 @@ namespace MvcMusicStore.FunctionalTests.Step4
         // should be straight to the db, not through the UI
         public void Given_that_I_am_a_logged_in_user()
         {
-            _homePage = SelenoHost.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
+            _homePage = Host.Instance.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

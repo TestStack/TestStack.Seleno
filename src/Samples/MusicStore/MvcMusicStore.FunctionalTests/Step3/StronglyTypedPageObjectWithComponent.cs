@@ -11,7 +11,7 @@ namespace MvcMusicStore.FunctionalTests.Step3
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var orderedPage = SelenoHost.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
+            var orderedPage = Host.Instance.NavigateToInitialPage<HomeController, HomePage>(x => x.Index())
                 .Menu
                 .GoToAdminForAnonymousUser()
                 .GoToRegisterPage()

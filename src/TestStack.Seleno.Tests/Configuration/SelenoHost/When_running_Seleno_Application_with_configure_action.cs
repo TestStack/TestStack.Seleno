@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NSubstitute;
 using TestStack.Seleno.Configuration.Contracts;
-using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {

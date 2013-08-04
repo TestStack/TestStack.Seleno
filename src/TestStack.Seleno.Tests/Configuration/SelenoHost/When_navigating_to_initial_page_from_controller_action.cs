@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using NSubstitute;
 using TestStack.Seleno.Tests.TestObjects;
-using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {

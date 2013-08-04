@@ -45,7 +45,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
         public void Given_browser_is_on_a_page()
         {
-            Page = SelenoHost.NavigateToInitialPage<HomePage>();
+            Page = Host.Instance.NavigateToInitialPage<HomePage>();
         }
 
         public void Then_the_page_was_navigated_to()
