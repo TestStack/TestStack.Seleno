@@ -53,9 +53,9 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// Navigate to the initial page in a test via a URL string relative to the root of the web application and then return a page object instance of the specified type.
         /// </summary>
         /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
-        /// <param name="relativeUrl">A URL string relative to the root of the web application being tested</param>
+        /// <param name="url">A URL string, either relative to the root of the web application being tested or absoluate URL</param>
         /// <returns>An initialised page object</returns>
-        TPage NavigateToInitialPage<TPage>(string relativeUrl = "")
+        TPage NavigateToInitialPage<TPage>(string url = "")
             where TPage : UiComponent, new();
     }
 }

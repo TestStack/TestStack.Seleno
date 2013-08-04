@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using TestStack.Seleno.AcceptanceTests.Web.Controllers;
 using TestStack.Seleno.PageObjects;
 
-namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
+namespace TestStack.Seleno.AcceptanceTests.PageObjects
 {
     public class HomePage : Page
     {
@@ -18,9 +18,14 @@ namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
             return Navigate().To<Form1Page>(By.LinkText("Empty form, but expecting Fixture A upon submit"));
         }
 
-        public Form1Page GoToReadModelPageByUrl()
+        public Form1Page GoToReadModelPageByRelativeUrl()
         {
             return Navigate().To<Form1Page>("/Form1/FixtureA");
+        }
+
+        public Form1Page GoToReadModelPageByAbsoluteUrl()
+        {
+            return Navigate().To<Form1Page>(Host.Instance.Application.WebServer.BaseUrl + "/Form1/FixtureA");
         }
 
         public Form1Page GoToReadModelPageByMvcAction()

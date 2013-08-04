@@ -1,18 +1,24 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
-using TestStack.Seleno.AcceptanceTests.Web.PageObjects;
-using TestStack.Seleno.Configuration;
 using FluentAssertions;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.ActionsTests
 {
     abstract class NavigationTests
     {
-        public class Navigating_via_url : NavigationTests
+        public class Navigating_via_relative_url : NavigationTests
         {
             public void When_navigating_by_url()
             {
-                ResultPage = Page.GoToReadModelPageByUrl();
+                ResultPage = Page.GoToReadModelPageByRelativeUrl();
+            }
+        }
+
+        public class Navigating_via_absolute_url : NavigationTests
+        {
+            public void When_navigating_by_url()
+            {
+                ResultPage = Page.GoToReadModelPageByAbsoluteUrl();
             }
         }
 
