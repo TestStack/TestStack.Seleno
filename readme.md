@@ -27,7 +27,6 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
                 );
 			}
 		}
-
 	* The `123456` is the port number you want the site to run on - it can be anything you want, just make it unique and unused
 	* The `c` variable is a fluent configurator - chain method calls off of it to configure the different parts of Seleno
 	* By default it uses Firefox so you will need to install that
