@@ -3,7 +3,6 @@ using FluentAssertions;
 using NSubstitute;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.WebServers;
-using SUT = TestStack.Seleno.Configuration.SelenoHost;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 {
@@ -45,7 +44,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 
         public void AndThen_the_Seleno_Application_is_kept()
         {
-            Seleno.Configuration.SelenoHost.Host.Should().BeSameAs(SelenoApplication);
+            SUT.Host.Should().BeSameAs(SelenoApplication);
         }
     }
 }

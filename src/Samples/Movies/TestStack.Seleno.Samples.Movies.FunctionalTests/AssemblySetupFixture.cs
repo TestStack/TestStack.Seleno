@@ -5,13 +5,20 @@ using NUnit.Framework;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests
 {
+    public class Host
+    {
+        public static readonly SelenoHost Instance = new SelenoHost();
+    }
+
+
     [SetUpFixture]
     public class AssemblySetupFixture
     {
+
         [SetUp]
         public void SetUp()
         {
-            SelenoHost.Run("TestStack.Seleno.Samples.Movies", 19456);
+            Host.Instance.Run("TestStack.Seleno.Samples.Movies", 19456);
             InitializeBDDfyReport();
         }
 

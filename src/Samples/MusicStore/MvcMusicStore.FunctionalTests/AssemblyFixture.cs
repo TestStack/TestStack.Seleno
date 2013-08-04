@@ -3,13 +3,18 @@ using TestStack.Seleno.Configuration;
 
 namespace MvcMusicStore.FunctionalTests
 {
+    public class Host
+    {
+        public static readonly SelenoHost Instance = new SelenoHost();
+    }
+
     [SetUpFixture]
     public class AssemblyFixture
     {
         [SetUp]
         public void SetUp()
         {
-            SelenoHost.Run("MvcMusicStore", 12345);
+            Host.Instance.Run("MvcMusicStore", 12345);
         }
     }
 }

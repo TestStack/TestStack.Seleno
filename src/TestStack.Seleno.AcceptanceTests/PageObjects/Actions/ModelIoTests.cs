@@ -16,7 +16,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_a_filled_in_form()
             {
-                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                _page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
@@ -39,7 +39,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_an_empty_form()
             {
-                _page = SelenoHost.NavigateToInitialPage<HomePage>()
+                _page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToWriteModelPage();
             }
 
