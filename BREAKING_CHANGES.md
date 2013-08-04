@@ -1,5 +1,14 @@
 # Version 0.5
 
+## Host property on SelenoHost is renamed
+Host property on SelenoHost is renamed to Application
+
+### Reason
+Host was a confusing name given it wasn't actually the host; but an instance of ISelenoApplication
+
+### Fix
+Normally you shouldn't be using Host property on SelenoHost but if you are then just rename the call on the instance of SelenoHost from Host to Application.
+
 ## SelenoHost is no longer static
 SelenoHost class and it's methods are no longer static. 
 
@@ -9,7 +18,9 @@ This way it was impractical to have Seleno run on multiple websites or domains a
 This also opens the door for adding features like running your tests on multiple browsers or with different settings.
 
 ### Fix
-You should instantiate a single instance of SelenoHost and use it in all your tests. 
+You should instantiate a single instance of SelenoHost and use it in all your tests:
+* Add a new class that instances and holds a reference to SelenoHost; e.g. a class called Host that has a public static getter property called Instance that returns a singleton instance of SelenoHost
+* Change all the instances of `SelenoHost` with `Host.Instance`
 
 # Version 0.4.55
 
