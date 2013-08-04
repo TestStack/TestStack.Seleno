@@ -11,35 +11,29 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 	* If you are using ASP.NET MVC then there are some helper methods for that which require you to install MVC if you want to use them: Install-Package Microsoft.AspNet.Mvc
 	* If you installed MVC then you will also need to add binding redirects: Add-BindingRedirect
 
-2. Create a class that creates and holds a reference to an instance of SelenoHost. SelenoHost is your portal to Seleno. It does a lot of things, including running an IISExpress targeting the website you are testing, and as such is a relatively expective class to instantiate for each test. So you create one instance and use it in your tests (unless you want to point Seleno at multiple websites or multiple browsers in which case you will need one instance per website and browser):
+2. Create a class that creates and holds a reference to an instance of SelenoHost. SelenoHost is your portal to Seleno. It does a lot of things, including running an IISExpress targeting the website you are testing, and as such is a relatively expensive class to instantiate for each test. So you create one instance and use it in your tests (unless you want to point Seleno at multiple websites or multiple browsers in which case you will need one instance per website and browser):
 
-		public class Host
+		public static class Host
 		{
 			public static readonly SelenoHost Instance = new SelenoHost();
-		}
 
-3. Create an assembly-level test fixture (if your unit test library supports it, otherwise creating a normal test fixture that will be guaranteed to run first should be enough because Seleno unloads itself when the app domain finishes) that looks something like this NUnit / ASP.NET web application example:
-
-        [SetUpFixture]
-        public class AssemblyFixture
-        {
-            [SetUp]
-            public void SetUp()
-            {
-                Host.Instance.Run("Name.Of.Your.Web.Project", 12346, c => c
+			static Host()
+			{
+                Instance.Run("Name.Of.Your.Web.Project", 12346, c => c
                     .UsingLoggerFactory(new ConsoleFactory())
                     // If you are using MVC then do this where RouteConfig is the class that registers your routes in the "Name.Of.Your.Web.Project" project
                     // If you aren't using MVC then don't include this line
                     .WithRouteConfig(RouteConfig.RegisterRoutes)
                 );
-            }
-        }
+			}
+		}
+
 	* The `123456` is the port number you want the site to run on - it can be anything you want, just make it unique and unused
 	* The `c` variable is a fluent configurator - chain method calls off of it to configure the different parts of Seleno
 	* By default it uses Firefox so you will need to install that
 	* You might need to run Visual Studio / your test runner as an admin if you can an error when the port tries to get registered by IIS Express
 
-4. Create page objects by extending `Page`, or if you want to use strongly-typed view models, `Page<T>`, e.g.:
+3. Create page objects by extending `Page`, or if you want to use strongly-typed view models, `Page<T>`, e.g.:
 
         public class HomePage : Page
         {
@@ -60,7 +54,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
 	* Seleno provides a DSL that hides most of Selenium Web Driver from you. Feel free to make use of intellisense within your page object to experiment with what's possible
 	* There are some links to advanced usage instructions and tutorials below
 
-5. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
+4. If you want to wrap common components of your pages then create components by extending `UiComponent`, e.g.:
 
         public class HomePage : Page
         {
@@ -85,7 +79,7 @@ If you are upgrading to v0.4 from an earlier version then note that there are a 
             }
         }
 
-6. Create automated tests that use your page objects, e.g. this NUnit example:
+5. Create automated tests that use your page objects, e.g. this NUnit example:
 
         class RegistrationTests
         {
