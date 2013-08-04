@@ -44,7 +44,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
 
         public void AndThen_the_Seleno_Application_is_kept()
         {
-            SUT.Host.Should().BeSameAs(SelenoApplication);
+            SUT.Application.Should().BeSameAs(SelenoApplication);
         }
     }
 }

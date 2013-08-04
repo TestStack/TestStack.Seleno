@@ -37,7 +37,7 @@ namespace TestStack.Seleno.Configuration
         /// The currently running seleno application.
         /// </summary>
         // todo: should this be internal?
-        public ISelenoApplication Host { get; set; }
+        public ISelenoApplication Application { get; set; }
 
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.
@@ -79,15 +79,15 @@ namespace TestStack.Seleno.Configuration
                     configure(x);
             };
 
-            Host = CreateApplication(action);
+            Application = CreateApplication(action);
             AppDomain.CurrentDomain.DomainUnload += CurrentDomainDomainUnload;
         }
 
         private void CurrentDomainDomainUnload(object sender, EventArgs e)
         {
-            Host.Logger.Info("Starting domain unload");
-            Host.Dispose();
-            Host.Logger.Debug("Domain unloaded");
+            Application.Logger.Info("Starting domain unload");
+            Application.Dispose();
+            Application.Logger.Debug("Domain unloaded");
         }
 
         private ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
@@ -95,15 +95,15 @@ namespace TestStack.Seleno.Configuration
             if (configure == null)
                 throw new ArgumentNullException("configure");
 
-            if (Host != null)
+            if (Application != null)
                 throw new SelenoException("You have already created a Seleno application; Seleno currently only supports one application at a time per app domain");
 
             var configurator = AppConfiguratorFactory();
             configure(configurator);
-            Host = configurator.CreateApplication();
-            Host.Initialize();
+            Application = configurator.CreateApplication();
+            Application.Initialize();
 
-            return Host;
+            return Application;
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace TestStack.Seleno.Configuration
             where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.NavigateToInitialPage<TController, TPage>(action);
+            return Application.NavigateToInitialPage<TController, TPage>(action);
         }
 
         /// <summary>
@@ -130,12 +130,12 @@ namespace TestStack.Seleno.Configuration
         public TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Host.NavigateToInitialPage<TPage>(relativeUrl);
+            return Application.NavigateToInitialPage<TPage>(relativeUrl);
         }
 
         private void ThrowIfHostNotInitialised()
         {
-            if (Host == null)
+            if (Application == null)
                 throw new InvalidOperationException("You must call SelenoHost.Run(...) before using SelenoHost to navigate to a page.");
         }
     }

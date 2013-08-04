@@ -20,7 +20,7 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
         [TearDown]
         public void Teardown()
         {
-            SUT.Host = null;
+            SUT.Application = null;
         }
     }
 }

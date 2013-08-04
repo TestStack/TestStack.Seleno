@@ -8,7 +8,7 @@ namespace MvcMusicStore.FunctionalTests
         [Test]
         public void Can_buy_an_Album_when_registered()
         {
-            var driver = Host.Instance.Host.Browser;
+            var driver = Host.Instance.Application.Browser;
             driver.Navigate().GoToUrl(driver.Url);
             driver.FindElement(By.LinkText("Admin")).Click();
             driver.FindElement(By.LinkText("Register")).Click();
