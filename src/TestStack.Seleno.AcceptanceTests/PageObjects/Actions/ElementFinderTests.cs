@@ -20,7 +20,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_an_element_exists_on_the_page()
             {
-                Page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
@@ -57,7 +57,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_an_element_doesnt_exist_on_the_page()
             {
-                Page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
@@ -109,7 +109,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_an_element_doesnt_exist_on_the_page()
             {
-                Page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToReadModelPage();
             }
 
@@ -144,7 +144,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_elements_exist_on_the_page()
             {
-                Page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToListPage();
             }
 
@@ -186,7 +186,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Given_no_elements_exist_on_the_page_that_match_the_search()
             {
-                Page = SelenoHost.NavigateToInitialPage<HomePage>()
+                Page = Host.Instance.NavigateToInitialPage<HomePage>()
                     .GoToListPage();
             }
 

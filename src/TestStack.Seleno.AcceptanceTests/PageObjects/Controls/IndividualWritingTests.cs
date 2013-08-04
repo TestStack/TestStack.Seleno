@@ -96,7 +96,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
 
         protected void Given_a_filled_in_form()
         {
-            Page = SelenoHost
+            Page = Host.Instance
                 .NavigateToInitialPage<HomePage>()
                 .GoToWriteModelPage();
         }

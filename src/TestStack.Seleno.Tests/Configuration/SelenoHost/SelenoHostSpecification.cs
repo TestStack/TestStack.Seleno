@@ -9,17 +9,18 @@ namespace TestStack.Seleno.Tests.Configuration.SelenoHost
     {
         internal readonly IInternalAppConfigurator AppConfigurator = Substitute.For<IInternalAppConfigurator>();
         protected readonly ISelenoApplication SelenoApplication = Substitute.For<ISelenoApplication>();
-        
+        protected static Seleno.Configuration.SelenoHost SUT = new Seleno.Configuration.SelenoHost();
+
         protected SelenoHostSpecification()
         {
-            Seleno.Configuration.SelenoHost.AppConfiguratorFactory = () => AppConfigurator;
+            SUT.AppConfiguratorFactory = () => AppConfigurator;
             AppConfigurator.CreateApplication().Returns(SelenoApplication);
         }
 
         [TearDown]
         public void Teardown()
         {
-            Seleno.Configuration.SelenoHost.Host = null;
+            SUT.Host = null;
         }
     }
 }

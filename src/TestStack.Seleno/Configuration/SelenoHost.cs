@@ -29,15 +29,15 @@ namespace TestStack.Seleno.Configuration
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
-    public static class SelenoHost
+    public class SelenoHost
     {
-        internal static Func<IInternalAppConfigurator> AppConfiguratorFactory = () => new AppConfigurator();
+        internal Func<IInternalAppConfigurator> AppConfiguratorFactory = () => new AppConfigurator();
 
         /// <summary>
         /// The currently running seleno application.
         /// </summary>
         // todo: should this be internal?
-        public static ISelenoApplication Host { get; internal set; }
+        public ISelenoApplication Host { get; set; }
 
         /// <summary>
         /// Begin a Seleno test for a Visual Studio web project.
@@ -45,7 +45,7 @@ namespace TestStack.Seleno.Configuration
         /// <param name="webProjectFolder">The name of the web project to run</param>
         /// <param name="portNumber">The port number to run the project under</param>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null)
+        public void Run(string webProjectFolder, int portNumber, Action<IAppConfigurator> configure = null)
         {
             var webApplication = new WebApplication(ProjectLocation.FromFolder(webProjectFolder), portNumber);
             Run(webApplication, configure);
@@ -56,7 +56,7 @@ namespace TestStack.Seleno.Configuration
         /// </summary>
         /// <param name="app">The web application to test</param>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(WebApplication app, Action<IAppConfigurator> configure)
+        public void Run(WebApplication app, Action<IAppConfigurator> configure)
         {
             Run(c =>
                 {
@@ -71,7 +71,7 @@ namespace TestStack.Seleno.Configuration
         /// Begin a Seleno test.
         /// </summary>
         /// <param name="configure">Any configuration changes you would like to make</param>
-        public static void Run(Action<IAppConfigurator> configure)
+        public void Run(Action<IAppConfigurator> configure)
         {
             Action<IAppConfigurator> action = x =>
             {
@@ -83,14 +83,14 @@ namespace TestStack.Seleno.Configuration
             AppDomain.CurrentDomain.DomainUnload += CurrentDomainDomainUnload;
         }
 
-        private static void CurrentDomainDomainUnload(object sender, EventArgs e)
+        private void CurrentDomainDomainUnload(object sender, EventArgs e)
         {
             Host.Logger.Info("Starting domain unload");
             Host.Dispose();
             Host.Logger.Debug("Domain unloaded");
         }
 
-        private static ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
+        private ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
         {
             if (configure == null)
                 throw new ArgumentNullException("configure");
@@ -113,7 +113,7 @@ namespace TestStack.Seleno.Configuration
         /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
         /// <param name="action">The controller action to navigate to</param>
         /// <returns>The initialised page object</returns>
-        public static TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
             where TController : Controller
             where TPage : UiComponent, new()
         {
@@ -127,13 +127,13 @@ namespace TestStack.Seleno.Configuration
         /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
         /// <param name="relativeUrl">The URL to navigate to (relative to the base URL of the site)</param>
         /// <returns>The initialised page object</returns>
-        public static TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
+        public TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
             return Host.NavigateToInitialPage<TPage>(relativeUrl);
         }
 
-        private static void ThrowIfHostNotInitialised()
+        private void ThrowIfHostNotInitialised()
         {
             if (Host == null)
                 throw new InvalidOperationException("You must call SelenoHost.Run(...) before using SelenoHost to navigate to a page.");
