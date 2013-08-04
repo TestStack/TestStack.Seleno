@@ -19,7 +19,7 @@ This also opens the door for adding features like running your tests on multiple
 
 ### Fix
 You should instantiate a single instance of SelenoHost and use it in all your tests:
-* Add a new static class, <YourHostClass>, that instantiats and holds a reference to SelenoHost and exposes it via a static getter property, <NameOfInstanceProperty>.
+* Add a new static class, <YourHostClass>, that instantiates and holds a reference to SelenoHost and exposes it via a static getter property, <NameOfInstanceProperty>.
 * Change all the instances of `SelenoHost` with `<YourHostClass>.<NameOfInstanceProperty>`
 
 # Version 0.4.55
