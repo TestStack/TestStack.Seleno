@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -82,19 +83,24 @@ namespace TestStack.Seleno.Configuration
         private static void CreateDriver(string resourceFileName, string outputName = null)
         {
             outputName = outputName ?? resourceFileName;
-            // Already been loaded before
+
+            // Already been loaded before?
             if (File.Exists(outputName))
                 return;
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = assembly
-                .GetManifestResourceNames()
-                .FirstOrDefault(x => x.EndsWith(resourceFileName));
-            
-            if (resourceName == null)
+            // Find any assembly with the desired executable embedded in it
+            var assembly = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.GetManifestResourceNames().Any())
+                .FirstOrDefault(a => a
+                    .GetManifestResourceNames()
+                    .Any(x => x.EndsWith(resourceFileName))
+                );
+
+            if (assembly == null)
                 throw new WebDriverNotFoundException(resourceFileName);
 
-            // Write embedded resource to disk to Selenium Web Driver can use it
+            // Write embedded resource to disk so Selenium Web Driver can use it
+            var resourceName = assembly.GetManifestResourceNames().First(x => x.EndsWith(resourceFileName));
             using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
             using (var fileStream = new FileStream(outputName, FileMode.Create))
             {
