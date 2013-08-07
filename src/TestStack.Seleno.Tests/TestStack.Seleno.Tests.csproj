@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="AssemblySetupFixtue.cs" />
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
+    <Compile Include="Configuration\BrowserFactoryTests.cs" />
     <Compile Include="Configuration\SelenoApplication\When_creating_seleno_application.cs" />
     <Compile Include="Configuration\SelenoApplication\When_navigating_to_url.cs" />
     <Compile Include="Configuration\SelenoApplication\When_initialising_seleno_application.cs" />
@@ -174,6 +175,7 @@
     <Content Include="bddifyCustom.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Configuration\chromedriver.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
