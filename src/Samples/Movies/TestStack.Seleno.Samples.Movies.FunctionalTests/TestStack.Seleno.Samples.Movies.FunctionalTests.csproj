@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="AssemblySetupFixture.cs" />
     <Compile Include="FunctionalTestsHtmlReportConfig.cs" />
+    <Compile Include="Host.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\LogonPage.cs" />
