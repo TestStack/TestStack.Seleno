@@ -99,7 +99,7 @@
     <Compile Include="Configuration\SelenoHost\When_running_twice.cs" />
     <Compile Include="Configuration\SelenoHost\SelenoHostSpecification.cs" />
     <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_controller_action.cs" />
-    <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_relativeUrl.cs" />
+    <Compile Include="Configuration\SelenoHost\When_navigating_to_initial_page_from_Url.cs" />
     <Compile Include="Configuration\SelenoHost\When_running_Seleno_Application_with_web_application.cs" />
     <Compile Include="Configuration\SelenoHost\When_running_Seleno_Application_with_configure_action.cs" />
     <Compile Include="Configuration\WebServers\WebApplicationTests.cs" />
@@ -122,6 +122,7 @@
     <Compile Include="PageObjects\Actions\Executor\When_executing_predicate_script_timing_out_before_it_completes.cs" />
     <Compile Include="PageObjects\Actions\Executor\When_executing_script_and_returning_to_converted_Type.cs" />
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
+    <Compile Include="PageObjects\Actions\Navigator\PageNavigatorAbsoluteUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorJQueryBySpecs.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_checking_an_element_exists_and_is_visible_with_property.cs" />

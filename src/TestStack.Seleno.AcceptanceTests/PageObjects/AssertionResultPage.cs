@@ -1,7 +1,7 @@
 ﻿using System;
 using TestStack.Seleno.PageObjects;
 
-namespace TestStack.Seleno.AcceptanceTests.Web.PageObjects
+namespace TestStack.Seleno.AcceptanceTests.PageObjects
 {
     public class AssertionResultPage : Page
     {

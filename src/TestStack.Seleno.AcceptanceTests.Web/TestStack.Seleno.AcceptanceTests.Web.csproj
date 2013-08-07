@@ -157,9 +157,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="PageObjects\AssertionResultPage.cs" />
-    <Compile Include="PageObjects\Form1Page.cs" />
-    <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Form1ViewModel.cs" />
   </ItemGroup>

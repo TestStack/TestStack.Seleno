@@ -6,10 +6,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using TestStack.BDDfy;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
-using TestStack.Seleno.AcceptanceTests.Web.PageObjects;
-using TestStack.Seleno.Configuration;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.ActionsTests
 {
     abstract class ElementFinderTests
     {

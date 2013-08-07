@@ -73,9 +73,9 @@ namespace TestStack.Seleno.Configuration
             return _container.Resolve<IPageNavigator>().To<TController, TPage>(action);
         }
 
-        public TPage NavigateToInitialPage<TPage>(string relativeUrl = "") where TPage : UiComponent, new()
+        public TPage NavigateToInitialPage<TPage>(string url = "") where TPage : UiComponent, new()
         {
-            return _container.Resolve<IPageNavigator>().To<TPage>(relativeUrl);
+            return _container.Resolve<IPageNavigator>().To<TPage>(url);
         }
     }
 }
