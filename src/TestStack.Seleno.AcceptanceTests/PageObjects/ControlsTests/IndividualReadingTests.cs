@@ -2,11 +2,9 @@ using FluentAssertions;
 using NUnit.Framework;
 using TestStack.BDDfy;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
-using TestStack.Seleno.AcceptanceTests.Web.PageObjects;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
-using TestStack.Seleno.Configuration;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.ControlsTests
 {
     abstract class Reading_individual_html_controls
     {

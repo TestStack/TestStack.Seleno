@@ -40,9 +40,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             return _componentFactory.CreatePage<TPage>();
         }
 
-        public TPage To<TPage>(string relativeUrl) where TPage : UiComponent, new()
+        public TPage To<TPage>(string url) where TPage : UiComponent, new()
         {
-            Browser.Navigate().GoToUrl(_webServer.BaseUrl + relativeUrl);
+            string targetPageUrl = _webServer.BaseUrl + url;
+            Uri uri;
+            if (Uri.TryCreate(url, UriKind.Absolute, out uri))
+                targetPageUrl = uri.AbsoluteUri;
+
+            Browser.Navigate().GoToUrl(targetPageUrl);
             return _componentFactory.CreatePage<TPage>();
         }
 

@@ -34,9 +34,9 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Navigate to a different page by going to a URL (relative to the root URL of the application under test).
         /// </summary>
         /// <typeparam name="TPage">The page object type for the expected resultant page</typeparam>
-        /// <param name="relativeUrl">The URL, relative to the root URL of the application under test, to navigate to</param>
+        /// <param name="url">The URL, either relative to the root URL of the application under test or the absolute URL, to navigate to</param>
         /// <returns>An instantiated and initialised <see cref="TPage"/> page object</returns>
-        TPage To<TPage>(string relativeUrl)
+        TPage To<TPage>(string url)
             where TPage : UiComponent, new();
 
         /// <summary>
