@@ -58,12 +58,24 @@ namespace TestStack.Seleno.Configuration
             return new FirefoxDriver(profile);
         }
 
+        /// <summary>
+        /// Returns an initialised 32-bit IE Web Driver.
+        /// </summary>
+        /// <remarks>You need to have IEDriverServer_Win32_2.28.0.exe embedded into your assembly</remarks>
+        /// <param name="options">Options to configure the driver</param>
+        /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer32(InternetExplorerOptions options = null)
         {
             CreateDriver("IEDriverServer_Win32_2.28.0.exe", "IEDriverServer.exe");
             return InternetExplorer(options);
         }
 
+        /// <summary>
+        /// Returns an initialised 64-bit IE Web Driver.
+        /// </summary>
+        /// <remarks>You need to have IEDriverServer_x64_2.28.0.exe embedded into your assembly</remarks>
+        /// <param name="options">Options to configure the driver</param>
+        /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer64(InternetExplorerOptions options = null)
         {
             CreateDriver("IEDriverServer_x64_2.28.0.exe", "IEDriverServer.exe");
