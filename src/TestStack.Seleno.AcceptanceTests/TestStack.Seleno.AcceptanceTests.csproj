@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browsers\BrowserTests.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="PageObjects\ActionsTests\ElementFinderTests.cs" />
     <Compile Include="PageObjects\ActionsTests\ModelIoTests.cs" />
@@ -135,6 +136,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\packages\phantomjs.exe.1.8.1\tools\phantomjs\phantomjs.exe">
+      <Link>Browsers\phantomjs.exe</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\WebDriver.ChromeDriver.26.0.1383.1\tools\ChromeDriver.exe">
+      <Link>Browsers\ChromeDriver.exe</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\WebDriver.IEDriver.2.29.1.1\tools\IEDriverServer.exe">
+      <Link>Browsers\IEDriverServer.exe</Link>
+    </EmbeddedResource>
     <Content Include="BDDfy.readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
