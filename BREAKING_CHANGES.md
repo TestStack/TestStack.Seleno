@@ -1,3 +1,14 @@
+# Version 0.5.1
+
+## InternetExplorer32 and InternetExplorer64 methods on BrowserFactory deprecated
+For simplicity you now need to include the `IEDriverServer.exe` file with that name embedded in your assembly rather than a name specific to 64-bit or 32-bit. This does mean that you will need to use multiple assemblies if you are using both at the same time, but it's unlikely that would have worked previously anyway.
+
+### Reason
+It was overly complex before.
+
+### Fix
+Use the `BrowserFactory.InternetExplorer` method and embed the driver server file as `IEDriverServer.exe`.
+
 # Version 0.5
 
 ## Host property on SelenoHost is renamed

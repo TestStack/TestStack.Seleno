@@ -26,7 +26,7 @@ namespace TestStack.Seleno.Tests.Configuration
         {
             try
             {
-                BrowserFactory.InternetExplorer32();
+                BrowserFactory.InternetExplorer();
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void And_exception_should_tell_user_what_file_to_embed()
         {
-            _caughtException.Message.Should().Be("Could not find configured web driver; you need to embed an executable with the filename IEDriverServer_Win32_2.28.0.exe.");
+            _caughtException.Message.Should().Be("Could not find configured web driver; you need to embed an executable with the filename IEDriverServer.exe.");
         }
     }
 
