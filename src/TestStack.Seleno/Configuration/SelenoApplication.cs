@@ -62,8 +62,15 @@ namespace TestStack.Seleno.Configuration
                 WebServer.Stop();
                 _logger.Debug("Webserver shutdown");
             }
-            
-            _container.Dispose();
+
+            try
+            {
+                _container.Dispose();
+            }
+            catch 
+            {
+                // Safari throws 'System.InvalidOperationException : No process is associated with this object.'
+            }
         }
 
         public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
