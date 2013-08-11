@@ -10,7 +10,9 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
     {
         protected abstract RemoteWebDriver WebDriver { get; }
 
-        protected void RunTest()
+        [Explicit]
+        [Test]
+        public void RunTest()
         {
             var host = new SelenoHost();
             host.Run(x => x.WithRemoteWebDriver(() => WebDriver).WithWebServer(new InternetWebServer("http://www.google.com/")));
@@ -26,13 +28,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         {
             get { return BrowserFactory.Safari(); }
         }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
-        }
     }
 
     class PhantomJSTest : BrowserTest
@@ -40,13 +35,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         protected override RemoteWebDriver WebDriver
         {
             get { return BrowserFactory.PhantomJS(); }
-        }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
         }
     }
 
@@ -56,13 +44,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         {
             get { return BrowserFactory.FireFox(); }
         }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
-        }
     }
 
     class ChromeTest : BrowserTest
@@ -70,13 +51,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         protected override RemoteWebDriver WebDriver
         {
             get { return BrowserFactory.Chrome(); }
-        }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
         }
     }
 
@@ -86,13 +60,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         {
             get { return BrowserFactory.Android(); }
         }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
-        }
     }
 
     class IETest : BrowserTest
@@ -100,13 +67,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         protected override RemoteWebDriver WebDriver
         {
             get { return BrowserFactory.InternetExplorer(); }
-        }
-
-        [Explicit]
-        [Test]
-        public void Test()
-        {
-            RunTest();
         }
     }
 }
