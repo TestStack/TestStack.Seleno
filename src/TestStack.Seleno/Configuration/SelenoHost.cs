@@ -29,7 +29,7 @@ namespace TestStack.Seleno.Configuration
     /// <summary>
     /// The entry point for Seleno.
     /// </summary>
-    public class SelenoHost
+    public class SelenoHost : IDisposable
     {
         internal Func<IInternalAppConfigurator> AppConfiguratorFactory = () => new AppConfigurator();
 
@@ -137,6 +137,11 @@ namespace TestStack.Seleno.Configuration
         {
             if (Application == null)
                 throw new InvalidOperationException("You must call SelenoHost.Run(...) before using SelenoHost to navigate to a page.");
+        }
+
+        public void Dispose()
+        {
+            Application.Dispose();
         }
     }
 }

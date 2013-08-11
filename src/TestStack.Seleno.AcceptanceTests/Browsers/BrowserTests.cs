@@ -10,15 +10,20 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
     {
         protected abstract RemoteWebDriver WebDriver { get; }
 
-        [Explicit]
+        //[Explicit]
         [Test]
         public void RunTest()
         {
-            var host = new SelenoHost();
-            host.Run(x => x.WithRemoteWebDriver(() => WebDriver).WithWebServer(new InternetWebServer("http://www.google.com/")));
-            var title = host.NavigateToInitialPage<Page>().Title;
+            using (var host = new SelenoHost())
+            {
+                host.Run(
+                    x =>
+                    x.WithRemoteWebDriver(() => WebDriver)
+                     .WithWebServer(new InternetWebServer("http://www.google.com/")));
+                var title = host.NavigateToInitialPage<Page>().Title;
 
-            Assert.That(title, Is.EqualTo("Google"));
+                Assert.That(title, Is.EqualTo("Google"));
+            }
         }
     }
 
