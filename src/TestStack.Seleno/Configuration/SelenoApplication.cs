@@ -67,9 +67,10 @@ namespace TestStack.Seleno.Configuration
             {
                 _container.Dispose();
             }
-            catch 
+            catch (Exception ex)
             {
                 // Safari throws 'System.InvalidOperationException : No process is associated with this object.'
+                _logger.Warn(ex.Message);
             }
         }
 
