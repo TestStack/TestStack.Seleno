@@ -141,7 +141,12 @@ namespace TestStack.Seleno.Configuration
 
         public void Dispose()
         {
+            Application.Logger.Info("Starting SelenoHost Dispose");
+
+            // removing unload handler as it's being handled here
+            AppDomain.CurrentDomain.DomainUnload -= CurrentDomainDomainUnload;
             Application.Dispose();
+            Application.Logger.Info("SelenoHost Disposed");
         }
     }
 }

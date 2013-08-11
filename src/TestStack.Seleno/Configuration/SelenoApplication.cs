@@ -57,7 +57,7 @@ namespace TestStack.Seleno.Configuration
 
             if (_initialised)
             {
-                Browser.Dispose();
+                Browser.Close();
                 _logger.Debug("Browser closed");
                 WebServer.Stop();
                 _logger.Debug("Webserver shutdown");
