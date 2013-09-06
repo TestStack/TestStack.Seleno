@@ -65,6 +65,26 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
             get { return Find().Element(By.Id("RequiredBool")); }
         }
 
+        public void AssertElementExists(string id)
+        {
+            AssertThatElements().Exist(By.Id(id));
+        }
+
+        public void AssertElementDoesNotExist(string id)
+        {
+            AssertThatElements().DoNotExist(By.Id(id));
+        }
+
+        public void AssertElementDoesNotExistWithJquery(string id)
+        {
+            AssertThatElements().DoNotExist(Seleno.PageObjects.Locators.By.jQuery(string.Format("#{0}", id)));
+        }
+
+        public void AssertElementExistsWithJQuery(string id)
+        {
+            AssertThatElements().Exist(Seleno.PageObjects.Locators.By.jQuery(string.Format("#{0}", id)));
+        }
+
         public IWebElement FindExistentElementByJQuery
         {
             get { return Find().Element(Seleno.PageObjects.Locators.By.jQuery("#RequiredBool")); }
