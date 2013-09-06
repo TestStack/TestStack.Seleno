@@ -40,14 +40,14 @@ namespace TestStack.Seleno.Specifications.Assertions
             throw new SelenoException(message);
         }
 
-        public IElementAssert DoNotExist(By selector, string message = null, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert DoNotExist(By findExpression, string message = null, TimeSpan maxWait = default(TimeSpan))
         {
-            return DoNotExist(() => Find.Element(selector, maxWait), selector.ToString(), message);
+            return DoNotExist(() => Find.Element(findExpression, maxWait), findExpression.ToString(), message);
         }
 
-        public IElementAssert DoNotExist(PageObjects.Locators.By.jQueryBy selector, string message = null, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert DoNotExist(PageObjects.Locators.By.jQueryBy findExpression, string message = null, TimeSpan maxWait = default(TimeSpan))
         {
-            return DoNotExist(() => Find.Element(selector, maxWait), selector.ToString(), message);
+            return DoNotExist(() => Find.Element(findExpression, maxWait), findExpression.ToString(), message);
         }
 
         IElementAssert Exist(Action action, string message)
@@ -65,14 +65,14 @@ namespace TestStack.Seleno.Specifications.Assertions
             return this;
         }
 
-        public IElementAssert Exist(By selector, string message = null, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert Exist(By findExpression, string message = null, TimeSpan maxWait = default(TimeSpan))
         {
-            return Exist(() => Find.Element(selector, maxWait), message);
+            return Exist(() => Find.Element(findExpression, maxWait), message);
         }
 
-        public IElementAssert Exist(PageObjects.Locators.By.jQueryBy selector, string message = null, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert Exist(PageObjects.Locators.By.jQueryBy findExpression, string message = null, TimeSpan maxWait = default(TimeSpan))
         {
-            return Exist(() => Find.Element(selector, maxWait), message);
+            return Exist(() => Find.Element(findExpression, maxWait), message);
         }
 
         IElementAssert ConformTo(Action action)
@@ -90,20 +90,20 @@ namespace TestStack.Seleno.Specifications.Assertions
             return this;
         }
 
-        public IElementAssert ConformTo(By selector, Action<IEnumerable<IWebElement>> assertion, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert ConformTo(By findExpression, Action<IEnumerable<IWebElement>> assertion, TimeSpan maxWait = default(TimeSpan))
         {
             return ConformTo(() =>
                 {
-                    var elements = Find.Elements(selector, maxWait);
+                    var elements = Find.Elements(findExpression, maxWait);
                     assertion(elements);
                 });
         }
 
-        public IElementAssert ConformTo(PageObjects.Locators.By.jQueryBy selector, Action<IEnumerable<IWebElement>> assertion, TimeSpan maxWait = default(TimeSpan))
+        public IElementAssert ConformTo(PageObjects.Locators.By.jQueryBy findExpression, Action<IEnumerable<IWebElement>> assertion, TimeSpan maxWait = default(TimeSpan))
         {
             return ConformTo(() =>
                 {
-                    var elements = Find.Elements(selector, maxWait);
+                    var elements = Find.Elements(findExpression, maxWait);
                     assertion(elements);
                 });
         }
