@@ -41,10 +41,10 @@ namespace TestStack.Seleno.PageObjects
             return new TableReader<TModel>(gridId) { Browser = Browser };
         }
 
-        protected ElementAssert AssertThatElements(By selector)
+        protected IElementAssert AssertThatElements()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return new ElementAssert(selector, Camera, Browser);
+            return ComponentFactory.CreateElementAssert(ElementFinder);
         }
 
         protected TComponent GetComponent<TComponent>()

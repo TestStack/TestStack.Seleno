@@ -11,7 +11,7 @@ namespace TestStack.Seleno.PageObjects
     {
         IPageReader<T> CreatePageReader<T>() where T : class, new();
         IPageWriter<T> CreatePageWriter<T>() where T : class, new();
-        IElementAssert CreateElementAssert(By selector);
+        IElementAssert CreateElementAssert(IElementFinder finder);
         TPage CreatePage<TPage>() where TPage : UiComponent, new();
 
         THtmlControl HtmlControlFor<THtmlControl>(LambdaExpression propertySelector, TimeSpan maxWait = default(TimeSpan))
