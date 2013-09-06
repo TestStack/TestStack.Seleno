@@ -28,6 +28,70 @@ namespace TestStack.Seleno.AcceptanceTests.Specifications.Assertions
             }
         }
 
+        public class Asserting_an_element_conforms_with_a_rule : ElementAssertTests
+        {
+            public void Given_an_element_exists_on_the_page()
+            {
+                NavigateToReadModel();
+            }
+
+            public void When_it_conforms_to_a_certain_rule()
+            {}
+
+            public void Then_asserting_element_conformity_passes()
+            {
+                Page.AssertElementContainsValue("RequiredString", "String");
+            }
+        }
+
+        public class Asserting_an_element_conforms_with_a_rule_when_it_does_not : ElementAssertTests
+        {
+            public void Given_an_element_exists_on_the_page()
+            {
+                NavigateToReadModel();
+            }
+
+            public void When_it_does_not_conform_to_a_certain_rule()
+            {}
+
+            public void Then_asserting_element_conformity_throws()
+            {
+                Assert.Throws<SelenoException>(() => Page.AssertElementContainsValue("RequiredString", "Another Value"));
+            }
+        }
+
+        public class Asserting_an_element_conforms_with_a_rule_with_jquery : ElementAssertTests
+        {
+            public void Given_an_element_exists_on_the_page()
+            {
+                NavigateToReadModel();
+            }
+
+            public void When_it_conforms_to_a_certain_rule()
+            {}
+
+            public void Then_asserting_element_conformity_with_jquery_passes()
+            {
+                Page.AssertElementContainsValueWithJquery("RequiredString", "String");
+            }
+        }
+
+        public class Asserting_an_element_conforms_with_a_rule_when_it_does_not_with_jquery : ElementAssertTests
+        {
+            public void Given_an_element_exists_on_the_page()
+            {
+                NavigateToReadModel();
+            }
+
+            public void When_it_does_not_conform_to_a_certain_rule()
+            {}
+
+            public void Then_asserting_element_conformity_with_jquery_throws()
+            {
+                Assert.Throws<SelenoException>(() => Page.AssertElementContainsValueWithJquery("RequiredString", "Another Value"));
+            }
+        }
+
         public class Asserting_an_element_exists_when_it_doesnt_exist : ElementAssertTests
         {
             public void Given_an_element_does_not_exist_on_the_page()

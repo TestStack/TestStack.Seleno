@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
+using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.PageObjects
@@ -108,6 +112,24 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
         public IWebElement FindNonExistentElementByJQuery(int timeoutInSeconds)
         {
             return Find().Element(Seleno.PageObjects.Locators.By.jQuery("#RandomElement"), TimeSpan.FromSeconds(timeoutInSeconds));
+        }
+
+        public void AssertElementContainsValue(string id, string value)
+        {
+            AssertThatElements().ConformTo(By.Id(id), es => ThrowIfElementDoesNotContainValue(value, es));
+        }
+
+        private static void ThrowIfElementDoesNotContainValue(string value, IEnumerable<IWebElement> es)
+        {
+            if (es.Any(e => !e.GetControlValueAs<string>().Contains(value)))
+                throw new SelenoException();
+        }
+
+        public void AssertElementContainsValueWithJquery(string id, string value)
+        {
+            AssertThatElements().ConformTo(
+                Seleno.PageObjects.Locators.By.jQuery(string.Format("#{0}", id)), 
+                es => ThrowIfElementDoesNotContainValue(value, es));
         }
     }
 }
