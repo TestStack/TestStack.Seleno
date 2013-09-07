@@ -1,3 +1,19 @@
+# Version 0.5.2
+
+## `AssertThatElements` method signature on `UiComponent` has changed to not require a `By` selector
+The selector has been pushed down into the `IElementAssert` methods instead of `AssertThatElements` method.
+
+### Reason
+The selector has been pushed down to firstly make the `IElementAssert` and `AssertThatElements` methods more consistent with the rest of the API and secondly allow for assertions to be done using By and jQueryBy.
+
+### Fix
+Move your selector from the `AssertThatElements` call to the `IElementAssert` method you are calling.
+
+## `IElementAssert` and `ElementAssert` API changed
+`IElementAssert` and `ElementAssert` API were not consistent with the other API. So the API changed to accept a `By` and a `jQueryBy` instead (by removing the selector from AssertThatElements method).
+All methods also accept a maxWait to allow for the developer to specify how long the methods should wait for the assertion before they throw.
+Internally the methods have changed to use `IElementFinder` to avoid code duplication.
+
 # Version 0.5.1
 
 ## InternetExplorer32 and InternetExplorer64 methods on BrowserFactory deprecated

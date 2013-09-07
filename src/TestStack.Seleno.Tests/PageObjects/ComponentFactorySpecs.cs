@@ -45,7 +45,7 @@ namespace TestStack.Seleno.Tests.PageObjects
     {
         public void When_asked_to_create_an_ElementAssert()
         {
-            Result = SUT.CreateElementAssert(Arg.Any<By>());
+            Result = SUT.CreateElementAssert(Arg.Any<IElementFinder>());
         }
 
         public void Then_ComponentFactory_should_create_an_ElementAssert()
