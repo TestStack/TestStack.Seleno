@@ -8,8 +8,7 @@ namespace TestStack.Seleno.PageObjects
     public class UiComponent<TModel> : UiComponent
         where TModel : class, new()
     {
-
-        protected IPageReader<TModel> Read
+        public IPageReader<TModel> Read
         {
             get
             {
@@ -17,7 +16,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected IPageWriter<TModel> Input
+        public IPageWriter<TModel> Input
         {
             get
             {
@@ -25,7 +24,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
+        public THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
             TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {

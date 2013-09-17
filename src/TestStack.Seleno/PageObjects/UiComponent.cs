@@ -16,7 +16,7 @@ namespace TestStack.Seleno.PageObjects
         internal ICamera Camera { get; set; }
         internal IElementFinder ElementFinder { get; set; }
 
-        protected IPageNavigator Navigate
+        public IPageNavigator Navigate
         {
             get
             {
@@ -25,7 +25,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected IExecutor Execute
+        public IExecutor Execute
         {
             get
             {
@@ -34,7 +34,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected IElementFinder Find
+        public IElementFinder Find
         {
             get
             {
@@ -43,13 +43,13 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
+        public TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
             return new TableReader<TModel>(gridId) {Browser = Browser};
         }
 
-        protected IElementAssert AssertThatElements
+        public IElementAssert AssertThatElements
         {
             get
             {
@@ -58,14 +58,14 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        protected TComponent GetComponent<TComponent>()
+        public TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
             return ComponentFactory.CreatePage<TComponent>();
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
+        public THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
