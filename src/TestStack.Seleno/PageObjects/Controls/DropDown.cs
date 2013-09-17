@@ -22,13 +22,13 @@ namespace TestStack.Seleno.PageObjects.Controls
         public virtual void SelectElementByText(string optionText)
         {
             var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", Id, optionText.ToJavaScriptString());
-            Execute.ExecuteScript(scriptToExecute);
+            Execute.Script(scriptToExecute);
         }
 
         public override void SelectElement<TProperty>(TProperty value)
         {
             var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, value.ToString().ToJavaScriptString());
-            Execute.ExecuteScript(scriptToExecute);
+            Execute.Script(scriptToExecute);
         }
     }
 }

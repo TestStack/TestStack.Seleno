@@ -98,7 +98,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             return (TReturn) ScriptAndReturn(javascriptToBeExecuted, typeof (TReturn));
         }
 
-        public void ExecuteScript(string javascriptToBeExecuted)
+        public void Script(string javascriptToBeExecuted)
         {
             _javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
         }

@@ -18,7 +18,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         public void ReplaceInputValueWith<TProperty>(TProperty inputValue)
         {
             var scriptToExecute = string.Format(@"$('#{0}').val(""{1}"")", Id, inputValue.ToString().ToJavaScriptString());
-            Execute.ExecuteScript(scriptToExecute);
+            Execute.Script(scriptToExecute);
         }
     }
 }

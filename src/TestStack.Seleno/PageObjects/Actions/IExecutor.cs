@@ -75,7 +75,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Executes the given JavaScript.
         /// </summary>
         /// <param name="javascriptToBeExecuted">The JavaScript to execute</param>
-        void ExecuteScript(string javascriptToBeExecuted);
+        void Script(string javascriptToBeExecuted);
 
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: Use Find.Element() and map it to the value you need. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]

@@ -14,7 +14,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             set
             {
                 var scriptToExecute = string.Format(@"$(""#{0}"").text(""{1}"")", Id, value.ToJavaScriptString());
-                Execute.ExecuteScript(scriptToExecute);
+                Execute.Script(scriptToExecute);
             }
         }
     }

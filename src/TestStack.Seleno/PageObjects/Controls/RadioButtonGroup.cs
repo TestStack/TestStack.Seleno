@@ -38,7 +38,7 @@ namespace TestStack.Seleno.PageObjects.Controls
                 Name,
                 value.ToString().ToJavaScriptString()
             );
-            Execute.ExecuteScript(scriptToExecute);
+            Execute.Script(scriptToExecute);
         }
        
     }
