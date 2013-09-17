@@ -9,11 +9,11 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
     {
         public Page SubmitShippingInfo(Order order, string promoCode)
         {
-            Input().Model(order);
+            Input.Model(order);
             PromoCode = promoCode;
-            return Navigate().To<Page>(By.CssSelector("input[type=submit]"));
+            return Navigate.To<Page>(By.CssSelector("input[type=submit]"));
         }
 
-        string PromoCode { set { Input().ClearAndSendKeys("PromoCode",value);} }
+        string PromoCode { set { Input.ClearAndSendKeys("PromoCode",value);} }
     }
 }

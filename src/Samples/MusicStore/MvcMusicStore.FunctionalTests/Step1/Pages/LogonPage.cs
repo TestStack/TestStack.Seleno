@@ -7,7 +7,7 @@ namespace MvcMusicStore.FunctionalTests.Step1.Pages
     {
         public RegisterPage GoToRegisterPage()
         {
-            return Navigate().To<RegisterPage>(By.LinkText("Register"));
+            return Navigate.To<RegisterPage>(By.LinkText("Register"));
         }
     }
 }
