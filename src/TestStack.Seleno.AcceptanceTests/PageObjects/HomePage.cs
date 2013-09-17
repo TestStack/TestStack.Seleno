@@ -10,27 +10,27 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
     {
         public Form1Page GoToReadModelPage()
         {
-            return Navigate().To<Form1Page>(By.LinkText("Fixture A values"));
+            return Navigate.To<Form1Page>(By.LinkText("Fixture A values"));
         }
 
         public Form1Page GoToWriteModelPage()
         {
-            return Navigate().To<Form1Page>(By.LinkText("Empty form, but expecting Fixture A upon submit"));
+            return Navigate.To<Form1Page>(By.LinkText("Empty form, but expecting Fixture A upon submit"));
         }
 
         public Form1Page GoToReadModelPageByRelativeUrl()
         {
-            return Navigate().To<Form1Page>("/Form1/FixtureA");
+            return Navigate.To<Form1Page>("/Form1/FixtureA");
         }
 
         public Form1Page GoToReadModelPageByAbsoluteUrl()
         {
-            return Navigate().To<Form1Page>(Host.Instance.Application.WebServer.BaseUrl + "/Form1/FixtureA");
+            return Navigate.To<Form1Page>(Host.Instance.Application.WebServer.BaseUrl + "/Form1/FixtureA");
         }
 
         public Form1Page GoToReadModelPageByMvcAction()
         {
-            return Navigate().To<Form1Controller, Form1Page>(c => c.FixtureA());
+            return Navigate.To<Form1Controller, Form1Page>(c => c.FixtureA());
         }
 
         public Form1Page GoToReadModelPageByLink()
@@ -40,28 +40,28 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
 
         public Form1Page GoToReadModelPageByButton()
         {
-            return Navigate().To<Form1Page>(By.CssSelector("input[type=submit]"));
+            return Navigate.To<Form1Page>(By.CssSelector("input[type=submit]"));
         }
 
         public ListPage GoToListPage()
         {
-            return Navigate().To<HomeController, ListPage>(c => c.List());
+            return Navigate.To<HomeController, ListPage>(c => c.List());
         }
     }
 
     public class ListPage : Page
     {
-        public IEnumerable<IWebElement> Items { get { return Find().Elements(By.CssSelector("#ul li")); } }
-        public IEnumerable<IWebElement> ItemsByJQuery { get { return Find().Elements(Seleno.PageObjects.Locators.By.jQuery("#ul li")); } }
+        public IEnumerable<IWebElement> Items { get { return Find.Elements(By.CssSelector("#ul li")); } }
+        public IEnumerable<IWebElement> ItemsByJQuery { get { return Find.Elements(Seleno.PageObjects.Locators.By.jQuery("#ul li")); } }
 
         public IEnumerable<IWebElement> FindNonExistantItems(TimeSpan maxWait)
         {
-            return Find().Elements(By.ClassName("nonexistant"), maxWait);
+            return Find.Elements(By.ClassName("nonexistant"), maxWait);
         }
 
         public IEnumerable<IWebElement> FindNonExistantItemsByJQuery(TimeSpan maxWait)
         {
-            return Find().Elements(Seleno.PageObjects.Locators.By.jQuery(".nonexistant"), maxWait);
+            return Find.Elements(Seleno.PageObjects.Locators.By.jQuery(".nonexistant"), maxWait);
         }
     }
 }

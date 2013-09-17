@@ -17,7 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received(1)
-                .ExecuteScript(string.Format(@"$('#Name').attr('{0}', ""someValue \\ \"" \r\n"")", AttributeName));
+                .Script(string.Format(@"$('#Name').attr('{0}', ""someValue \\ \"" \r\n"")", AttributeName));
         }
     }
 }

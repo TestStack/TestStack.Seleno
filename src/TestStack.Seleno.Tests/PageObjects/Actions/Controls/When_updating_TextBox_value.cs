@@ -22,7 +22,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ExecuteScript(_expectedScriptToBeExecuted);
+                .Script(_expectedScriptToBeExecuted);
         }
     }
 
@@ -39,7 +39,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ExecuteScript(@"$('#Modified').val(""asdf \\ \"" \r\n"")");
+                .Script(@"$('#Modified').val(""asdf \\ \"" \r\n"")");
         }
     }
 }

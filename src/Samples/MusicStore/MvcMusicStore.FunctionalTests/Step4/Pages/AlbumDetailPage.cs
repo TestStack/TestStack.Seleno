@@ -8,7 +8,7 @@ namespace MvcMusicStore.FunctionalTests.Step4.Pages
     {
         public ShoppingCartPage AddToCart()
         {
-            return Navigate().To<ShoppingCartPage>(By.LinkText("Add to cart"));
+            return Navigate.To<ShoppingCartPage>(By.LinkText("Add to cart"));
         }
     }
 }

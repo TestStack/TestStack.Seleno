@@ -15,7 +15,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ExecuteScript("$('input[type=radio][name=Choice][value]')" +
+                .Script("$('input[type=radio][name=Choice][value]')" +
                                @".filter(function() {return $(this).attr('value').toLowerCase() == ""Another"".toLowerCase()})"+
                                ".attr('checked', true)");
         }
@@ -33,7 +33,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ExecuteScript("$('input[type=radio][name=AnotherChoice][value]')" +
+                .Script("$('input[type=radio][name=AnotherChoice][value]')" +
                                @".filter(function() {return $(this).attr('value').toLowerCase() == ""Something with \"" and \r\n"".toLowerCase()})" +
                                ".attr('checked', true)");
         }

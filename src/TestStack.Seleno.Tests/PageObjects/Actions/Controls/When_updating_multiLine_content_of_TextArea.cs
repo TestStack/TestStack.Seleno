@@ -16,7 +16,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ExecuteScript(@"$(""#MultiLineContent"").text(""line 1\nline 2\nnew line 3"")");
+                .Script(@"$(""#MultiLineContent"").text(""line 1\nline 2\nnew line 3"")");
         }
         
     }

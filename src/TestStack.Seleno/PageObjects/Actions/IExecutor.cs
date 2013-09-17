@@ -17,7 +17,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Throws an exception if the element isn't found.
         /// </summary>
         /// <example>
-        /// Execute().ActionOnLocator(By.Id("helloworld"), e => e.ClearAndSendKeys("xyz"))
+        /// Execute.ActionOnLocator(By.Id("helloworld"), e => e.ClearAndSendKeys("xyz"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
         /// <param name="action">The action to perform when the element is found</param>
@@ -31,7 +31,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Throws an exception if the element isn't found.
         /// </summary>
         /// <example>
-        /// Execute().ActionOnLocator(By.jQuery("#helloworld"), e => e.ClearAndSendKeys("xyz"))
+        /// Execute.ActionOnLocator(By.jQuery("#helloworld"), e => e.ClearAndSendKeys("xyz"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
         /// <param name="action">The action to perform when the element is found</param>
@@ -75,7 +75,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Executes the given JavaScript.
         /// </summary>
         /// <param name="javascriptToBeExecuted">The JavaScript to execute</param>
-        void ExecuteScript(string javascriptToBeExecuted);
+        void Script(string javascriptToBeExecuted);
 
         /// <summary>Obsolete</summary>
         [Obsolete("Obsolete: Use Find.Element() and map it to the value you need. See BREAKING_CHANGES.md on the Github repository under version 0.4", true)]

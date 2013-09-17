@@ -14,7 +14,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Throws an exception if the element isn't found.
         /// </summary>
         /// <example>
-        /// Find().Element(By.Id("helloworld"))
+        /// Find.Element(By.Id("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
         /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
@@ -27,7 +27,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Throws an exception if the element isn't found.
         /// </summary>
         /// <example>
-        /// Find().Element(By.jQuery("#helloworld"))
+        /// Find.Element(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
         /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
@@ -40,7 +40,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Returns an empty list of no elements found
         /// </summary>
         /// <example>
-        /// Find().Elements(By.ClassName("helloworld"))
+        /// Find.Elements(By.ClassName("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find elements</param>
         /// <param name="maxWait">Maximum amount of time to wait for the elements to become available</param>
@@ -52,7 +52,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Returns an empty list of no elements found
         /// </summary>
         /// <example>
-        /// Find().Elements(By.jQuery("#helloworld"))
+        /// Find.Elements(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find elements</param>
         /// <param name="maxWait">Maximum amount of time to wait for the elements to become available</param>
@@ -64,7 +64,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Returns null if the element isn't found.
         /// </summary>
         /// <example>
-        /// Find().OptionalElement(By.Id("helloworld"))
+        /// Find.OptionalElement(By.Id("helloworld"))
         /// </example>
         /// <param name="findExpression">Selenium Web Driver expression to find an element</param>
         /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
@@ -76,7 +76,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// Returns null if the element isn't found.
         /// </summary>
         /// <example>
-        /// Find().OptionalElement(By.jQuery("#helloworld"))
+        /// Find.OptionalElement(By.jQuery("#helloworld"))
         /// </example>
         /// <param name="jQueryFindExpression">jQuery expression to find an element</param>
         /// <param name="maxWait">Maximum amount of time to wait for the element to become available</param>
