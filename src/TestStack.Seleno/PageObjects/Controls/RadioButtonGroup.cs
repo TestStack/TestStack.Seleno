@@ -13,7 +13,7 @@ namespace TestStack.Seleno.PageObjects.Controls
             {
                 var selector = string.Format("input[type=radio][name={0}]:checked", Name);
 
-                return Find().OptionalElement(By.jQuery(selector));
+                return Find.OptionalElement(By.jQuery(selector));
             }
         }
 
@@ -38,7 +38,7 @@ namespace TestStack.Seleno.PageObjects.Controls
                 Name,
                 value.ToString().ToJavaScriptString()
             );
-            Execute().ExecuteScript(scriptToExecute);
+            Execute.ExecuteScript(scriptToExecute);
         }
        
     }

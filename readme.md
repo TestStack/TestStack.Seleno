@@ -38,7 +38,7 @@ If you are upgrading from an earlier version then note that there are a [number 
         {
             public Form1Page GoToRegisterPage()
             {
-                return Navigate().To<RegisterPage>(By.LinkText("Register"));
+                return Navigate.To<RegisterPage>(By.LinkText("Register"));
             }
         }
         
@@ -46,8 +46,8 @@ If you are upgrading from an earlier version then note that there are a [number 
         {
             public HomePage RegisterUser(RegisterModel registerModel)
             {
-                Input().Model(registerModel);
-                return Navigate().To<HomePage>(By.CssSelector("input[type=submit]"));
+                Input.Model(registerModel);
+                return Navigate.To<HomePage>(By.CssSelector("input[type=submit]"));
             }
         }
 	* Seleno provides a DSL that hides most of Selenium Web Driver from you. Feel free to make use of intellisense within your page object to experiment with what's possible
@@ -69,12 +69,12 @@ If you are upgrading from an earlier version then note that there are a [number 
         {
             public bool IsLoggedIn
             {
-                get { return Find().OptionalElement(By.Id("login-panel")) == null; }
+                get { return Find.OptionalElement(By.Id("login-panel")) == null; }
             }
     
             public string LoggedInUserName
             {
-                get { return Find().Element(By.Id("login-username")).Text; }
+                get { return Find.Element(By.Id("login-username")).Text; }
             }
         }
 

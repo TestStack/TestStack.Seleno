@@ -9,17 +9,24 @@ namespace TestStack.Seleno.PageObjects
         where TModel : class, new()
     {
 
-        protected IPageReader<TModel> Read()
+        protected IPageReader<TModel> Read
         {
-            return ComponentFactory.CreatePageReader<TModel>();
+            get
+            {
+                return ComponentFactory.CreatePageReader<TModel>();
+            }
         }
 
-        protected IPageWriter<TModel> Input()
+        protected IPageWriter<TModel> Input
         {
-            return ComponentFactory.CreatePageWriter<TModel>();
+            get
+            {
+                return ComponentFactory.CreatePageWriter<TModel>();
+            }
         }
 
-        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector, TimeSpan maxWait = default(TimeSpan))
+        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
+            TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {
             return ComponentFactory.HtmlControlFor<THtmlControl>(propertySelector, maxWait);

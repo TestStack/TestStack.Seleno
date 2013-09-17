@@ -7,7 +7,7 @@ namespace MvcMusicStore.FunctionalTests.Step2.Pages
     {
         public AddressAndPaymentPage Checkout()
         {
-            return Navigate().To<AddressAndPaymentPage>(By.LinkText("Checkout >>"));
+            return Navigate.To<AddressAndPaymentPage>(By.LinkText("Checkout >>"));
         }
     }
 }

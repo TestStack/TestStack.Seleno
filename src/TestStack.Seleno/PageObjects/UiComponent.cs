@@ -4,47 +4,58 @@ using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
 using TestStack.Seleno.Specifications.Assertions;
-using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects
 {
     public class UiComponent
     {
-        internal protected IWebDriver Browser { get; internal set; }
+        protected internal IWebDriver Browser { get; internal set; }
         internal IComponentFactory ComponentFactory { get; set; }
         internal IPageNavigator PageNavigator { get; set; }
         internal IExecutor Executor { get; set; }
         internal ICamera Camera { get; set; }
         internal IElementFinder ElementFinder { get; set; }
-        
-        protected IPageNavigator Navigate()
+
+        protected IPageNavigator Navigate
         {
-            ThrowIfComponentNotCreatedCorrectly();
-            return PageNavigator;
+            get
+            {
+                ThrowIfComponentNotCreatedCorrectly();
+                return PageNavigator;
+            }
         }
 
-        protected IExecutor Execute()
+        protected IExecutor Execute
         {
-            ThrowIfComponentNotCreatedCorrectly();
-            return Executor;
+            get
+            {
+                ThrowIfComponentNotCreatedCorrectly();
+                return Executor;
+            }
         }
 
-        protected IElementFinder Find()
+        protected IElementFinder Find
         {
-            ThrowIfComponentNotCreatedCorrectly();
-            return ElementFinder;
+            get
+            {
+                ThrowIfComponentNotCreatedCorrectly();
+                return ElementFinder;
+            }
         }
 
         protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
-            return new TableReader<TModel>(gridId) { Browser = Browser };
+            return new TableReader<TModel>(gridId) {Browser = Browser};
         }
 
-        protected IElementAssert AssertThatElements()
+        protected IElementAssert AssertThatElements
         {
-            ThrowIfComponentNotCreatedCorrectly();
-            return ComponentFactory.CreateElementAssert(ElementFinder);
+            get
+            {
+                ThrowIfComponentNotCreatedCorrectly();
+                return ComponentFactory.CreateElementAssert(ElementFinder);
+            }
         }
 
         protected TComponent GetComponent<TComponent>()
@@ -55,7 +66,7 @@ namespace TestStack.Seleno.PageObjects
         }
 
         protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
-          where THtmlControl : HTMLControl, new()
+            where THtmlControl : HTMLControl, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
             return ComponentFactory.HtmlControlFor<THtmlControl>(controlId, maxWait);
@@ -64,7 +75,8 @@ namespace TestStack.Seleno.PageObjects
         private void ThrowIfComponentNotCreatedCorrectly()
         {
             if (PageNavigator == null)
-                throw new InvalidOperationException("Don't new up page objects / components / controls; instead use SelenoHost.NavigateToInitialPage, Navigate(), HtmlControlFor() or GetComponent() as appropriate.");
+                throw new InvalidOperationException(
+                    "Don't new up page objects / components / controls; instead use SelenoHost.NavigateToInitialPage, Navigate(), HtmlControlFor() or GetComponent() as appropriate.");
         }
     }
 }

@@ -81,17 +81,17 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public TReturn AttributeValueAs<TReturn>(string attributeName)
         {
-            return Execute().ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')", Id, attributeName));
+            return Execute.ScriptAndReturn<TReturn>(string.Format("$('#{0}').attr('{1}')", Id, attributeName));
         }
 
         public void SetAttributeValue<TValue>(string attributeName, TValue value)
         {
-            Execute().ExecuteScript(string.Format(@"$('#{0}').attr('{1}', ""{2}"")", Id, attributeName, value.ToString().ToJavaScriptString()));
+            Execute.ExecuteScript(string.Format(@"$('#{0}').attr('{1}', ""{2}"")", Id, attributeName, value.ToString().ToJavaScriptString()));
         }
 
         public void RemoveAttribute(string attributeName)
         {
-            Execute().ExecuteScript(string.Format("$('#{0}').removeAttr('{1}')", Id, attributeName));
+            Execute.ExecuteScript(string.Format("$('#{0}').removeAttr('{1}')", Id, attributeName));
         }
 
         protected void AddOrRemoveAttribute(string attributeName, bool addOrRemove)
