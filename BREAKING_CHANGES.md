@@ -1,5 +1,23 @@
 # Version 0.5.2
 
+## ExecuteScript method renamed to Script on Executor
+On Executor and IExecutor `ExecuteScript` was renamed to `Script`.
+
+### Reason
+The API wasn't very fluent and wouldn't read well; e.g. before it was `Execute().ExecuteScript` - now it is changed to `Execute.Script`
+
+### Fix
+Rename your ExecuteScript calls on Executor to Script
+
+## UiComponent and Page methods changed to properties
+Most methods on UiComponent and Page classes are changed to properties
+
+### Reason
+It was very hard to extend UiComponent and Page classes (see #41). Also to assert anything from your tests you would have to first wrap it in a method/property on your page class.
+
+### Fix
+Change calls to `Input()` to `Input` and `Execute()` to `Execute` and `Navigate()` to `Navigate`.
+
 ## `AssertThatElements` method signature on `UiComponent` has changed to not require a `By` selector
 The selector has been pushed down into the `IElementAssert` methods instead of `AssertThatElements` method.
 
@@ -10,9 +28,15 @@ The selector has been pushed down to firstly make the `IElementAssert` and `Asse
 Move your selector from the `AssertThatElements` call to the `IElementAssert` method you are calling.
 
 ## `IElementAssert` and `ElementAssert` API changed
-`IElementAssert` and `ElementAssert` API were not consistent with the other API. So the API changed to accept a `By` and a `jQueryBy` instead (by removing the selector from AssertThatElements method).
+`IElementAssert` and `ElementAssert` API were not consistent with the other API and were changed. So the API changed to accept a `By` and a `jQueryBy` instead (by removing the selector from AssertThatElements method).
 All methods also accept a maxWait to allow for the developer to specify how long the methods should wait for the assertion before they throw.
 Internally the methods have changed to use `IElementFinder` to avoid code duplication.
+
+###Reason
+Inconsistency with IElementFinder API
+
+###Fix
+Remove the selector from finder methods and put it on the ElementAssert methods instead.
 
 # Version 0.5.1
 
