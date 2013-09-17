@@ -1,4 +1,4 @@
-# Version 0.5.2
+# Version 0.6
 
 ## ExecuteScript method renamed to Script on Executor
 On Executor and IExecutor `ExecuteScript` was renamed to `Script`.
