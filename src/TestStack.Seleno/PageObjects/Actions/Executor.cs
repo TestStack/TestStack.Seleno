@@ -103,11 +103,13 @@ namespace TestStack.Seleno.PageObjects.Actions
             _javaScriptExecutor.ExecuteScript(javascriptToBeExecuted);
         }
 
+        [Obsolete]
         public TResult ActionOnLocator<TResult>(By findExpression, Func<IWebElement, TResult> func, int maxWaitInSeconds = 5)
         {
             throw new NotImplementedException("Obsolete");
         }
 
+        [Obsolete]
         public IWebElement WithPatience(By findElement, Action<IWebElement> action, int waitInSeconds = 20)
         {
             throw new NotImplementedException("Obsolete");

@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.Configuration.Registration
 {
@@ -24,6 +25,7 @@ namespace TestStack.Seleno.Configuration.Registration
                     component.ElementFinder = e.Context.Resolve<IElementFinder>();
                     component.PageNavigator = e.Context.Resolve<IPageNavigator>();
                     component.Executor = e.Context.Resolve<IExecutor>();
+                    component.ElementAssert = e.Context.Resolve<IElementAssert>();
                 }
             );
         }

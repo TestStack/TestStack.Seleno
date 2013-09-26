@@ -41,19 +41,6 @@ namespace TestStack.Seleno.Tests.PageObjects
         }
     }
 
-    class creating_an_ElementAssert : ComponentFactorySpecification
-    {
-        public void When_asked_to_create_an_ElementAssert()
-        {
-            Result = SUT.CreateElementAssert(Arg.Any<IElementFinder>());
-        }
-
-        public void Then_ComponentFactory_should_create_an_ElementAssert()
-        {
-            Result.Should().BeOfType<ElementAssert>();
-        }
-    }
-
     class creating_a_Page : ComponentFactorySpecification
     {
         private readonly TestPage _testPage;
