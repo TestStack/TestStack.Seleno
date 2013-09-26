@@ -41,7 +41,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
 
         public ActionResult AjaxElements()
         {
-            Thread.Sleep(TimeSpan.FromSeconds(5));
+            Thread.Sleep(TimeSpan.FromSeconds(2));
             return Content("AJAX result");
         }
     }
