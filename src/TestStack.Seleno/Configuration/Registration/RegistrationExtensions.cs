@@ -26,6 +26,7 @@ namespace TestStack.Seleno.Configuration.Registration
                     component.PageNavigator = e.Context.Resolve<IPageNavigator>();
                     component.Executor = e.Context.Resolve<IExecutor>();
                     component.ElementAssert = e.Context.Resolve<IElementAssert>();
+                    component.Wait = e.Context.Resolve<IWait>();
                 }
             );
         }

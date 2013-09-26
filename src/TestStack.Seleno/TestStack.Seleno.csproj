@@ -113,6 +113,7 @@
     <Compile Include="PageObjects\Actions\IPageReader.cs" />
     <Compile Include="PageObjects\Actions\IPageWriter.cs" />
     <Compile Include="PageObjects\Actions\IExecutor.cs" />
+    <Compile Include="PageObjects\Actions\IWait.cs" />
     <Compile Include="PageObjects\Actions\PageWriter.cs" />
     <Compile Include="PageObjects\Actions\Executor.cs" />
     <Compile Include="PageObjects\Actions\ElementFinder.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="PageObjects\Actions\PageNavigator.cs" />
     <Compile Include="PageObjects\Actions\TableReader.cs" />
     <Compile Include="PageObjects\Actions\PageReader.cs" />
+    <Compile Include="PageObjects\Actions\Wait.cs" />
     <Compile Include="PageObjects\ComponentFactory.cs" />
     <Compile Include="PageObjects\Controls\CheckBox.cs" />
     <Compile Include="PageObjects\Controls\DropDown.cs" />

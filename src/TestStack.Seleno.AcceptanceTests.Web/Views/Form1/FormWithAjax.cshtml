@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Form with AJAX";
+}
+
+<h2>This form loads some elements through AJAX</h2>
+
+<div id="target">Target</div>
+
+
+<script type="text/javascript">
+    $(function() {
+        $.get("@Url.Action("AjaxElements")")
+            .done(function(data) {
+                $('#target').replaceWith(data);
+            });
+    });
+</script>
+

@@ -54,6 +54,8 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<PageNavigator>()
                 .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.RegisterType<Wait>()
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.Register(c => _routes).SingleInstance();

@@ -80,11 +80,6 @@ namespace TestStack.Seleno.PageObjects.Actions
             }
         }
 
-        public void WaitForAjaxCallsToComplete(TimeSpan maxWait = default(TimeSpan))
-        {
-            PredicateScriptAndWaitToComplete("$.active == 0", maxWait);
-        }
-
         public object ScriptAndReturn(string javascriptToBeExecuted, Type returnType)
         {
             var untypedValue = _javaScriptExecutor.ExecuteScript("return " + javascriptToBeExecuted);

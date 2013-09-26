@@ -121,6 +121,7 @@
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specifications\Assertions\ElementAssertTests.cs" />
+    <Compile Include="Specifications\WaitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
