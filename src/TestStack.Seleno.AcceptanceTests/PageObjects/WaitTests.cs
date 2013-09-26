@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
-using TestStack.Seleno.AcceptanceTests.PageObjects;
 using TestStack.Seleno.PageObjects;
-using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Locators;
 
-namespace TestStack.Seleno.AcceptanceTests.Specifications
+namespace TestStack.Seleno.AcceptanceTests.PageObjects
 {
     public abstract class WaitTests
     {
