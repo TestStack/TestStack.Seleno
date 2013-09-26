@@ -111,12 +111,12 @@
   <ItemGroup>
     <Compile Include="Browsers\BrowserTests.cs" />
     <Compile Include="Host.cs" />
-    <Compile Include="PageObjects\ActionsTests\ElementFinderTests.cs" />
-    <Compile Include="PageObjects\ActionsTests\ModelIoTests.cs" />
-    <Compile Include="PageObjects\ActionsTests\NavigationTests.cs" />
+    <Compile Include="Specifications\ActionsTests\ElementFinderTests.cs" />
+    <Compile Include="Specifications\ActionsTests\ModelIoTests.cs" />
+    <Compile Include="Specifications\ActionsTests\NavigationTests.cs" />
     <Compile Include="PageObjects\AssertionResultPage.cs" />
-    <Compile Include="PageObjects\ControlsTests\IndividualReadingTests.cs" />
-    <Compile Include="PageObjects\ControlsTests\IndividualWritingTests.cs" />
+    <Compile Include="Specifications\ControlsTests\IndividualReadingTests.cs" />
+    <Compile Include="Specifications\ControlsTests\IndividualWritingTests.cs" />
     <Compile Include="PageObjects\Form1Page.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
