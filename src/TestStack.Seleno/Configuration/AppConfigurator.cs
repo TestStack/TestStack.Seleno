@@ -10,6 +10,7 @@ using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
+using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -49,7 +50,11 @@ namespace TestStack.Seleno.Configuration
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<Executor>()
                 .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.RegisterType<ElementAssert>()
+                .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<PageNavigator>()
+                .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.RegisterType<Wait>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();

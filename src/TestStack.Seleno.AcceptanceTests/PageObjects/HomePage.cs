@@ -47,6 +47,11 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
         {
             return Navigate.To<HomeController, ListPage>(c => c.List());
         }
+
+        public Page GoToFormWithAjax()
+        {
+            return Navigate.To<Page>("/Form1/FormWithAJAX");
+        }
     }
 
     public class ListPage : Page

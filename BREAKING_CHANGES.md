@@ -1,3 +1,14 @@
+# Version 0.7
+
+## WaitForAjaxCallsToComplete moved
+WaitForAjaxCallsToComplete method has been removed from Executor
+
+### Reason
+A new `WaitFor` property has been added to `UiComponent` to support all waiting needs. Also `Execute.WaitForAjaxCallsToComplete` didn't make much sense from fluency point of view.
+
+### Fix
+Replace `Execute.WaitForAjaxCallsToComplete` with `WaitFor.AjaxCallsToComplete` in your code.
+
 # Version 0.6
 
 ## ExecuteScript method renamed to Script on Executor
