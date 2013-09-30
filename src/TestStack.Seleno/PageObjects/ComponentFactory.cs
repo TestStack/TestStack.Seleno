@@ -5,7 +5,6 @@ using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
-using TestStack.Seleno.Specifications.Assertions;
 
 namespace TestStack.Seleno.PageObjects
 {
