@@ -118,7 +118,6 @@
     <Compile Include="PageObjects\Actions\Controls\When_updating_TextBox_value.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Executor\ExecutorSpecification.cs" />
-    <Compile Include="PageObjects\Actions\Executor\When_checking_whether_ajax_calls_are_completed.cs" />
     <Compile Include="PageObjects\Actions\Executor\When_executing_predicate_script_that_completes_successfuly.cs" />
     <Compile Include="PageObjects\Actions\Executor\When_executing_predicate_script_timing_out_before_it_completes.cs" />
     <Compile Include="PageObjects\Actions\Executor\When_executing_script_and_returning_to_converted_Type.cs" />

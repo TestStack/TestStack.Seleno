@@ -15,6 +15,8 @@ namespace TestStack.Seleno.PageObjects
         internal IExecutor Executor { get; set; }
         internal ICamera Camera { get; set; }
         internal IElementFinder ElementFinder { get; set; }
+        internal IElementAssert ElementAssert { get; set; }
+        internal IWait Wait { get; set; }
 
         public IPageNavigator Navigate
         {
@@ -54,7 +56,16 @@ namespace TestStack.Seleno.PageObjects
             get
             {
                 ThrowIfComponentNotCreatedCorrectly();
-                return ComponentFactory.CreateElementAssert(ElementFinder);
+                return ElementAssert;
+            }
+        }
+
+        public IWait WaitFor
+        {
+            get
+            {
+                ThrowIfComponentNotCreatedCorrectly();
+                return Wait;
             }
         }
 

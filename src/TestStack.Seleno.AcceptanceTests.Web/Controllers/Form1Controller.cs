@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Web.Mvc;
 using NUnit.Framework;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
@@ -33,5 +34,15 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
             return View("Form", Form1Fixtures.A);
         }
 
+        public ActionResult FormWithAjax()
+        {
+            return View();
+        }
+
+        public ActionResult AjaxElements()
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            return Content("AJAX result");
+        }
     }
 }

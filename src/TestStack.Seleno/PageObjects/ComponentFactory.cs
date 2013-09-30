@@ -28,11 +28,6 @@ namespace TestStack.Seleno.PageObjects
             return new PageWriter<TModel>(_scope.Resolve<IElementFinder>(), _scope.Resolve<IComponentFactory>());
         }
 
-        public IElementAssert CreateElementAssert(IElementFinder finder)
-        {
-            return new ElementAssert(_scope.Resolve<ICamera>(), finder);
-        }
-
         public TPage CreatePage<TPage>() where TPage : UiComponent, new()
         {
             return _scope.Resolve<TPage>();

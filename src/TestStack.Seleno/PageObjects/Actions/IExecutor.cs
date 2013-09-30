@@ -49,13 +49,6 @@ namespace TestStack.Seleno.PageObjects.Actions
         void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan));
         
         /// <summary>
-        /// Wait until ajax calls are complete
-        /// </summary>
-        /// <param name="maxWait">Maximum amount of time to wait for ajax calls to be completed (default is 5 seconds)</param>
-        /// <exception cref="TimeoutException">When the ajax calls took more than maxWait to execute</exception>
-        void WaitForAjaxCallsToComplete(TimeSpan maxWait = default(TimeSpan));
-
-        /// <summary>
         /// Executes some JavaScript and returns the return value type-casted to the given type.
         /// </summary>
         /// <param name="javascriptToBeExecuted">The JavaScript to execute</param>
