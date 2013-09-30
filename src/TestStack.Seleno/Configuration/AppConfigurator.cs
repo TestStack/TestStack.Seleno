@@ -10,7 +10,7 @@ using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Specifications.Assertions;
+using TestStack.Seleno.PageObjects.Assertions;
 
 namespace TestStack.Seleno.Configuration
 {

@@ -4,7 +4,6 @@ using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
-using TestStack.Seleno.Specifications.Assertions;
 using TestStack.Seleno.Tests.Specify;
 using TestStack.Seleno.Tests.TestObjects;
 
