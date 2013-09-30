@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using TestStack.BDDfy;
-using FluentAssertions;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.ActionsTests
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 {
     abstract class NavigationTests
     {

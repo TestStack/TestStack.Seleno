@@ -4,7 +4,7 @@ using TestStack.BDDfy;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.ControlsTests
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
 {
     abstract class Reading_individual_html_controls
     {

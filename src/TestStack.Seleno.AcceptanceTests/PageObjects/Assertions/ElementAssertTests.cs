@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
-using TestStack.Seleno.AcceptanceTests.PageObjects;
 using TestStack.Seleno.Configuration;
 
-namespace TestStack.Seleno.AcceptanceTests.Specifications.Assertions
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
 {
     public abstract class ElementAssertTests
     {

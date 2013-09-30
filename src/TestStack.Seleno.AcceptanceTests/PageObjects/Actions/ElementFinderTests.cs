@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 using TestStack.BDDfy;
 using TestStack.Seleno.AcceptanceTests.Web.Fixtures;
 
-namespace TestStack.Seleno.AcceptanceTests.PageObjects.ActionsTests
+namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 {
     abstract class ElementFinderTests
     {

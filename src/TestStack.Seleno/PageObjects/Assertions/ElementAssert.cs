@@ -5,7 +5,7 @@ using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 
-namespace TestStack.Seleno.Specifications.Assertions
+namespace TestStack.Seleno.PageObjects.Assertions
 {
     public class ElementAssert : IElementAssert
     {

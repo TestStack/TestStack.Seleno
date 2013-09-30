@@ -135,7 +135,7 @@
     <Compile Include="PageObjects\IComponentFactory.cs" />
     <Compile Include="PageObjects\Page.cs" />
     <Compile Include="PageObjects\Page`1.cs" />
-    <Compile Include="Specifications\Assertions\ElementAssert.cs" />
+    <Compile Include="PageObjects\Assertions\ElementAssert.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="Configuration\Fakes\FakeViewDataContainer.cs" />
     <Compile Include="Configuration\Fakes\FakeHttpContext.cs" />
@@ -150,7 +150,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\RemoteWebDriverExtensions.cs" />
     <Compile Include="PageObjects\Actions\ActionHelpers.cs" />
-    <Compile Include="Specifications\Assertions\IElementAssert.cs" />
+    <Compile Include="PageObjects\Assertions\IElementAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Actions;
 
-namespace TestStack.Seleno.Specifications.Assertions
+namespace TestStack.Seleno.PageObjects.Assertions
 {
     public interface IElementAssert
     {
