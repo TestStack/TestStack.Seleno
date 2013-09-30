@@ -1,4 +1,5 @@
-﻿using TestStack.Seleno.Configuration;
+﻿using System;
+using TestStack.Seleno.Configuration;
 
 namespace MvcMusicStore.FunctionalTests
 {
@@ -8,7 +9,7 @@ namespace MvcMusicStore.FunctionalTests
 
         static Host()
         {
-            Instance.Run("MvcMusicStore", 12345);
+            Instance.Run("MvcMusicStore", 12345, c => c.WithMinimumWaitTimeoutOf(TimeSpan.FromSeconds(20)));
         }
     }
 }
