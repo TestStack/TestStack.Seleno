@@ -2,9 +2,11 @@ using System;
 using System.Web.Routing;
 using Autofac;
 using Castle.Core.Logging;
+using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -46,8 +48,12 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
+            var proxyGenerator = new ProxyGenerator();
             ContainerBuilder.RegisterType<ElementFinder>()
-                .AsImplementedInterfaces().SingleInstance();
+                .SingleInstance();
+            ContainerBuilder
+                .Register(c => CreateCameraProxyFor<ElementFinder, IElementFinder>(proxyGenerator, c))
+                .SingleInstance();
             ContainerBuilder.RegisterType<Executor>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.RegisterType<ElementAssert>()
@@ -62,6 +68,13 @@ namespace TestStack.Seleno.Configuration
             ContainerBuilder.RegisterSource(new UiComponentRegistrationSource());
 
             return ContainerBuilder.Build();
+        }
+
+        private static TInterface CreateCameraProxyFor<TConcrete, TInterface>(ProxyGenerator proxyGenerator, IComponentContext c)
+            where TConcrete : TInterface
+            where TInterface : class
+        {
+            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new CameraProxyInterceptor(c.Resolve<ICamera>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
         }
 
         public IAppConfigurator ProjectToTest(WebApplication webApplication)
@@ -82,6 +95,7 @@ namespace TestStack.Seleno.Configuration
             var driver = new Lazy<RemoteWebDriver>(webDriver);
             WithWebDriver(() => driver.Value);
             WithJavaScriptExecutor(() => driver.Value);
+            WithScreenshotTaker(() => driver.Value as ITakesScreenshot);
             return this;
         }
 
@@ -100,6 +114,13 @@ namespace TestStack.Seleno.Configuration
             return this;
         }
 
+        internal IAppConfigurator WithScreenshotTaker(Func<ITakesScreenshot> screenshotTaker)
+        {
+            ContainerBuilder.Register(c => screenshotTaker())
+                .As<ITakesScreenshot>().SingleInstance();
+            return this;
+        }
+
         public IAppConfigurator WithMinimumWaitTimeoutOf(TimeSpan minimumWait)
         {
             _minimumWait = minimumWait;
@@ -109,15 +130,17 @@ namespace TestStack.Seleno.Configuration
         public IAppConfigurator UsingCamera(ICamera camera)
         {
             ContainerBuilder.Register(c => camera)
-                .As<ICamera>().SingleInstance();
+                .As<ICamera>().SingleInstance()
+                .OnActivated(a => {
+                    a.Instance.ScreenshotTaker = a.Context.Resolve<ITakesScreenshot>();
+                    a.Instance.Browser = a.Context.Resolve<IWebDriver>();
+                });
             return this;
         }
 
         public IAppConfigurator UsingCamera(string screenShotPath)
         {
-            ContainerBuilder.Register(c => new FileCamera(c.Resolve<IWebDriver>(), screenShotPath))
-                .As<ICamera>().SingleInstance();
-            return this;
+            return UsingCamera(new FileCamera(screenShotPath));
         }
 
         public IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory)

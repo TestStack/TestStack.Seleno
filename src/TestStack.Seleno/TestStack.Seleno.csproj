@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Interceptors\CameraProxyInterceptor.cs" />
     <Compile Include="Configuration\Registration\UiComponentRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
