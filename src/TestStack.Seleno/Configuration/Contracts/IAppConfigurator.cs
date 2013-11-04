@@ -52,6 +52,13 @@ namespace TestStack.Seleno.Configuration.Contracts
         IAppConfigurator UsingCamera(ICamera camera);
 
         /// <summary>
+        /// Specify the directory path to store screenshots in.
+        /// </summary>
+        /// <param name="screenShotPath">The directory to store screenshots in</param>
+        /// <returns>The configurator to allow for method chaining</returns>
+        IAppConfigurator UsingCamera(string screenShotPath);
+
+        /// <summary>
         /// Specify the logger factory you would like to use.
         /// By default a null logger is used.
         /// </summary>
