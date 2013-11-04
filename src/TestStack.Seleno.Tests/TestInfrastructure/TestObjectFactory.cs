@@ -15,6 +15,7 @@ namespace TestStack.Seleno.Tests.TestInfrastructure
             var configurator = new AppConfigurator();
             configurator.WithJavaScriptExecutor(() => Substitute.For<IJavaScriptExecutor>());
             configurator.WithWebDriver(() => Substitute.For<IWebDriver>());
+            configurator.WithScreenshotTaker(() => Substitute.For<ITakesScreenshot>());
 
             configurator
                 .ProjectToTest(webApplication)
