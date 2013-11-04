@@ -48,33 +48,19 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
-            var proxyGenerator = new ProxyGenerator();
-            ContainerBuilder.RegisterType<ElementFinder>()
+            ContainerBuilder.Register(c => new ProxyGenerator())
                 .SingleInstance();
-            ContainerBuilder
-                .Register(c => CreateCameraProxyFor<ElementFinder, IElementFinder>(proxyGenerator, c))
-                .SingleInstance();
-            ContainerBuilder.RegisterType<Executor>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<ElementAssert>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<PageNavigator>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<Wait>()
-                .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.RegisterProxiedClass<ElementFinder, IElementFinder>();
+            ContainerBuilder.RegisterProxiedClass<Executor, IExecutor>();
+            ContainerBuilder.RegisterProxiedClass<ElementAssert, IElementAssert>();
+            ContainerBuilder.RegisterProxiedClass<PageNavigator, IPageNavigator>();
+            ContainerBuilder.RegisterProxiedClass<Wait, IWait>();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.Register(c => _routes).SingleInstance();
             ContainerBuilder.RegisterSource(new UiComponentRegistrationSource());
 
             return ContainerBuilder.Build();
-        }
-
-        private static TInterface CreateCameraProxyFor<TConcrete, TInterface>(ProxyGenerator proxyGenerator, IComponentContext c)
-            where TConcrete : TInterface
-            where TInterface : class
-        {
-            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new CameraProxyInterceptor(c.Resolve<ICamera>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
         }
 
         public IAppConfigurator ProjectToTest(WebApplication webApplication)

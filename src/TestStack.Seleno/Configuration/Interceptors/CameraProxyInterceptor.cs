@@ -24,6 +24,10 @@ namespace TestStack.Seleno.Configuration.Interceptors
             {
                 invocation.Proceed();
             }
+            catch (SelenoReceivedException)
+            {
+                throw;
+            }
             catch (Exception e)
             {
                 _logger.ErrorFormat(e, "Error invoking {0}.{1}", invocation.TargetType.Name, invocation.Method.Name);
@@ -42,8 +46,23 @@ namespace TestStack.Seleno.Configuration.Interceptors
                 {
                     _logger.Error("Error saving a screenshot", ex);
                 }
-                throw;
+
+                throw new SelenoReceivedException(e);
             }
         }
+    }
+    
+    /// <summary>
+    /// Wraps an exception that has been received and processed by Seleno.
+    /// </summary>
+    public class SelenoReceivedException : Exception
+    {
+        /// <summary>
+        /// Creates a <see cref="SelenoReceivedException"/>.
+        /// </summary>
+        /// <param name="innerException">The exception that has been caught and processed by Seleno</param>
+        public SelenoReceivedException(Exception innerException)
+            : base(innerException.Message, innerException)
+        {}
     }
 }

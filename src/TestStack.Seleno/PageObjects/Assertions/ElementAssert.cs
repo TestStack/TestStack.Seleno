@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration;
-using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.PageObjects.Assertions
 {
     public class ElementAssert : IElementAssert
     {
-        private readonly ICamera _camera;
-
-        public ElementAssert(ICamera camera, IElementFinder find)
+        public ElementAssert(IElementFinder find)
         {
-            _camera = camera;
             Find = find;
         }
 
@@ -33,10 +29,6 @@ namespace TestStack.Seleno.PageObjects.Assertions
             if (string.IsNullOrEmpty(message))
                 message = string.Format("'{0}' was in fact found!", selector);
 
-            // todo: Can we move the screenshots to a central place that catches any
-            //  uncaught exceptions rather than having them in a number of places just
-            //  before throwing an exception
-            _camera.TakeScreenshot();
             throw new SelenoException(message);
         }
 
@@ -58,7 +50,6 @@ namespace TestStack.Seleno.PageObjects.Assertions
             }
             catch (NoSuchElementException ex)
             {
-                _camera.TakeScreenshot();
                 throw new SelenoException(message, ex);
             }
 
@@ -77,16 +68,7 @@ namespace TestStack.Seleno.PageObjects.Assertions
 
         IElementAssert ConformTo(Action action)
         {
-            try
-            {
-                action();
-            }
-            catch (Exception)
-            {
-                _camera.TakeScreenshot();
-                throw;
-            }
-
+            action();
             return this;
         }
 

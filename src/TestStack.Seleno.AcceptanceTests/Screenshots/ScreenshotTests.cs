@@ -2,33 +2,51 @@
 using Castle.Core.Logging;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration;
-using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Screenshots
 {
-    class ScreenshotTests
+    class ScreenshotTest
     {
+        private SelenoHost _host;
+
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            _host = new SelenoHost();
+            _host.Run(x => x
+                .UsingCamera(@"c:\screenshots")
+                .WithWebServer(new InternetWebServer("http://www.google.com/"))
+                .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
+                .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
+            );
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTeardown()
+        {
+            _host.Dispose();
+        }
+
         [Explicit]
         [Test]
-        [ExpectedException(typeof(NoSuchElementException))]
-        public void TakeScreenshot()
+        [ExpectedException(typeof(SelenoReceivedException))]
+        public void TakeScreenshotFromElementFinder()
         {
-            using (var host = new SelenoHost())
-            {
-                host.Run(x => x
-                    .UsingCamera(@"c:\screenshots")
-                    .WithWebServer(new InternetWebServer("http://www.google.com/"))
-                    .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
-                    .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
-                );
+            _host.NavigateToInitialPage<Page>()
+                .Find.Element(By.Name("doesntexist"));
+        }
 
-                host.NavigateToInitialPage<Page>()
-                    .Find.Element(By.Name("doesntexist"));
-            }
+        [Explicit]
+        [Test]
+        [ExpectedException(typeof(SelenoReceivedException))]
+        public void TakeScreenshotFromPageNavigator()
+        {
+            _host.NavigateToInitialPage<Page>()
+                .Navigate.To<Page>(By.Id("doesntexist"));
         }
     }
 }

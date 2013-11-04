@@ -26,33 +26,17 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public IWebElement ActionOnLocator(By findExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
-            try
-            {
-                var element = _finder.Element(findExpression, maxWait);
-                action(element);
-                return element;
-            }
-            catch (Exception)
-            {
-                _camera.TakeScreenshot();
-                throw;
-            }
+            var element = _finder.Element(findExpression, maxWait);
+            action(element);
+            return element;
         }
 
         // todo: unit/integration test this
         public IWebElement ActionOnLocator(Locators.By.jQueryBy jQueryFindExpression, Action<IWebElement> action, TimeSpan maxWait = default(TimeSpan))
         {
-            try
-            {
-                var element = _finder.Element(jQueryFindExpression, maxWait);
-                action(element);
-                return element;
-            }
-            catch (Exception)
-            {
-                _camera.TakeScreenshot();
-                throw;
-            }
+            var element = _finder.Element(jQueryFindExpression, maxWait);
+            action(element);
+            return element;
         }
 
         public void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan))
