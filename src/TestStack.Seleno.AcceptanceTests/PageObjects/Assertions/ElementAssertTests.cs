@@ -55,7 +55,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
 
             public void Then_asserting_element_conformity_throws()
             {
-                Assert.Throws<SelenoException>(() => Page.AssertElementContainsValue("RequiredString", "Another Value"));
+                Assert.That(() => Page.AssertElementContainsValue("RequiredString", "Another Value"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 
@@ -87,7 +89,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
 
             public void Then_asserting_element_conformity_with_jquery_throws()
             {
-                Assert.Throws<SelenoException>(() => Page.AssertElementContainsValueWithJquery("RequiredString", "Another Value"));
+                Assert.That(() => Page.AssertElementContainsValueWithJquery("RequiredString", "Another Value"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 
@@ -100,8 +104,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
 
             public void Then_asserting_element_existence_throws()
             {
-                Assert.Throws<SelenoException>(() =>
-                    Page.AssertElementExists("some_non_existing_element"));
+                Assert.That(() => Page.AssertElementExists("some_non_existing_element"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 
@@ -114,8 +119,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
 
             public void Then_asserting_element_existence_throws()
             {
-                Assert.Throws<SelenoException>(() =>
-                    Page.AssertElementExistsWithJQuery("some_non_existing_element"));
+                Assert.That(() => Page.AssertElementExistsWithJQuery("some_non_existing_element"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 
@@ -154,7 +160,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
             
             public void Then_asserting_element_does_not_exist_throws()
             {
-                Assert.Throws<SelenoException>(() => Page.AssertElementDoesNotExist("RequiredBool"));
+                Assert.That(() => Page.AssertElementDoesNotExist("RequiredBool"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 
@@ -180,7 +188,9 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Assertions
             
             public void Then_asserting_element_does_not_exist_throws()
             {
-                Assert.Throws<SelenoException>(() => Page.AssertElementDoesNotExistWithJquery("RequiredBool"));
+                Assert.That(() => Page.AssertElementDoesNotExistWithJquery("RequiredBool"),
+                    Throws.InnerException.InstanceOf<SelenoException>()
+                );
             }
         }
 

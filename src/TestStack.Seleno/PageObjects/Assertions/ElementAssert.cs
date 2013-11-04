@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration;
+using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.PageObjects.Actions;
 
 namespace TestStack.Seleno.PageObjects.Assertions
@@ -20,6 +21,12 @@ namespace TestStack.Seleno.PageObjects.Assertions
             try
             {
                 action();
+            }
+            catch (SelenoReceivedException e)
+            {
+                if (e.InnerException is NoSuchElementException)
+                    return this;
+                throw;
             }
             catch (NoSuchElementException)
             {
@@ -47,6 +54,12 @@ namespace TestStack.Seleno.PageObjects.Assertions
             try
             {
                 action();
+            }
+            catch (SelenoReceivedException ex)
+            {
+                if (ex.InnerException is NoSuchElementException)
+                    throw new SelenoException(message, ex);
+                throw;
             }
             catch (NoSuchElementException ex)
             {

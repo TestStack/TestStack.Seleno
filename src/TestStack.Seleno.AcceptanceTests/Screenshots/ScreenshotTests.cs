@@ -9,6 +9,7 @@ using TestStack.Seleno.PageObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Screenshots
 {
+    [Explicit]
     class ScreenshotTest
     {
         private SelenoHost _host;
@@ -31,7 +32,6 @@ namespace TestStack.Seleno.AcceptanceTests.Screenshots
             _host.Dispose();
         }
 
-        [Explicit]
         [Test]
         [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromElementFinder()
@@ -40,7 +40,6 @@ namespace TestStack.Seleno.AcceptanceTests.Screenshots
                 .Find.Element(By.Name("doesntexist"));
         }
 
-        [Explicit]
         [Test]
         [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromPageNavigator()
