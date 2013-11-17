@@ -9,7 +9,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected : HtmlControlSpecificationFor<RadioButtonGroup>
+    class When_attempting_to_retrieve_selected_button_from_radio_group_with_none_selected : HtmlControlSpecificationFor<RadioButtonGroup, ChoiceType>
     {
         private Action _selectedButtonInRadioGroupAction;
         private ExceptionAssertions<NoSuchElementException> _exceptionThrown;

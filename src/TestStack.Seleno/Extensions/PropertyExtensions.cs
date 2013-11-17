@@ -16,6 +16,7 @@ namespace TestStack.Seleno.Extensions
             Visit(new ReadOnlyCollection<Expression>(expressions));
             return _properties;
         }
+
         protected override Expression VisitMember(MemberExpression node)
         {
             var property = node.Member as PropertyInfo;

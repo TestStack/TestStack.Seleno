@@ -8,7 +8,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    abstract class HtmlControlSpecificationFor<THtmlControl> : SpecificationFor<THtmlControl>
+    abstract class HtmlControlSpecificationFor<THtmlControl, TPropertyType> : SpecificationFor<THtmlControl>
         where THtmlControl : HTMLControl, new()
     {
         protected IPageNavigator PageNavigator { get; private set; }
@@ -16,7 +16,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         protected IExecutor Executor { get; private set; }
         protected IComponentFactory ComponentFactory { get; private set; }
 
-        protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
+        protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, TPropertyType>> htmlControlPropertySelector)
         {
             SUT.ViewModelPropertySelector = htmlControlPropertySelector;
         }

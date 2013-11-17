@@ -2,11 +2,12 @@ using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects.Controls;
+using TestStack.Seleno.Tests.TestObjects;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_verifying_that_no_radio_button_is_selected_in_radio_group : HtmlControlSpecificationFor<RadioButtonGroup>
+    class When_verifying_that_no_radio_button_is_selected_in_radio_group : HtmlControlSpecificationFor<RadioButtonGroup, ChoiceType>
     {
 
         private bool _result;

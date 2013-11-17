@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Text;
+using System.Web.Mvc;
 using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.PageObjects.Controls
@@ -24,19 +24,6 @@ namespace TestStack.Seleno.PageObjects.Controls
         public const string ReadOnlyAttribute = "readonly";
         public const string DisabledAttribute = "disabled";
 
-        protected virtual PropertyInfo ViewModelProperty
-        {
-            get
-            {
-                if (ViewModelPropertySelector == null)
-                {
-                    throw new ArgumentException("A view model selector expression to the property for the control must be specified");
-                }
-
-                return ViewModelPropertySelector.GetPropertyFromLambda();
-            }
-        }
-
         internal TimeSpan WaitUntilElementAvailable { get; set; }
 
         internal LambdaExpression ViewModelPropertySelector { get; set; }
@@ -58,7 +45,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public string Name
         {
-            get { return ViewModelProperty != null ? ViewModelProperty.Name : Id; }
+            get { return ViewModelPropertySelector != null ? ExpressionHelper.GetExpressionText(ViewModelPropertySelector) : Id; }
         }
 
         public string Title

@@ -7,7 +7,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_getting_selected_button_from_radio_group : HtmlControlSpecificationFor<RadioButtonGroup>
+    class When_getting_selected_button_from_radio_group : HtmlControlSpecificationFor<RadioButtonGroup, ChoiceType>
     {
         private ChoiceType _result;
         private By.jQueryBy _actualJqueryBy;

@@ -3,7 +3,7 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_setting_an_attribute_value_for_any_element : HtmlControlSpecificationFor<TextBox>
+    class When_setting_an_attribute_value_for_any_element : HtmlControlSpecificationFor<TextBox, string>
     {
         private const string AttributeName = "data-myAttribute";
         private const string AttributeValue = "someValue \\ \" \r\n";

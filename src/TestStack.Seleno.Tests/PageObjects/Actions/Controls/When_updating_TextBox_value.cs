@@ -7,9 +7,9 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    abstract class TextboxControlSpecification<TValueType> : HtmlControlSpecificationFor<TextBox>
+    abstract class TextboxControlSpecification<TValueType> : HtmlControlSpecificationFor<TextBox, TValueType>
     {
-        protected TextboxControlSpecification(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
+        protected TextboxControlSpecification(Expression<Func<TestViewModel, TValueType>> htmlControlPropertySelector)
             : base(htmlControlPropertySelector) {}
         protected abstract TValueType Value { get; }
         protected abstract string ExpectedControlId { get; }
@@ -52,7 +52,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
     class When_updating_textbox_value_with_string : TextboxControlSpecification<string>
     {
-        public When_updating_textbox_value_with_string() : base(x => x.Modified) { }
+        public When_updating_textbox_value_with_string() : base(x => x.Name) { }
 
         protected override string Value
         {
@@ -61,7 +61,27 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         protected override string ExpectedControlId
         {
-            get { return "Modified"; }
+            get { return "Name"; }
+        }
+
+        protected override string ExpectedControlValue
+        {
+            get { return @"asdf \\ \"" \r\n"; }
+        }
+    }
+
+    class When_updating_subviewmodel_textbox_value_with_string : TextboxControlSpecification<string>
+    {
+        public When_updating_subviewmodel_textbox_value_with_string() : base(x => x.SubViewModel.Name) { }
+
+        protected override string Value
+        {
+            get { return "asdf \\ \" \r\n"; }
+        }
+
+        protected override string ExpectedControlId
+        {
+            get { return "SubViewModel_Name"; }
         }
 
         protected override string ExpectedControlValue
