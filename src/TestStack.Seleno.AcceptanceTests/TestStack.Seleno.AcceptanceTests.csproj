@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO">
       <HintPath>..\packages\Microsoft.Bcl.1.1.3\lib\net40\System.IO.dll</HintPath>
     </Reference>
@@ -99,13 +100,17 @@
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.BDDfy, Version=3.15.0.0, Culture=neutral, PublicKeyToken=a357057d05a879bd, processorArchitecture=MSIL">
+    <Reference Include="TestStack.BDDfy, Version=3.17.1.0, Culture=neutral, PublicKeyToken=a357057d05a879bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\TestStack.BDDfy.3.15\lib\NET40\TestStack.BDDfy.dll</HintPath>
+      <HintPath>..\packages\TestStack.BDDfy.3.17.1\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=2.33.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.33.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.37.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selenium.Support.2.37.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +153,6 @@
     <EmbeddedResource Include="..\packages\WebDriver.IEDriver.2.29.1.1\tools\IEDriverServer.exe">
       <Link>Browsers\IEDriverServer.exe</Link>
     </EmbeddedResource>
-    <Content Include="BDDfy.readme.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
