@@ -22,6 +22,7 @@ namespace TestStack.Seleno.Tests.Configuration
             _webDriver = Substitute.For<IWebDriver>();
             SUT.WithWebDriver(() => _webDriver);
             SUT.WithJavaScriptExecutor(() => Substitute.For<IJavaScriptExecutor>());
+            SUT.WithScreenshotTaker(() => Substitute.For<ITakesScreenshot>());
         }
 
         public void AndGiven_there_is_a_registered_camera()
@@ -65,17 +66,17 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void And_the_element_finder_is_populated()
         {
-            Assert.That(_pageObject.ElementFinder, Is.TypeOf<ElementFinder>());
+            Assert.That(_pageObject.ElementFinder, Is.InstanceOf<IElementFinder>());
         }
 
         public void And_the_page_navigator_is_populated()
         {
-            Assert.That(_pageObject.PageNavigator, Is.TypeOf<PageNavigator>());
+            Assert.That(_pageObject.PageNavigator, Is.InstanceOf<IPageNavigator>());
         }
 
         public void And_the_script_executor_is_populated()
         {
-            Assert.That(_pageObject.Executor, Is.TypeOf<Executor>());
+            Assert.That(_pageObject.Executor, Is.InstanceOf<IExecutor>());
         }
 
         public void And_the_component_factory_is_populated()

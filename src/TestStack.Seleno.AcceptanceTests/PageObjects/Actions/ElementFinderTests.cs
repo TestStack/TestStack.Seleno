@@ -83,7 +83,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Actions
 
             public void Then_an_exception_is_thrown()
             {
-                Assert.That(_exception, Is.TypeOf<NoSuchElementException>());
+                Assert.That(_exception.InnerException, Is.TypeOf<NoSuchElementException>());
             }
 
             public void And_the_find_call_waited_the_maximum_amount_of_time()

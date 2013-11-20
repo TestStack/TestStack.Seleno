@@ -1,3 +1,14 @@
+# Version 0.8
+
+## Exceptions from within Seleno
+Exceptions such as `SelenoException` and `NoSuchElementException` that you would previously have received from Seleno will generally now be presented as a `SelenoReceivedException`.
+
+### Reason
+Seleno now wraps all internal calls in an interceptor that automatically takes screenshots and performs logging, but in order to signal that a particular exception deep within Seleno should be ignored by the layers higher up the root exception needed to be wrapped in another exception (`SelenoReceivedException`).
+
+### Fix
+If you are relying on a particular type of exception to be thrown then simply change your logic to look for a `SelenoReceivedException` and then check the `InnerException` property for the original exception you were previously dealing with.
+
 # Version 0.7
 
 ## WaitForAjaxCallsToComplete moved

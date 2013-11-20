@@ -2,9 +2,11 @@ using System;
 using System.Web.Routing;
 using Autofac;
 using Castle.Core.Logging;
+using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -46,16 +48,13 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
-            ContainerBuilder.RegisterType<ElementFinder>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<Executor>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<ElementAssert>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<PageNavigator>()
-                .AsImplementedInterfaces().SingleInstance();
-            ContainerBuilder.RegisterType<Wait>()
-                .AsImplementedInterfaces().SingleInstance();
+            ContainerBuilder.Register(c => new ProxyGenerator())
+                .SingleInstance();
+            ContainerBuilder.RegisterProxiedClass<ElementFinder, IElementFinder>();
+            ContainerBuilder.RegisterProxiedClass<Executor, IExecutor>();
+            ContainerBuilder.RegisterProxiedClass<ElementAssert, IElementAssert>();
+            ContainerBuilder.RegisterProxiedClass<PageNavigator, IPageNavigator>();
+            ContainerBuilder.RegisterProxiedClass<Wait, IWait>();
             ContainerBuilder.RegisterType<ComponentFactory>()
                 .AsImplementedInterfaces().SingleInstance();
             ContainerBuilder.Register(c => _routes).SingleInstance();
@@ -82,6 +81,7 @@ namespace TestStack.Seleno.Configuration
             var driver = new Lazy<RemoteWebDriver>(webDriver);
             WithWebDriver(() => driver.Value);
             WithJavaScriptExecutor(() => driver.Value);
+            WithScreenshotTaker(() => driver.Value as ITakesScreenshot);
             return this;
         }
 
@@ -100,6 +100,13 @@ namespace TestStack.Seleno.Configuration
             return this;
         }
 
+        internal IAppConfigurator WithScreenshotTaker(Func<ITakesScreenshot> screenshotTaker)
+        {
+            ContainerBuilder.Register(c => screenshotTaker())
+                .As<ITakesScreenshot>().SingleInstance();
+            return this;
+        }
+
         public IAppConfigurator WithMinimumWaitTimeoutOf(TimeSpan minimumWait)
         {
             _minimumWait = minimumWait;
@@ -109,15 +116,17 @@ namespace TestStack.Seleno.Configuration
         public IAppConfigurator UsingCamera(ICamera camera)
         {
             ContainerBuilder.Register(c => camera)
-                .As<ICamera>().SingleInstance();
+                .As<ICamera>().SingleInstance()
+                .OnActivated(a => {
+                    a.Instance.ScreenshotTaker = a.Context.Resolve<ITakesScreenshot>();
+                    a.Instance.Browser = a.Context.Resolve<IWebDriver>();
+                });
             return this;
         }
 
         public IAppConfigurator UsingCamera(string screenShotPath)
         {
-            ContainerBuilder.Register(c => new FileCamera(c.Resolve<IWebDriver>(), screenShotPath))
-                .As<ICamera>().SingleInstance();
-            return this;
+            return UsingCamera(new FileCamera(screenShotPath));
         }
 
         public IAppConfigurator UsingLoggerFactory(ILoggerFactory loggerFactory)

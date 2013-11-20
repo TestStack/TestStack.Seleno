@@ -8,26 +8,30 @@ using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Configuration.Screenshots
 {
+    /// <summary>
+    /// Camera that saves screenshots to a file.
+    /// </summary>
     public class FileCamera : ICamera
     {
-        private readonly IWebDriver _browser;
         private readonly string _screenShotPath;
 
-        public FileCamera(IWebDriver browser, string screenShotPath)
+        /// <summary>
+        /// Constructs a FileCamera.
+        /// </summary>
+        /// <param name="screenShotPath">The file system directory to save screenshots in</param>
+        public FileCamera(string screenShotPath)
         {
-            _browser = browser;
             _screenShotPath = screenShotPath;
         }
 
         public void TakeScreenshot(string fileName = null)
         {
-            var camera = (ITakesScreenshot)_browser;
-            var screenshot = camera.GetScreenshot();
+            var screenshot = ScreenshotTaker.GetScreenshot();
 
             if (!Directory.Exists(_screenShotPath))
                 Directory.CreateDirectory(_screenShotPath);
 
-            var windowTitle = _browser.Title;
+            var windowTitle = Browser.Title;
             fileName = fileName ?? string.Format("{0}{1}.png", windowTitle, DateTime.Now.ToFileTime()).Replace(':', '.');
             var outputPath = Path.Combine(_screenShotPath, fileName);
 
@@ -41,5 +45,8 @@ namespace TestStack.Seleno.Configuration.Screenshots
             var screenShotPath = stringBuilder.ToString();
             screenshot.SaveAsFile(screenShotPath, ImageFormat.Png);
         }
+
+        public ITakesScreenshot ScreenshotTaker { get; set; }
+        public IWebDriver Browser { get; set; }
     }
 }
