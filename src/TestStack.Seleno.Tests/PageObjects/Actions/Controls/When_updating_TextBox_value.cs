@@ -81,7 +81,8 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         protected override string ExpectedControlId
         {
-            get { return "SubViewModel_Name"; }
+            // Default control id generator uses the last property in the chain
+            get { return "Name"; }
         }
 
         protected override string ExpectedControlValue

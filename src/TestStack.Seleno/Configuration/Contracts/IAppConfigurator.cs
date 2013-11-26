@@ -2,6 +2,7 @@ using System;
 using System.Web.Routing;
 using Castle.Core.Logging;
 using OpenQA.Selenium.Remote;
+using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.Configuration.WebServers;
 
 namespace TestStack.Seleno.Configuration.Contracts
@@ -11,7 +12,6 @@ namespace TestStack.Seleno.Configuration.Contracts
     /// </summary>
     public interface IAppConfigurator
     {
-
         /// <summary>
         /// Specify the details of the project you are testing.
         /// </summary>
@@ -72,6 +72,14 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="routeCollectionUpdater">A method that takes a route collection and populates it with routes</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator WithRouteConfig(Action<RouteCollection> routeCollectionUpdater);
+
+        /// <summary>
+        /// Specify a control id generator to use; default is <see cref="DefaultControlIdGenerator"/>, Seleno also has an
+        ///   <see cref="MvcControlIdGenerator"/> and you can implement your own by implementing the <see cref="IControlIdGenerator"/> interface.
+        /// </summary>
+        /// <param name="controlIdGenerator">An instance of the <see cref="IControlIdGenerator"/> interface</param>
+        /// <returns>The configurator to allow for method chaining</returns>
+        IAppConfigurator UsingControlIdGenerator(IControlIdGenerator controlIdGenerator);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator

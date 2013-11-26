@@ -86,6 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Interceptors\CameraProxyInterceptor.cs" />
+    <Compile Include="Configuration\Contracts\IControlIdGenerator.cs" />
+    <Compile Include="Configuration\ControlIdGenerators\DefaultControlIdGenerator.cs" />
+    <Compile Include="Configuration\ControlIdGenerators\MvcControlIdGenerator.cs" />
     <Compile Include="Configuration\Registration\UiComponentRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

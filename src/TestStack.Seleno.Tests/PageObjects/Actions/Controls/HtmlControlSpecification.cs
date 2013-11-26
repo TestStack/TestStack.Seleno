@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
@@ -28,7 +29,8 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
                           PageNavigator = PageNavigator = SubstituteFor<IPageNavigator>(),
                           ElementFinder = ElementFinder = SubstituteFor<IElementFinder>(),
                           Executor = Executor = SubstituteFor<IExecutor>(),
-                          ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>()
+                          ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>(),
+                          ControlIdGenerator = new DefaultControlIdGenerator()
                       };
 
         }
