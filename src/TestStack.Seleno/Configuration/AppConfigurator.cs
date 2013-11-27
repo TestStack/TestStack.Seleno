@@ -50,7 +50,7 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
-            ContainerBuilder.Register(c => new ProxyGenerator())
+            ContainerBuilder.Register(c => new ProxyGenerator(disableSignedModule: true))
                 .SingleInstance();
             ContainerBuilder.RegisterProxiedClass<ElementFinder, IElementFinder>();
             ContainerBuilder.RegisterProxiedClass<Executor, IExecutor>();
