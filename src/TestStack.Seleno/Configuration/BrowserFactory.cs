@@ -163,8 +163,11 @@ namespace TestStack.Seleno.Configuration
                 return;
 
             // Find any assembly with the desired executable embedded in it
+            // http://bloggingabout.net/blogs/vagif/archive/2010/07/02/net-4-0-and-notsupportedexception-complaining-about-dynamic-assemblies.aspx
             var assembly = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetManifestResourceNames().Any())
+                .Where(a => !(a is System.Reflection.Emit.AssemblyBuilder))
+                .Where(a => a.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder")
+                .Where(a => !a.GlobalAssemblyCache)
                 .FirstOrDefault(a => a
                     .GetManifestResourceNames()
                     .Any(x => x.EndsWith(resourceFileName, true, CultureInfo.InvariantCulture))
