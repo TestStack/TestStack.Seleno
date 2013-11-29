@@ -29,11 +29,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             {
                 var propertyName = property.Name;
                 var propertyValue = property.GetValue(viewModel, null);
+                var customAttributes = property.GetCustomAttributes(false);
 
-                if (property.GetCustomAttributes(typeof(HiddenInputAttribute), false).Length > 0)
+                if (customAttributes.OfType<HiddenInputAttribute>().Any())
                     continue;
 
-                if (property.GetCustomAttributes(typeof(ScaffoldColumnAttribute), false).Length > 0)
+                if (customAttributes.OfType<ScaffoldColumnAttribute>().Any(x => !x.Scaffold))
                     continue;
 
                 if (propertyValue == null)
