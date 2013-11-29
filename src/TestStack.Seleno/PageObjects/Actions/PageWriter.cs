@@ -37,10 +37,59 @@ namespace TestStack.Seleno.PageObjects.Actions
                 if (customAttributes.OfType<ScaffoldColumnAttribute>().Any(x => !x.Scaffold))
                     continue;
 
+                // iterate through sub-properties of complex type
+                if (!(property.PropertyType.IsValueType ||
+                      property.PropertyType.Equals(typeof(string))))
+                {
+                    Property(propertyName, viewModel);
+                    continue;
+                }
+
                 if (propertyValue == null)
                     continue;
 
                 var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property);
+
+                var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
+                textBox.ReplaceInputValueWith(stringValue);
+            }
+        }
+
+        /// <summary>
+        /// Fill out the fields rendered by a complex property
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="pageWriter"></param>
+        /// <param name="model"></param>
+        /// <param name="prefix"></param>
+        public void Property(string propertyName, TModel model, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        {
+            var viewProperty = typeof(TModel).GetProperty(propertyName);
+            var viewType = viewProperty.PropertyType;
+            var viewModel = viewProperty.GetValue(model, null);
+
+            if (viewModel == null)
+            {
+                return;
+            }
+
+            foreach (var property in viewType.GetProperties())
+            {
+                var prefixedPropertyName = string.Format("{0}_{1}", propertyName, property.Name);
+                var propertyValue = property.GetValue(viewModel, null);
+                var customAttributes = property.GetCustomAttributes(false);
+
+                if (customAttributes.OfType<HiddenInputAttribute>().Any())
+                    continue;
+
+                if (customAttributes.OfType<ScaffoldColumnAttribute>().Any(x => !x.Scaffold))
+                    continue;
+
+                if (propertyValue == null)
+                    continue;
+
+                //var stringValue = pageWriter.GetStringValue(propertyTypeHandling, propertyValue, property);
+                var stringValue = propertyValue.ToString();
 
                 var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
                 textBox.ReplaceInputValueWith(stringValue);
