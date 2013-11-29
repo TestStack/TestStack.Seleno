@@ -28,7 +28,6 @@ namespace TestStack.Seleno.PageObjects.Actions
             foreach (var property in type.GetProperties())
             {
                 var propertyName = property.Name;
-                var propertyValue = property.GetValue(viewModel, null);
                 var customAttributes = property.GetCustomAttributes(false);
 
                 if (customAttributes.OfType<HiddenInputAttribute>().Any())
@@ -41,10 +40,11 @@ namespace TestStack.Seleno.PageObjects.Actions
                 if (!(property.PropertyType.IsValueType ||
                       property.PropertyType.Equals(typeof(string))))
                 {
-                    Property(propertyName, viewModel);
+                    ModelProperty(viewModel, property, propertyTypeHandling);
                     continue;
                 }
 
+                var propertyValue = property.GetValue(viewModel, null);
                 if (propertyValue == null)
                     continue;
 
@@ -58,26 +58,24 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// <summary>
         /// Fill out the fields rendered by a complex property
         /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <param name="pageWriter"></param>
         /// <param name="model"></param>
-        /// <param name="prefix"></param>
-        public void Property(string propertyName, TModel model, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        /// <param name="property"></param>
+        /// <param name="propertyTypeHandling"></param>
+        private void ModelProperty(TModel model, PropertyInfo property, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
         {
-            var viewProperty = typeof(TModel).GetProperty(propertyName);
-            var viewType = viewProperty.PropertyType;
-            var viewModel = viewProperty.GetValue(model, null);
+            var viewType = property.PropertyType;
+            var viewModel = property.GetValue(model, null);
 
             if (viewModel == null)
             {
                 return;
             }
 
-            foreach (var property in viewType.GetProperties())
+            foreach (var subProperty in viewType.GetProperties())
             {
-                var prefixedPropertyName = string.Format("{0}_{1}", propertyName, property.Name);
-                var propertyValue = property.GetValue(viewModel, null);
-                var customAttributes = property.GetCustomAttributes(false);
+                var prefixedPropertyName = string.Format("{0}_{1}", property.Name, subProperty.Name);
+                var propertyValue = subProperty.GetValue(viewModel, null);
+                var customAttributes = subProperty.GetCustomAttributes(false);
 
                 if (customAttributes.OfType<HiddenInputAttribute>().Any())
                     continue;
@@ -88,10 +86,9 @@ namespace TestStack.Seleno.PageObjects.Actions
                 if (propertyValue == null)
                     continue;
 
-                //var stringValue = pageWriter.GetStringValue(propertyTypeHandling, propertyValue, property);
-                var stringValue = propertyValue.ToString();
+                var stringValue = GetStringValue(propertyTypeHandling, propertyValue, subProperty);
 
-                var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
+                var textBox = _componentFactory.HtmlControlFor<TextBox>(prefixedPropertyName);
                 textBox.ReplaceInputValueWith(stringValue);
             }
         }
