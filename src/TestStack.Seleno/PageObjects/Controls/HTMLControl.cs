@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -23,6 +24,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         public const string TitleAttribute = "title";
         public const string ReadOnlyAttribute = "readonly";
         public const string DisabledAttribute = "disabled";
+        public const string CssClassAttribute = "class";
 
         protected virtual PropertyInfo ViewModelProperty
         {
@@ -106,6 +108,35 @@ namespace TestStack.Seleno.PageObjects.Controls
             }
         }
 
+        /// <summary>
+        /// Retrieve the CSS classes on an element
+        /// as a string
+        /// </summary>
+        /// <returns></returns>
+        public string CssClass()
+        {
+            return this.AttributeValueAs<string>(CssClassAttribute);
+        }
+
+        /// <summary>
+        /// Retrieve the CSS classes on an element
+        /// as a list of strings
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> CssClasses()
+        {
+            return (this.CssClass() ?? string.Empty)
+                    .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        /// <summary>
+        /// Retrieve the value of a control
+        /// </summary>
+        /// <returns></returns>
+        public string Value()
+        {
+            return this.Execute.ScriptAndReturn<string>(string.Format("$('#{0}').val()", this.Id));
+        }
 
         /// <summary>
         /// Copied from System.Web.Mvc.TagBuilder
