@@ -6,7 +6,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_getting_selected_option_value_from_drop_box :  HtmlControlSpecificationFor<DropDown>
+    class When_getting_selected_option_value_from_drop_box :  HtmlControlSpecificationFor<DropDown, int>
     {
         private int _result;
         private IWebElement _selectedOption;

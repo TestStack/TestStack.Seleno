@@ -3,7 +3,7 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_updating_multiline_content_of_textarea : HtmlControlSpecificationFor<TextArea>
+    class When_updating_multiline_content_of_textarea : HtmlControlSpecificationFor<TextArea, string>
     {
         private const string Content = "line 1\nline 2\nnew line 3";
 

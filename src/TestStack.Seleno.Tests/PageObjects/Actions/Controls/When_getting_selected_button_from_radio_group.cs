@@ -7,7 +7,7 @@ using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_getting_selected_button_from_radio_group : HtmlControlSpecificationFor<RadioButtonGroup>
+    class When_getting_selected_button_from_radio_group : HtmlControlSpecificationFor<RadioButtonGroup, ChoiceType>
     {
         private ChoiceType _result;
         private By.jQueryBy _actualJqueryBy;
@@ -40,7 +40,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_retrieve_the_selected_button()
         {
-            _actualJqueryBy.Selector.Should().Contain("input[type=radio][name=Choice]:checked");
+            _actualJqueryBy.Selector.Should().Contain("input[type=radio][name='Choice']:checked");
         }
 
         public void AndThen_it_should_get_the_value_of_the_selected_button()

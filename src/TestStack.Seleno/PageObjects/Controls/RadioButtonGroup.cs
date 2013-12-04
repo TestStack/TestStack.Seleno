@@ -11,7 +11,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         {
             get
             {
-                var selector = string.Format("input[type=radio][name={0}]:checked", Name);
+                var selector = string.Format("input[type=radio][name='{0}']:checked", Name);
 
                 return Find.OptionalElement(By.jQuery(selector));
             }
@@ -32,7 +32,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         public override void SelectElement<TProperty>(TProperty value)
         {
             // todo: Is the .toLowerCase needed?
-            var scriptToExecute = string.Format("$('input[type=radio][name={0}][value]')" +
+            var scriptToExecute = string.Format("$(\"input[type=radio][name='{0}'][value]\")" +
                 @".filter(function() {{return $(this).attr('value').toLowerCase() == ""{1}"".toLowerCase()}})" +
                 ".attr('checked', true)",
                 Name,

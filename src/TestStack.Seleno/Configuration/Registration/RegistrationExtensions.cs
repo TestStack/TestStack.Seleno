@@ -30,6 +30,7 @@ namespace TestStack.Seleno.Configuration.Registration
                     component.Executor = e.Context.Resolve<IExecutor>();
                     component.ElementAssert = e.Context.Resolve<IElementAssert>();
                     component.Wait = e.Context.Resolve<IWait>();
+                    component.ControlIdGenerator = e.Context.Resolve<IControlIdGenerator>();
                 }
             );
         }

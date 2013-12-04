@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.PageObjects.Controls;
@@ -8,7 +9,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    abstract class HtmlControlSpecificationFor<THtmlControl> : SpecificationFor<THtmlControl>
+    abstract class HtmlControlSpecificationFor<THtmlControl, TPropertyType> : SpecificationFor<THtmlControl>
         where THtmlControl : HTMLControl, new()
     {
         protected IPageNavigator PageNavigator { get; private set; }
@@ -16,7 +17,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         protected IExecutor Executor { get; private set; }
         protected IComponentFactory ComponentFactory { get; private set; }
 
-        protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, object>> htmlControlPropertySelector)
+        protected HtmlControlSpecificationFor(Expression<Func<TestViewModel, TPropertyType>> htmlControlPropertySelector)
         {
             SUT.ViewModelPropertySelector = htmlControlPropertySelector;
         }
@@ -28,7 +29,8 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
                           PageNavigator = PageNavigator = SubstituteFor<IPageNavigator>(),
                           ElementFinder = ElementFinder = SubstituteFor<IElementFinder>(),
                           Executor = Executor = SubstituteFor<IExecutor>(),
-                          ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>()
+                          ComponentFactory = ComponentFactory = SubstituteFor<IComponentFactory>(),
+                          ControlIdGenerator = new DefaultControlIdGenerator()
                       };
 
         }

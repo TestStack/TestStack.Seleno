@@ -12,6 +12,8 @@ namespace TestStack.Seleno.Tests.TestObjects
         public ChoiceType Choice { get; set; }
         public string MultiLineContent { get; set; }
         public string AnotherChoice { get; set; }
+
+        public TestViewModel SubViewModel { get; set; }
     }
 
     public enum ChoiceType

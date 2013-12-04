@@ -88,6 +88,9 @@
     <Compile Include="AssemblySetupFixtue.cs" />
     <Compile Include="Configuration\AppConfiguratorTests.cs" />
     <Compile Include="Configuration\BrowserFactoryTests.cs" />
+    <Compile Include="Configuration\ControlIdGenerators\When_getting_control_id_for_subviewmmodel_property.cs" />
+    <Compile Include="Configuration\ControlIdGenerators\When_getting_control_name_for_convert_lambda.cs" />
+    <Compile Include="Configuration\ControlIdGenerators\When_getting_control_name_for_subviewmmodel_property.cs" />
     <Compile Include="Configuration\SelenoApplication\When_creating_seleno_application.cs" />
     <Compile Include="Configuration\SelenoApplication\When_navigating_to_url.cs" />
     <Compile Include="Configuration\SelenoApplication\When_initialising_seleno_application.cs" />

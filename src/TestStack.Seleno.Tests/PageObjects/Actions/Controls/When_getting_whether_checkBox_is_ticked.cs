@@ -4,7 +4,7 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_getting_whether_checkBox_is_ticked : HtmlControlSpecificationFor<CheckBox>
+    class When_getting_whether_checkBox_is_ticked : HtmlControlSpecificationFor<CheckBox, bool>
     {
         private readonly bool _result;
 

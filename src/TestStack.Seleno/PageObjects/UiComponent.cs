@@ -17,6 +17,7 @@ namespace TestStack.Seleno.PageObjects
         internal IElementFinder ElementFinder { get; set; }
         internal IElementAssert ElementAssert { get; set; }
         internal IWait Wait { get; set; }
+        internal IControlIdGenerator ControlIdGenerator { get; set; }
 
         public IPageNavigator Navigate
         {
