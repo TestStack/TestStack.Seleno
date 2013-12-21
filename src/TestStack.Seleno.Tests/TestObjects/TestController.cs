@@ -6,5 +6,7 @@ namespace TestStack.Seleno.Tests.TestObjects
     {
         [HttpGet]
         public abstract ActionResult Index();
+
+        public abstract ActionResult ActionWithParameters(string parameter);
     }
 }

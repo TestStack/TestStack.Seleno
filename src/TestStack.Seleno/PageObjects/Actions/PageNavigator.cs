@@ -42,7 +42,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public TPage To<TPage>(string url) where TPage : UiComponent, new()
         {
-            string targetPageUrl = _webServer.BaseUrl + url;
+            string targetPageUrl = new Uri(new Uri(_webServer.BaseUrl), url).ToString();
             Uri uri;
             if (Uri.TryCreate(url, UriKind.Absolute, out uri))
                 targetPageUrl = uri.AbsoluteUri;
