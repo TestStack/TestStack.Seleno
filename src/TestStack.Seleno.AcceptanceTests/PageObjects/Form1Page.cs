@@ -15,7 +15,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
         public AssertionResultPage InputFixtureA()
         {
             Input.Model(Form1Fixtures.A);
-            return Navigate.To<AssertionResultPage>(By.CssSelector("input[type=submit]"));
+            return Navigate.To<AssertionResultPage>(By.TagName("button"));
         }
 
         public Form1ViewModel ReadModel()

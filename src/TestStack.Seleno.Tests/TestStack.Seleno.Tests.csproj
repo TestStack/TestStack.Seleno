@@ -146,6 +146,7 @@
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_strongly_typed_textBox_value.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_a_web_element_strongly_typed_text.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_getting_strongly_typed_attribute_value.cs" />
+    <Compile Include="PageObjects\Actions\PageWriter\When_inputting_a_field.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_inputting_a_model.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_updating_combined_content_as_a_single_string_with_return_separator_of_a_textarea.cs" />
     <Compile Include="PageObjects\Actions\PageWriter\When_updating_multiline_content_of_a_textarea.cs" />
