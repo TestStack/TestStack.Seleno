@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -52,14 +53,28 @@ namespace TestStack.Seleno.PageObjects.Actions
         }
 
         // todo: Move to a Seleno.Mvc project if established
-        public TPage To<TController, TPage>(Expression<Action<TController>> action)
+        public TPage To<TController, TPage>(Expression<Action<TController>> action, IDictionary<string, object> routeValues = null)
             where TController : Controller
             where TPage : UiComponent, new()
         {
-            var helper = new HtmlHelper(new ViewContext { HttpContext = FakeHttpContext.Root() }, new FakeViewDataContainer(), _routeCollection);
-            var relativeUrl = helper.BuildUrlFromExpression(action);
+            var requestContext = new RequestContext(FakeHttpContext.Root(), new RouteData());
+
+            var actionRouteValues = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+            if (routeValues != null)
+                foreach (var v in routeValues)
+                    actionRouteValues[v.Key] = v.Value;
+
+            var urlHelper = new UrlHelper(requestContext, _routeCollection);
+            var relativeUrl = urlHelper.RouteUrl(new RouteValueDictionary(actionRouteValues));
 
             return To<TPage>(relativeUrl);
+        }
+
+        public TPage To<TController, TPage>(Expression<Action<TController>> action, object routeValues)
+            where TController : Controller
+            where TPage : UiComponent, new()
+        {
+            return To<TController, TPage>(action, new RouteValueDictionary(routeValues));
         }
 
         public void To(By clickDestination)

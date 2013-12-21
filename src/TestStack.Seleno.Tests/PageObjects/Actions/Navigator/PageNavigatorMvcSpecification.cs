@@ -1,4 +1,5 @@
-﻿using System.Web.Routing;
+﻿using System.Collections.Generic;
+using System.Web.Routing;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.PageObjects.Actions;
@@ -75,6 +76,42 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Navigator
         protected override void DefineRoutes(RouteCollection routes)
         {
             routes.MapRoute("ActionWithParameters", "action/url", new { controller = "Test", action = "ActionWithParameters" });
+        }
+    }
+
+    class When_navigating_to_action_with_extra_route_parameter : PageNavigatorMvcSpecification
+    {
+        public void When_navigating_by_mvc_action()
+        {
+            SUT.To<TestController, TestPage>(c => c.ActionWithParameters("hi"), new Dictionary<string, object>{{"other", "value"}});
+        }
+
+        public void Then_go_to_expected_url_route()
+        {
+            SubstituteFor<IWebDriver>().Navigate().Received().GoToUrl(string.Format("{0}action/hi?other=value", BaseUrl));
+        }
+
+        protected override void DefineRoutes(RouteCollection routes)
+        {
+            routes.MapRoute("ActionWithParameters", "action/{parameter}", new { controller = "Test", action = "ActionWithParameters" });
+        }
+    }
+
+    class When_navigating_to_action_with_expected_route_parameter : PageNavigatorMvcSpecification
+    {
+        public void When_navigating_by_mvc_action()
+        {
+            SUT.To<TestController, TestPage>(c => c.ActionWithParameters("hi"), new { other = "value", id = 123 });
+        }
+
+        public void Then_go_to_expected_url_route()
+        {
+            SubstituteFor<IWebDriver>().Navigate().Received().GoToUrl(string.Format("{0}action/hi/123?other=value", BaseUrl));
+        }
+
+        protected override void DefineRoutes(RouteCollection routes)
+        {
+            routes.MapRoute("ActionWithParameters", "action/{parameter}/{id}", new { controller = "Test", action = "ActionWithParameters" });
         }
     }
 }
