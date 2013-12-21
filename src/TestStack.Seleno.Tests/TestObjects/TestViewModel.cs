@@ -1,4 +1,7 @@
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace TestStack.Seleno.Tests.TestObjects
 {
@@ -14,6 +17,17 @@ namespace TestStack.Seleno.Tests.TestObjects
         public string AnotherChoice { get; set; }
 
         public TestViewModel SubViewModel { get; set; }
+
+        [HiddenInput]
+        public string HiddenProperty { get; set; }
+        [ReadOnly(true)]
+        public string ReadonlyProperty { get; set; }
+        [ReadOnly(false)]
+        public string NonReadonlyProperty { get; set; }
+        [ScaffoldColumn(true)]
+        public string ScaffoldedProperty { get; set; }
+        [ScaffoldColumn(false)]
+        public string NonScaffoldedProperty { get; set; }
     }
 
     public enum ChoiceType
