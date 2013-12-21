@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using FizzWare.NBuilder;
 using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.PageObjects;
@@ -28,7 +29,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         public void Given_a_model()
         {
             _model = Builder<TestViewModel>.CreateNew()
-                .With(m => m.SubViewModel = Builder<TestViewModel>.CreateNew().Build())
+                .With(m => m.SubViewModel = Builder<TestViewModel>.CreateNew().With(mm => mm.SubViewModel = new TestViewModel{Name = "TripleNestedName"}).Build())
                 .Build();
         }
 
@@ -106,6 +107,11 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
         {
             AssertPropertyIgnored("SubViewModel_NonScaffoldedProperty");
         }
+
+        public void And_input_deep_nested_model_property()
+        {
+            AssertPropertyValueSet("SubViewModel_SubViewModel_Name", _model.SubViewModel.SubViewModel.Name);
+        }
         
         private void AssertPropertyIgnored(string fieldId)
         {
@@ -119,14 +125,14 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         public override void Setup()
         {
-            SubstituteFor<IComponentFactory>().HtmlControlFor<TextBox>(Arg.Any<string>())
+            SubstituteFor<IComponentFactory>().HtmlControlFor<TextBox>(Arg.Any<LambdaExpression>())
                 .Returns(a => new TextBox
                 {
                     PageNavigator = SubstituteFor<IPageNavigator>(),
                     Executor = SubstituteFor<IExecutor>(),
                     ControlIdGenerator = new MvcControlIdGenerator()
                 }
-                    .Initialize(a.Arg<string>())
+                    .Initialize(a.Arg<LambdaExpression>())
                 );
         }
     }

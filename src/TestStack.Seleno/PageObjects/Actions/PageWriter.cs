@@ -22,13 +22,12 @@ namespace TestStack.Seleno.PageObjects.Actions
             _componentFactory = componentFactory;
         }
 
-        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        private void Input(object o, ParameterExpression parentParameter, LambdaExpression expression, IDictionary<Type, Func<object, string>> propertyTypeHandling)
         {
-            var type = typeof(TModel);
+            var type = o.GetType();
 
             foreach (var property in type.GetProperties())
             {
-                var propertyName = property.Name;
                 var customAttributes = property.GetCustomAttributes(false);
 
                 if (customAttributes.OfType<HiddenInputAttribute>().Any())
@@ -40,64 +39,29 @@ namespace TestStack.Seleno.PageObjects.Actions
                 if (customAttributes.OfType<ReadOnlyAttribute>().Any(x => x.IsReadOnly))
                     continue;
 
-                // iterate through sub-properties of complex type
-                if (!(property.PropertyType.IsValueType ||
-                      property.PropertyType.Equals(typeof(string))))
+                var propertyValue = property.GetValue(o, null);
+                if (propertyValue == null)
+                    continue;
+
+                var p = Expression.Property(expression != null ? expression.Body : parentParameter, property);
+                var propertyExpression = Expression.Lambda(p, parentParameter);
+
+                if (!property.PropertyType.IsValueType && property.PropertyType != typeof (string))
                 {
-                    ModelProperty(viewModel, property, propertyTypeHandling);
+                    Input(propertyValue, parentParameter, propertyExpression, propertyTypeHandling);
                     continue;
                 }
 
-                var propertyValue = property.GetValue(viewModel, null);
-                if (propertyValue == null)
-                    continue;
-
                 var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property);
 
-                var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
-                textBox.ReplaceInputValueWith(stringValue);
+                _componentFactory.HtmlControlFor<TextBox>(propertyExpression)
+                    .ReplaceInputValueWith(stringValue);
             }
         }
 
-        /// <summary>
-        /// Fill out the fields rendered by a complex property
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="property"></param>
-        /// <param name="propertyTypeHandling"></param>
-        private void ModelProperty(TModel model, PropertyInfo property, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
         {
-            var viewType = property.PropertyType;
-            var viewModel = property.GetValue(model, null);
-
-            if (viewModel == null)
-            {
-                return;
-            }
-
-            foreach (var subProperty in viewType.GetProperties())
-            {
-                var prefixedPropertyName = string.Format("{0}_{1}", property.Name, subProperty.Name);
-                var propertyValue = subProperty.GetValue(viewModel, null);
-                var customAttributes = subProperty.GetCustomAttributes(false);
-
-                if (customAttributes.OfType<HiddenInputAttribute>().Any())
-                    continue;
-
-                if (customAttributes.OfType<ScaffoldColumnAttribute>().Any(x => !x.Scaffold))
-                    continue;
-
-                if (customAttributes.OfType<ReadOnlyAttribute>().Any(x => x.IsReadOnly))
-                    continue;
-
-                if (propertyValue == null)
-                    continue;
-
-                var stringValue = GetStringValue(propertyTypeHandling, propertyValue, subProperty);
-
-                var textBox = _componentFactory.HtmlControlFor<TextBox>(prefixedPropertyName);
-                textBox.ReplaceInputValueWith(stringValue);
-            }
+            Input(viewModel, Expression.Parameter(viewModel.GetType(), "m"), null, propertyTypeHandling);
         }
 
         [Obsolete("Use ReplaceInputValueWith instead")]
