@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Interceptors;
+using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -30,6 +31,7 @@ namespace TestStack.Seleno.Configuration
             WithRemoteWebDriver(BrowserFactory.FireFox);
             ContainerBuilder.Register(c => new IisExpressWebServer(WebApplication))
                 .As<IWebServer>().SingleInstance();
+            UsingControlIdGenerator(new DefaultControlIdGenerator());
         }
 
         public ISelenoApplication CreateApplication()
@@ -48,7 +50,7 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
-            ContainerBuilder.Register(c => new ProxyGenerator())
+            ContainerBuilder.Register(c => new ProxyGenerator(disableSignedModule: true))
                 .SingleInstance();
             ContainerBuilder.RegisterProxiedClass<ElementFinder, IElementFinder>();
             ContainerBuilder.RegisterProxiedClass<Executor, IExecutor>();
@@ -139,6 +141,13 @@ namespace TestStack.Seleno.Configuration
         public IAppConfigurator WithRouteConfig(Action<RouteCollection> routeCollectionUpdater)
         {
             routeCollectionUpdater(_routes);
+            return this;
+        }
+
+        public IAppConfigurator UsingControlIdGenerator(IControlIdGenerator controlIdGenerator)
+        {
+            ContainerBuilder.Register(c => controlIdGenerator)
+                .As<IControlIdGenerator>().SingleInstance();
             return this;
         }
     }

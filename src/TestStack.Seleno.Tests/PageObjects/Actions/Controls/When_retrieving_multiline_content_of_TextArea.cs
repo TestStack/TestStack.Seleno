@@ -5,7 +5,7 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_retrieving_multiline_content_of_textarea : HtmlControlSpecificationFor<TextArea>
+    class When_retrieving_multiline_content_of_textarea : HtmlControlSpecificationFor<TextArea, string>
     {
         private string _result;
         private IWebElement _textAreaElement;

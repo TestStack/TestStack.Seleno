@@ -4,7 +4,7 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 {
-    class When_retrieving_textbox_value : HtmlControlSpecificationFor<TextBox>
+    class When_retrieving_textbox_value : HtmlControlSpecificationFor<TextBox, DateTime>
     {
 
         public When_retrieving_textbox_value() : base(x => x.Modified) { }
