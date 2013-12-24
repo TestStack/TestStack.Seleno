@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -21,29 +22,61 @@ namespace TestStack.Seleno.PageObjects.Actions
             _componentFactory = componentFactory;
         }
 
-        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        private void Input(object o, ParameterExpression parentParameter, LambdaExpression expression, IDictionary<Type, Func<object, string>> propertyTypeHandling)
         {
-            var type = typeof(TModel);
+            var type = o.GetType();
 
             foreach (var property in type.GetProperties())
+                InputProperty(o, parentParameter, expression, propertyTypeHandling, property);
+        }
+
+        private void InputProperty(object o, ParameterExpression parentParameter, LambdaExpression expression,
+            IDictionary<Type, Func<object, string>> propertyTypeHandling, PropertyInfo property)
+        {
+            var customAttributes = property.GetCustomAttributes(false);
+
+            if (customAttributes.OfType<HiddenInputAttribute>().Any())
+                return;
+
+            if (customAttributes.OfType<ScaffoldColumnAttribute>().Any(x => !x.Scaffold))
+                return;
+
+            if (customAttributes.OfType<ReadOnlyAttribute>().Any(x => x.IsReadOnly))
+                return;
+
+            var propertyValue = property.GetValue(o, null);
+            if (propertyValue == null)
+                return;
+
+            var p = Expression.Property(expression != null ? expression.Body : parentParameter, property);
+            var propertyExpression = Expression.Lambda(p, parentParameter);
+
+            if (!property.PropertyType.IsValueType && property.PropertyType != typeof (string))
             {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(viewModel, null);
-
-                if (property.GetCustomAttributes(typeof(HiddenInputAttribute), false).Length > 0)
-                    continue;
-
-                if (property.GetCustomAttributes(typeof(ScaffoldColumnAttribute), false).Length > 0)
-                    continue;
-
-                if (propertyValue == null)
-                    continue;
-
-                var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property);
-
-                var textBox = _componentFactory.HtmlControlFor<TextBox>(propertyName);
-                textBox.ReplaceInputValueWith(stringValue);
+                Input(propertyValue, parentParameter, propertyExpression, propertyTypeHandling);
+                return;
             }
+
+            var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property.PropertyType);
+
+            _componentFactory.HtmlControlFor<TextBox>(propertyExpression)
+                .ReplaceInputValueWith(stringValue);
+        }
+
+        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        {
+            Input(viewModel, Expression.Parameter(viewModel.GetType(), "m"), null, propertyTypeHandling);
+        }
+
+        public void Field<T>(Expression<Func<TModel, T>> field, T value, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        {
+            var param = field.Parameters.First();
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string))
+                Input(value, param, field, propertyTypeHandling);
+
+            var stringValue = GetStringValue(propertyTypeHandling, value, typeof(T));
+            _componentFactory.HtmlControlFor<TextBox>(field)
+                .ReplaceInputValueWith(stringValue);
         }
 
         [Obsolete("Use ReplaceInputValueWith instead")]
@@ -52,12 +85,10 @@ namespace TestStack.Seleno.PageObjects.Actions
             ReplaceInputValueWith(fieldName,value);
         }
 
-        protected string GetStringValue(IDictionary<Type, Func<object, string>> propertyTypeHandling, object propertyValue, PropertyInfo property)
+        protected string GetStringValue(IDictionary<Type, Func<object, string>> propertyTypeHandling, object propertyValue, Type propertyType)
         {
             if (propertyTypeHandling == null)
                 return propertyValue.ToString();
-
-            var propertyType = property.PropertyType;
 
             if (propertyTypeHandling.ContainsKey(propertyType))
             {
