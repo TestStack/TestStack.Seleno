@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using TestStack.Seleno.Configuration.Contracts;
@@ -112,13 +113,30 @@ namespace TestStack.Seleno.Configuration
         /// <typeparam name="TController">The controller to navigate to</typeparam>
         /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
         /// <param name="action">The controller action to navigate to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route</param>
         /// <returns>The initialised page object</returns>
-        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, IDictionary<string, object> routeValues = null)
             where TController : Controller
             where TPage : UiComponent, new()
         {
             ThrowIfHostNotInitialised();
-            return Application.NavigateToInitialPage<TController, TPage>(action);
+            return Application.NavigateToInitialPage<TController, TPage>(action, routeValues);
+        }
+
+        /// <summary>
+        /// Navigate to the given controller action and return an initialised page object of the specified type.
+        /// </summary>
+        /// <typeparam name="TController">The controller to navigate to</typeparam>
+        /// <typeparam name="TPage">The type of page object to initialise and return</typeparam>
+        /// <param name="action">The controller action to navigate to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route as an anonymous object</param>
+        /// <returns>The initialised page object</returns>
+        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, object routeValues)
+            where TController : Controller
+            where TPage : UiComponent, new()
+        {
+            ThrowIfHostNotInitialised();
+            return Application.NavigateToInitialPage<TController, TPage>(action, routeValues);
         }
 
         /// <summary>
