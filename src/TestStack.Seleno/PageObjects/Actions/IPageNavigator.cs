@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using OpenQA.Selenium;
@@ -45,8 +46,21 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// <typeparam name="TController">The type of the controller that is serving the page you are navigating to</typeparam>
         /// <typeparam name="TPage">The page object type for the expected resultant page</typeparam>
         /// <param name="action">An expression representing the controller action being navigated to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route</param>
         /// <returns>An instantiated and initialised <see cref="TPage"/> page object</returns>
-        TPage To<TController, TPage>(Expression<Action<TController>> action)
+        TPage To<TController, TPage>(Expression<Action<TController>> action, IDictionary<string, object> routeValues = null)
+            where TController : Controller
+            where TPage : UiComponent, new();
+
+        /// <summary>
+        /// Navigate to a different page by going to a URL by an ASP.NET MVC route.
+        /// </summary>
+        /// <typeparam name="TController">The type of the controller that is serving the page you are navigating to</typeparam>
+        /// <typeparam name="TPage">The page object type for the expected resultant page</typeparam>
+        /// <param name="action">An expression representing the controller action being navigated to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route as an anonymous object</param>
+        /// <returns>An instantiated and initialised <see cref="TPage"/> page object</returns>
+        TPage To<TController, TPage>(Expression<Action<TController>> action, object routeValues)
             where TController : Controller
             where TPage : UiComponent, new();
 

@@ -73,6 +73,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -132,6 +133,7 @@
     <Compile Include="PageObjects\Actions\Fields\ModelFieldValueTests.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorAbsoluteUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorJQueryBySpecs.cs" />
+    <Compile Include="PageObjects\Actions\Navigator\PageNavigatorMvcSpecification.cs" />
     <Compile Include="PageObjects\Actions\Navigator\PageNavigatorRelativeUrlSpecification.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_checking_an_element_exists_and_is_visible_with_property.cs" />
     <Compile Include="PageObjects\Actions\PageReader\When_checking_whether_an_element_exists_or_not_with_jquery_selector.cs" />

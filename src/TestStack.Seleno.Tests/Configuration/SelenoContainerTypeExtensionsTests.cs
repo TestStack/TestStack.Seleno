@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration;
@@ -86,7 +87,7 @@ namespace TestStack.Seleno.Tests.Configuration
 
         public void And_the_browser_was_navigated_to_the_correct_url()
         {
-            _webDriver.Navigate().Received().GoToUrl(_baseUrl);
+            _webDriver.Navigate().Received().GoToUrl(new Uri(_baseUrl).ToString());
         }
     }
 
