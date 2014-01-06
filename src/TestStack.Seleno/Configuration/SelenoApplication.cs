@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using Autofac;
@@ -74,11 +75,16 @@ namespace TestStack.Seleno.Configuration
             }
         }
 
-        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, IDictionary<string, object> routeValues = null)
             where TController : Controller
             where TPage : UiComponent, new()
         {
-            return _container.Resolve<IPageNavigator>().To<TController, TPage>(action);
+            return _container.Resolve<IPageNavigator>().To<TController, TPage>(action, routeValues);
+        }
+
+        public TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, object routeValues) where TController : Controller where TPage : UiComponent, new()
+        {
+            return _container.Resolve<IPageNavigator>().To<TController, TPage>(action, routeValues);
         }
 
         public TPage NavigateToInitialPage<TPage>(string url = "") where TPage : UiComponent, new()

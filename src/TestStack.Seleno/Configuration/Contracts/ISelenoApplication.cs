@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using Castle.Core.Logging;
@@ -44,8 +45,22 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <typeparam name="TController">The type of the MVC controller containing the action to visit</typeparam>
         /// <typeparam name="TPage">The type of page object to intialise and return</typeparam>
         /// <param name="action">A lambda expression that specifies the action to navigate to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route</param>
         /// <returns>An initialised page object</returns>
-        TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action)
+        TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, IDictionary<string, object> routeValues = null)
+            where TController : Controller
+            where TPage : UiComponent, new();
+
+        /// <summary>
+        /// Navigate to the initial page in a test by looking up the URL using an MVC controller and action and then return a page object instance of the specified type.
+        /// Note: Requires you to have configured the seleno application with a Route Config.
+        /// </summary>
+        /// <typeparam name="TController">The type of the MVC controller containing the action to visit</typeparam>
+        /// <typeparam name="TPage">The type of page object to intialise and return</typeparam>
+        /// <param name="action">A lambda expression that specifies the action to navigate to</param>
+        /// <param name="routeValues">Extra route data to use to generate the route as an anonymous object</param>
+        /// <returns>An initialised page object</returns>
+        TPage NavigateToInitialPage<TController, TPage>(Expression<Action<TController>> action, object routeValues)
             where TController : Controller
             where TPage : UiComponent, new();
 
