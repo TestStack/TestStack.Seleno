@@ -45,7 +45,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public string Name
         {
-            get { return ViewModelPropertySelector != null ? ControlIdGenerator.GetControlName(ViewModelPropertySelector) : Id; }
+            get { return ViewModelPropertySelector != null ? ControlIdGenerator.GetControlName(ViewModelPropertySelector) : _id; }
         }
 
         public string Title
