@@ -59,14 +59,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         }
     }
 
-    class AndroidTest : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get { return BrowserFactory.Android(); }
-        }
-    }
-
     class IETest : BrowserTest
     {
         protected override RemoteWebDriver WebDriver
