@@ -1,3 +1,10 @@
+# Dev
+
+## Removed Android support
+
+### Reason
+Selenium WebDriver has deprecated Android and iOS support. See [here](http://seleniumhq.wordpress.com/2013/12/24/android-and-ios-support/) for details.
+
 # Version 0.8
 
 ## Exceptions from within Seleno

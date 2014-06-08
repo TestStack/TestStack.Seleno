@@ -3,8 +3,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Android;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -117,26 +115,6 @@ namespace TestStack.Seleno.Configuration
             catch (Win32Exception e)
             {
                 throw new BrowserNotFoundException("Safari", e);
-            }
-        }
-
-        /// <summary>
-        /// Returns an initialised Android Web Driver.
-        /// </summary>
-        /// <remarks>You need to have Android SDK installed on the machine and running the Selenium Web Driver server</remarks>
-        /// <param name="url">The URL to access the Android Selenium Web Driver server; leave null to use default of: http://localhost:8080/wd/hub</param>
-        /// <returns>Initialised Android driver</returns>
-        public static AndroidDriver Android(string url = null)
-        {
-            try
-            {
-                return url == null
-                    ? new AndroidDriver()
-                    : new AndroidDriver(url);
-            }
-            catch (WebDriverException e)
-            {
-                throw new BrowserNotFoundException("Android via Selenium Web Driver server at " + (url ?? "http://localhost:8080/wd/hub"), e);
             }
         }
 
