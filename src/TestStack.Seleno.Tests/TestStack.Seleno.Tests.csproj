@@ -116,10 +116,12 @@
     <Compile Include="PageObjects\Actions\Controls\When_getting_selected_option_value_from_drop_box.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_getting_whether_checkBox_is_ticked.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_retrieving_multiline_content_of_TextArea.cs" />
+    <Compile Include="PageObjects\Actions\Controls\When_retrieving_TextBox_text.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_retrieving_TextBox_value.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_selecting_radio_button_in_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_setting_an_attribute_value_for_any_element.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_updating_multiLine_content_of_TextArea.cs" />
+    <Compile Include="PageObjects\Actions\Controls\When_updating_textbox_text.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_updating_TextBox_value.cs" />
     <Compile Include="PageObjects\Actions\Controls\When_verifying_that_no_radio_button_is_selected_in_radio_group.cs" />
     <Compile Include="PageObjects\Actions\Executor\ExecutorSpecification.cs" />
