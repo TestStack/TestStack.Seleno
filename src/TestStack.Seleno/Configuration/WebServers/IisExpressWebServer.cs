@@ -18,7 +18,7 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public void Start()
         {
-            var webHostStartInfo = ProcessStartInfo(_application.Location.FullPath, _application.PortNumber);
+            var webHostStartInfo = ProcessStartInfo(_application);
             _webHostProcess = Process.Start(webHostStartInfo);
         }
 
@@ -36,22 +36,27 @@ namespace TestStack.Seleno.Configuration.WebServers
             get { return string.Format("http://localhost:{0}", _application.PortNumber); }
         }
         
-        private static ProcessStartInfo ProcessStartInfo(string applicationPath, int port)
+        private static ProcessStartInfo ProcessStartInfo(WebApplication application)
         {
             // todo: grab stdout and/or stderr for logging purposes?
             var key = Environment.Is64BitOperatingSystem ? "programfiles(x86)" : "programfiles";
             var programfiles = Environment.GetEnvironmentVariable(key);
 
-            return new ProcessStartInfo
+            var startInfo = new ProcessStartInfo
             {
                 WindowStyle = ProcessWindowStyle.Normal,
                 ErrorDialog = true,
                 LoadUserProfile = true,
                 CreateNoWindow = false,
                 UseShellExecute = false,
-                Arguments = String.Format("/path:\"{0}\" /port:{1}", applicationPath, port),
+                Arguments = String.Format("/path:\"{0}\" /port:{1}", application.Location.FullPath, application.PortNumber),
                 FileName = string.Format("{0}\\IIS Express\\iisexpress.exe", programfiles)
             };
+
+            foreach (var variable in application.EnvironmentVariables)
+                startInfo.EnvironmentVariables.Add(variable.Key, variable.Value);
+
+            return startInfo;
         }
     }
 }

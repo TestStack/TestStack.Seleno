@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
 {
@@ -12,6 +13,15 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
         public ActionResult List()
         {
             return View();
+        }
+
+        public ActionResult TestingEnvVariable()
+        {
+            var envVar = Environment.GetEnvironmentVariable("FunctionalTest");
+            if (envVar != "SomeVal")
+                throw new Exception("Environment Variable was not injected!!");
+
+            return RedirectToAction("Index");
         }
     }
 }

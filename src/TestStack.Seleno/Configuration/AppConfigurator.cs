@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Routing;
 using Autofac;
 using Castle.Core.Logging;
@@ -6,7 +7,6 @@ using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
-using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.Configuration.ControlIdGenerators;
 using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
@@ -84,6 +84,17 @@ namespace TestStack.Seleno.Configuration
             WithWebDriver(() => driver.Value);
             WithJavaScriptExecutor(() => driver.Value);
             WithScreenshotTaker(() => driver.Value as ITakesScreenshot);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds an environment variable to be injected into the web application process
+        /// </summary>
+        /// <param name="name">The name of the environment variable</param>
+        /// <param name="value">The optional value of the environment variable</param>
+        public IAppConfigurator WithEnvironmentVariable(string name, string value = null)
+        {
+            WebApplication.AddEnvironmentVariable(name, value);
             return this;
         }
 
