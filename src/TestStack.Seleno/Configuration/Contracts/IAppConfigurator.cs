@@ -80,6 +80,13 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="controlIdGenerator">An instance of the <see cref="IControlIdGenerator"/> interface</param>
         /// <returns>The configurator to allow for method chaining</returns>
         IAppConfigurator UsingControlIdGenerator(IControlIdGenerator controlIdGenerator);
+
+        /// <summary>
+        /// Adds an environment variable to be injected into the web application process
+        /// </summary>
+        /// <param name="name">The name of the environment variable</param>
+        /// <param name="value">The optional value of the environment variable</param>
+        IAppConfigurator WithEnvironmentVariable(string name, string value = null);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator
