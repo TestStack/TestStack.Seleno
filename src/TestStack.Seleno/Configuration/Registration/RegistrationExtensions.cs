@@ -43,6 +43,8 @@ namespace TestStack.Seleno.Configuration.Registration
                 .SingleInstance();
             builder.Register(CreateCameraProxyFor<TConcrete, TInterface>)
                 .SingleInstance();
+            builder.Register(CreateDomCaptureProxyFor<TConcrete, TInterface>)
+                .SingleInstance();
         }
 
         private static TInterface CreateCameraProxyFor<TConcrete, TInterface>(IComponentContext c)
@@ -50,6 +52,13 @@ namespace TestStack.Seleno.Configuration.Registration
             where TInterface : class
         {
             return c.Resolve<ProxyGenerator>().CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new CameraProxyInterceptor(c.Resolve<ICamera>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
+        }
+
+        private static TInterface CreateDomCaptureProxyFor<TConcrete, TInterface>(IComponentContext c)
+            where TConcrete : TInterface
+            where TInterface : class
+        {
+            return c.Resolve<ProxyGenerator>().CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new DomCaptureProxyInterceptor(c.Resolve<IDomCapture>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
         }
     }
 }

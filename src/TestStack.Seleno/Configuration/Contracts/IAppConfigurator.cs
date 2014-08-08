@@ -87,6 +87,9 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="name">The name of the environment variable</param>
         /// <param name="value">The optional value of the environment variable</param>
         IAppConfigurator WithEnvironmentVariable(string name, string value = null);
+
+        IAppConfigurator UsingDomCapture(string capturePath);
+        IAppConfigurator UsingDomCapture(IDomCapture domCapture);
     }
 
     internal interface IInternalAppConfigurator : IAppConfigurator

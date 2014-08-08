@@ -80,11 +80,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Contracts\IDomCapture.cs" />
     <Compile Include="Configuration\ControlIdGenerators\Html401IdUtil.cs" />
+    <Compile Include="Configuration\DomCaptures\FileDomCapture.cs" />
+    <Compile Include="Configuration\DomCaptures\NullDomCapture.cs" />
     <Compile Include="Configuration\Interceptors\CameraProxyInterceptor.cs" />
     <Compile Include="Configuration\Contracts\IControlIdGenerator.cs" />
     <Compile Include="Configuration\ControlIdGenerators\DefaultControlIdGenerator.cs" />
     <Compile Include="Configuration\ControlIdGenerators\MvcControlIdGenerator.cs" />
+    <Compile Include="Configuration\Interceptors\DomCaptureProxyInterceptor.cs" />
     <Compile Include="Configuration\Registration\UiComponentRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
