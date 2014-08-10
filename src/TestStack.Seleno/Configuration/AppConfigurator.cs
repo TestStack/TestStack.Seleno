@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.ControlIdGenerators;
+using TestStack.Seleno.Configuration.DomCaptures;
 using TestStack.Seleno.Configuration.Registration;
 using TestStack.Seleno.Configuration.Screenshots;
 using TestStack.Seleno.Configuration.WebServers;
@@ -32,6 +33,7 @@ namespace TestStack.Seleno.Configuration
             ContainerBuilder.Register(c => new IisExpressWebServer(WebApplication))
                 .As<IWebServer>().SingleInstance();
             UsingControlIdGenerator(new DefaultControlIdGenerator());
+            UsingDomCapture(new NullDomCapture());
         }
 
         public ISelenoApplication CreateApplication()
@@ -159,6 +161,21 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.Register(c => controlIdGenerator)
                 .As<IControlIdGenerator>().SingleInstance();
+            return this;
+        }
+
+        public IAppConfigurator UsingDomCapture(string capturePath)
+        {
+            return UsingDomCapture(new FileDomCapture(capturePath));
+        }
+
+        public IAppConfigurator UsingDomCapture(IDomCapture domCapture)
+        {
+            ContainerBuilder.Register(c => domCapture)
+                .As<IDomCapture>().SingleInstance()
+                .OnActivated(x => {
+                    x.Instance.Browser = x.Context.Resolve<IWebDriver>();
+                });
             return this;
         }
     }
