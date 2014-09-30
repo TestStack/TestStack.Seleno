@@ -1,4 +1,4 @@
-using TestStack.BDDfy.Core;
+using TestStack.BDDfy;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests.UserStories.ViewingMovies
 {

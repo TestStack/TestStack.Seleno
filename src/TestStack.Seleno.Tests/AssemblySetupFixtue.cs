@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy.Configuration;
-using TestStack.BDDfy.Processors.Reporters.Html;
+using TestStack.BDDfy.Reporters.Html;
 using TestStack.Seleno.Tests.Specify;
 
 namespace TestStack.Seleno.Tests
@@ -13,7 +13,7 @@ namespace TestStack.Seleno.Tests
         {
             Configurator.BatchProcessors.HtmlReport.Disable();
             Configurator.BatchProcessors.Add(new HtmlReporter(new SelenoDesignSpecsHtmlReportConfig()));
-            Configurator.Scanners.StoryMetaDataScanner = () => new SpecStoryMetaDataScanner();
+            Configurator.Scanners.StoryMetadataScanner = () => new SpecStoryMetaDataScanner();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TestStack.Seleno.Tests.Specify
         public virtual void Run()
         {
             string title = BuildTitle();
-            this.BDDfy(title, Category);
+            this.BDDfy(title);
         }
 
         protected virtual string BuildTitle()
