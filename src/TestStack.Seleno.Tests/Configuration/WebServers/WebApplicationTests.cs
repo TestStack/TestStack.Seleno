@@ -14,7 +14,7 @@ namespace TestStack.Seleno.Tests.Configuration.WebServers
         {
             Action action = () =>  new WebApplication(Substitute.For<IProjectLocation>(), 0);
             action.ShouldThrow<ArgumentException>()
-                .WithMessage("portNumber must be greater than zero", ComparisonMode.StartWith);
+                .Where(exception => exception.Message.StartsWith("portNumber must be greater than zero"));
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace TestStack.Seleno.Tests.Configuration.WebServers
         {
             Action action = () =>  new WebApplication(null, 1000);
             action.ShouldThrow<ArgumentException>()
-                .WithMessage("You must specify a location", ComparisonMode.StartWith);
+                .Where(exception => exception.Message.StartsWith("You must specify a location"));
         }
 
     }
