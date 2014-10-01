@@ -8,6 +8,19 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
 {
     abstract class Reading_individual_html_controls
     {
+        protected void Given_a_filled_in_form()
+        {
+            Page = Host.Instance
+                .NavigateToInitialPage<HomePage>()
+                .GoToReadModelPage();
+        }
+
+        [Test]
+        public void Perform_test()
+        {
+            this.BDDfy();
+        }
+        
         public class Reading_textbox_value : Reading_individual_html_controls
         {
             private int _result;
@@ -119,19 +132,5 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
         }
         
         protected Form1Page Page;
-
-        protected void Given_a_filled_in_form()
-        {
-            Page = Host.Instance
-                .NavigateToInitialPage<HomePage>()
-                .GoToReadModelPage();
-        }
-
-        [Test]
-        public void Perform_test()
-        {
-            this.BDDfy();
-        }
-    }
-    
+    }    
 }
