@@ -36,7 +36,7 @@ namespace TestStack.Seleno.Configuration.Interceptors
 
                 try
                 {
-                    _camera.TakeScreenshot(filename);
+                    _camera.TakeScreenshot(filename, e);
                 }
                 catch (Exception ex)
                 {

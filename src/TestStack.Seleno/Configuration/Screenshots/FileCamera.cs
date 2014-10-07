@@ -25,7 +25,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
             _screenShotPath = screenShotPath;
         }
 
-        public void TakeScreenshot(string fileName = null)
+        public void TakeScreenshot(string filename = null, Exception exception = null)
         {
             var screenshot = ScreenshotTaker.GetScreenshot();
 

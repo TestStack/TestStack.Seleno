@@ -16,7 +16,8 @@ namespace TestStack.Seleno.Configuration.Screenshots
     /// Camera that saves screenshots to a file with additional contextual information. e.g. 
     /// - Page Title and URL
     /// - Timestamp
-    /// - Current Callstack
+    /// - Exception (if available)
+    /// - Current Call stack
     /// </summary>
     public class ContextFileCamera : ICamera
     {
@@ -43,7 +44,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
                 Directory.CreateDirectory(_screenShotPath);
         }
 
-        public void TakeScreenshot(string filename = null)
+        public void TakeScreenshot(string filename = null, Exception exception = null)
         {
             var frames = new StackTrace(1, true).GetFrames();
             var testFrame = frames.FirstOrDefault(frame => frame.GetMethod().GetCustomAttributes(_testAttributeType, false).Any()) ?? frames.First();
@@ -62,6 +63,9 @@ namespace TestStack.Seleno.Configuration.Screenshots
                 {"Time", string.Format("{0} at {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString())},
                 {"Callstack", string.Join(Environment.NewLine, callstack) },
             };
+
+            if (exception != null)
+                contextMetaData.Add("Exception", exception.Message);
 
             var lineCount = string.Join(Environment.NewLine, contextMetaData.Values)
                 .Split(Environment.NewLine.ToCharArray())
