@@ -12,7 +12,7 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
-    [Explicit]
+
     class DomCaptureTests
     {
         private SelenoHost _host;
