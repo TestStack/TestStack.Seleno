@@ -24,10 +24,6 @@ namespace TestStack.Seleno.Configuration.Interceptors
             {
                 invocation.Proceed();
             }
-            catch (SelenoReceivedException)
-            {
-                throw;
-            }
             catch (Exception e)
             {
                 _logger.ErrorFormat(e, "Error invoking {0}.{1}", invocation.TargetType.Name, invocation.Method.Name);
@@ -46,6 +42,9 @@ namespace TestStack.Seleno.Configuration.Interceptors
                 {
                     _logger.Error("Error saving a screenshot", ex);
                 }
+
+                if (e is SelenoReceivedException)
+                    throw;
 
                 throw new SelenoReceivedException(e);
             }
