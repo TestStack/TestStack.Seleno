@@ -5,6 +5,11 @@
 ### Reason
 Selenium WebDriver has deprecated Android and iOS support. See [here](http://seleniumhq.wordpress.com/2013/12/24/android-and-ios-support/) for details.
 
+## Made methods and properties on UiComponent and UiComponent<> protected
+
+### Reason
+When methods and properties on UiComponent and UiComponent<> are exposed publicly it is possible to just skip encapsulating the page interaction logics in custom page objects and use the methods and properties from test script, which breaks the whole idea and mindset behind Seleno and page objects. Making them protected requires  encapsulating the logic in custom page objects. 
+
 # Version 0.8
 
 ## Exceptions from within Seleno
