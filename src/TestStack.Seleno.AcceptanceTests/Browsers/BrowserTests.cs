@@ -11,7 +11,7 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
     {
         protected abstract RemoteWebDriver WebDriver { get; }
 
-       // [Explicit]
+        [Explicit]
         [Test]
         public void RunTest()
         {
