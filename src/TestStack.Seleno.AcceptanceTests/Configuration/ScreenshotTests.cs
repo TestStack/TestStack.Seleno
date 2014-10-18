@@ -36,16 +36,31 @@ namespace TestStack.Seleno.AcceptanceTests.Screenshots
         [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromElementFinder()
         {
-            _host.NavigateToInitialPage<Page>()
-                .Find.Element(By.Name("doesntexist"));
+            _host.NavigateToInitialPage<ScreenshotTestPage>()
+                .NavigateToNonExistentPageWithElementFinder();
         }
 
         [Test]
         [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromPageNavigator()
         {
-            _host.NavigateToInitialPage<Page>()
-                .Navigate.To<Page>(By.Id("doesntexist"));
+            _host.NavigateToInitialPage<ScreenshotTestPage>()
+                .NavigateToNonExistentPageWithPageNavigator();
+        }
+
+        private class ScreenshotTestPage : Page
+        {
+            public ScreenshotTestPage NavigateToNonExistentPageWithElementFinder()
+            {
+                Find.Element(By.Name("doesntexist"));
+                return this;
+            }
+             public ScreenshotTestPage NavigateToNonExistentPageWithPageNavigator()
+             {
+                 Navigate.To<Page>(By.Id("doesntexist"));
+                 return this;
+             }
+
         }
     }
 }

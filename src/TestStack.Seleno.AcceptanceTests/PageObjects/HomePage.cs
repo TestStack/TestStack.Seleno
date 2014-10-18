@@ -48,9 +48,14 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
             return Navigate.To<HomeController, ListPage>(c => c.List());
         }
 
-        public Page GoToFormWithAjax()
+        public FormWithAJAXPage GoToFormWithAjax()
         {
-            return Navigate.To<Page>("/Form1/FormWithAJAX");
+            return Navigate.To<FormWithAJAXPage>("/Form1/FormWithAJAX");
+        }
+
+        public HomePage SelectCheckingEnvironmentVariables()
+        {
+            return Navigate.To<HomePage>(By.LinkText("Checking Environment Variables"));
         }
     }
 
