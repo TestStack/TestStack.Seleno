@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Browsers\BrowserTests.cs" />
+    <Compile Include="Configuration\SelenoApplicationTests.cs" />
     <Compile Include="Configuration\EnvironmentVariablesTests.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="PageObjects\Actions\ElementFinderTests.cs" />

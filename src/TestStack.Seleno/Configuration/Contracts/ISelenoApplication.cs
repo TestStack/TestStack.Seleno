@@ -72,5 +72,12 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <returns>An initialised page object</returns>
         TPage NavigateToInitialPage<TPage>(string url = "")
             where TPage : UiComponent, new();
+
+        /// <summary>
+        /// Gets or sets the size of the outer browser window, including title bars and window borders. When setting this property, it should act as the JavaScript window.resizeTo() method.
+        /// </summary>
+        /// <param name="width">The integer width component of the window size</param>
+        /// <param name="height">The integer height component of the window size</param>
+        void SetBrowserWindowSize(int width, int height);
     }
 }

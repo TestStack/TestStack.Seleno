@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using Autofac;
@@ -90,6 +91,11 @@ namespace TestStack.Seleno.Configuration
         public TPage NavigateToInitialPage<TPage>(string url = "") where TPage : UiComponent, new()
         {
             return _container.Resolve<IPageNavigator>().To<TPage>(url);
+        }
+
+        public void SetBrowserWindowSize(int width, int height)
+        {
+            Browser.Manage().Window.Size = new Size(width, height);
         }
     }
 }
