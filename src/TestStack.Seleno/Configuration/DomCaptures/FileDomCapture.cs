@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.Configuration.DomCaptures
 {
@@ -25,7 +26,7 @@ namespace TestStack.Seleno.Configuration.DomCaptures
                 Directory.CreateDirectory(_capturePath);
 
             var windowTitle = this.Browser.Title;
-            fileName = (fileName ?? string.Format("{0}{1}.html", windowTitle, DateTime.Now.ToFileTime()).Replace(':', '.'));
+            fileName = (fileName ?? string.Format("{0}{1}.html", windowTitle, SystemTime.Now().ToFileTime()).Replace(':', '.'));
 
             var outputPath = Path.Combine(_capturePath, fileName);
             var pathChars = Path.GetInvalidPathChars();

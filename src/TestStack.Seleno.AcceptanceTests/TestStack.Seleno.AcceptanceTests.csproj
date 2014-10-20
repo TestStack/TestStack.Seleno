@@ -144,6 +144,10 @@
       <Project>{b8359de7-3953-448c-a9ab-3e5c7f26afce}</Project>
       <Name>TestStack.Seleno.AcceptanceTests.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestStack.Seleno.Tests\TestStack.Seleno.Tests.csproj">
+      <Project>{A2CC3281-DC6E-48E3-B541-2DE37E346E35}</Project>
+      <Name>TestStack.Seleno.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestStack.Seleno\TestStack.Seleno.csproj">
       <Project>{32a3eb53-458f-42f1-8780-77950ffb9972}</Project>
       <Name>TestStack.Seleno</Name>

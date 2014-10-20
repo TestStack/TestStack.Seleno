@@ -9,6 +9,7 @@ using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.Interceptors;
 using TestStack.Seleno.Configuration.WebServers;
 using TestStack.Seleno.PageObjects;
+using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
@@ -16,13 +17,14 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     class ScreenshotTest
     {
         private SelenoHost _host;
+        private string _cameraFolderPath = @"c:\screenshots";
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
             _host.Run(x => x
-                .UsingCamera(@"c:\screenshots")
+                .UsingCamera(_cameraFolderPath)
                 .WithWebServer(new InternetWebServer("http://www.google.com/"))
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
                 .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
@@ -52,33 +54,21 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         }
 
         [Test]
-        public void TakeScreenshotFromSelenoApplicationThrows()
+        public void TakeScreenshotFromSelenoApplicationThrowsAndSavesScreenshotToFile()
         {
             string imageName = "screenshot";
             string errorMessage = "there was an error";
+            var dateTime = new DateTime(2014, 05, 11,10,29,33);
+            string fileName = string.Format(@"{0}\{1}{2}.png", _cameraFolderPath, imageName, dateTime.ToString("yyyy-MM-dd_HH-mm-ss"));
 
-            Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
-
-            result.ShouldThrow<SelenoException>()
-                .WithMessage(errorMessage);
-        }
-
-        [Test]
-        public void TakeScreenshotFromSelenoApplicationSavesScreenshotToFile()
-        {
-            var directoryInfo = new DirectoryInfo(@"c:\screenshots");
-            foreach (var file in directoryInfo.GetFiles())
+            using (new TestableSystemTime(dateTime))
             {
-                file.Delete();
+                Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
+
+                result.ShouldThrow<SelenoException>()
+                    .WithMessage(errorMessage);
+                File.Exists(fileName).Should().BeTrue();
             }
-            string imageName = "screenshot";
-            string errorMessage = "there was an error";
-
-            Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
-
-            result.ShouldThrow<SelenoException>()
-                .WithMessage(errorMessage);
-            directoryInfo.GetFiles("screenshot*.png").Count().Should().Be(1);
         }
 
         private class ScreenshotTestPage : Page

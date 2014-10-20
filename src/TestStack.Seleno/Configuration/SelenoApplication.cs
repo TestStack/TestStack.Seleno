@@ -7,6 +7,7 @@ using Autofac;
 using Castle.Core.Logging;
 using TestStack.Seleno.Configuration.Contracts;
 using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 
@@ -100,7 +101,7 @@ namespace TestStack.Seleno.Configuration
 
         public void TakeScreenshotAndThrow(string imageName, string errorMessage)
         {
-            Camera.TakeScreenshot(string.Format(imageName + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png"));
+            Camera.TakeScreenshot(string.Format(imageName + SystemTime.Now().ToString("yyyy-MM-dd_HH-mm-ss") + ".png"));
             throw new SelenoException(errorMessage);
         }
     }

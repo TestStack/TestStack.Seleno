@@ -112,6 +112,7 @@
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\SystemTime.cs" />
     <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Configuration\AppConfigurationException.cs" />
     <Compile Include="Configuration\BrowserFactory.cs" />
