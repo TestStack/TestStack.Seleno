@@ -79,5 +79,12 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="width">The integer width component of the window size</param>
         /// <param name="height">The integer height component of the window size</param>
         void SetBrowserWindowSize(int width, int height);
+
+        /// <summary>
+        /// Takes a screenshot of the currently active browser window, saves it to the configured location, and throws a SelenoException.
+        /// </summary>
+        /// <param name="imageName">The name of the image</param>
+        /// <param name="errorMessage">The error message that will be applied to the SelenoException</param>
+        void TakeScreenshotAndThrow(string imageName, string errorMessage);
     }
 }

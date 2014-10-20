@@ -97,5 +97,11 @@ namespace TestStack.Seleno.Configuration
         {
             Browser.Manage().Window.Size = new Size(width, height);
         }
+
+        public void TakeScreenshotAndThrow(string imageName, string errorMessage)
+        {
+            Camera.TakeScreenshot(string.Format(imageName + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png"));
+            throw new SelenoException(errorMessage);
+        }
     }
 }
