@@ -29,7 +29,8 @@ namespace MvcMusicStore.FunctionalTests
                 UserName = "HJSimpson",
                 Email = "chunkylover53@aol.com",
                 Password = "!2345Qwert",
-                ConfirmPassword = "!2345Qwert"
+                ConfirmPassword = "!2345Qwert",
+                RegistrationCode = "foo"
             };
             return model;
         }

@@ -22,11 +22,14 @@ namespace TestStack.Seleno.PageObjects.Actions
             _componentFactory = componentFactory;
         }
 
-        private void Input(object o, ParameterExpression parentParameter, LambdaExpression expression, IDictionary<Type, Func<object, string>> propertyTypeHandling)
+        private void Input(object o, ParameterExpression parentParameter, LambdaExpression expression, IDictionary<Type, Func<object, string>> propertyTypeHandling, List<string> membersBlacklist = null)
         {
             var type = o.GetType();
 
-            foreach (var property in type.GetProperties())
+            if (membersBlacklist == null)
+                membersBlacklist = new List<string>();
+
+            foreach (var property in type.GetProperties().Where(x => !membersBlacklist.Exists(y => y == x.Name)))
                 InputProperty(o, parentParameter, expression, propertyTypeHandling, property);
         }
 
@@ -63,9 +66,12 @@ namespace TestStack.Seleno.PageObjects.Actions
                 .ReplaceInputValueWith(stringValue);
         }
 
-        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)
+        public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null, params Expression<Func<TModel, object>>[] propertyBlacklist)
         {
-            Input(viewModel, Expression.Parameter(viewModel.GetType(), "m"), null, propertyTypeHandling);
+            var blacklist = new List<string>();
+            propertyBlacklist.ToList().ForEach(x => blacklist.Add((x.Body as MemberExpression).Member.Name));
+
+            Input(viewModel, Expression.Parameter(viewModel.GetType(), "m"), null, propertyTypeHandling, blacklist);
         }
 
         public void Field<T>(Expression<Func<TModel, T>> field, T value, IDictionary<Type, Func<object, string>> propertyTypeHandling = null)

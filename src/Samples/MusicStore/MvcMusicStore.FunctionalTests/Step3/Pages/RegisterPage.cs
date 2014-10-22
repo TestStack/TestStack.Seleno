@@ -1,6 +1,6 @@
 using MvcMusicStore.Models;
-using TestStack.Seleno.PageObjects;
 using OpenQA.Selenium;
+using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step3.Pages
 {
@@ -8,7 +8,7 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
     {
         public HomePage CreateValidUser(RegisterModel model)
         {
-            Input.Model(model);
+            Input.Model(model, null, x => x.LobValue, x => x.RegistrationCode);
             return Navigate.To<HomePage>(By.CssSelector("input[type='submit']"));
         }
     }
