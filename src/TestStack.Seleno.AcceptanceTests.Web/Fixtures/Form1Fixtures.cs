@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
 namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
@@ -31,5 +32,48 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
                 };
             }
         }
+        public static StudentViewModel Student
+        {
+            get
+            {
+                return new StudentViewModel
+                {
+                    LastName = "Alexander",
+                    FirstMidName = "Carson",
+                    EnrollmentDate = "2010-09-01",
+                    Enrollments = new List<Enrollment>
+                    {
+                        new Enrollment { Course = "Chemistry", Grade = "A" },
+                        new Enrollment { Course = "Microeconomics", Grade = "C" },
+                        new Enrollment { Course = "Macroeconomics", Grade = "B" }
+                    }
+                };
+            }
+        }
+
+    }
+    public class StudentViewModel
+    {
+        public string EnrollmentDate { get; set; }
+
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public int ID { get; set; }
+
+        public string LastName { get; set; }
+        public string FirstMidName { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstMidName;
+            }
+        }
+    }
+    public class Enrollment
+    {
+        public int ID { get; set; }
+        public string Course { get; set; }
+        public string Grade { get; set; }
     }
 }

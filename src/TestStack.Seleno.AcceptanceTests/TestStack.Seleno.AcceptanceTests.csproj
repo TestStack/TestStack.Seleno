@@ -126,6 +126,7 @@
     <Compile Include="PageObjects\AssertionResultPage.cs" />
     <Compile Include="PageObjects\Controls\IndividualReadingTests.cs" />
     <Compile Include="PageObjects\Controls\IndividualWritingTests.cs" />
+    <Compile Include="PageObjects\DetailsPage.cs" />
     <Compile Include="PageObjects\Form1Page.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

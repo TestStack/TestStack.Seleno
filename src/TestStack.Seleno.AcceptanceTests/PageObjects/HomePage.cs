@@ -13,6 +13,11 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
             return Navigate.To<Form1Page>(By.LinkText("Fixture A values"));
         }
 
+        public DetailsPage GoToDetailsPage()
+        {
+            return Navigate.To<DetailsPage>(By.LinkText("Details Page"));
+        }
+
         public Form1Page GoToWriteModelPage()
         {
             return Navigate.To<Form1Page>(By.LinkText("Empty form, but expecting Fixture A upon submit"));
