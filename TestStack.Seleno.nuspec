@@ -13,12 +13,12 @@
     <iconUrl>https://raw.github.com/TestStack/TestStack.Seleno/master/logo.png</iconUrl>
     <tags>web, mvc, asp.net, testing, ui, selenium</tags>
     <dependencies> 
-      <dependency id="Selenium.WebDriver" version="2.42.0" />
-      <dependency id="Selenium.Support" version="2.42.0" />
-      <dependency id="Castle.Core" version="3.3.0" />
+      <dependency id="Selenium.WebDriver" version="2.43.1" />
+      <dependency id="Selenium.Support" version="2.43.1" />
+      <dependency id="Castle.Core" version="3.3.1" />
     </dependencies>
     <releaseNotes>
-      This version of Seleno is updated for Selenium 2.42.0. For breaking changes in previous
+      This version of Seleno is updated for Selenium 2.43.1. For breaking changes in previous
       versions, see https://github.com/TestStack/TestStack.Seleno/blob/master/BREAKING_CHANGES.md
     </releaseNotes>
   </metadata>
