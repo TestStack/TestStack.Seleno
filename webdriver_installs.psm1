@@ -1,5 +1,5 @@
 ﻿function Install-ChromeDriver() {
-	Install-EmbeddedFileFromNugetPackageTools "WebDriver.ChromeDriver" "chromedriver.exe"
+	Install-Package Selenium.WebDriver.ChromeDriver
 	Write-Host "Successfully added chrome web driver for use with Seleno."
 }
 
@@ -19,7 +19,7 @@ function Install-IE64Driver() {
 }
 
 function Install-IE32Driver() {
-	Install-EmbeddedFileFromNugetPackageTools "WebDriver.IEDriver.32-bit" "IEDriverServer.exe"
+	Install-Package Selenium.WebDriver.IEDriver
 	Write-Host "Successfully added IE web driver for use with Seleno."
 }
 
