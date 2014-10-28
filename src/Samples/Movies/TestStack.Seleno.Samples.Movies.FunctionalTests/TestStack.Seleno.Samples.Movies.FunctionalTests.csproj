@@ -88,6 +88,7 @@
     </Reference>
     <Reference Include="TestStack.Seleno">
       <HintPath>bin\TestStack.Seleno.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll</HintPath>
