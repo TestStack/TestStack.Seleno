@@ -8,7 +8,7 @@ namespace MvcMusicStore.FunctionalTests.Step3.Pages
     {
         public HomePage CreateValidUser(RegisterModel model)
         {
-            Input.Model(model, null, x => x.LobValue, x => x.RegistrationCode);
+            Input.Model(model, null, GetName<bool>(x => x.LobValue), GetName<string>(x => x.RegistrationCode));
             return Navigate.To<HomePage>(By.CssSelector("input[type='submit']"));
         }
     }
