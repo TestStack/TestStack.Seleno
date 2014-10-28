@@ -30,6 +30,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies", "Samples\Movies\TestStack.Seleno.Samples.Movies\TestStack.Seleno.Samples.Movies.csproj", "{97AC2DE0-79D8-4C0C-931E-D5DAFF2E2B25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestStack.Seleno.Samples.Movies.FunctionalTests", "Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\TestStack.Seleno.Samples.Movies.FunctionalTests.csproj", "{44695C43-6AF4-4D46-A121-8C9B8326F9EA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32A3EB53-458F-42F1-8780-77950FFB9972} = {32A3EB53-458F-42F1-8780-77950FFB9972}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "Samples\MusicStore\MvcMusicStore\MvcMusicStore.csproj", "{32DCD27D-A84C-4250-B657-408B3620A9AC}"
 EndProject
