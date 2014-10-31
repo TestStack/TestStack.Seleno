@@ -86,10 +86,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\TestStack.BDDfy.4.0.0\lib\NET40\TestStack.BDDfy.dll</HintPath>
     </Reference>
-    <Reference Include="TestStack.Seleno">
-      <HintPath>bin\TestStack.Seleno.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="WebDriver">
       <HintPath>..\..\..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -120,6 +116,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TestStack.Seleno\TestStack.Seleno.csproj">
+      <Project>{32a3eb53-458f-42f1-8780-77950ffb9972}</Project>
+      <Name>TestStack.Seleno</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\TestStack.Seleno\TestStack.Seleno.csproj">
       <Project>{32a3eb53-458f-42f1-8780-77950ffb9972}</Project>
       <Name>TestStack.Seleno</Name>

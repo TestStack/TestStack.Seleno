@@ -187,11 +187,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(TargetDir)Combined"
-"$(ProjectDir)..\packages\ilmerge.2.13.0307\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"
-copy "$(TargetDir)TestStack.Seleno.XML" "$(TargetDir)Combined\TestStack.Seleno.XML"
-mkdir "$(ProjectDir)..\Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\bin\$(ConfigurationName)\"
-copy "$(TargetDir)Combined\TestStack.Seleno.dll" "$(ProjectDir)..\Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\bin\$(ConfigurationName)\"
-copy "$(TargetDir)Combined\TestStack.Seleno.pdb" "$(ProjectDir)..\Samples\Movies\TestStack.Seleno.Samples.Movies.FunctionalTests\bin\$(ConfigurationName)\"
-</PostBuildEvent>
+"$(ProjectDir)..\packages\ilmerge.2.13.0307\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
