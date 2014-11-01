@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using Autofac;
 using Castle.Core.Logging;
 using TestStack.Seleno.Configuration.Contracts;
 using OpenQA.Selenium;
+using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
 
@@ -90,6 +92,17 @@ namespace TestStack.Seleno.Configuration
         public TPage NavigateToInitialPage<TPage>(string url = "") where TPage : UiComponent, new()
         {
             return _container.Resolve<IPageNavigator>().To<TPage>(url);
+        }
+
+        public void SetBrowserWindowSize(int width, int height)
+        {
+            Browser.Manage().Window.Size = new Size(width, height);
+        }
+
+        public void TakeScreenshotAndThrow(string imageName, string errorMessage)
+        {
+            Camera.TakeScreenshot(string.Format(imageName + SystemTime.Now().ToString("yyyy-MM-dd_HH-mm-ss") + ".png"));
+            throw new SelenoException(errorMessage);
         }
     }
 }

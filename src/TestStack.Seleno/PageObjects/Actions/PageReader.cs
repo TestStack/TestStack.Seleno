@@ -29,7 +29,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             foreach (var property in type.GetProperties())
             {
                 var propertyName = property.Name;
-                var javascriptExtractor = string.Format("$('#{0}').val()", propertyName);
+                var javascriptExtractor = string.Format(@"getValue();
+function getValue(){{var x = $('#{0}'); return x.is('span') ? x.text().trim() : x.val();}}", propertyName);
+
                 var typedValue = _executor.ScriptAndReturn(javascriptExtractor, property.PropertyType);
 
                 if (property.CanWriteToProperty(typedValue))

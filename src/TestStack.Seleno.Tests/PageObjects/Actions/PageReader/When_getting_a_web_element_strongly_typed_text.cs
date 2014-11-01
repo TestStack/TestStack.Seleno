@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
-using TestStack.BDDfy.Scanners.StepScanners.ExecutableAttribute.GwtAttributes;
+using TestStack.BDDfy;
 using TestStack.Seleno.PageObjects.Actions;
 using TestStack.Seleno.Tests.TestInfrastructure;
 
