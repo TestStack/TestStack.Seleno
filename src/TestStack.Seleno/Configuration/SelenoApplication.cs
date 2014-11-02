@@ -22,10 +22,12 @@ namespace TestStack.Seleno.Configuration
         private readonly IWebServer _webServer;
         private readonly IWebDriver _webDriver;
         private readonly ICamera _camera;
+        private readonly IDomCapture _domCapture;
         private readonly IContainer _container;
 
         public IWebDriver Browser { get { return _webDriver; } }
         public ICamera Camera { get { return _camera; } }
+        public IDomCapture DomCapture { get { return _domCapture; } }
         public ILogger Logger { get { return _logger; } }
         public IWebServer WebServer { get { return _webServer; } }
 
@@ -38,6 +40,7 @@ namespace TestStack.Seleno.Configuration
             _container = container;
             _webDriver = _container.Resolve<IWebDriver>();
             _camera = _container.Resolve<ICamera>();
+            _domCapture = _container.Resolve<IDomCapture>();
             _logger = _container.Resolve<ILoggerFactory>().Create(GetType());
             _webServer = _container.Resolve<IWebServer>();
         }
@@ -104,5 +107,12 @@ namespace TestStack.Seleno.Configuration
             Camera.TakeScreenshot(string.Format(imageName + SystemTime.Now().ToString("yyyy-MM-dd_HH-mm-ss") + ".png"));
             throw new SelenoException(errorMessage);
         }
+
+        public void CaptureDomAndThrow(string captureName, string errorMessage)
+        {
+            DomCapture.CaptureDom(string.Format(captureName + SystemTime.Now().ToString("yyyy-MM-dd_HH-mm-ss") + ".html"));
+            throw new SelenoException(errorMessage);
+        }
+
     }
 }

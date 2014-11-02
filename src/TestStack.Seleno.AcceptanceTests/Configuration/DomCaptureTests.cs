@@ -13,17 +13,17 @@ using TestStack.Seleno.Tests.TestObjects;
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
 
-    class ScreenshotTest
+    class DomCaptureTests
     {
         private SelenoHost _host;
-        private const string CameraFolderPath = @"c:\screenshots";
+        private const string DomCaptureFolderPath = @"c:\domcapture";
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
             _host.Run(x => x
-                .UsingCamera(CameraFolderPath)
+                .UsingDomCapture(DomCaptureFolderPath)
                 .WithWebServer(new InternetWebServer("http://www.google.com/"))
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
                 .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
@@ -31,14 +31,14 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         }
 
         [TestFixtureTearDown]
-        public void FixtureTeardown()
+        public void FixtureTearDown()
         {
             _host.Dispose();
         }
 
         [Test]
         [ExpectedException(typeof(SelenoReceivedException))]
-        public void TakeScreenshotFromElementFinder()
+        public void CaptureDomFromElementFinder()
         {
             _host.NavigateToInitialPage<NonExistentTestPage>()
                 .NavigateToNonExistentPageWithElementFinder();
@@ -46,30 +46,29 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
 
         [Test]
         [ExpectedException(typeof(SelenoReceivedException))]
-        public void TakeScreenshotFromPageNavigator()
+        public void CaptureDomFromPageNavigator()
         {
             _host.NavigateToInitialPage<NonExistentTestPage>()
                 .NavigateToNonExistentPageWithPageNavigator();
         }
 
         [Test]
-        public void TakeScreenshotFromSelenoApplicationThrowsAndSavesScreenshotToFile()
+        public void CaptureDomFromSelenoApplicationThrowsAndSavesDomToFile()
         {
-            const string imageName = "screenshot";
+            const string captureName = "page";
             const string errorMessage = "there was an error";
 
             var dateTime = new DateTime(2014, 05, 11, 10, 29, 33);
-            var fileName = string.Format(@"{0}\{1}{2}.png", CameraFolderPath, imageName, dateTime.ToString("yyyy-MM-dd_HH-mm-ss"));
+            var fileName = string.Format(@"{0}\{1}{2}.html", DomCaptureFolderPath, captureName, dateTime.ToString("yyyy-MM-dd_HH-mm-ss"));
 
             using (new TestableSystemTime(dateTime))
             {
-                Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
+                Action result = () => _host.Application.CaptureDomAndThrow(captureName, errorMessage);
 
                 result.ShouldThrow<SelenoException>()
                     .WithMessage(errorMessage);
                 File.Exists(fileName).Should().BeTrue();
             }
         }
-
     }
 }

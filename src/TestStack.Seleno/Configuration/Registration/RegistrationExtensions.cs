@@ -41,24 +41,33 @@ namespace TestStack.Seleno.Configuration.Registration
         {
             builder.RegisterType<TConcrete>()
                 .SingleInstance();
-            builder.Register(CreateCameraProxyFor<TConcrete, TInterface>)
-                .SingleInstance();
-            builder.Register(CreateDomCaptureProxyFor<TConcrete, TInterface>)
+
+            builder.Register(CreateProxyFor<TConcrete, TInterface>)
                 .SingleInstance();
         }
 
-        private static TInterface CreateCameraProxyFor<TConcrete, TInterface>(IComponentContext c)
+        private static TInterface CreateProxyFor<TConcrete, TInterface>(IComponentContext c)
             where TConcrete : TInterface
             where TInterface : class
         {
-            return c.Resolve<ProxyGenerator>().CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new CameraProxyInterceptor(c.Resolve<ICamera>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
+            var cameraProxyInterceptor = CreateCameraProxyInterceptor<TConcrete>(c);
+            var domCaptureProxyInterceptor = CreateDomCaptureProxyInterceptor<TConcrete>(c);
+
+            return c.Resolve<ProxyGenerator>().CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(),
+                cameraProxyInterceptor, domCaptureProxyInterceptor);
         }
 
-        private static TInterface CreateDomCaptureProxyFor<TConcrete, TInterface>(IComponentContext c)
-            where TConcrete : TInterface
-            where TInterface : class
+        private static IInterceptor CreateCameraProxyInterceptor<TConcrete>(IComponentContext c)
         {
-            return c.Resolve<ProxyGenerator>().CreateInterfaceProxyWithTarget<TInterface>(c.Resolve<TConcrete>(), new DomCaptureProxyInterceptor(c.Resolve<IDomCapture>(), typeof(TConcrete).Name, c.Resolve<ILoggerFactory>().Create(typeof(TConcrete))));
+            return new CameraProxyInterceptor(c.Resolve<ICamera>(), typeof(TConcrete).Name, 
+                c.Resolve<ILoggerFactory>().Create(typeof(TConcrete)));
         }
+
+        private static IInterceptor CreateDomCaptureProxyInterceptor<TConcrete>(IComponentContext c)
+        {
+            return new DomCaptureProxyInterceptor(c.Resolve<IDomCapture>(), typeof(TConcrete).Name, 
+                c.Resolve<ILoggerFactory>().Create(typeof(TConcrete)));
+        }
+
     }
 }

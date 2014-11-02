@@ -108,6 +108,7 @@
     <Compile Include="Configuration\ControlIdGenerators\DefaultControlIdGenerator.cs" />
     <Compile Include="Configuration\ControlIdGenerators\MvcControlIdGenerator.cs" />
     <Compile Include="Configuration\Interceptors\DomCaptureProxyInterceptor.cs" />
+    <Compile Include="Configuration\Interceptors\SelenoReceivedException.cs" />
     <Compile Include="Configuration\Registration\UiComponentRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

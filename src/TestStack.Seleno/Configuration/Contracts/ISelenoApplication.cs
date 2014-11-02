@@ -86,5 +86,12 @@ namespace TestStack.Seleno.Configuration.Contracts
         /// <param name="imageName">The name of the image</param>
         /// <param name="errorMessage">The error message that will be applied to the SelenoException</param>
         void TakeScreenshotAndThrow(string imageName, string errorMessage);
+
+        /// <summary>
+        /// Captures the dom of the currently active browser window, saves it to the configured location, and throws a SelenoException.
+        /// </summary>
+        /// <param name="captureName">The name of the capture</param>
+        /// <param name="errorMessage">The error message that will be applied to the SelenoException</param>
+        void CaptureDomAndThrow(string captureName, string errorMessage);
     }
 }
