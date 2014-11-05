@@ -42,11 +42,11 @@ namespace TestStack.Seleno.PageObjects.Actions
         public void PredicateScriptAndWaitToComplete(string predicateScriptToBeExecuted, TimeSpan maxWait = default(TimeSpan))
         {
             if (maxWait == default(TimeSpan)) maxWait = TimeSpan.FromSeconds(5);
-            var end = DateTime.Now + maxWait;
+            var end = SystemTime.Now() + maxWait;
             
             var isComplete = false;
 
-            while (DateTime.Now < end)
+            while (SystemTime.Now() < end)
             {
                 isComplete = ScriptAndReturn<bool>(predicateScriptToBeExecuted);
                 

@@ -6,10 +6,14 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.PageObjects
 {
+    /// <summary>
+    /// Strongly-typed extension of UiComponent.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public class UiComponent<TModel> : UiComponent
         where TModel : class, new()
     {
-        public IPageReader<TModel> Read
+        protected IPageReader<TModel> Read
         {
             get
             {
@@ -17,7 +21,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public IPageWriter<TModel> Input
+        protected IPageWriter<TModel> Input
         {
             get
             {
@@ -25,7 +29,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
+        protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
             TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Castle.Core.Logging;
 using Castle.DynamicProxy;
 using TestStack.Seleno.Configuration.Contracts;
@@ -27,10 +25,6 @@ namespace TestStack.Seleno.Configuration.Interceptors
             {
                 invocation.Proceed();
             }
-            catch (SelenoReceivedException)
-            {
-                throw;
-            }
             catch (Exception e)
             {
                 _logger.ErrorFormat(e, "Error invoking {0}.{1}", invocation.TargetType.Name, invocation.Method.Name);
@@ -44,6 +38,9 @@ namespace TestStack.Seleno.Configuration.Interceptors
                 {
                     _logger.Error("Error saving a DOM", ex);
                 }
+
+                if (e is SelenoReceivedException)
+                    throw;
 
                 throw new SelenoReceivedException(e);
             }

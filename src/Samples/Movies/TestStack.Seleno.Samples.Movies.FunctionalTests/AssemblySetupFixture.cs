@@ -1,4 +1,4 @@
-﻿using TestStack.BDDfy.Processors.Reporters.Html;
+﻿using TestStack.BDDfy.Reporters.Html;
 using Configurator = TestStack.BDDfy.Configuration.Configurator;
 using NUnit.Framework;
 

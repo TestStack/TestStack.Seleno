@@ -30,7 +30,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         public void CanInjectEnvironmentVariables()
         {
             var homepage = _host.NavigateToInitialPage<HomePage>();
-            homepage = homepage.Navigate.To<HomePage>(By.LinkText("Checking Environment Variables"));
+            homepage = homepage.SelectCheckingEnvironmentVariables();
 
             homepage.Title.Should().Be("Home");
         }

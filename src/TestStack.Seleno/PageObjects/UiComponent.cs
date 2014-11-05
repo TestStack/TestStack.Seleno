@@ -7,6 +7,9 @@ using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.PageObjects
 {
+    /// <summary>
+    /// Base class for Page Objects and Components
+    /// </summary>
     public class UiComponent
     {
         protected internal IWebDriver Browser { get; internal set; }
@@ -19,7 +22,7 @@ namespace TestStack.Seleno.PageObjects
         internal IWait Wait { get; set; }
         internal IControlIdGenerator ControlIdGenerator { get; set; }
 
-        public IPageNavigator Navigate
+        protected IPageNavigator Navigate
         {
             get
             {
@@ -28,7 +31,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public IExecutor Execute
+        protected IExecutor Execute
         {
             get
             {
@@ -37,7 +40,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public IElementFinder Find
+        protected IElementFinder Find
         {
             get
             {
@@ -46,13 +49,13 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
+        protected TableReader<TModel> TableFor<TModel>(string gridId) where TModel : class, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
             return new TableReader<TModel>(gridId) {Browser = Browser};
         }
 
-        public IElementAssert AssertThatElements
+        protected IElementAssert AssertThatElements
         {
             get
             {
@@ -61,7 +64,7 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public IWait WaitFor
+        protected IWait WaitFor
         {
             get
             {
@@ -70,14 +73,14 @@ namespace TestStack.Seleno.PageObjects
             }
         }
 
-        public TComponent GetComponent<TComponent>()
+        protected TComponent GetComponent<TComponent>()
             where TComponent : UiComponent, new()
         {
             ThrowIfComponentNotCreatedCorrectly();
             return ComponentFactory.CreatePage<TComponent>();
         }
 
-        public THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
+        protected THtmlControl HtmlControlFor<THtmlControl>(string controlId, TimeSpan maxWait = default(TimeSpan))
             where THtmlControl : HTMLControl, new()
         {
             ThrowIfComponentNotCreatedCorrectly();

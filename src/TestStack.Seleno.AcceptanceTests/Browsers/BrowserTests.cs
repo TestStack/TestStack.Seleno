@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.WebServers;
@@ -64,6 +65,18 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         protected override RemoteWebDriver WebDriver
         {
             get { return BrowserFactory.InternetExplorer(); }
+        }
+    }
+
+    class IETestWithOptions : BrowserTest
+    {
+        protected override RemoteWebDriver WebDriver
+        {
+            get
+            {
+                var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+                return BrowserFactory.InternetExplorer(options);
+            }
         }
     }
 }

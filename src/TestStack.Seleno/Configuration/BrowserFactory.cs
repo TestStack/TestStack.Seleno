@@ -122,15 +122,22 @@ namespace TestStack.Seleno.Configuration
         /// Returns an initialised 64-bit IE Web Driver.
         /// </summary>
         /// <remarks>You need to have IEDriverServer_x64_2.28.0.exe embedded into your assembly</remarks>
-        /// <param name="options">Options to configure the driver</param>
         /// <returns>Initialised IE driver</returns>
-        public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options = null)
+        public static InternetExplorerDriver InternetExplorer()
         {
             CreateDriver("IEDriverServer.exe");
-            if (options == null)
-            {
-                options = new InternetExplorerOptions {IntroduceInstabilityByIgnoringProtectedModeSettings = true};
-            }
+            var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+            return new InternetExplorerDriver(options);
+        }
+        /// <summary>
+        /// Returns an initialised 64-bit IE Web Driver.
+        /// </summary>
+        /// <remarks>You need to have IEDriverServer_x64_2.28.0.exe embedded into your assembly</remarks>
+        /// <param name="options">Options to configure the driver</param>
+        /// <returns>Initialised IE driver</returns>
+        public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options)
+        {
+            CreateDriver("IEDriverServer.exe");
             return new InternetExplorerDriver(options);
         }
 

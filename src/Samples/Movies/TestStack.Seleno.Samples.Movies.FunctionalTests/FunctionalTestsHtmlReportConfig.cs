@@ -1,4 +1,4 @@
-using TestStack.BDDfy.Processors.Reporters.Html;
+using TestStack.BDDfy.Reporters.Html;
 
 namespace TestStack.Seleno.Samples.Movies.FunctionalTests
 {

@@ -2,9 +2,7 @@
 using MvcMusicStore.Controllers;
 using MvcMusicStore.FunctionalTests.Step4.Pages;
 using TestStack.BDDfy;
-using TestStack.BDDfy.Core;
 using NUnit.Framework;
-using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
 namespace MvcMusicStore.FunctionalTests.Step4

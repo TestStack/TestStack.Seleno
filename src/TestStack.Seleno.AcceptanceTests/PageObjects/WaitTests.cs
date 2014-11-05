@@ -7,7 +7,7 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
 {
     public abstract class WaitTests
     {
-        protected Page Page = new Page();
+        protected FormWithAJAXPage Page;
 
         public WaitTests()
         {
@@ -29,14 +29,33 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
 
             public void WhenWaitingForAjaxCompletion()
             {
-                Page.AssertThatElements.Exist(By.jQuery("#target"));
-                Page.WaitFor.AjaxCallsToComplete();
+                Page.AssertThatTargetElementExists()
+                    .WaitForAjaxCallsToComplete();
             }
 
             public void ThenTheApiReturnsWhenTheCallFinishes()
             {
-                Page.AssertThatElements.DoNotExist(By.jQuery("#target"));
+                Page.AssertThatTargetElementDoesNotExist();
             }
         }
     }
+    public class FormWithAJAXPage : Page
+    {
+        public FormWithAJAXPage AssertThatTargetElementExists()
+        {
+            AssertThatElements.Exist(By.jQuery("#target"));
+            return this;
+        }
+        public FormWithAJAXPage WaitForAjaxCallsToComplete()
+        {
+            WaitFor.AjaxCallsToComplete();
+            return this;
+        }
+        public FormWithAJAXPage AssertThatTargetElementDoesNotExist()
+        {
+            AssertThatElements.DoNotExist(By.jQuery("#target"));
+            return this;
+        }
+    }
+
 }

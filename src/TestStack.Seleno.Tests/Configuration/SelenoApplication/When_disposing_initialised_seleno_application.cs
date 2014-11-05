@@ -1,5 +1,5 @@
 ﻿using NSubstitute;
-using NSubstitute.Experimental;
+using Received = NSubstitute.Received;
 
 namespace TestStack.Seleno.Tests.Configuration.SelenoApplication
 {

@@ -6,8 +6,34 @@ using TestStack.Seleno.AcceptanceTests.Web.ViewModels;
 
 namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
 {
+    [TestFixture]
+    public class CheckBoxHtmlControlTests
+    {
+        [Test]
+        public void Reading_checked_checkbox_should_return_true()
+        {
+            Form1Page page = Host.Instance
+                .NavigateToInitialPage<HomePage>()
+                .GoToReadModelPage();
+            bool result = page.RequiredBoolCheckBoxIsTicked;
+            result.Should().BeTrue();
+        }
+    }
     abstract class Reading_individual_html_controls
     {
+        protected void Given_a_filled_in_form()
+        {
+            Page = Host.Instance
+                .NavigateToInitialPage<HomePage>()
+                .GoToReadModelPage();
+        }
+
+        [Test]
+        public void Perform_test()
+        {
+            this.BDDfy();
+        }
+        
         public class Reading_textbox_value : Reading_individual_html_controls
         {
             private int _result;
@@ -24,21 +50,23 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
             }
         }
 
-        public class Reading__checked_checkbox : Reading_individual_html_controls
-        {
-            private bool _result;
+        // Moved this into own test (without BDDfy) as was throwing stackoverflow exception.
+        // New test is CheckBoxHtmlControlTests.Reading_checked_checkbox_should_return_true (above)
+        //public class Reading__checked_checkbox : Reading_individual_html_controls
+        //{
+        //    private bool _result;
 
-            public void When_getting_whether_the_checkbox_is_checked_or_not()
-            {
-                _result = Page.RequiredBoolCheckBoxIsTicked;
-            }
+        //    public void When_getting_whether_the_checkbox_is_checked_or_not()
+        //    {
+        //        _result = Page.RequiredBoolCheckBoxIsTicked;
+        //    }
 
-            public void Then_the_checkbox_should_be_ticked()
-            {
-                _result.Should().BeTrue();
+        //    public void Then_the_checkbox_should_be_ticked()
+        //    {
+        //        _result.Should().BeTrue();
 
-            }
-        }
+        //    }
+        //}
 
         public class Reading_selected_option_value_from_drop_down : Reading_individual_html_controls
         {
@@ -119,19 +147,5 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects.Controls
         }
         
         protected Form1Page Page;
-
-        protected void Given_a_filled_in_form()
-        {
-            Page = Host.Instance
-                .NavigateToInitialPage<HomePage>()
-                .GoToReadModelPage();
-        }
-
-        [Test]
-        public void Perform_test()
-        {
-            this.BDDfy();
-        }
-    }
-    
+    }    
 }

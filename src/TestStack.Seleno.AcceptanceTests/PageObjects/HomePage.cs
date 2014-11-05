@@ -13,6 +13,11 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
             return Navigate.To<Form1Page>(By.LinkText("Fixture A values"));
         }
 
+        public DetailsPage GoToDetailsPage()
+        {
+            return Navigate.To<DetailsPage>(By.LinkText("Details Page"));
+        }
+
         public Form1Page GoToWriteModelPage()
         {
             return Navigate.To<Form1Page>(By.LinkText("Empty form, but expecting Fixture A upon submit"));
@@ -48,9 +53,14 @@ namespace TestStack.Seleno.AcceptanceTests.PageObjects
             return Navigate.To<HomeController, ListPage>(c => c.List());
         }
 
-        public Page GoToFormWithAjax()
+        public FormWithAJAXPage GoToFormWithAjax()
         {
-            return Navigate.To<Page>("/Form1/FormWithAJAX");
+            return Navigate.To<FormWithAJAXPage>("/Form1/FormWithAJAX");
+        }
+
+        public HomePage SelectCheckingEnvironmentVariables()
+        {
+            return Navigate.To<HomePage>(By.LinkText("Checking Environment Variables"));
         }
     }
 
