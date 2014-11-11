@@ -1,8 +1,10 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Holf.AllForOne;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -24,7 +26,9 @@ namespace TestStack.Seleno.Configuration
         public static PhantomJSDriver PhantomJS()
         {
             CreateDriver("phantomjs.exe");
-            return new PhantomJSDriver();
+            var driver = new PhantomJSDriver();
+            TieLifecycleToParentProcess("phantomjs");
+            return driver;
         }
 
         /// <summary>
@@ -36,7 +40,9 @@ namespace TestStack.Seleno.Configuration
         public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
         {
             CreateDriver("phantomjs.exe");
-            return new PhantomJSDriver(options);
+            var driver = new PhantomJSDriver(options);
+            TieLifecycleToParentProcess("phantomjs");
+            return driver;
         }
 
         /// <summary>
@@ -47,7 +53,9 @@ namespace TestStack.Seleno.Configuration
         public static ChromeDriver Chrome()
         {
             CreateDriver("chromedriver.exe");
-            return new ChromeDriver();
+            var driver = new ChromeDriver();
+            TieLifecycleToParentProcess("chromedriver");
+            return driver;
         }
 
         /// <summary>
@@ -59,7 +67,9 @@ namespace TestStack.Seleno.Configuration
         public static ChromeDriver Chrome(ChromeOptions options)
         {
             CreateDriver("chromedriver.exe");
-            return new ChromeDriver(options ?? new ChromeOptions());
+            var driver = new ChromeDriver(options ?? new ChromeOptions());
+            TieLifecycleToParentProcess("chromedriver");
+            return driver;
         }
 
         /// <summary>
@@ -69,7 +79,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox()
         {
-            return new FirefoxDriver();
+            var driver = new FirefoxDriver();
+            TieLifecycleToParentProcess("firefox");
+            return driver;
         }
 
         /// <summary>
@@ -80,7 +92,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox(FirefoxProfile profile)
         {
-            return new FirefoxDriver(profile);
+            var driver = new FirefoxDriver(profile);
+            TieLifecycleToParentProcess("firefox");
+            return driver;
         }
 
         /// <summary>
@@ -127,7 +141,9 @@ namespace TestStack.Seleno.Configuration
         {
             CreateDriver("IEDriverServer.exe");
             var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-            return new InternetExplorerDriver(options);
+            var driver = new InternetExplorerDriver(options);
+            TieLifecycleToParentProcess("IEDriverServer");
+            return driver;
         }
         /// <summary>
         /// Returns an initialised 64-bit IE Web Driver.
@@ -138,7 +154,9 @@ namespace TestStack.Seleno.Configuration
         public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options)
         {
             CreateDriver("IEDriverServer.exe");
-            return new InternetExplorerDriver(options);
+            var driver = new InternetExplorerDriver(options);
+            TieLifecycleToParentProcess("IEDriverServer");
+            return driver;
         }
 
         private static void CreateDriver(string resourceFileName)
@@ -169,6 +187,15 @@ namespace TestStack.Seleno.Configuration
                 // ReSharper disable PossibleNullReferenceException
                 resourceStream.CopyTo(fileStream);
                 // ReSharper restore PossibleNullReferenceException
+            }
+        }
+
+        private static void TieLifecycleToParentProcess(string processName)
+        {
+            var process = Process.GetProcessesByName(processName).FirstOrDefault();
+            if (process != null)
+            {
+                process.TieLifecycleToParentProcess();
             }
         }
     }
