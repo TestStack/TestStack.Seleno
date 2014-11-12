@@ -53,7 +53,10 @@ namespace TestStack.Seleno.Configuration
         public static ChromeDriver Chrome()
         {
             CreateDriver("chromedriver.exe");
-            var driver = new ChromeDriver();
+            var options = new ChromeOptions();
+            // addresses issue: https://code.google.com/p/chromedriver/issues/detail?id=799
+            options.AddArgument("test-type");
+            var driver = new ChromeDriver(options);
             TieLifecycleToParentProcess("chromedriver");
             return driver;
         }
