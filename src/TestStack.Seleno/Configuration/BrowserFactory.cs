@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using Holf.AllForOne;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -25,10 +27,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised PhantomJS driver</returns>
         public static PhantomJSDriver PhantomJS()
         {
-            CreateDriver("phantomjs.exe");
-            var driver = new PhantomJSDriver();
-            TieLifecycleToParentProcess("phantomjs");
-            return driver;
+            EnsureFileExists("phantomjs.exe");
+            return CreateWebDriver<PhantomJSDriver>(
+                () => new PhantomJSDriver(), "phantomjs");
         }
 
         /// <summary>
@@ -39,10 +40,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised PhantomJS driver</returns>
         public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
         {
-            CreateDriver("phantomjs.exe");
-            var driver = new PhantomJSDriver(options);
-            TieLifecycleToParentProcess("phantomjs");
-            return driver;
+            EnsureFileExists("phantomjs.exe");
+            return CreateWebDriver<PhantomJSDriver>(
+                () => new PhantomJSDriver(options), "phantomjs");
         }
 
         /// <summary>
@@ -52,13 +52,12 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome()
         {
-            CreateDriver("chromedriver.exe");
+            EnsureFileExists("chromedriver.exe");
             var options = new ChromeOptions();
             // addresses issue: https://code.google.com/p/chromedriver/issues/detail?id=799
             options.AddArgument("test-type");
-            var driver = new ChromeDriver(options);
-            TieLifecycleToParentProcess("chromedriver");
-            return driver;
+            return CreateWebDriver<ChromeDriver>(
+                () => new ChromeDriver(options), "chromedriver");
         }
 
         /// <summary>
@@ -69,10 +68,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome(ChromeOptions options)
         {
-            CreateDriver("chromedriver.exe");
-            var driver = new ChromeDriver(options ?? new ChromeOptions());
-            TieLifecycleToParentProcess("chromedriver");
-            return driver;
+            EnsureFileExists("chromedriver.exe");
+            return CreateWebDriver<ChromeDriver>(
+                () => new ChromeDriver(options ?? new ChromeOptions()), "chromedriver");
         }
 
         /// <summary>
@@ -82,9 +80,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox()
         {
-            var driver = new FirefoxDriver();
-            TieLifecycleToParentProcess("firefox");
-            return driver;
+            return CreateWebDriver<FirefoxDriver>(
+                () => new FirefoxDriver(), "firefox");
         }
 
         /// <summary>
@@ -95,9 +92,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox(FirefoxProfile profile)
         {
-            var driver = new FirefoxDriver(profile);
-            TieLifecycleToParentProcess("firefox");
-            return driver;
+            return CreateWebDriver<FirefoxDriver>(
+                () => new FirefoxDriver(profile), "firefox");
         }
 
         /// <summary>
@@ -142,12 +138,12 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer()
         {
-            CreateDriver("IEDriverServer.exe");
+            EnsureFileExists("IEDriverServer.exe");
             var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-            var driver = new InternetExplorerDriver(options);
-            TieLifecycleToParentProcess("IEDriverServer");
-            return driver;
+            return CreateWebDriver<InternetExplorerDriver>(
+                () => new InternetExplorerDriver(options), "IEDriverServer");
         }
+
         /// <summary>
         /// Returns an initialised 64-bit IE Web Driver.
         /// </summary>
@@ -156,13 +152,12 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options)
         {
-            CreateDriver("IEDriverServer.exe");
-            var driver = new InternetExplorerDriver(options);
-            TieLifecycleToParentProcess("IEDriverServer");
-            return driver;
+            EnsureFileExists("IEDriverServer.exe");
+            return CreateWebDriver<InternetExplorerDriver>(
+                () => new InternetExplorerDriver(options), "IEDriverServer");
         }
 
-        private static void CreateDriver(string resourceFileName)
+        private static void EnsureFileExists(string resourceFileName)
         {
             // Already been loaded before?
             if (File.Exists(resourceFileName))
@@ -193,13 +188,26 @@ namespace TestStack.Seleno.Configuration
             }
         }
 
-        private static void TieLifecycleToParentProcess(string processName)
+        private static T CreateWebDriver<T>(Func<IWebDriver> factory, string processName)
+            where T : IWebDriver
         {
-            var process = Process.GetProcessesByName(processName).FirstOrDefault();
-            if (process != null)
+            IEnumerable<int> pidsBefore = Process
+                .GetProcessesByName(processName)
+                .Select(p => p.Id);
+
+            var driver = factory();
+
+            IEnumerable<int> pidsAfter = Process
+                .GetProcessesByName(processName)
+                .Select(p => p.Id);
+
+            IEnumerable<int> newPids = pidsAfter.Except(pidsBefore);
+            foreach (int pid in newPids)
             {
-                process.TieLifecycleToParentProcess();
+                Process.GetProcessById(pid).TieLifecycleToParentProcess();
             }
+
+            return (T)driver;
         }
     }
 
