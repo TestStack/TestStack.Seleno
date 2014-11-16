@@ -106,6 +106,7 @@
     <Compile Include="Configuration\ControlIdGenerators\Html401IdUtil.cs" />
     <Compile Include="Configuration\DomCaptures\FileDomCapture.cs" />
     <Compile Include="Configuration\DomCaptures\NullDomCapture.cs" />
+    <Compile Include="Configuration\WebDriverBuilder.cs" />
     <Compile Include="Configuration\Interceptors\CameraProxyInterceptor.cs" />
     <Compile Include="Configuration\Contracts\IControlIdGenerator.cs" />
     <Compile Include="Configuration\ControlIdGenerators\DefaultControlIdGenerator.cs" />
