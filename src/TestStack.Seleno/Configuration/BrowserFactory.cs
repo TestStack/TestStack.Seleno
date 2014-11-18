@@ -1,8 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -23,8 +20,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised PhantomJS driver</returns>
         public static PhantomJSDriver PhantomJS()
         {
-            CreateDriver("phantomjs.exe");
-            return new PhantomJSDriver();
+            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver())
+                .WithFileName("phantomjs.exe");
         }
 
         /// <summary>
@@ -35,8 +32,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised PhantomJS driver</returns>
         public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
         {
-            CreateDriver("phantomjs.exe");
-            return new PhantomJSDriver(options);
+            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver(options))
+                .WithFileName("phantomjs.exe");
         }
 
         /// <summary>
@@ -46,8 +43,11 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome()
         {
-            CreateDriver("chromedriver.exe");
-            return new ChromeDriver();
+            var options = new ChromeOptions();
+            // addresses issue: https://code.google.com/p/chromedriver/issues/detail?id=799
+            options.AddArgument("test-type");
+            return new WebDriverBuilder<ChromeDriver>(() => new ChromeDriver(options))
+                .WithFileName("chromedriver.exe");
         }
 
         /// <summary>
@@ -58,8 +58,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome(ChromeOptions options)
         {
-            CreateDriver("chromedriver.exe");
-            return new ChromeDriver(options ?? new ChromeOptions());
+            return new WebDriverBuilder<ChromeDriver>(() => new ChromeDriver(options ?? new ChromeOptions()))
+                .WithFileName("chromedriver.exe");
+
         }
 
         /// <summary>
@@ -69,7 +70,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox()
         {
-            return new FirefoxDriver();
+            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver())
+                .WithProcessName("firefox");
         }
 
         /// <summary>
@@ -80,7 +82,8 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised Firefox driver</returns>
         public static FirefoxDriver FireFox(FirefoxProfile profile)
         {
-            return new FirefoxDriver(profile);
+            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(profile))
+                .WithProcessName("firefox");
         }
 
         /// <summary>
@@ -125,10 +128,11 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer()
         {
-            CreateDriver("IEDriverServer.exe");
             var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-            return new InternetExplorerDriver(options);
+            return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
+                .WithFileName("IEDriverServer.exe");
         }
+
         /// <summary>
         /// Returns an initialised 64-bit IE Web Driver.
         /// </summary>
@@ -137,40 +141,10 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options)
         {
-            CreateDriver("IEDriverServer.exe");
-            return new InternetExplorerDriver(options);
+            return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
+                .WithFileName("IEDriverServer.exe");
         }
 
-        private static void CreateDriver(string resourceFileName)
-        {
-            // Already been loaded before?
-            if (File.Exists(resourceFileName))
-                return;
-
-            // Find any assembly with the desired executable embedded in it
-            // http://bloggingabout.net/blogs/vagif/archive/2010/07/02/net-4-0-and-notsupportedexception-complaining-about-dynamic-assemblies.aspx
-            var assembly = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => !(a is System.Reflection.Emit.AssemblyBuilder))
-                .Where(a => a.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder")
-                .Where(a => !a.GlobalAssemblyCache)
-                .FirstOrDefault(a => a
-                    .GetManifestResourceNames()
-                    .Any(x => x.EndsWith(resourceFileName, true, CultureInfo.InvariantCulture))
-                );
-
-            if (assembly == null)
-                throw new WebDriverNotFoundException(resourceFileName);
-
-            // Write embedded resource to disk so Selenium Web Driver can use it
-            var resourceName = assembly.GetManifestResourceNames().First(x => x.EndsWith(resourceFileName, true, CultureInfo.InvariantCulture));
-            using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
-            using (var fileStream = new FileStream(resourceFileName, FileMode.Create))
-            {
-                // ReSharper disable PossibleNullReferenceException
-                resourceStream.CopyTo(fileStream);
-                // ReSharper restore PossibleNullReferenceException
-            }
-        }
     }
 
     /// <summary>

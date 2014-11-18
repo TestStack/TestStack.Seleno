@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Holf.AllForOne;
 using TestStack.Seleno.Configuration.Contracts;
 
 namespace TestStack.Seleno.Configuration.WebServers
@@ -20,6 +21,7 @@ namespace TestStack.Seleno.Configuration.WebServers
         {
             var webHostStartInfo = ProcessStartInfo(_application);
             _webHostProcess = Process.Start(webHostStartInfo);
+            _webHostProcess.TieLifecycleToParentProcess();
         }
 
         public void Stop()
