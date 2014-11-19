@@ -23,6 +23,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         [TestCase(Firefox)]
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
         {
+            Process.GetProcessesByName(driverName).ForEach(StopProcess);
             var selenoHost = new SelenoHost();
             Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
@@ -38,6 +39,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         public void Closing_SelenoHost_should_close_Iis_Express()
         {
             Process.GetProcessesByName(IisExpress).ForEach(StopProcess);
+            Process.GetProcessesByName("chromedriver").ForEach(StopProcess);
 
             var selenoHost = new SelenoHost();
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
