@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.3.1\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Holf.AllForOne">
+      <HintPath>..\packages\AllForOne.1.0.0.27\lib\Holf.AllForOne.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -103,6 +106,7 @@
     <Compile Include="Configuration\ControlIdGenerators\Html401IdUtil.cs" />
     <Compile Include="Configuration\DomCaptures\FileDomCapture.cs" />
     <Compile Include="Configuration\DomCaptures\NullDomCapture.cs" />
+    <Compile Include="Configuration\WebDriverBuilder.cs" />
     <Compile Include="Configuration\Interceptors\CameraProxyInterceptor.cs" />
     <Compile Include="Configuration\Contracts\IControlIdGenerator.cs" />
     <Compile Include="Configuration\ControlIdGenerators\DefaultControlIdGenerator.cs" />
@@ -188,6 +192,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(TargetDir)Combined"
-"$(ProjectDir)..\packages\ilmerge.2.13.0307\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"</PostBuildEvent>
+"$(ProjectDir)..\packages\ilmerge.2.13.0307\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" "$(TargetDir)Holf.AllForOne.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
