@@ -11,7 +11,7 @@ namespace TestStack.Seleno.PageObjects.Controls
         
         public virtual TReturn ValueAs<TReturn>()
         {
-            var scriptToExecute = string.Format(@"$('[name=""{0}""').val()", Name);
+            var scriptToExecute = string.Format(@"$('[name=""{0}""]').val()", Name);
             return Execute.ScriptAndReturn<TReturn>(scriptToExecute);
         }
 

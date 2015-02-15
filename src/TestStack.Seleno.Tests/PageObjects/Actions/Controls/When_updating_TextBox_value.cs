@@ -24,7 +24,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .Script(string.Format("$('#{0}').val(\"{1}\")", ExpectedControlId, ExpectedControlValue));
+                .Script(string.Format("$('[name=\"{0}\"]').val(\"{1}\")", ExpectedControlId, ExpectedControlValue));
         }
     }
 
