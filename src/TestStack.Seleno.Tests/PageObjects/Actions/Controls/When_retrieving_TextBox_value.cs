@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ScriptAndReturn<DateTime>("$('#Modified').val()");
+                .ScriptAndReturn<DateTime>("$('[name=\"Modified\"]').val()");
 
         }
     }

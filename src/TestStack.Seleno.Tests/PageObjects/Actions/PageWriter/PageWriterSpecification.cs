@@ -47,20 +47,20 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
 
         protected void AssertPropertyIgnored<TProperty>(Expression<Func<TestViewModel, TProperty>> property)
         {
-            var expectedId = _controlIdGenerator.GetControlId(_controlIdGenerator.GetControlName(property));
-            SubstituteFor<IExecutor>().DidNotReceive().Script(Arg.Is<string>(s => s.Contains("#" + expectedId)));
+            var expectedId = _controlIdGenerator.GetControlName(property);
+            SubstituteFor<IExecutor>().DidNotReceive().Script(Arg.Is<string>(s => s.Contains("[name=\"" + expectedId)));
         }
 
         protected void AssertPropertyValueSet<TProperty>(Expression<Func<TestViewModel, TProperty>> property)
         {
-            var expectedId = _controlIdGenerator.GetControlId(_controlIdGenerator.GetControlName(property));
+            var expectedName = _controlIdGenerator.GetControlName(property);
             var propertyValue = property.Compile().Invoke(Model);
 
             var expectedValue = propertyValue.ToString();
             if (propertyValue is DateTime)
                 expectedValue = ((DateTime)(object)propertyValue).ToString(DateFormat);
 
-            SubstituteFor<IExecutor>().Received().Script(string.Format("$('#{0}').val(\"{1}\")", expectedId, expectedValue.ToJavaScriptString()));
+            SubstituteFor<IExecutor>().Received().Script(string.Format("$('[name=\"{0}\"]').val(\"{1}\")", expectedName, expectedValue.ToJavaScriptString()));
         }
 
         public override void Setup()

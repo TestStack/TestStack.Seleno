@@ -20,7 +20,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .Script(string.Format("$('#Name').val(\"{0}\")", Text));
+                .Script(string.Format("$('[name=\"Name\"]').val(\"{0}\")", Text));
         }
     }
 }

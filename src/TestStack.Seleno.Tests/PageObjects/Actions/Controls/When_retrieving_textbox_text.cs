@@ -19,7 +19,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
         {
             Executor
                 .Received()
-                .ScriptAndReturn<string>("$('#Name').val()");
+                .ScriptAndReturn<string>("$('[name=\"Name\"]').val()");
         }
     }
 }

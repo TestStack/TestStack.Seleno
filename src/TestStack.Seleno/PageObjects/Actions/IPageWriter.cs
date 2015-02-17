@@ -6,7 +6,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 {
     public interface IPageWriter<TModel> where TModel : class, new()
     {
-        void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null);
+        void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null, params string[] propertyBlacklist);
         [Obsolete("Use ReplaceInputValueWith instead")]
         void TextInField(string fieldName, string value);
         void ClearAndSendKeys<TProperty>(Expression<Func<TModel, TProperty>> propertySelector, string value, bool clearFirst = true);

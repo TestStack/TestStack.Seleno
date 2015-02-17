@@ -1,5 +1,12 @@
 # Dev
 
+# Version 0.9
+
+## Element selector based on name instead of id
+
+### Reason
+Previously elements were selected based on their id which was assumed to be based on the viewmodel type name and property name. This assumption has been removed since developers might require the id to be different. Basing selection of elements on name should ensure elements are more reliably discovered. 
+
 ## Removed Android support
 
 ### Reason
