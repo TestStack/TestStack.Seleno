@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using Holf.AllForOne;
 using OpenQA.Selenium;
 
@@ -12,7 +12,7 @@ namespace TestStack.Seleno.Configuration
     internal class WebDriverBuilder<T> where T : IWebDriver
     {
         private readonly Func<IWebDriver> _factory;
-        private string _processName;
+        private string[] _processNames;
         private string _fileName;
 
         public WebDriverBuilder(Func<IWebDriver> factory)
@@ -26,9 +26,9 @@ namespace TestStack.Seleno.Configuration
             return this;
         }
 
-        public WebDriverBuilder<T> WithProcessName(string processName)
+        public WebDriverBuilder<T> WithProcessNames(params string[] processNames)
         {
-            _processName = processName;
+            _processNames = processNames;
             return this;
         }
 
@@ -55,7 +55,7 @@ namespace TestStack.Seleno.Configuration
             // Find any assembly with the desired executable embedded in it
             // http://bloggingabout.net/blogs/vagif/archive/2010/07/02/net-4-0-and-notsupportedexception-complaining-about-dynamic-assemblies.aspx
             var assembly = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => !(a is System.Reflection.Emit.AssemblyBuilder))
+                .Where(a => !(a is AssemblyBuilder))
                 .Where(a => a.GetType().FullName != "System.Reflection.Emit.InternalAssemblyBuilder")
                 .Where(a => !a.GlobalAssemblyCache)
                 .FirstOrDefault(a => a
@@ -79,22 +79,28 @@ namespace TestStack.Seleno.Configuration
 
         private T CreateWebDriver()
         {
-            var processName = _processName ?? _fileName.Replace(@".exe", "");
+            var processNames = _processNames ?? new [] {_fileName.Replace(@".exe", "")};
 
-            IEnumerable<int> pidsBefore = Process
-                .GetProcessesByName(processName)
-                .Select(p => p.Id);
+            var pidsBefore = processNames
+                .SelectMany(Process.GetProcessesByName)
+                .Select(p => p.Id)
+                .ToArray();
 
-            var driver = _factory();
-
-            IEnumerable<int> pidsAfter = Process
-                .GetProcessesByName(processName)
-                .Select(p => p.Id);
-
-            IEnumerable<int> newPids = pidsAfter.Except(pidsBefore);
-            foreach (int pid in newPids)
+            IWebDriver driver;
+            try
             {
-                Process.GetProcessById(pid).TieLifecycleToParentProcess();
+                driver = _factory();
+            }
+            finally
+            {
+                var pidsAfter = processNames
+                    .SelectMany(Process.GetProcessesByName)
+                    .Select(p => p.Id)
+                    .ToArray();
+
+                var newPids = pidsAfter.Except(pidsBefore);
+                foreach (var pid in newPids)
+                    Process.GetProcessById(pid).TieLifecycleToParentProcess();
             }
 
             return (T)driver;
