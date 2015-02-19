@@ -87,6 +87,8 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
 
             using (new TestableSystemTime(dateTime))
             {
+                Host.Instance.Application.SetBrowserWindowSize(800, 600);
+
                 Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
                 result.ShouldThrow<SelenoException>()
                     .WithMessage(errorMessage);
