@@ -9,6 +9,7 @@ using System.Text;
 
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.Configuration.Screenshots
 {
@@ -56,7 +57,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
             {
                 {"Page Title", string.IsNullOrWhiteSpace(Browser.Title) ? Browser.Url : Browser.Title },
                 {"URL", Browser.Url},
-                {"Time", string.Format("{0} at {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString())},
+                {"Time", string.Format("{0} at {1}", SystemTime.Now().ToShortDateString(), SystemTime.Now().ToLongTimeString())},
                 {"Callstack", string.Join(Environment.NewLine, callstack) },
             };
 
@@ -141,7 +142,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
             foreach (var invalidChar in Path.GetInvalidFileNameChars())
                 validFilename.Replace(invalidChar, '.');
 
-            var validPath = Path.Combine(path, string.Format("{0}_{1}.png", validFilename, DateTime.Now.ToFileTimeUtc()));
+            var validPath = Path.Combine(path, string.Format("{0}_{1}.png", validFilename, SystemTime.Now().ToFileTimeUtc()));
             return validPath;
         }
 

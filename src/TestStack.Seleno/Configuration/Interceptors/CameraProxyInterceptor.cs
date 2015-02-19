@@ -2,6 +2,7 @@
 using Castle.Core.Logging;
 using Castle.DynamicProxy;
 using TestStack.Seleno.Configuration.Contracts;
+using TestStack.Seleno.Extensions;
 
 namespace TestStack.Seleno.Configuration.Interceptors
 {
@@ -27,7 +28,7 @@ namespace TestStack.Seleno.Configuration.Interceptors
             catch (Exception e)
             {
                 _logger.ErrorFormat(e, "Error invoking {0}.{1}", invocation.TargetType.Name, invocation.Method.Name);
-                var filename = _filename + "_" + DateTime.UtcNow.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+                var filename = _filename + "_" + SystemTime.Now().ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
 
                 if (_camera.ScreenshotTaker == null)
                     _logger.WarnFormat("ITakesScreenshot isn't supported by the web driver {0} so taking a screenshot probably won't work", _camera.Browser.GetType().Name);
