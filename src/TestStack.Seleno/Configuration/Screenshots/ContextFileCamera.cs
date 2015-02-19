@@ -28,17 +28,13 @@ namespace TestStack.Seleno.Configuration.Screenshots
 
         private readonly string _screenShotPath;
 
-        private readonly Type _testAttributeType;
-
         /// <summary>
         /// Constructs a ContextFileCamera.
         /// </summary>
         /// <param name="screenshotPath">The file system directory to save the screenshots in</param>
-        /// <param name="testAttributeType">The type of attribute used to identify unit test, required for call stack parsing</param>
-        public ContextFileCamera(string screenshotPath, Type testAttributeType)
+        public ContextFileCamera(string screenshotPath)
         {
             _screenShotPath = screenshotPath;
-            _testAttributeType = testAttributeType;
 
             if (!Directory.Exists(_screenShotPath))
                 Directory.CreateDirectory(_screenShotPath);
@@ -47,12 +43,12 @@ namespace TestStack.Seleno.Configuration.Screenshots
         public void TakeScreenshot(string filename = null, Exception exception = null)
         {
             var frames = new StackTrace(1, true).GetFrames();
-            var testFrame = frames.FirstOrDefault(frame => frame.GetMethod().GetCustomAttributes(_testAttributeType, false).Any()) ?? frames.First();
+            var testFrame = GetTestFrame(frames);
             var relevantFrames = new List<StackFrame>(frames.TakeWhile(x => x != testFrame)) { testFrame };
             var firstFrame = relevantFrames.FirstOrDefault(x => x != testFrame);
 
             var screenshotFilename = string.Format("{0}{1}", testFrame.GetMethod().Name, firstFrame == null ? string.Empty : string.Concat("_", firstFrame.GetMethod().Name));
-            var screenshotPath = CreateValidPath(_screenShotPath, filename ?? screenshotFilename);
+            var screenshotPath = (filename == null) ? CreateValidPath(_screenShotPath, screenshotFilename) : Path.Combine(_screenShotPath, filename);
 
             var callstack = relevantFrames.Select(x => string.Format("{0}.{1}(), Line {2}", x.GetMethod().DeclaringType, x.GetMethod().Name, x.GetFileLineNumber()));
 
@@ -114,6 +110,28 @@ namespace TestStack.Seleno.Configuration.Screenshots
                     finalBitmap.Save(screenshotPath, ImageFormat.Png);
                 }
             }
+        }
+
+        private static StackFrame GetTestFrame(StackFrame[] frames)
+        {
+            foreach (var frame in frames)
+            {
+                var attributes = frame.GetMethod().GetCustomAttributes(false);
+                foreach (var attribute in attributes)
+                {
+                    switch (attribute.ToString())
+                    {
+                        case "xUnit.FactAttribute":
+                        case "xUnit.TheoryAttribute":
+                        case "NUnit.Framework.TestAttribute":
+                        case "NUnit.Framework.TestCaseAttribute":
+                        case "Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute":
+                            return frame;
+                    }
+                }
+            }
+
+            return frames.First();
         }
 
         private static string CreateValidPath(string path, string filename)
