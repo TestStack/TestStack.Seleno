@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using Castle.Core.Internal;
 using FluentAssertions;
 using NUnit.Framework;
@@ -38,7 +39,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         [Test]
         public void Closing_SelenoHost_should_close_Iis_Express()
         {
-            Process.GetProcessesByName(IisExpress).ForEach(StopProcess);
+            PatientlyStopProcess(IisExpress);
             Process.GetProcessesByName("chromedriver").ForEach(StopProcess);
 
             var selenoHost = new SelenoHost();
@@ -52,6 +53,18 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             Process.GetProcessesByName(IisExpress).Should().BeEmpty();
         }
 
+        private void PatientlyStopProcess(string processName)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Process.GetProcessesByName(processName).ForEach(StopProcess);
+                if (Process.GetProcessesByName(processName).Length > 0)
+                {
+                    Thread.Sleep(5000);
+                }
+            }
+
+        }
         private void StopProcess(Process process)
         {
             if (process == null)
