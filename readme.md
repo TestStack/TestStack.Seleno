@@ -27,6 +27,7 @@ If you are upgrading from an earlier version then note that there are a [number 
                 );
 			}
 		}
+	* `Name.Of.Your.Web.Project` is the path to the web project relative to the solution, not the name of the project or the assembly - if this is incorrect it may throw a `DirectoryNotFoundException`
 	* The `123456` is the port number you want the site to run on - it can be anything you want, just make it unique and unused
 	* The `c` variable is a fluent configurator - chain method calls off of it to configure the different parts of Seleno
 	* By default it uses Firefox so you will need to install that
