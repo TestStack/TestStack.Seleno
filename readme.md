@@ -97,7 +97,7 @@ If you are upgrading from an earlier version then note that there are a [number 
         }
 
 ## Tutorials / advanced usage
-Check out [our documentation](http://seleno.teststack.net/docs/introduction-to-seleno).
+Check out [our documentation](http://seleno.teststack.net/).
 
 ## Background information on Page Objects
 
