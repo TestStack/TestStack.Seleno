@@ -136,7 +136,8 @@ namespace TestStack.Seleno.PageObjects.Actions
                     .FindElements(Locators.By.jQuery(selector))
                     .Select(e => e.GetAttribute(PropertyNameAttribute)
                                   .Split('_')
-                                  .Last());
+                                  .Last())
+                    .ToList();
         }
 
 
