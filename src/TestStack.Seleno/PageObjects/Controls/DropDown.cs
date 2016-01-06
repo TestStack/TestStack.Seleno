@@ -21,7 +21,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public virtual void SelectElementByText(string optionText)
         {
-            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true)", Id, optionText.ToJavaScriptString());
+            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true).change()", Id, optionText.ToJavaScriptString());
             Execute.Script(scriptToExecute);
         }
 
