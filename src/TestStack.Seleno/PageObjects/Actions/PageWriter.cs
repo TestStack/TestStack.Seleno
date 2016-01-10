@@ -63,8 +63,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property.PropertyType);
 
-            _componentFactory.HtmlControlFor<TextBox>(propertyExpression)
-                .ReplaceInputValueWith(stringValue);
+			var ctrl = _componentFactory.HtmlControlFor<TextBox>(propertyExpression);
+            ctrl.ReplaceInputValueWith(stringValue);
         }
 
         public void Model(TModel viewModel, IDictionary<Type, Func<object, string>> propertyTypeHandling = null, params string[] propertyBlacklist)

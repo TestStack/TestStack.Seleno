@@ -37,12 +37,31 @@ namespace TestStack.Seleno.Configuration.WebServers
         {
             get { return string.Format("http://localhost:{0}", _application.PortNumber); }
         }
+
+		private static bool Is64BitProcess()
+		{
+			if (IntPtr.Size == 4)
+			{
+				return false;
+			}
+			else if (IntPtr.Size == 8)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		private static string GetProgramFilesPath()
+		{
+			var key = Environment.Is64BitOperatingSystem && !Is64BitProcess() ? "programfiles(x86)" : "programfiles";
+			var programfiles = Environment.GetEnvironmentVariable(key);
+			return programfiles;
+		}
         
         private static ProcessStartInfo ProcessStartInfo(WebApplication application)
         {
             // todo: grab stdout and/or stderr for logging purposes?
-            var key = Environment.Is64BitOperatingSystem ? "programfiles(x86)" : "programfiles";
-            var programfiles = Environment.GetEnvironmentVariable(key);
+			var programfiles = GetProgramFilesPath();
 
             var startInfo = new ProcessStartInfo
             {
