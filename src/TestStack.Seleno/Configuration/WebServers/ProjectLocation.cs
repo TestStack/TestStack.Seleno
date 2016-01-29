@@ -37,7 +37,7 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         private static string GetSolutionFolderPath(string basePath = null)
         {
-            var baseDir = basePath ?? AppDomain.CurrentDomain.RelativeSearchPath;
+            var baseDir = basePath ?? Environment.CurrentDirectory;
 
             var directory = new DirectoryInfo(baseDir);
 
