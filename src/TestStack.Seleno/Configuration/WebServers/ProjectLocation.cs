@@ -30,28 +30,36 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public static ProjectLocation FromFolder(string webProjectFolderName)
         {
-            string solutionFolder = GetSolutionFolderPath();
-            string projectPath = FindSubFolderPath(solutionFolder, webProjectFolderName);
+            var solutionFolder = GetSolutionFolderPath();
+            var projectPath = FindSubFolderPath(solutionFolder, webProjectFolderName);
             return new ProjectLocation(projectPath);
         }
 
-        private static string GetSolutionFolderPath()
+        private static string GetSolutionFolderPath(string basePath = null)
         {
-            var directory = new DirectoryInfo(Environment.CurrentDirectory);
+            var baseDir = basePath ?? AppDomain.CurrentDomain.RelativeSearchPath;
 
-            while (directory.GetFiles("*.sln").Length == 0)
+            var directory = new DirectoryInfo(baseDir);
+
+            while (directory != null && directory.GetFiles("*.sln").Length == 0)
             {
                 directory = directory.Parent;
             }
-            return directory.FullName;
+
+            return directory == null ? GetSolutionFolderPath(AppDomain.CurrentDomain.BaseDirectory) : directory.FullName;
         }
 
         private static string FindSubFolderPath(string rootFolderPath, string folderName)
         {
+            if (string.IsNullOrEmpty(rootFolderPath))
+            {
+                throw new DirectoryNotFoundException();
+            }
+
             var directory = new DirectoryInfo(rootFolderPath);
 
             directory = (directory.GetDirectories("*", SearchOption.AllDirectories)
-                .Where(folder => folder.Name.ToLower() == folderName.ToLower()))
+                .Where(folder => string.Equals(folder.Name, folderName, StringComparison.CurrentCultureIgnoreCase)))
                 .FirstOrDefault();
 
             if (directory == null)
