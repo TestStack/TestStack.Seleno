@@ -41,13 +41,12 @@ namespace TestStack.Seleno.Configuration.WebServers
 
             var directory = new DirectoryInfo(baseDir);
 
-            while (directory?.GetFiles("*.sln").Length == 0)
+            while (directory != null && directory.GetFiles("*.sln").Length == 0)
             {
                 directory = directory.Parent;
             }
 
-            return directory?.FullName ??
-                   GetSolutionFolderPath(AppDomain.CurrentDomain.BaseDirectory);
+            return directory == null ? GetSolutionFolderPath(AppDomain.CurrentDomain.BaseDirectory) : directory.FullName;
         }
 
         private static string FindSubFolderPath(string rootFolderPath, string folderName)
