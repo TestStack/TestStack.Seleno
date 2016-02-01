@@ -4,16 +4,13 @@ using System.Linq;
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    public interface IProjectLocation
-    {
-        string FullPath { get; }
-    }
-
+    /// <inheritdoc />
     public class ProjectLocation : IProjectLocation
     {
-        public string FullPath { get; private set; }
+        private static string[] _searchPaths;
 
-        private static string[] searchPaths;
+        /// <inheritdoc />
+        public string FullPath { get; private set; }
 
         private ProjectLocation(string fullPath)
         {
@@ -27,14 +24,14 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         }
 
-        public ProjectLocation(string[] test)
+        internal ProjectLocation(string[] test)
         {
-            searchPaths = test;
+            _searchPaths = test;
         }
 
         static ProjectLocation()
         {
-            searchPaths = new[]
+            _searchPaths = new[]
             {
                 Environment.CurrentDirectory,
                 AppDomain.CurrentDomain.RelativeSearchPath,
@@ -42,11 +39,20 @@ namespace TestStack.Seleno.Configuration.WebServers
             };
         }
 
+        /// <summary>
+        /// Returns the project location from the absolute file path to the web project.
+        /// </summary>
+        /// <param name="webProjectFullPath">The web project full path.</param>
+        /// <returns></returns>
         public static ProjectLocation FromPath(string webProjectFullPath)
         {
             return new ProjectLocation(webProjectFullPath);
         }
 
+        /// <summary>
+        /// Returns the project location from the folder name of the web project.
+        /// </summary>
+        /// <param name="webProjectFolderName">Name of the web project folder.</param>
         public static ProjectLocation FromFolder(string webProjectFolderName)
         {
             var solutionFolder = GetSolutionFolderPath();
@@ -71,7 +77,7 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         private static string GetSolutionFolderPath()
         {
-            foreach (var solutionPath in searchPaths.Select(FindSolution).Where(solutionPath => solutionPath != null))
+            foreach (var solutionPath in _searchPaths.Select(FindSolution).Where(solutionPath => solutionPath != null))
             {
                 return solutionPath.FullName;
             }
