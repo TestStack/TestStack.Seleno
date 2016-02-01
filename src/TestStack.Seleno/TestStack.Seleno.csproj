@@ -194,6 +194,6 @@
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(TargetDir)Combined"
 copy /y "$(TargetDir)$(TargetName).XML" "$(TargetDir)Combined\"
-"$(ProjectDir)..\packages\ilmerge.2.13.0307\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" "$(TargetDir)Holf.AllForOne.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"</PostBuildEvent>
+"$(ProjectDir)..\packages\ILMerge.2.14.1208\tools\ILMerge.exe" /internalize /v4 /target:library "$(TargetPath)" "$(TargetDir)Autofac.dll" "$(TargetDir)Microsoft.Web.Mvc.dll" "$(TargetDir)Holf.AllForOne.dll" /out:"$(TargetDir)Combined\TestStack.Seleno.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
