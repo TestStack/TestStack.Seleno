@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace TestStack.Seleno.PageObjects.Actions.Fields
 {
@@ -20,6 +22,7 @@ namespace TestStack.Seleno.PageObjects.Actions.Fields
         public ModelFieldValue(object value)
         {
             _value = value;
+            var test = 2.3d;
         }
 
         public bool HasMultipleValues { get { return _value as IEnumerable != null && _value.GetType() != typeof(string); } }
@@ -36,16 +39,25 @@ namespace TestStack.Seleno.PageObjects.Actions.Fields
             }
         }
 
+        private string ValueToStringWithInvariantCulture()
+        {
+            var toStringMethod = _value.GetType().GetMethod("ToString",
+                BindingFlags.Public | BindingFlags.Instance,
+                null, new[] {typeof (IFormatProvider)}, null);
+            if (toStringMethod != null)
+                return (string)toStringMethod.Invoke(_value, new object[] { CultureInfo.InvariantCulture });
+            return _value.ToString();
+        }
+
         public string Value
         {
             get
             {
-                var val = string.Empty;
                 if (HasMultipleValues)
-                    val = string.Join(",", Values);
-                else if (_value != null)
-                    val = _value is bool ? _value.ToString().ToLower() : _value.ToString();
-                return val;
+                    return string.Join(",", Values);
+                if (_value is bool)
+                    return _value.ToString().ToLower();
+                return _value != null ? ValueToStringWithInvariantCulture() : string.Empty;
             }
         }
 

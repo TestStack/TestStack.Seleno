@@ -4,13 +4,12 @@ using System.Linq;
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    public interface IProjectLocation
-    {
-        string FullPath { get; }
-    }
-
+    /// <inheritdoc />
     public class ProjectLocation : IProjectLocation
     {
+        private static string[] _searchPaths;
+
+        /// <inheritdoc />
         public string FullPath { get; private set; }
 
         private ProjectLocation(string fullPath)
@@ -20,14 +19,40 @@ namespace TestStack.Seleno.Configuration.WebServers
             {
                 throw new DirectoryNotFoundException();
             }
+
             FullPath = fullPath;
+
         }
 
+        internal ProjectLocation(string[] test)
+        {
+            _searchPaths = test;
+        }
+
+        static ProjectLocation()
+        {
+            _searchPaths = new[]
+            {
+                Environment.CurrentDirectory,
+                AppDomain.CurrentDomain.RelativeSearchPath,
+                AppDomain.CurrentDomain.BaseDirectory
+            };
+        }
+
+        /// <summary>
+        /// Returns the project location from the absolute file path to the web project.
+        /// </summary>
+        /// <param name="webProjectFullPath">The web project full path.</param>
+        /// <returns></returns>
         public static ProjectLocation FromPath(string webProjectFullPath)
         {
             return new ProjectLocation(webProjectFullPath);
         }
 
+        /// <summary>
+        /// Returns the project location from the folder name of the web project.
+        /// </summary>
+        /// <param name="webProjectFolderName">Name of the web project folder.</param>
         public static ProjectLocation FromFolder(string webProjectFolderName)
         {
             var solutionFolder = GetSolutionFolderPath();
@@ -35,25 +60,36 @@ namespace TestStack.Seleno.Configuration.WebServers
             return new ProjectLocation(projectPath);
         }
 
-        private static string GetSolutionFolderPath(string basePath = null)
+        private static DirectoryInfo FindSolution(string path)
         {
-            var baseDir = basePath ?? Environment.CurrentDirectory;
+            if (string.IsNullOrEmpty(path))
+                return null;
 
-            var directory = new DirectoryInfo(baseDir);
+            var directory = new DirectoryInfo(path);
 
             while (directory != null && directory.GetFiles("*.sln").Length == 0)
             {
                 directory = directory.Parent;
             }
 
-            return directory == null ? GetSolutionFolderPath(AppDomain.CurrentDomain.BaseDirectory) : directory.FullName;
+            return directory;
+        }
+
+        private static string GetSolutionFolderPath()
+        {
+            foreach (var solutionPath in _searchPaths.Select(FindSolution).Where(solutionPath => solutionPath != null))
+            {
+                return solutionPath.FullName;
+            }
+
+            throw new SelenoException("Could not locate applications solution file.");
         }
 
         private static string FindSubFolderPath(string rootFolderPath, string folderName)
         {
             if (string.IsNullOrEmpty(rootFolderPath))
             {
-                throw new DirectoryNotFoundException();
+                throw new DirectoryNotFoundException(rootFolderPath);
             }
 
             var directory = new DirectoryInfo(rootFolderPath);
@@ -64,7 +100,7 @@ namespace TestStack.Seleno.Configuration.WebServers
 
             if (directory == null)
             {
-                throw new DirectoryNotFoundException();
+                throw new DirectoryNotFoundException(rootFolderPath);
             }
 
             return directory.FullName;

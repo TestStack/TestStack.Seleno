@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using FluentAssertions;
 using NSubstitute;
 using OpenQA.Selenium;
@@ -26,9 +27,10 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Executor
 
         public void Then_it_should_throw_a_TimeOut_Exception()
         {
+            var timing = 0.001d.ToString(CultureInfo.CurrentCulture);
             _executeTimingOutScriptAction
                 .ShouldThrow<TimeoutException>()
-                .WithMessage("The predicate script took longer than 0.001 seconds to verify statement");
+                .WithMessage(string.Format("The predicate script took longer than {0} seconds to verify statement", timing));
         }
     }
 }

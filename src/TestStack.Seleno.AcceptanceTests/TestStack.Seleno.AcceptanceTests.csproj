@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Browsers\BrowserTests.cs" />
     <Compile Include="Configuration\ProcessLifecycleTests.cs" />
+    <Compile Include="Configuration\ProjectLocationTests.cs" />
     <Compile Include="PageObjects\NonExistentTestPage.cs" />
     <Compile Include="Configuration\SelenoApplicationTests.cs" />
     <Compile Include="Configuration\DomCaptureTests.cs" />

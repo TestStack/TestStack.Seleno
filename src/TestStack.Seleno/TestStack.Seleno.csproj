@@ -115,6 +115,7 @@
     <Compile Include="Configuration\Interceptors\SelenoReceivedException.cs" />
     <Compile Include="Configuration\Registration\UiComponentRegistrationSource.cs" />
     <Compile Include="Configuration\Registration\RegistrationExtensions.cs" />
+    <Compile Include="Configuration\WebServers\IProjectLocation.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SystemTime.cs" />
