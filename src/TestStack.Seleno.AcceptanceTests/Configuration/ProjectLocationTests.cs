@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
+using TestStack.Seleno.Configuration;
 using TestStack.Seleno.Configuration.WebServers;
 
 namespace TestStack.Seleno.AcceptanceTests.Configuration
@@ -13,7 +15,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         private string _webPath;
         private string _solutionFile;
         private readonly string _webAppName = "WebApp";
-        private readonly string _originalCurrentDirectory = Environment.CurrentDirectory;
+        private string _originalCurrentDirectory;
 
         private void DeleteDirectory(string path)
         {
@@ -31,16 +33,18 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             _rootPath = Path.GetTempPath() + @"Seleno";
             _webPath = _rootPath + @"\WebApp\bin";
             _solutionFile = _rootPath + @"\Test.sln";
+            _originalCurrentDirectory = Environment.CurrentDirectory;
 
             Directory.CreateDirectory(_webPath);
             File.Create(_solutionFile).Close();
 
             Directory.SetCurrentDirectory(_webPath);
 
-            ProjectLocation.SearchPaths = new[]
+            new ProjectLocation(new[]
             {
                 Environment.CurrentDirectory
-            };
+            });
+           
         }
 
         [TearDown]
@@ -48,10 +52,14 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         {
             // Change directory back, so that _rootPath is no longer locked by our process.
             Directory.SetCurrentDirectory(_originalCurrentDirectory);
-
-            File.Delete(_solutionFile);
-
+            File.Delete(_solutionFile);                              
             DeleteDirectory(_rootPath);
+            new ProjectLocation(new[]
+            {
+                Environment.CurrentDirectory,
+                AppDomain.CurrentDomain.RelativeSearchPath,
+                AppDomain.CurrentDomain.BaseDirectory
+            });
         }
 
         [Test]
@@ -63,12 +71,13 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         }
 
         [Test]
-        [ExpectedException(typeof(SolutionFileNotFoundException))]
         public void FromFile_should_raise_an_SolutionNotFoundException_when_no_solution_is_found()
         {
             File.Delete(_solutionFile);
 
-            ProjectLocation.FromFolder(_webAppName);
+            Action action = () => ProjectLocation.FromFolder(_webAppName);
+
+            action.ShouldThrow<SelenoException>();
         }
 
     }

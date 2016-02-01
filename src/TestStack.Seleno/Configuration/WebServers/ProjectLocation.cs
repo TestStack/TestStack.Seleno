@@ -4,13 +4,6 @@ using System.Linq;
 
 namespace TestStack.Seleno.Configuration.WebServers
 {
-    public class SolutionFileNotFoundException : Exception
-    {
-        public SolutionFileNotFoundException(string message) : base(message)
-        {
-        }
-    }
-
     public interface IProjectLocation
     {
         string FullPath { get; }
@@ -20,7 +13,7 @@ namespace TestStack.Seleno.Configuration.WebServers
     {
         public string FullPath { get; private set; }
 
-        public static string[] SearchPaths { get; set; }
+        private static string[] searchPaths;
 
         private ProjectLocation(string fullPath)
         {
@@ -32,7 +25,16 @@ namespace TestStack.Seleno.Configuration.WebServers
 
             FullPath = fullPath;
 
-            SearchPaths = new[]
+        }
+
+        public ProjectLocation(string[] test)
+        {
+            searchPaths = test;
+        }
+
+        static ProjectLocation()
+        {
+            searchPaths = new[]
             {
                 Environment.CurrentDirectory,
                 AppDomain.CurrentDomain.RelativeSearchPath,
@@ -69,12 +71,12 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         private static string GetSolutionFolderPath()
         {
-            foreach (var solutionPath in SearchPaths.Select(FindSolution).Where(solutionPath => solutionPath != null))
+            foreach (var solutionPath in searchPaths.Select(FindSolution).Where(solutionPath => solutionPath != null))
             {
                 return solutionPath.FullName;
             }
 
-            throw new SolutionFileNotFoundException("Could not locate solution file.");
+            throw new SelenoException("Could not locate applications solution file.");
         }
 
         private static string FindSubFolderPath(string rootFolderPath, string folderName)
