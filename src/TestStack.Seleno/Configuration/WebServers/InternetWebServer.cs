@@ -13,6 +13,6 @@ namespace TestStack.Seleno.Configuration.WebServers
 
         public void Stop() { }
 
-        public string BaseUrl { get; private set; }
+        public string BaseUrl { get; }
     }
 }

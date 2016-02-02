@@ -10,7 +10,7 @@ namespace TestStack.Seleno.Configuration.WebServers
         private static string[] _searchPaths;
 
         /// <inheritdoc />
-        public string FullPath { get; private set; }
+        public string FullPath { get; }
 
         private ProjectLocation(string fullPath)
         {
@@ -94,8 +94,8 @@ namespace TestStack.Seleno.Configuration.WebServers
 
             var directory = new DirectoryInfo(rootFolderPath);
 
-            directory = (directory.GetDirectories("*", SearchOption.AllDirectories)
-                .Where(folder => string.Equals(folder.Name, folderName, StringComparison.CurrentCultureIgnoreCase)))
+            directory = directory.GetDirectories("*", SearchOption.AllDirectories)
+                .Where(folder => string.Equals(folder.Name, folderName, StringComparison.CurrentCultureIgnoreCase))
                 .FirstOrDefault();
 
             if (directory == null)

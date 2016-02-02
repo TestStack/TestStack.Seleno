@@ -29,8 +29,9 @@ namespace TestStack.Seleno.PageObjects.Actions
             foreach (var property in type.GetProperties())
             {
                 var propertyName = property.Name;
-                var javascriptExtractor = string.Format(@"getValue();
-function getValue(){{var x = $('#{0}'); return x.is('span') ? x.text().trim() : x.val();}}", propertyName);
+                var javascriptExtractor =
+                    $@"getValue();
+function getValue(){{var x = $('#{propertyName}'); return x.is('span') ? x.text().trim() : x.val();}}";
 
                 var typedValue = _executor.ScriptAndReturn(javascriptExtractor, property.PropertyType);
 
@@ -65,13 +66,13 @@ function getValue(){{var x = $('#{0}'); return x.is('span') ? x.text().trim() : 
 
         public bool ExistsAndIsVisible<TField>(Expression<Func<TViewModel, TField>> propertySelector)
         {
-            var jquerySelector = string.Format("#{0}", ExpressionHelper.GetExpressionText(propertySelector));
+            var jquerySelector = $"#{ExpressionHelper.GetExpressionText(propertySelector)}";
             return ExistsAndIsVisible(By.jQuery(jquerySelector));
         }
         
         public bool ExistsAndIsVisible(By.jQueryBy jqueryBy)
         {
-            var elementIsVisibleScript = string.Format("${0}.is(':visible')", jqueryBy.Selector);
+            var elementIsVisibleScript = $"${jqueryBy.Selector}.is(':visible')";
             return _executor.ScriptAndReturn<bool>(elementIsVisibleScript);
         }
 

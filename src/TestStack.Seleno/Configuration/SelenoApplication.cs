@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using Autofac;
 using Castle.Core.Logging;
-using TestStack.Seleno.Configuration.Contracts;
 using OpenQA.Selenium;
+using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects;
 using TestStack.Seleno.PageObjects.Actions;
@@ -15,21 +15,16 @@ namespace TestStack.Seleno.Configuration
 {
     internal class SelenoApplication : ISelenoApplication
     {
-        private bool _initialised = false;
-        private bool _disposed = false;
+        private bool _initialised;
+        private bool _disposed;
 
-        private readonly ILogger _logger;
-        private readonly IWebServer _webServer;
-        private readonly IWebDriver _webDriver;
-        private readonly ICamera _camera;
-        private readonly IDomCapture _domCapture;
         private readonly IContainer _container;
 
-        public IWebDriver Browser { get { return _webDriver; } }
-        public ICamera Camera { get { return _camera; } }
-        public IDomCapture DomCapture { get { return _domCapture; } }
-        public ILogger Logger { get { return _logger; } }
-        public IWebServer WebServer { get { return _webServer; } }
+        public IWebDriver Browser { get; }
+        public ICamera Camera { get; }
+        public IDomCapture DomCapture { get; }
+        public ILogger Logger { get; }
+        public IWebServer WebServer { get; }
 
         /// <summary>
         /// Create a SelenoApplication
@@ -38,19 +33,19 @@ namespace TestStack.Seleno.Configuration
         public SelenoApplication(IContainer container)
         {
             _container = container;
-            _webDriver = _container.Resolve<IWebDriver>();
-            _camera = _container.Resolve<ICamera>();
-            _domCapture = _container.Resolve<IDomCapture>();
-            _logger = _container.Resolve<ILoggerFactory>().Create(GetType());
-            _webServer = _container.Resolve<IWebServer>();
+            Browser = _container.Resolve<IWebDriver>();
+            Camera = _container.Resolve<ICamera>();
+            DomCapture = _container.Resolve<IDomCapture>();
+            Logger = _container.Resolve<ILoggerFactory>().Create(GetType());
+            WebServer = _container.Resolve<IWebServer>();
         }
 
         public void Initialize()
         {
             _initialised = true;
-            _logger.Debug("Starting Webserver");
+            Logger.Debug("Starting Webserver");
             WebServer.Start();
-            _logger.Debug("Browsing to base URL");
+            Logger.Debug("Browsing to base URL");
             Browser.Navigate().GoToUrl(WebServer.BaseUrl);
         }
 
@@ -64,9 +59,9 @@ namespace TestStack.Seleno.Configuration
             if (_initialised)
             {
                 Browser.Close();
-                _logger.Debug("Browser closed");
+                Logger.Debug("Browser closed");
                 WebServer.Stop();
-                _logger.Debug("Webserver shutdown");
+                Logger.Debug("Webserver shutdown");
             }
 
             try
@@ -76,7 +71,7 @@ namespace TestStack.Seleno.Configuration
             catch (Exception ex)
             {
                 // Safari throws 'System.InvalidOperationException : No process is associated with this object.'
-                _logger.Warn(ex.Message);
+                Logger.Warn(ex.Message);
             }
         }
 

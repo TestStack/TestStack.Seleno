@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Castle.Core.Logging;
 using Castle.DynamicProxy;
 using TestStack.Seleno.Configuration.Contracts;

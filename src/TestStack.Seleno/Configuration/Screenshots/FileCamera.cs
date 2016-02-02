@@ -1,8 +1,6 @@
-using System;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
@@ -33,7 +31,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
                 Directory.CreateDirectory(_screenShotPath);
 
             var windowTitle = Browser.Title;
-            fileName = fileName ?? string.Format("{0}{1}.png", windowTitle, SystemTime.Now().ToFileTime()).Replace(':', '.');
+            fileName = fileName ?? $"{windowTitle}{SystemTime.Now().ToFileTime()}.png".Replace(':', '.');
             var outputPath = Path.Combine(_screenShotPath, fileName);
 
             var pathChars = Path.GetInvalidPathChars();

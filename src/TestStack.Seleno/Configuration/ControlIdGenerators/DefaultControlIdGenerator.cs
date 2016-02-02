@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
-using TestStack.Seleno.PageObjects.Controls;
 
 namespace TestStack.Seleno.Configuration.ControlIdGenerators
 {

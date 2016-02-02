@@ -50,8 +50,9 @@ namespace TestStack.Seleno.PageObjects.Locators
                 jQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/" + version + "/jquery.min.js";
 
             //Script to load jQuery from external site
-            var versionEnforceScript = version.ToLower() != "any" ? string.Format("if (typeof jQuery == 'function' && jQuery.fn.jquery != '{0}') jQuery.noConflict(true);", version)
-                                              : string.Empty;
+            var versionEnforceScript = version.ToLower() != "any" ?
+                $"if (typeof jQuery == 'function' && jQuery.fn.jquery != '{version}') jQuery.noConflict(true);"
+                : string.Empty;
             var loadingScript =
                 @"if (typeof jQuery != 'function')
                   {
@@ -128,8 +129,7 @@ namespace TestStack.Seleno.PageObjects.Locators
 
             if (element != null)
                 return element;
-            else
-                throw new NoSuchElementException("No element found with jQuery command: jQuery" + by.Selector);
+            throw new NoSuchElementException("No element found with jQuery command: jQuery" + @by.Selector);
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace TestStack.Seleno.Extensions
                 if (from == null)
                     return defaultValue;
 
-                if ((from as string) != null)
+                if (@from as string != null)
                 {
                     string value = from as string;
 
@@ -46,7 +46,7 @@ namespace TestStack.Seleno.Extensions
                         return defaultValue;
                 }
 
-                if ((from as IConvertible) != null)
+                if (@from as IConvertible != null)
                     return Convert.ChangeType(from, underlyingType);
 
                 if (returnType.IsAssignableFrom(from.GetType()))
@@ -57,8 +57,8 @@ namespace TestStack.Seleno.Extensions
                 if (converter.CanConvertTo(returnType))
                     return converter.ConvertTo(from, returnType);
 
-                if ((from as string) != null)
-                    return from.ToString().TryConvertTo<string>(returnType, defaultValue);
+                if (@from as string != null)
+                    return from.ToString().TryConvertTo(returnType, defaultValue);
             }
             catch
             {

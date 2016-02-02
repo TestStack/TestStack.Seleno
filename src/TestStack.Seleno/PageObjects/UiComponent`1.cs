@@ -13,21 +13,9 @@ namespace TestStack.Seleno.PageObjects
     public class UiComponent<TModel> : UiComponent
         where TModel : class, new()
     {
-        protected IPageReader<TModel> Read
-        {
-            get
-            {
-                return ComponentFactory.CreatePageReader<TModel>();
-            }
-        }
+        protected IPageReader<TModel> Read => ComponentFactory.CreatePageReader<TModel>();
 
-        protected IPageWriter<TModel> Input
-        {
-            get
-            {
-                return ComponentFactory.CreatePageWriter<TModel>();
-            }
-        }
+        protected IPageWriter<TModel> Input => ComponentFactory.CreatePageWriter<TModel>();
 
         protected THtmlControl HtmlControlFor<THtmlControl>(Expression<Func<TModel, Object>> propertySelector,
             TimeSpan maxWait = default(TimeSpan))

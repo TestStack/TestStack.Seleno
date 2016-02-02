@@ -5,10 +5,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 {
     public abstract class SelectableHtmlControl : HTMLControl
     {
-        public bool HasSelectedElement
-        {
-            get { return SelectedElement != null; }
-        }
+        public bool HasSelectedElement => SelectedElement != null;
 
         public virtual TProperty SelectedElementAs<TProperty>()
         {

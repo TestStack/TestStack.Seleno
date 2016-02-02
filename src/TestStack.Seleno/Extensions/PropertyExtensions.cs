@@ -57,8 +57,7 @@ namespace TestStack.Seleno.Extensions
             if (propInfo == null)
             {
                 throw new InvalidOperationException
-                    (String.Format("Expression '{0}' refers to a field, not a property.",
-                                   propertySelector));
+                    ($"Expression '{propertySelector}' refers to a field, not a property.");
             }
 
             return propInfo;

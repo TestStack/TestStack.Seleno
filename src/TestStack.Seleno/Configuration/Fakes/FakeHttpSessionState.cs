@@ -14,15 +14,9 @@ namespace TestStack.Seleno.Configuration.Fakes
             _sessionItems = sessionItems;
         }
 
-        public override int Count
-        {
-            get { return _sessionItems.Count; }
-        }
+        public override int Count => _sessionItems.Count;
 
-        public override NameObjectCollectionBase.KeysCollection Keys
-        {
-            get { return _sessionItems.Keys; }
-        }
+        public override NameObjectCollectionBase.KeysCollection Keys => _sessionItems.Keys;
 
         public override object this[string name]
         {

@@ -58,27 +58,15 @@ namespace TestStack.Seleno.Configuration.Fakes
             _items = new Dictionary<object, object>();
         }
 
-        public override HttpRequestBase Request
-        {
-            get
-            {
-                return _request ??
-                       new FakeHttpRequest(_relativeUrl, _method, _formParams, _queryStringParams, _cookies);
-            }
-        }
+        public override HttpRequestBase Request => _request ??
+                                                   new FakeHttpRequest(_relativeUrl, _method, _formParams, _queryStringParams, _cookies);
 
         public void SetRequest(HttpRequestBase request)
         {
             _request = request;
         }
 
-        public override HttpResponseBase Response
-        {
-            get
-            {
-                return _response ?? new FakeHttpResponse();
-            }
-        }
+        public override HttpResponseBase Response => _response ?? new FakeHttpResponse();
 
         public void SetResponse(HttpResponseBase response)
         {
@@ -91,19 +79,9 @@ namespace TestStack.Seleno.Configuration.Fakes
             set { _principal = value; }
         }
 
-        public override HttpSessionStateBase Session
-        {
-            get { return new FakeHttpSessionState(_sessionItems); }
-        }
+        public override HttpSessionStateBase Session => new FakeHttpSessionState(_sessionItems);
 
-        public override IDictionary Items
-        {
-            get
-            {
-                return _items;
-            }
-        }
-
+        public override IDictionary Items => _items;
 
         public override bool SkipAuthorization { get; set; }
 

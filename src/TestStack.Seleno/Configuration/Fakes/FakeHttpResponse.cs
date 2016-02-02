@@ -7,10 +7,7 @@ namespace TestStack.Seleno.Configuration.Fakes
     {
         private readonly StringBuilder _outputString = new StringBuilder();
 
-        public string ResponseOutput
-        {
-            get { return _outputString.ToString(); }
-        }
+        public string ResponseOutput => _outputString.ToString();
 
         public override int StatusCode { get; set; }
 

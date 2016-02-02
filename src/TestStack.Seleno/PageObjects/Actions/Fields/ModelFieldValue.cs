@@ -25,7 +25,7 @@ namespace TestStack.Seleno.PageObjects.Actions.Fields
             var test = 2.3d;
         }
 
-        public bool HasMultipleValues { get { return _value as IEnumerable != null && _value.GetType() != typeof(string); } }
+        public bool HasMultipleValues => _value as IEnumerable != null && _value.GetType() != typeof(string);
 
         public IEnumerable<string> Values
         {
@@ -61,9 +61,6 @@ namespace TestStack.Seleno.PageObjects.Actions.Fields
             }
         }
 
-        public bool IsTrue
-        {
-            get { return _value as bool? == true; }
-        }
+        public bool IsTrue => _value as bool? == true;
     }
 }

@@ -15,7 +15,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         public ElementFinder(IWebDriver browser)
         {
             if (browser == null)
-                throw new ArgumentNullException("browser");
+                throw new ArgumentNullException(nameof(browser));
             Browser = browser;
         }
 

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Web.Routing;
 using Autofac;
 using Castle.Core.Logging;
@@ -52,7 +51,7 @@ namespace TestStack.Seleno.Configuration
 
         private IContainer BuildContainer()
         {
-            ContainerBuilder.Register(c => new ProxyGenerator(disableSignedModule: true))
+            ContainerBuilder.Register(c => new ProxyGenerator(true))
                 .SingleInstance();
             ContainerBuilder.RegisterProxiedClass<ElementFinder, IElementFinder>();
             ContainerBuilder.RegisterProxiedClass<Executor, IExecutor>();

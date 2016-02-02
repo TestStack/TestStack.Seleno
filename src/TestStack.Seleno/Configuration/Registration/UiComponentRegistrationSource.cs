@@ -12,7 +12,7 @@ namespace TestStack.Seleno.Configuration.Registration
         public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
         {
             if (service == null)
-                throw new ArgumentNullException("service");
+                throw new ArgumentNullException(nameof(service));
 
             var typedService = service as TypedService;
             if (typedService == null || !typeof(UiComponent).IsAssignableFrom(typedService.ServiceType))
@@ -26,6 +26,6 @@ namespace TestStack.Seleno.Configuration.Registration
             return new[] { rb.CreateRegistration() };
         }
 
-        public bool IsAdapterForIndividualComponents { get { return false; } }
+        public bool IsAdapterForIndividualComponents => false;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
@@ -25,8 +24,8 @@ namespace TestStack.Seleno.Configuration.DomCaptures
             if (!Directory.Exists(_capturePath))
                 Directory.CreateDirectory(_capturePath);
 
-            var windowTitle = this.Browser.Title;
-            fileName = (fileName ?? string.Format("{0}{1}.html", windowTitle, SystemTime.Now().ToFileTime()).Replace(':', '.'));
+            var windowTitle = Browser.Title;
+            fileName = fileName ?? $"{windowTitle}{SystemTime.Now().ToFileTime()}.html".Replace(':', '.');
 
             var outputPath = Path.Combine(_capturePath, fileName);
             var pathChars = Path.GetInvalidPathChars();
