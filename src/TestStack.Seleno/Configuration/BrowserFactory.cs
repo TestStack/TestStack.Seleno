@@ -157,9 +157,7 @@ namespace TestStack.Seleno.Configuration
         /// </summary>
         /// <param name="expectedExecutableName">The name of the expected executable to be embedded in the assembly</param>
         public WebDriverNotFoundException(string expectedExecutableName)
-            : base(string.Format("Could not find configured web driver; you need to embed an executable with the filename {0}.",
-                expectedExecutableName
-            ))
+            : base($"Could not find configured web driver; you need to embed an executable with the filename {expectedExecutableName}.")
         {}
     }
 
@@ -174,7 +172,7 @@ namespace TestStack.Seleno.Configuration
         /// <param name="expectedBrowser">The name of the expected browser</param>
         /// <param name="innerException">The exception that indicated the browser couldn't be found</param>
         public BrowserNotFoundException(string expectedBrowser, Exception innerException)
-            : base(string.Format("Could not find browser: {0}.", expectedBrowser), innerException)
+            : base($"Could not find browser: {expectedBrowser}.", innerException)
         { }
     }
 }

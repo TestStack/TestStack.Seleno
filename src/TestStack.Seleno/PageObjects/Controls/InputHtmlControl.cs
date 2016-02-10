@@ -4,20 +4,17 @@ namespace TestStack.Seleno.PageObjects.Controls
 {
     public abstract class InputHtmlControl : HTMLControl
     {
-        public string Value
-        {
-            get { return ValueAs<string>(); }
-        }
-        
+        public string Value => ValueAs<string>();
+
         public virtual TReturn ValueAs<TReturn>()
         {
-            var scriptToExecute = string.Format(@"$('[name=""{0}""]').val()", Name);
+            var scriptToExecute = $@"$('[name=""{Name}""]').val()";
             return Execute.ScriptAndReturn<TReturn>(scriptToExecute);
         }
 
         public void ReplaceInputValueWith<TProperty>(TProperty inputValue)
         {
-            var scriptToExecute = string.Format(@"$('[name=""{0}""]').val(""{1}"")", Name, inputValue.ToString().ToJavaScriptString());
+            var scriptToExecute = $@"$('[name=""{Name}""]').val(""{inputValue.ToString().ToJavaScriptString()}"")";
             Execute.Script(scriptToExecute);
         }
     }

@@ -23,7 +23,7 @@
 
             public jQueryBy(string selector)
             {
-                this.Selector = selector;
+                Selector = selector;
             }
 
             public jQueryBy Html(string selector = "")
@@ -146,7 +146,7 @@
                     selector += ",\"" + additionalArg + "\"";
 
                 //Add either: .func() or .func("selector") to original selector
-                return new jQueryBy(this.Selector + "." + func + "(" + selector + ")");
+                return new jQueryBy(Selector + "." + func + "(" + selector + ")");
             }
         }
     }

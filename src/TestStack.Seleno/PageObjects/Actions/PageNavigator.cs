@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Routing;
+using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Configuration.Fakes;
-using Microsoft.Web.Mvc;
-using OpenQA.Selenium;
+using ExpressionHelper = Microsoft.Web.Mvc.Internal.ExpressionHelper;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -20,8 +20,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public PageNavigator(IWebDriver browser, IExecutor executor, IWebServer webServer, IComponentFactory componentFactory, RouteCollection routeCollection)
         {
-            if (browser == null) throw new ArgumentNullException("browser");
-            if (executor == null) throw new ArgumentNullException("executor");
+            if (browser == null) throw new ArgumentNullException(nameof(browser));
+            if (executor == null) throw new ArgumentNullException(nameof(executor));
             Browser = browser;
             _executor = executor;
             _webServer = webServer;
@@ -59,7 +59,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         {
             var requestContext = new RequestContext(FakeHttpContext.Root(), new RouteData());
 
-            var actionRouteValues = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+            var actionRouteValues = ExpressionHelper.GetRouteValuesFromExpression(action);
             if (routeValues != null)
                 foreach (var v in routeValues)
                     actionRouteValues[v.Key] = v.Value;

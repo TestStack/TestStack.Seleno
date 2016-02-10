@@ -1,18 +1,18 @@
 ﻿using OpenQA.Selenium;
-using By = TestStack.Seleno.PageObjects.Locators.By;
 using TestStack.Seleno.Extensions;
+using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
     public class DropDown : SelectableHtmlControl
     {
-        public virtual string SelectedElementText { get { return SelectedElement.Text; } }
+        public virtual string SelectedElementText => SelectedElement.Text;
 
         public override IWebElement SelectedElement
         {
             get
             {
-                var selector = string.Format("#{0} option:selected", Id);
+                var selector = $"#{Id} option:selected";
                 return Find.Element(By.jQuery(selector), WaitUntilElementAvailable);
             }
         }
@@ -21,13 +21,14 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         public virtual void SelectElementByText(string optionText)
         {
-            var scriptToExecute = string.Format("$('#{0} option:contains(\"{1}\")').attr('selected',true).change()", Id, optionText.ToJavaScriptString());
+            var scriptToExecute =
+                $"$('#{Id} option:contains(\"{optionText.ToJavaScriptString()}\")').attr('selected',true).change()";
             Execute.Script(scriptToExecute);
         }
 
         public override void SelectElement<TProperty>(TProperty value)
         {
-            var scriptToExecute = string.Format("$('#{0}').val('{1}')", Id, value.ToString().ToJavaScriptString());
+            var scriptToExecute = $"$('#{Id}').val('{value.ToString().ToJavaScriptString()}')";
             Execute.Script(scriptToExecute);
         }
     }

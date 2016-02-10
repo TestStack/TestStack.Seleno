@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
@@ -46,12 +47,12 @@ namespace TestStack.Seleno.Extensions
 
         public static void WaitForSeconds(this IWebDriver driver, int seconds)
         {
-            System.Threading.Thread.Sleep(seconds * 1000);
+            Thread.Sleep(seconds * 1000);
         }
 
         public static void WaitForMilliseconds(this IWebDriver driver, int milliseconds)
         {
-            System.Threading.Thread.Sleep(milliseconds);
+            Thread.Sleep(milliseconds);
         }
 
         public static TReturn ExecuteScriptAndReturn<TReturn>(this IWebDriver driver, string javascriptToBeExecuted)

@@ -1,7 +1,6 @@
-﻿using System.Web.Mvc;
-using OpenQA.Selenium;
-using By = TestStack.Seleno.PageObjects.Locators.By;
+﻿using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
+using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Controls
 {
@@ -11,13 +10,13 @@ namespace TestStack.Seleno.PageObjects.Controls
         {
             get
             {
-                var selector = string.Format("input[type=radio][name='{0}']:checked", Name);
+                var selector = $"input[type=radio][name='{Name}']:checked";
 
                 return Find.OptionalElement(By.jQuery(selector));
             }
         }
 
-        public string Value { get { return ValueAs<string>(); }}
+        public string Value => ValueAs<string>();
 
         public TReturn ValueAs<TReturn>()
         {
@@ -32,12 +31,9 @@ namespace TestStack.Seleno.PageObjects.Controls
         public override void SelectElement<TProperty>(TProperty value)
         {
             // todo: Is the .toLowerCase needed?
-            var scriptToExecute = string.Format("$(\"input[type=radio][name='{0}'][value]\")" +
-                @".filter(function() {{return $(this).attr('value').toLowerCase() == ""{1}"".toLowerCase()}})" +
-                ".attr('checked', true)",
-                Name,
-                value.ToString().ToJavaScriptString()
-            );
+            var scriptToExecute = $"$(\"input[type=radio][name='{Name}'][value]\")" +
+                                  $@".filter(function() {{return $(this).attr('value').toLowerCase() == ""{value
+                                      .ToString().ToJavaScriptString()}"".toLowerCase()}})" + ".attr('checked', true)";
             Execute.Script(scriptToExecute);
         }
        

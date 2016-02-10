@@ -3,7 +3,6 @@ using System.Threading;
 using OpenQA.Selenium;
 using TestStack.Seleno.Configuration.Contracts;
 using TestStack.Seleno.Extensions;
-using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
@@ -15,9 +14,9 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public Executor(IJavaScriptExecutor javaScriptExecutor, IElementFinder finder, ICamera camera)
         {
-            if (javaScriptExecutor == null) throw new ArgumentNullException("javaScriptExecutor");
-            if (finder == null) throw new ArgumentNullException("finder");
-            if (camera == null) throw new ArgumentNullException("camera");
+            if (javaScriptExecutor == null) throw new ArgumentNullException(nameof(javaScriptExecutor));
+            if (finder == null) throw new ArgumentNullException(nameof(finder));
+            if (camera == null) throw new ArgumentNullException(nameof(camera));
             
             _javaScriptExecutor = javaScriptExecutor;
             _finder = finder;
@@ -60,7 +59,8 @@ namespace TestStack.Seleno.PageObjects.Actions
 
             if (!isComplete)
             {
-                throw new TimeoutException(string.Format("The predicate script took longer than {0} seconds to verify statement",maxWait.TotalSeconds));
+                throw new TimeoutException(
+                    $"The predicate script took longer than {maxWait.TotalSeconds} seconds to verify statement");
             }
         }
 

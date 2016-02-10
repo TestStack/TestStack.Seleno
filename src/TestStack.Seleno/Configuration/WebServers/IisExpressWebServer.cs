@@ -33,11 +33,8 @@ namespace TestStack.Seleno.Configuration.WebServers
             _webHostProcess.Dispose();
         }
 
-        public string BaseUrl
-        {
-            get { return string.Format("http://localhost:{0}", _application.PortNumber); }
-        }
-        
+        public string BaseUrl => $"http://localhost:{_application.PortNumber}";
+
         private static ProcessStartInfo ProcessStartInfo(WebApplication application)
         {
             // todo: grab stdout and/or stderr for logging purposes?
@@ -51,8 +48,8 @@ namespace TestStack.Seleno.Configuration.WebServers
                 LoadUserProfile = true,
                 CreateNoWindow = false,
                 UseShellExecute = false,
-                Arguments = String.Format("/path:\"{0}\" /port:{1}", application.Location.FullPath, application.PortNumber),
-                FileName = string.Format("{0}\\IIS Express\\iisexpress.exe", programfiles)
+                Arguments = $"/path:\"{application.Location.FullPath}\" /port:{application.PortNumber}",
+                FileName = $"{programfiles}\\IIS Express\\iisexpress.exe"
             };
 
             foreach (var variable in application.EnvironmentVariables)

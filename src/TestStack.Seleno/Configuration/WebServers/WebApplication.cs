@@ -31,10 +31,10 @@ namespace TestStack.Seleno.Configuration.WebServers
         public WebApplication(IProjectLocation location, int portNumber)
         {
             if (location == null)
-                throw new ArgumentNullException("location", "You must specify a location");
+                throw new ArgumentNullException(nameof(location), "You must specify a location");
 
             if (portNumber <= 0)
-                throw new ArgumentOutOfRangeException("portNumber", portNumber, "portNumber must be greater than zero");
+                throw new ArgumentOutOfRangeException(nameof(portNumber), portNumber, "portNumber must be greater than zero");
 
             Location = location;
             PortNumber = portNumber;

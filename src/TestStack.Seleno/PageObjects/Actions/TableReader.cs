@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
-using OpenQA.Selenium;
 using By = TestStack.Seleno.PageObjects.Locators.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
@@ -69,10 +69,7 @@ namespace TestStack.Seleno.PageObjects.Actions
         /// </summary>
         /// <param name="rowNumber">number of the row 1 based</param>
         /// <returns></returns>
-        public TViewModel this[int rowNumber]
-        {
-            get { return GetRowAt(rowNumber); }
-        }
+        public TViewModel this[int rowNumber] => GetRowAt(rowNumber);
 
         public long NumberOfRows
         {
@@ -80,7 +77,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             {
                 if (!_numberOfRows.HasValue)
                 {
-                    _numberOfRows = Browser.ExecuteScriptAndReturn<long>(string.Format("$('#{0} tbody tr').size()", _gridId));
+                    _numberOfRows = Browser.ExecuteScriptAndReturn<long>($"$('#{_gridId} tbody tr').size()");
                 }
 
                 return _numberOfRows.Value;
@@ -129,11 +126,11 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         private IEnumerable<String> GetColumnNames()
         {
-            var selector = String.Format("#{0} thead th[{1}]", _gridId, PropertyNameAttribute);
+            var selector = $"#{_gridId} thead th[{PropertyNameAttribute}]";
 
             return
                 Browser
-                    .FindElements(Locators.By.jQuery(selector))
+                    .FindElements(By.jQuery(selector))
                     .Select(e => e.GetAttribute(PropertyNameAttribute)
                                   .Split('_')
                                   .Last())
@@ -150,11 +147,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         string GetCellSelector(int rowIndex, string propertyName)
         {
-            var selector = String.Format("#{0} tr:eq({1}) td[{2}$='{3}']",
-                                         _gridId,
-                                         rowIndex,
-                                         PropertyNameAttribute,
-                                         propertyName);
+            var selector = $"#{_gridId} tr:eq({rowIndex}) td[{PropertyNameAttribute}$='{propertyName}']";
 
             return selector;
         }
@@ -164,8 +157,7 @@ namespace TestStack.Seleno.PageObjects.Actions
             if (property.PropertyType == typeof(bool))
             {
                 var javaScriptCheckBoxStateRetriever =
-                    string.Format("$(\"{0} input[type=checkbox]\").is(':checked')",
-                                  GetCellSelector(rowIndex, property.Name));
+                    $"$(\"{GetCellSelector(rowIndex, property.Name)} input[type=checkbox]\").is(':checked')";
 
                 return Browser.ExecuteScriptAndReturn<bool>(javaScriptCheckBoxStateRetriever);
 

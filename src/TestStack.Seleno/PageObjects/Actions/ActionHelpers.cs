@@ -4,12 +4,13 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using TestStack.Seleno.Extensions;
 using TestStack.Seleno.PageObjects.Locators;
+using By = OpenQA.Selenium.By;
 
 namespace TestStack.Seleno.PageObjects.Actions
 {
     public static class ActionHelpers
     {
-        public static IWebElement PerformActionOn(this IWebDriver browser, OpenQA.Selenium.By by, Action<IWebElement> actionToPerform)
+        public static IWebElement PerformActionOn(this IWebDriver browser, By by, Action<IWebElement> actionToPerform)
         {
             var element = browser.FindElement(@by);
 
@@ -80,7 +81,7 @@ namespace TestStack.Seleno.PageObjects.Actions
 
         public static long GetSelectionLength(this IWebDriver browser, string jquerySelector)
         {
-            return browser.ExecuteScriptAndReturn<long>(string.Format("$('{0}').getSelection().length", jquerySelector));
+            return browser.ExecuteScriptAndReturn<long>($"$('{jquerySelector}').getSelection().length");
         }
 
         public static void SetCursorFocusOnAt(this IWebDriver browser, string jquerySelector, int caretPosition = 0)

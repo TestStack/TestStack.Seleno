@@ -94,7 +94,7 @@ namespace TestStack.Seleno.Configuration
         private ISelenoApplication CreateApplication(Action<IAppConfigurator> configure)
         {
             if (configure == null)
-                throw new ArgumentNullException("configure");
+                throw new ArgumentNullException(nameof(configure));
 
             if (Application != null)
                 throw new SelenoException("You have already created a Seleno application; Seleno currently only supports one application at a time per app domain");
