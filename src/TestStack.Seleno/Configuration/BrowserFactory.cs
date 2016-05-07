@@ -71,7 +71,7 @@ namespace TestStack.Seleno.Configuration
         public static FirefoxDriver FireFox()
         {
             return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver())
-                .WithProcessName("firefox");
+                .WithProcessNames("firefox");
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace TestStack.Seleno.Configuration
         public static FirefoxDriver FireFox(FirefoxProfile profile)
         {
             return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(profile))
-                .WithProcessName("firefox");
+                .WithProcessNames("firefox");
         }
 
         /// <summary>
@@ -128,9 +128,10 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer()
         {
-            var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+            var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true, IgnoreZoomLevel = true};
             return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
-                .WithFileName("IEDriverServer.exe");
+                .WithFileName("IEDriverServer.exe")
+                .WithProcessNames("IEDriverServer", "iexplore");
         }
 
         /// <summary>
@@ -142,7 +143,8 @@ namespace TestStack.Seleno.Configuration
         public static InternetExplorerDriver InternetExplorer(InternetExplorerOptions options)
         {
             return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
-                .WithFileName("IEDriverServer.exe");
+                .WithFileName("IEDriverServer.exe")
+                .WithProcessNames("IEDriverServer", "iexplore");
         }
 
     }

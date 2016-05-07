@@ -25,13 +25,14 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
         {
             Process.GetProcessesByName(driverName).ForEach(StopProcess);
-            var selenoHost = new SelenoHost();
-            Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
-            selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
-                c => c.WithRemoteWebDriver(driver));
-            Process.GetProcessesByName(driverName).Length.Should().Be(1);
 
-            selenoHost.Dispose();
+            using (var selenoHost = new SelenoHost())
+            {
+                Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
+                selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
+                    c => c.WithRemoteWebDriver(driver));
+                Process.GetProcessesByName(driverName).Length.Should().Be(1);
+            }
 
             Process.GetProcessesByName(driverName).Should().BeEmpty();
         }
