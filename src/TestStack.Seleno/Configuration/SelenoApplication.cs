@@ -19,8 +19,13 @@ namespace TestStack.Seleno.Configuration
         private bool _disposed;
 
         private readonly IContainer _container;
+        private IWebDriver _browser;
 
-        public IWebDriver Browser { get; }
+        public IWebDriver Browser
+        {
+            get { return _browser ?? (_browser = _container.Resolve<IWebDriver>()); }
+        }
+
         public ICamera Camera { get; }
         public IDomCapture DomCapture { get; }
         public ILogger Logger { get; }
@@ -33,7 +38,6 @@ namespace TestStack.Seleno.Configuration
         public SelenoApplication(IContainer container)
         {
             _container = container;
-            Browser = _container.Resolve<IWebDriver>();
             Camera = _container.Resolve<ICamera>();
             DomCapture = _container.Resolve<IDomCapture>();
             Logger = _container.Resolve<ILoggerFactory>().Create(GetType());
