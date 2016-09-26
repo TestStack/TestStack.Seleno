@@ -74,13 +74,7 @@ namespace TestStack.Seleno.Configuration
         /// <param name="configure">Any configuration changes you would like to make</param>
         public void Run(Action<IAppConfigurator> configure)
         {
-            Action<IAppConfigurator> action = x =>
-            {
-                if (configure != null)
-                    configure(x);
-            };
-
-            Application = CreateApplication(action);
+            Application = CreateApplication(x => configure?.Invoke(x));
             AppDomain.CurrentDomain.DomainUnload += CurrentDomainDomainUnload;
         }
 
