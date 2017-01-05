@@ -23,7 +23,7 @@ namespace TestStack.Seleno.Configuration
 
         public WebDriverBuilder<T> WithFileName(string fileName)
         {
-            _fileName = fileName;
+            _fileName = AppDomain.CurrentDomain.BaseDirectory + fileName;
             return this;
         }
 
