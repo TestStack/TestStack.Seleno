@@ -32,7 +32,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Controls
 
         public void Then_it_should_throw_NoSuchElementException()
         {
-            _exceptionThrown = _selectedButtonInRadioGroupAction.ShouldThrow<NoSuchElementException>();
+            _exceptionThrown = _selectedButtonInRadioGroupAction.Should().Throw<NoSuchElementException>();
         }
 
         public void AndThen_exception_message_should_be_No_selected_radio_button_has_been_found()
