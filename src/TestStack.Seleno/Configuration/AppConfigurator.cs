@@ -28,7 +28,7 @@ namespace TestStack.Seleno.Configuration
         {
             UsingCamera(new NullCamera());
             UsingLoggerFactory(new NullLogFactory());
-            WithRemoteWebDriver(BrowserFactory.FireFox);
+            WithRemoteWebDriver(BrowserFactory.FireFoxHeadless);
             ContainerBuilder.Register(c => new IisExpressWebServer(WebApplication))
                 .As<IWebServer>().SingleInstance();
             UsingControlIdGenerator(new DefaultControlIdGenerator());

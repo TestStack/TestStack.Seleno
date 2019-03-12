@@ -51,14 +51,26 @@ namespace TestStack.Seleno.Configuration
         }
 
         /// <summary>
+        /// Returns an initialised Firefox Web Driver with headless mode enabled
+        /// </summary>
+        /// <returns>Initialised Firefox Web Driver</returns>
+        public static FirefoxDriver FireFoxHeadless()
+        {
+            var options = new FirefoxOptions();
+            options.AddArgument("-headless");
+
+            return FireFox(options);
+        }
+
+        /// <summary>
         /// Returns an initialised Firefox Web Driver.
         /// </summary>
         /// <remarks>You need to have Firefox installed on the machine running the test</remarks>
-        /// <param name="firefoxDriverService">Firefix driver service instance</param>
+        /// <param name="firefoxOptions">Custom options for the Firefox instance</param>
         /// <returns>Initialised Firefox driver</returns>
-        public static FirefoxDriver FireFox(FirefoxDriverService firefoxDriverService)
+        public static FirefoxDriver FireFox(FirefoxOptions firefoxOptions)
         {
-            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(firefoxDriverService))
+            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(firefoxOptions))
                 .WithProcessName("firefox");
         }
 
