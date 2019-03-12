@@ -67,30 +67,28 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         public void FromFolder_should_return_the_folder_of_web_application()
         {
             var solutionLocation = ProjectLocation.FromFolder(_webAppName);
-            solutionLocation.FullPath.ShouldBeEquivalentTo(_rootPath + @"\" + _webAppName);
+            solutionLocation.FullPath.Should().BeEquivalentTo(_rootPath + @"\" + _webAppName);
         }
 
         [Test]
         public void FromFolder_should_raise_a_SolutionNotFoundException_when_no_solution_is_found()
         {
             File.Delete(_solutionFile);
-            Action action = () => ProjectLocation.FromFolder(_webAppName);
-            action.ShouldThrow<SelenoException>();
+
+            Assert.Throws<SelenoException>(() => ProjectLocation.FromFolder(_webAppName));
         }
 
         [Test]
         public void FromFolder_should_raise_a_DirectoryNotFoundException_when_no_folder_is_found()
         {
-            Action action = () => ProjectLocation.FromFolder("non-existent-folder");
-            action.ShouldThrow<DirectoryNotFoundException>()
-                .WithMessage(_rootPath);
+            Assert.Throws<DirectoryNotFoundException>(()=> ProjectLocation.FromFolder("non-existent-folder"), _rootPath);
         }
 
         [Test]
         public void FromPath_should_return_the_path_to_web_application()
         {
             var solutionLocation = ProjectLocation.FromPath(_webApplicationPath);
-            solutionLocation.FullPath.ShouldBeEquivalentTo(_webApplicationPath);
+            solutionLocation.FullPath.Should().BeEquivalentTo(_webApplicationPath);
         }
     }
 }
