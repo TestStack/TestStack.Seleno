@@ -24,12 +24,13 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
             _expectedViewModel = expectedViewModel;
         }
 
-        public override bool Matches(object actualViewModel)
+        public override ConstraintResult ApplyTo<TActual>(TActual actualViewModel)
         {
             foreach (var property in actualViewModel.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 if (property.IsReadonly())
                     continue;
+
                 var expectedValue = property.GetValue(_expectedViewModel, null);
                 var actualValue = property.GetValue(actualViewModel, null);
 
@@ -39,12 +40,7 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Fixtures
                     Assert.That(actualValue, Is.EqualTo(expectedValue), property.Name);
             }
 
-            return true;
-        }
-
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            throw new System.NotImplementedException();
+            return new ConstraintResult(this, actualViewModel, true);
         }
     }
 

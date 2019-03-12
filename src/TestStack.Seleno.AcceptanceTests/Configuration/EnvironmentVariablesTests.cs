@@ -11,7 +11,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     {
         private SelenoHost _host;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
@@ -20,7 +20,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
                  .WithEnvironmentVariable("FunctionalTest", "SomeVal"));
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             _host.Dispose();

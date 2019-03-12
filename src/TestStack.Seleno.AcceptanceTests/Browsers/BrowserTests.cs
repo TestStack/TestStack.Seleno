@@ -36,14 +36,6 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         }
     }
 
-    class PhantomJSTest : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get { return BrowserFactory.PhantomJS(); }
-        }
-    }
-
     class FirefoxTest : BrowserTest
     {
         protected override RemoteWebDriver WebDriver

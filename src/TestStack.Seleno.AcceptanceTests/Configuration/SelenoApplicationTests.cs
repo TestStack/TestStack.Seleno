@@ -11,7 +11,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     {
         private SelenoHost _host;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
@@ -21,7 +21,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             _host.Application.Browser.Manage().Window.Size = new Size(750,750);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             _host.Dispose();

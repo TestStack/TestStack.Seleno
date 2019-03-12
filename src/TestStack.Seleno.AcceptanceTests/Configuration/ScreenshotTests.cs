@@ -18,7 +18,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         private SelenoHost _host;
         private const string CameraFolderPath = @"c:\screenshots";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
@@ -30,26 +30,30 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             );
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             _host.Dispose();
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromElementFinder()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithElementFinder();
+            Assert.Throws<SelenoReceivedException>(() =>
+            {
+                _host.NavigateToInitialPage<NonExistentTestPage>()
+                    .NavigateToNonExistentPageWithElementFinder();
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromPageNavigator()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithPageNavigator();
+            Assert.Throws<SelenoReceivedException>(() =>
+            {
+                _host.NavigateToInitialPage<NonExistentTestPage>()
+                    .NavigateToNonExistentPageWithPageNavigator();
+            });
         }
 
         [Test]
@@ -63,10 +67,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
 
             using (new TestableSystemTime(dateTime))
             {
-                Action result = () => _host.Application.TakeScreenshotAndThrow(imageName, errorMessage);
-
-                result.ShouldThrow<SelenoException>()
-                    .WithMessage(errorMessage);
+                Assert.Throws<SelenoException>(() => { _host.Application.TakeScreenshotAndThrow(imageName, errorMessage); }, errorMessage);
                 File.Exists(fileName).Should().BeTrue();
             }
         }
