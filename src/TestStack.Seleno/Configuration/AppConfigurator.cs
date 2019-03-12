@@ -103,7 +103,7 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.Register(c => webDriver())
                 .As<IWebDriver>().SingleInstance()
-                .OnActivated(a => a.Instance.Manage().Timeouts().ImplicitlyWait(_minimumWait));
+                .OnActivated(a => a.Instance.Manage().Timeouts().ImplicitWait = _minimumWait);
             return this;
         }
 

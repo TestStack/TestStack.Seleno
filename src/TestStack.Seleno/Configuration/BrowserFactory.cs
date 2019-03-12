@@ -3,7 +3,6 @@ using System.ComponentModel;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Safari;
 
 namespace TestStack.Seleno.Configuration
@@ -13,29 +12,6 @@ namespace TestStack.Seleno.Configuration
     /// </summary>
     public static class BrowserFactory
     {
-        /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS()
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver())
-                .WithFileName("phantomjs.exe");
-        }
-
-        /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <param name="options">Options to configure the driver</param>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver(options))
-                .WithFileName("phantomjs.exe");
-        }
-
         /// <summary>
         /// Returns an initialised Chrome Web Driver.
         /// </summary>
@@ -78,11 +54,11 @@ namespace TestStack.Seleno.Configuration
         /// Returns an initialised Firefox Web Driver.
         /// </summary>
         /// <remarks>You need to have Firefox installed on the machine running the test</remarks>
-        /// <param name="profile">Profile to use for the driver</param>
+        /// <param name="firefoxDriverService">Firefix driver service instance</param>
         /// <returns>Initialised Firefox driver</returns>
-        public static FirefoxDriver FireFox(FirefoxProfile profile)
+        public static FirefoxDriver FireFox(FirefoxDriverService firefoxDriverService)
         {
-            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(profile))
+            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(firefoxDriverService))
                 .WithProcessName("firefox");
         }
 
