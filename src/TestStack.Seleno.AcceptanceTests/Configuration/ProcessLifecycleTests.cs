@@ -15,7 +15,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     {
         private const string Chrome = "chromedriver";
         private const string IE = "IEDriverServer";
-        private const string Firefox = "firefox";
+        private const string Firefox = "geckodriver";
         private const string IisExpress = "iisexpress";
 
         [TestCase(Chrome)]
@@ -23,7 +23,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         [TestCase(Firefox)]
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
         {
-            Process.GetProcessesByName(driverName).As<List<Process>>().ForEach(StopProcess);
+            StopProcesses(driverName);
             var selenoHost = new SelenoHost();
             Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
