@@ -23,7 +23,10 @@ namespace TestStack.Seleno.AcceptanceTests.Web.Controllers
             }
             catch (Exception e)
             {
-                return new ContentResult {Content = e.ToString(), ContentType = "text/plain"};
+                return View("ExpectedFixtureAResult", new ExceptionViewModel
+                {
+                    Exception = e
+                });
             }
 
             return new EmptyResult();

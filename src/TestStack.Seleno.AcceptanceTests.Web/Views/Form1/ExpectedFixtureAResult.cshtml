@@ -1,0 +1,17 @@
+﻿@model TestStack.Seleno.AcceptanceTests.Web.ViewModels.ExceptionViewModel
+
+@if (Model.Exception != null)
+{
+    <div id="exception">
+        <h1>Exception</h1>
+        @Model.Exception.Message
+    </div>
+
+    if (Model.Exception.InnerException != null)
+    {
+        <div id="innerException">
+            <h2>Inner exception</h2>
+            @Model.Exception.InnerException.Message
+        </div>
+    }
+}
