@@ -61,7 +61,15 @@ namespace TestStack.Seleno.PageObjects.Actions
                 return;
             }
 
-            var stringValue = GetStringValue(propertyTypeHandling, propertyValue, property.PropertyType);
+            if (property.PropertyType == typeof(bool)
+                && property.PropertyType != typeof(bool?))
+            {
+                _componentFactory.HtmlControlFor<CheckBox>(propertyExpression)
+                    .SetPropertyValue("checked", propertyValue);
+                return;
+            }
+            var stringValue = property.PropertyType == typeof(bool?) ? GetStringValue(propertyTypeHandling, propertyValue, property.PropertyType).ToLower()
+                : GetStringValue(propertyTypeHandling, propertyValue, property.PropertyType);
 
             _componentFactory.HtmlControlFor<TextBox>(propertyExpression)
                 .ReplaceInputValueWith(stringValue);

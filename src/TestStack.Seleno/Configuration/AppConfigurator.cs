@@ -28,7 +28,7 @@ namespace TestStack.Seleno.Configuration
         {
             UsingCamera(new NullCamera());
             UsingLoggerFactory(new NullLogFactory());
-            WithRemoteWebDriver(BrowserFactory.FireFox);
+            WithRemoteWebDriver(BrowserFactory.FireFoxHeadless);
             ContainerBuilder.Register(c => new IisExpressWebServer(WebApplication))
                 .As<IWebServer>().SingleInstance();
             UsingControlIdGenerator(new DefaultControlIdGenerator());
@@ -103,7 +103,7 @@ namespace TestStack.Seleno.Configuration
         {
             ContainerBuilder.Register(c => webDriver())
                 .As<IWebDriver>().SingleInstance()
-                .OnActivated(a => a.Instance.Manage().Timeouts().ImplicitlyWait(_minimumWait));
+                .OnActivated(a => a.Instance.Manage().Timeouts().ImplicitWait = _minimumWait);
             return this;
         }
 

@@ -15,7 +15,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     {
         private const string Chrome = "chromedriver";
         private const string IE = "IEDriverServer";
-        private const string Firefox = "firefox";
+        private const string Firefox = "geckodriver";
         private const string IisExpress = "iisexpress";
 
         [TestCase(Chrome)]
@@ -23,7 +23,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         [TestCase(Firefox)]
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
         {
-            Process.GetProcessesByName(driverName).As<List<Process>>().ForEach(StopProcess);
+            StopProcesses(driverName);
             var selenoHost = new SelenoHost();
             Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
@@ -39,7 +39,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         public void Closing_SelenoHost_should_close_Iis_Express()
         {
             PatientlyStopProcess(IisExpress);
-            Process.GetProcessesByName("chromedriver").As<List<Process>>().ForEach(StopProcess);
+            StopProcesses("chromedriver");
 
             var selenoHost = new SelenoHost();
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
@@ -56,7 +56,7 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
         {
             for (int i = 0; i < 5; i++)
             {
-                Process.GetProcessesByName(processName).As<List<Process>>().ForEach(StopProcess);
+                StopProcesses(processName);
                 if (Process.GetProcessesByName(processName).Length > 0)
                 {
                     Thread.Sleep(5000);
@@ -64,6 +64,15 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             }
 
         }
+        
+        private void StopProcesses(string processName)
+        {
+            foreach (var process in Process.GetProcessesByName(processName))
+            {
+                StopProcess(process);
+            }
+        }
+        
         private void StopProcess(Process process)
         {
             if (process == null)

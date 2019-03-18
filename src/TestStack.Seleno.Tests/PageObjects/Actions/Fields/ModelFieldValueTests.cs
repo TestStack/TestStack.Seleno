@@ -154,7 +154,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
         }
 
         #region Setup Multiple Values
-        private IEnumerable<MultipleValuesTestCase> MultipleValuesTestCases()
+        static IEnumerable<MultipleValuesTestCase> MultipleValuesTestCases()
         {
             yield return new MultipleValuesTestCase { ModelValue = new object[] {}, ExpectedValue = string.Empty, ExpectedValues = new string[] {}};
             yield return new MultipleValuesTestCase { ModelValue = new [] {"1", "2", "3"}, ExpectedValue = "1,2,3", ExpectedValues = new[] {"1", "2", "3"}};
@@ -176,7 +176,7 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Fields
             }
         }
         #endregion
-        [TestCaseSource("MultipleValuesTestCases")]
+        [TestCaseSource(nameof(MultipleValuesTestCases))]
         public void EnumerableTests(MultipleValuesTestCase testCase)
         {
             new Multiple_values_ModelFieldValue_spec("Enumerable", testCase)
