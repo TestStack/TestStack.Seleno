@@ -1,4 +1,3 @@
-using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using OpenQA.Selenium;
@@ -42,7 +41,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
                 stringBuilder.Replace(item, '.');
 
             var screenShotPath = stringBuilder.ToString();
-            screenshot.SaveAsFile(screenShotPath, ImageFormat.Png);
+            screenshot.SaveAsFile(screenShotPath, ScreenshotImageFormat.Png);
         }
 
         public ITakesScreenshot ScreenshotTaker { get; set; }

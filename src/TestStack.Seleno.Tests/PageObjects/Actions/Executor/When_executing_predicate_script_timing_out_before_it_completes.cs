@@ -28,8 +28,9 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.Executor
         public void Then_it_should_throw_a_TimeOut_Exception()
         {
             var timing = 0.001d.ToString(CultureInfo.CurrentCulture);
+
             _executeTimingOutScriptAction
-                .ShouldThrow<TimeoutException>()
+                .Should().Throw<TimeoutException>()
                 .WithMessage(string.Format("The predicate script took longer than {0} seconds to verify statement", timing));
         }
     }

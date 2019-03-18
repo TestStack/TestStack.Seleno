@@ -8,7 +8,7 @@ namespace TestStack.Seleno.Samples.Movies.FunctionalTests
     public class AssemblySetupFixture
     {
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             InitializeBDDfyReport();

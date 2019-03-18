@@ -14,6 +14,7 @@ namespace TestStack.Seleno.PageObjects.Controls
 
         TReturn AttributeValueAs<TReturn>(string attributeName);
         void SetAttributeValue<TValue>(string attributeName, TValue value);
+        void SetPropertyValue<TValue>(string propertyValue, TValue value);
     }
     
     public abstract class HTMLControl : UiComponent, IHtmlControl
@@ -74,6 +75,11 @@ namespace TestStack.Seleno.PageObjects.Controls
         public void RemoveAttribute(string attributeName)
         {
             Execute.Script($"$('#{Id}').removeAttr('{attributeName}')");
+        }
+
+        public void SetPropertyValue<TValue>(string propertyName, TValue value)
+        {
+            Execute.Script($@"$('#{Id}').prop('{propertyName}', ""{value.ToString().ToJavaScriptString()}"")");
         }
 
         protected void AddOrRemoveAttribute(string attributeName, bool addOrRemove)
