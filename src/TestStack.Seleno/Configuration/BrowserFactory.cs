@@ -145,7 +145,7 @@ namespace TestStack.Seleno.Configuration
         /// </summary>
         /// <param name="expectedExecutableName">The name of the expected executable to be embedded in the assembly</param>
         public WebDriverNotFoundException(string expectedExecutableName)
-            : base($"Could not find configured web driver; you need to embed an executable with the filename {expectedExecutableName}.")
+            : base($"Could not find configured web driver; you need to add nuget package which adds the {expectedExecutableName} to your bin folder in your project.")
         {}
     }
 
