@@ -74,6 +74,15 @@ namespace TestStack.Seleno.Tests.PageObjects.Actions.PageWriter
                 }
                     .Initialize(a.Arg<LambdaExpression>())
                 );
+
+            SubstituteFor<IComponentFactory>()
+                .HtmlControlFor<CheckBox>(Arg.Any<LambdaExpression>())
+                .Returns(a => new CheckBox
+                {
+                    PageNavigator = SubstituteFor<IPageNavigator>(),
+                    Executor = SubstituteFor<IExecutor>(),
+                    ControlIdGenerator = _controlIdGenerator
+                }.Initialize(a.Arg<LambdaExpression>()));
         }
     }
 }
