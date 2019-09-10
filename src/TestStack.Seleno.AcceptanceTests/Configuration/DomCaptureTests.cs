@@ -12,44 +12,42 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
-
+	[TestFixture]
     class DomCaptureTests
     {
         private SelenoHost _host;
         private const string DomCaptureFolderPath = @"c:\domcapture";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
             _host.Run(x => x
                 .UsingDomCapture(DomCaptureFolderPath)
-                .WithWebServer(new InternetWebServer("http://www.google.com/"))
+                .WithWebServer(new InternetWebServer("https://www.google.com/"))
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
                 .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
             );
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTearDown()
         {
             _host.Dispose();
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
         public void CaptureDomFromElementFinder()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithElementFinder();
+            Assert.Throws<SelenoReceivedException>(() => _host.NavigateToInitialPage<NonExistentTestPage>()
+                .NavigateToNonExistentPageWithElementFinder());
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
         public void CaptureDomFromPageNavigator()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithPageNavigator();
+			Assert.Throws<SelenoReceivedException>(() => _host.NavigateToInitialPage<NonExistentTestPage>()
+                .NavigateToNonExistentPageWithPageNavigator());
         }
 
         [Test]
@@ -68,6 +66,8 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
                 result.ShouldThrow<SelenoException>()
                     .WithMessage(errorMessage);
                 File.Exists(fileName).Should().BeTrue();
+
+				// TODO: Delete the file
             }
         }
     }

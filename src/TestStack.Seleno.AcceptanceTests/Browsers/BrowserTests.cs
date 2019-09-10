@@ -44,23 +44,23 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         }
     }
 
-    //class IETest : BrowserTest
-    //{
-    //    protected override RemoteWebDriver WebDriver
-    //    {
-    //        get { return BrowserFactory.InternetExplorer(); }
-    //    }
-    //}
+	class IETest : BrowserTest
+	{
+		protected override RemoteWebDriver WebDriver
+		{
+			get { return BrowserFactory.InternetExplorer(); }
+		}
+	}
 
-    //class IETestWithOptions : BrowserTest
-    //{
-    //    protected override RemoteWebDriver WebDriver
-    //    {
-    //        get
-    //        {
-    //            var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-    //            return BrowserFactory.InternetExplorer(options);
-    //        }
-    //    }
-    //}
+	class IETestWithOptions : BrowserTest
+	{
+		protected override RemoteWebDriver WebDriver
+		{
+			get
+			{
+				var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+				return BrowserFactory.InternetExplorer(options);
+			}
+		}
+	}
 }

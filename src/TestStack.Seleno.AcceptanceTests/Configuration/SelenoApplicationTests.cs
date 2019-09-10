@@ -7,21 +7,22 @@ using TestStack.Seleno.Configuration.WebServers;
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
     [Explicit]
+	[TestFixture]
     class SelenoApplicationTests
     {
         private SelenoHost _host;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
             _host.Run(x => x
-                .WithWebServer(new InternetWebServer("http://www.google.com/"))
+                .WithWebServer(new InternetWebServer("https://www.google.com/"))
             );
             _host.Application.Browser.Manage().Window.Size = new Size(750,750);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             _host.Dispose();

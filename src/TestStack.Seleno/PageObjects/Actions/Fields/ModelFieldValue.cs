@@ -22,7 +22,6 @@ namespace TestStack.Seleno.PageObjects.Actions.Fields
         public ModelFieldValue(object value)
         {
             _value = value;
-            var test = 2.3d;
         }
 
         public bool HasMultipleValues => _value as IEnumerable != null && _value.GetType() != typeof(string);

@@ -8,7 +8,7 @@ namespace TestStack.Seleno.Tests
     [SetUpFixture]
     public class AssemblySetupFixtue
     {
-        [SetUp]
+        [OneTimeSetUp]
         public void InitialiseAppDomain()
         {
             Configurator.BatchProcessors.HtmlReport.Disable();
