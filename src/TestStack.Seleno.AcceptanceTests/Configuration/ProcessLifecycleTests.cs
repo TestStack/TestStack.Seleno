@@ -13,13 +13,13 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     class ProcessLifecycleTests
     {
         private const string Chrome = "chromedriver";
-        private const string IE = "IEDriverServer";
+        //private const string IE = "IEDriverServer";
         private const string Phantom = "phantomjs";
         private const string Firefox = "firefox";
         private const string IisExpress = "iisexpress";
 
         [TestCase(Chrome)]
-        [TestCase(IE)]
+        //[TestCase(IE)]
         [TestCase(Phantom)]
         [TestCase(Firefox)]
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
@@ -80,8 +80,8 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             {
                 case Chrome:
                     return BrowserFactory.Chrome;
-                case IE:
-                    return BrowserFactory.InternetExplorer;
+                //case IE:
+                //    return BrowserFactory.InternetExplorer;
                 case Phantom:
                     return BrowserFactory.PhantomJS;
                 case Firefox:

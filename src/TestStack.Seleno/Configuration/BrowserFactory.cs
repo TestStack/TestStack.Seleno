@@ -86,40 +86,40 @@ namespace TestStack.Seleno.Configuration
                 .WithProcessName("firefox");
         }
 
-        /// <summary>
-        /// Returns an initialised Safari Web Driver.
-        /// </summary>
-        /// <remarks>You need to have Safari installed on the machine running the test</remarks>
-        /// <returns>Initialised Safari driver</returns>
-        public static SafariDriver Safari()
-        {
-            try
-            {
-                return new SafariDriver();
-            }
-            catch (Win32Exception e)
-            {
-                throw new BrowserNotFoundException("Safari", e);
-            }
-        }
+        ///// <summary>
+        ///// Returns an initialised Safari Web Driver.
+        ///// </summary>
+        ///// <remarks>You need to have Safari installed on the machine running the test</remarks>
+        ///// <returns>Initialised Safari driver</returns>
+        //public static SafariDriver Safari()
+        //{
+        //    try
+        //    {
+        //        return new SafariDriver();
+        //    }
+        //    catch (Win32Exception e)
+        //    {
+        //        throw new BrowserNotFoundException("Safari", e);
+        //    }
+        //}
 
-        /// <summary>
-        /// Returns an initialised Safari Web Driver.
-        /// </summary>
-        /// <remarks>You need to have Safari installed on the machine running the test</remarks>
-        /// <param name="options">Profile to use for the driver</param>
-        /// <returns>Initialised Safari driver</returns>
-        public static SafariDriver Safari(SafariOptions options)
-        {
-            try
-            {
-                return new SafariDriver(options);
-            }
-            catch (Win32Exception e)
-            {
-                throw new BrowserNotFoundException("Safari", e);
-            }
-        }
+        ///// <summary>
+        ///// Returns an initialised Safari Web Driver.
+        ///// </summary>
+        ///// <remarks>You need to have Safari installed on the machine running the test</remarks>
+        ///// <param name="options">Profile to use for the driver</param>
+        ///// <returns>Initialised Safari driver</returns>
+        //public static SafariDriver Safari(SafariOptions options)
+        //{
+        //    try
+        //    {
+        //        return new SafariDriver(options);
+        //    }
+        //    catch (Win32Exception e)
+        //    {
+        //        throw new BrowserNotFoundException("Safari", e);
+        //    }
+        //}
 
         /// <summary>
         /// Returns an initialised 64-bit IE Web Driver.
