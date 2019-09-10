@@ -13,26 +13,41 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
     class ProcessLifecycleTests
     {
         private const string Chrome = "chromedriver";
-        //private const string IE = "IEDriverServer";
-        private const string Phantom = "phantomjs";
+        private const string IE = "IEDriverServer";
         private const string Firefox = "firefox";
         private const string IisExpress = "iisexpress";
 
         [TestCase(Chrome)]
-        //[TestCase(IE)]
-        [TestCase(Phantom)]
+        [TestCase(IE)]
         [TestCase(Firefox)]
         public void Closing_SelenoHost_should_close_child_browser(string driverName)
         {
+			// ARRANGE
             Process.GetProcessesByName(driverName).ForEach(StopProcess);
             var selenoHost = new SelenoHost();
             Func<RemoteWebDriver> driver = GetBrowserFactory(driverName);
             selenoHost.Run("TestStack.Seleno.AcceptanceTests.Web", 12346,
                 c => c.WithRemoteWebDriver(driver));
-            Process.GetProcessesByName(driverName).Length.Should().Be(1);
+			// Somehow, Firefox spawns 6 processes
+			const int NumberOfFirefoxProcesses = 6;
+			int NumberOfExpectedProcesses;
 
+			switch(driverName)
+			{
+				case Firefox:
+					NumberOfExpectedProcesses = NumberOfFirefoxProcesses;
+					break;
+				default:
+					NumberOfExpectedProcesses = 1;
+					break;
+			}
+
+			Process.GetProcessesByName(driverName).Length.Should().Be(NumberOfExpectedProcesses);
+
+			// ACT
             selenoHost.Dispose();
 
+			// ASSERT
             Process.GetProcessesByName(driverName).Should().BeEmpty();
         }
 
@@ -80,11 +95,9 @@ namespace TestStack.Seleno.AcceptanceTests.Configuration
             {
                 case Chrome:
                     return BrowserFactory.Chrome;
-                //case IE:
-                //    return BrowserFactory.InternetExplorer;
-                case Phantom:
-                    return BrowserFactory.PhantomJS;
-                case Firefox:
+				case IE:
+					return BrowserFactory.InternetExplorer;
+				case Firefox:
                     return BrowserFactory.FireFox;
             }
             return null;

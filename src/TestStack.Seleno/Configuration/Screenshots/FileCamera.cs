@@ -42,7 +42,7 @@ namespace TestStack.Seleno.Configuration.Screenshots
                 stringBuilder.Replace(item, '.');
 
             var screenShotPath = stringBuilder.ToString();
-            screenshot.SaveAsFile(screenShotPath, ImageFormat.Png);
+            screenshot.SaveAsFile(screenShotPath, ScreenshotImageFormat.Png);
         }
 
         public ITakesScreenshot ScreenshotTaker { get; set; }

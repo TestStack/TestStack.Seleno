@@ -1,10 +1,7 @@
 using System;
-using System.ComponentModel;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.PhantomJS;
-using OpenQA.Selenium.Safari;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -13,29 +10,6 @@ namespace TestStack.Seleno.Configuration
     /// </summary>
     public static class BrowserFactory
     {
-        /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS()
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver())
-                .WithFileName("phantomjs.exe");
-        }
-
-        /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <param name="options">Options to configure the driver</param>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver(options))
-                .WithFileName("phantomjs.exe");
-        }
-
         /// <summary>
         /// Returns an initialised Chrome Web Driver.
         /// </summary>
@@ -80,46 +54,11 @@ namespace TestStack.Seleno.Configuration
         /// <remarks>You need to have Firefox installed on the machine running the test</remarks>
         /// <param name="profile">Profile to use for the driver</param>
         /// <returns>Initialised Firefox driver</returns>
-        public static FirefoxDriver FireFox(FirefoxProfile profile)
+        public static FirefoxDriver FireFox(FirefoxOptions profile)
         {
             return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(profile))
                 .WithProcessName("firefox");
         }
-
-        ///// <summary>
-        ///// Returns an initialised Safari Web Driver.
-        ///// </summary>
-        ///// <remarks>You need to have Safari installed on the machine running the test</remarks>
-        ///// <returns>Initialised Safari driver</returns>
-        //public static SafariDriver Safari()
-        //{
-        //    try
-        //    {
-        //        return new SafariDriver();
-        //    }
-        //    catch (Win32Exception e)
-        //    {
-        //        throw new BrowserNotFoundException("Safari", e);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Returns an initialised Safari Web Driver.
-        ///// </summary>
-        ///// <remarks>You need to have Safari installed on the machine running the test</remarks>
-        ///// <param name="options">Profile to use for the driver</param>
-        ///// <returns>Initialised Safari driver</returns>
-        //public static SafariDriver Safari(SafariOptions options)
-        //{
-        //    try
-        //    {
-        //        return new SafariDriver(options);
-        //    }
-        //    catch (Win32Exception e)
-        //    {
-        //        throw new BrowserNotFoundException("Safari", e);
-        //    }
-        //}
 
         /// <summary>
         /// Returns an initialised 64-bit IE Web Driver.
