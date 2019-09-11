@@ -124,6 +124,7 @@ The usage of the Page Object design pattern creates a strong separation of conce
 ### Contributors
 * Franck Theolade (@Gwayaboy)
 * Rhys Campbell (@RhysC)
+* Sven Aelterman (@SvenAelterman)
 
 ## Problems / Contributions
 If you have any problems with Seleno, please [raise an issue](https://github.com/TestStack/TestStack.Seleno/issues). We are also happy to take pull requests; if you are thinking of contributing a major change feel free to raise an issue first and we can talk through and provide assistance.
