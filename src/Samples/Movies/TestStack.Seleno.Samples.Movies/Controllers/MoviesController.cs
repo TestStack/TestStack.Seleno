@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using AutoMapper;
+using TestStack.Seleno.Samples.Movies.Bootstrap;
 using TestStack.Seleno.Samples.Movies.Core.Domain;
 using TestStack.Seleno.Samples.Movies.Core.Services;
 using TestStack.Seleno.Samples.Movies.Core.Services.InMemoryDataProvider;
@@ -21,7 +21,7 @@ namespace TestStack.Seleno.Samples.Movies.Controllers
         public ActionResult Index()
         {
             var domain = _repository.GetAll().OrderBy(x => x.Title).ToList();
-            var list = Mapper.Map<IEnumerable<Movie>, IEnumerable<MovieListViewModel>>(domain);
+            var list = AutoMapperBootstrapper.map.Map<IEnumerable<Movie>, IEnumerable<MovieListViewModel>>(domain);
             return View(list);
         }
 

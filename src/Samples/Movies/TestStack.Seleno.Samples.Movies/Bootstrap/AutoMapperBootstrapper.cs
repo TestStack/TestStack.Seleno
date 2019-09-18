@@ -9,8 +9,17 @@ namespace TestStack.Seleno.Samples.Movies.Bootstrap
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Movie, MovieListViewModel>();
-            Mapper.AssertConfigurationIsValid();
+			var config = new MapperConfiguration(cfg =>
+				{
+					cfg.CreateMap<Movie, MovieListViewModel>();
+				}
+			);
+			//Mapper.
+			config.AssertConfigurationIsValid();
+			map = config.CreateMapper();
+            //mapper.AssertConfigurationIsValid();
         }
+
+		public static IMapper map;
     }
 }

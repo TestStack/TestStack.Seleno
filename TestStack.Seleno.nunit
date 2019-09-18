@@ -1,0 +1,10 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="src\TestStack.Seleno.Tests\bin\Debug\TestStack.Seleno.Tests.dll" />
+    <assembly path="src\TestStack.Seleno.Tests\bin\Debug\TestStack.Seleno.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="src\TestStack.Seleno.Tests\bin\Release\TestStack.Seleno.Tests.dll" />
+  </Config>
+</NUnitProject>

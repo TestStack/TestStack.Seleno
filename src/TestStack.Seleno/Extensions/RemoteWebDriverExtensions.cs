@@ -9,7 +9,7 @@ namespace TestStack.Seleno.Extensions
     {
         public static RemoteWebDriver SetImplicitTimeout(this RemoteWebDriver driver, int timeoutInSeconds)
         {
-            driver.Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, 0, timeoutInSeconds));
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 0, timeoutInSeconds);
             return driver;
         }
 

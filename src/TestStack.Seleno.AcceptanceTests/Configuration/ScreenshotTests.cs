@@ -12,44 +12,44 @@ using TestStack.Seleno.Tests.TestObjects;
 
 namespace TestStack.Seleno.AcceptanceTests.Configuration
 {
-
+	[TestFixture]
     class ScreenshotTest
     {
         private SelenoHost _host;
         private const string CameraFolderPath = @"c:\screenshots";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetup()
         {
             _host = new SelenoHost();
             _host.Run(x => x
                 .UsingCamera(CameraFolderPath)
-                .WithWebServer(new InternetWebServer("http://www.google.com/"))
+                .WithWebServer(new InternetWebServer("https://www.google.com/"))
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromMilliseconds(100))
                 .UsingLoggerFactory(new ConsoleFactory(LoggerLevel.Debug))
             );
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTeardown()
         {
             _host.Dispose();
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
+        //[ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromElementFinder()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithElementFinder();
+            Assert.Throws<SelenoReceivedException>(() => _host.NavigateToInitialPage<NonExistentTestPage>()
+                .NavigateToNonExistentPageWithElementFinder());
         }
 
         [Test]
-        [ExpectedException(typeof(SelenoReceivedException))]
+        //[ExpectedException(typeof(SelenoReceivedException))]
         public void TakeScreenshotFromPageNavigator()
         {
-            _host.NavigateToInitialPage<NonExistentTestPage>()
-                .NavigateToNonExistentPageWithPageNavigator();
+			Assert.Throws<SelenoReceivedException>(() => _host.NavigateToInitialPage<NonExistentTestPage>()
+                .NavigateToNonExistentPageWithPageNavigator());
         }
 
         [Test]

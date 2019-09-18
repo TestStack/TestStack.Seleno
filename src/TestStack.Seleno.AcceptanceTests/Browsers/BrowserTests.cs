@@ -20,27 +20,11 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
                 host.Run(
                     x =>
                     x.WithRemoteWebDriver(() => WebDriver)
-                     .WithWebServer(new InternetWebServer("http://www.google.com/")));
+                     .WithWebServer(new InternetWebServer("https://www.google.com/")));
                 var title = host.NavigateToInitialPage<Page>().Title;
 
                 Assert.That(title, Is.EqualTo("Google"));
             }
-        }
-    }
-
-    class SafariTest : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get { return BrowserFactory.Safari(); }
-        }
-    }
-
-    class PhantomJSTest : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get { return BrowserFactory.PhantomJS(); }
         }
     }
 
@@ -60,23 +44,23 @@ namespace TestStack.Seleno.AcceptanceTests.Browsers
         }
     }
 
-    class IETest : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get { return BrowserFactory.InternetExplorer(); }
-        }
-    }
+	class IETest : BrowserTest
+	{
+		protected override RemoteWebDriver WebDriver
+		{
+			get { return BrowserFactory.InternetExplorer(); }
+		}
+	}
 
-    class IETestWithOptions : BrowserTest
-    {
-        protected override RemoteWebDriver WebDriver
-        {
-            get
-            {
-                var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-                return BrowserFactory.InternetExplorer(options);
-            }
-        }
-    }
+	class IETestWithOptions : BrowserTest
+	{
+		protected override RemoteWebDriver WebDriver
+		{
+			get
+			{
+				var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+				return BrowserFactory.InternetExplorer(options);
+			}
+		}
+	}
 }

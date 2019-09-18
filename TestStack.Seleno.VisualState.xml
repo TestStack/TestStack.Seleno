@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="true">
+  <TopNode>[0-1000]C:\Users\SvenAelterman\source\repos\Sorrell-Solutions\TestStack.Seleno\TestStack.Seleno.nunit</TopNode>
+  <SelectedNode>[0-1190]C:\Users\SvenAelterman\source\repos\Sorrell-Solutions\TestStack.Seleno\src\TestStack.Seleno.Tests\bin\Debug\TestStack.Seleno.Tests.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]C:\Users\SvenAelterman\source\repos\Sorrell-Solutions\TestStack.Seleno\TestStack.Seleno.nunit" Expanded="true" />
+    <Node UniqueName="[0-1190]C:\Users\SvenAelterman\source\repos\Sorrell-Solutions\TestStack.Seleno\src\TestStack.Seleno.Tests\bin\Debug\TestStack.Seleno.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1191]TestStack" Expanded="true" />
+    <Node UniqueName="[0-1192]TestStack.Seleno" Expanded="true" />
+    <Node UniqueName="[0-1001]TestStack.Seleno.Tests.AssemblySetupFixtue" Expanded="true" />
+    <Node UniqueName="[0-1204]TestStack.Seleno.Tests.Configuration" Expanded="true" />
+    <Node UniqueName="[0-1208]TestStack.Seleno.Tests.Configuration.ControlIdGenerators" Expanded="true" />
+    <Node UniqueName="[0-1182]TestStack.Seleno.Tests.Configuration.ControlIdGenerators.When_getting_control_id_for_subviewmmodel_property" Expanded="true" />
+    <Node UniqueName="[0-1137]TestStack.Seleno.Tests.Configuration.DriverResourceNotEmbeddedTest" Expanded="true" />
+    <Node UniqueName="[0-1207]TestStack.Seleno.Tests.Configuration.SelenoApplication" Expanded="true" />
+    <Node UniqueName="[0-1206]TestStack.Seleno.Tests.Configuration.SelenoHost" Expanded="true" />
+    <Node UniqueName="[0-1205]TestStack.Seleno.Tests.Configuration.WebServers" Expanded="true" />
+    <Node UniqueName="[0-1203]TestStack.Seleno.Tests.Extensions" Expanded="true" />
+    <Node UniqueName="[0-1195]TestStack.Seleno.Tests.PageObjects" Expanded="true" />
+    <Node UniqueName="[0-1196]TestStack.Seleno.Tests.PageObjects.Actions" Expanded="true" />
+    <Node UniqueName="[0-1202]TestStack.Seleno.Tests.PageObjects.Actions.Controls" Expanded="true" />
+    <Node UniqueName="[0-1201]TestStack.Seleno.Tests.PageObjects.Actions.Executor" Expanded="true" />
+    <Node UniqueName="[0-1200]TestStack.Seleno.Tests.PageObjects.Actions.Fields" Expanded="true" />
+    <Node UniqueName="[0-1199]TestStack.Seleno.Tests.PageObjects.Actions.Navigator" Expanded="true" />
+    <Node UniqueName="[0-1198]TestStack.Seleno.Tests.PageObjects.Actions.PageReader" Expanded="true" />
+    <Node UniqueName="[0-1197]TestStack.Seleno.Tests.PageObjects.Actions.PageWriter" Expanded="true" />
+    <Node UniqueName="[0-1194]TestStack.Seleno.Tests.Specify" Expanded="true" />
+    <Node UniqueName="[0-1398]C:\Users\SvenAelterman\source\repos\Sorrell-Solutions\TestStack.Seleno\src\TestStack.Seleno.Tests\bin\Debug\TestStack.Seleno.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1399]TestStack" Expanded="true" />
+    <Node UniqueName="[0-1400]TestStack.Seleno" Expanded="true" />
+    <Node UniqueName="[0-1209]TestStack.Seleno.Tests.AssemblySetupFixtue" Expanded="true" />
+    <Node UniqueName="[0-1412]TestStack.Seleno.Tests.Configuration" Expanded="true" />
+    <Node UniqueName="[0-1416]TestStack.Seleno.Tests.Configuration.ControlIdGenerators" Expanded="true" />
+    <Node UniqueName="[0-1415]TestStack.Seleno.Tests.Configuration.SelenoApplication" Expanded="true" />
+    <Node UniqueName="[0-1414]TestStack.Seleno.Tests.Configuration.SelenoHost" Expanded="true" />
+    <Node UniqueName="[0-1413]TestStack.Seleno.Tests.Configuration.WebServers" Expanded="true" />
+    <Node UniqueName="[0-1411]TestStack.Seleno.Tests.Extensions" Expanded="true" />
+    <Node UniqueName="[0-1403]TestStack.Seleno.Tests.PageObjects" Expanded="true" />
+    <Node UniqueName="[0-1404]TestStack.Seleno.Tests.PageObjects.Actions" Expanded="true" />
+    <Node UniqueName="[0-1410]TestStack.Seleno.Tests.PageObjects.Actions.Controls" Expanded="true" />
+    <Node UniqueName="[0-1409]TestStack.Seleno.Tests.PageObjects.Actions.Executor" Expanded="true" />
+    <Node UniqueName="[0-1408]TestStack.Seleno.Tests.PageObjects.Actions.Fields" Expanded="true" />
+    <Node UniqueName="[0-1407]TestStack.Seleno.Tests.PageObjects.Actions.Navigator" Expanded="true" />
+    <Node UniqueName="[0-1406]TestStack.Seleno.Tests.PageObjects.Actions.PageReader" Expanded="true" />
+    <Node UniqueName="[0-1405]TestStack.Seleno.Tests.PageObjects.Actions.PageWriter" Expanded="true" />
+    <Node UniqueName="[0-1402]TestStack.Seleno.Tests.Specify" Expanded="true" />
+  </Nodes>
+</VisualState>

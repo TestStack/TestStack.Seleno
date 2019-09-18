@@ -22,5 +22,9 @@ Build/*
 TestResult.xml
 *.DotSettings
 
-# Visual Studio 2015 cache/options directory
+# Include sample data folder *.mdf and *.ldf
+!SamplesData/**/*.mdf
+!SamplesData/**/*.ldf
+
+# Visual Studio 2015+ cache/options directory
 .vs/

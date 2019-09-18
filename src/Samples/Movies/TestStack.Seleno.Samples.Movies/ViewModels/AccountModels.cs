@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 
 namespace TestStack.Seleno.Samples.Movies.ViewModels
 {

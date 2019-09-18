@@ -1,10 +1,7 @@
 using System;
-using System.ComponentModel;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.PhantomJS;
-using OpenQA.Selenium.Safari;
 
 namespace TestStack.Seleno.Configuration
 {
@@ -14,32 +11,9 @@ namespace TestStack.Seleno.Configuration
     public static class BrowserFactory
     {
         /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS()
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver())
-                .WithFileName("phantomjs.exe");
-        }
-
-        /// <summary>
-        /// Returns an initialised PhantomJS Web Driver.
-        /// </summary>
-        /// <remarks>You need to have phantomjs.exe embedded into your assembly</remarks>
-        /// <param name="options">Options to configure the driver</param>
-        /// <returns>Initialised PhantomJS driver</returns>
-        public static PhantomJSDriver PhantomJS(PhantomJSOptions options)
-        {
-            return new WebDriverBuilder<PhantomJSDriver>(() => new PhantomJSDriver(options))
-                .WithFileName("phantomjs.exe");
-        }
-
-        /// <summary>
         /// Returns an initialised Chrome Web Driver.
         /// </summary>
-        /// <remarks>You need to have chromedriver.exe embedded into your assembly and have Chrome installed on the machine running the test</remarks>
+        /// <remarks>You need to have Chrome installed on the machine running the test</remarks>
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome()
         {
@@ -53,14 +27,13 @@ namespace TestStack.Seleno.Configuration
         /// <summary>
         /// Returns an initialised Chrome Web Driver.
         /// </summary>
-        /// <remarks>You need to have chromedriver.exe embedded into your assembly and have Chrome installed on the machine running the test</remarks>
+        /// <remarks>You need to have Chrome installed on the machine running the test</remarks>
         /// <param name="options">Options to configure the driver</param>
         /// <returns>Initialised Chrome driver</returns>
         public static ChromeDriver Chrome(ChromeOptions options)
         {
             return new WebDriverBuilder<ChromeDriver>(() => new ChromeDriver(options ?? new ChromeOptions()))
                 .WithFileName("chromedriver.exe");
-
         }
 
         /// <summary>
@@ -78,47 +51,12 @@ namespace TestStack.Seleno.Configuration
         /// Returns an initialised Firefox Web Driver.
         /// </summary>
         /// <remarks>You need to have Firefox installed on the machine running the test</remarks>
-        /// <param name="profile">Profile to use for the driver</param>
-        /// <returns>Initialised Firefox driver</returns>
-        public static FirefoxDriver FireFox(FirefoxProfile profile)
-        {
-            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(profile))
-                .WithProcessName("firefox");
-        }
-
-        /// <summary>
-        /// Returns an initialised Safari Web Driver.
-        /// </summary>
-        /// <remarks>You need to have Safari installed on the machine running the test</remarks>
-        /// <returns>Initialised Safari driver</returns>
-        public static SafariDriver Safari()
-        {
-            try
-            {
-                return new SafariDriver();
-            }
-            catch (Win32Exception e)
-            {
-                throw new BrowserNotFoundException("Safari", e);
-            }
-        }
-
-        /// <summary>
-        /// Returns an initialised Safari Web Driver.
-        /// </summary>
-        /// <remarks>You need to have Safari installed on the machine running the test</remarks>
         /// <param name="options">Profile to use for the driver</param>
-        /// <returns>Initialised Safari driver</returns>
-        public static SafariDriver Safari(SafariOptions options)
+        /// <returns>Initialised Firefox driver</returns>
+        public static FirefoxDriver FireFox(FirefoxOptions options)
         {
-            try
-            {
-                return new SafariDriver(options);
-            }
-            catch (Win32Exception e)
-            {
-                throw new BrowserNotFoundException("Safari", e);
-            }
+            return new WebDriverBuilder<FirefoxDriver>(() => new FirefoxDriver(options))
+                .WithProcessName("firefox");
         }
 
         /// <summary>
@@ -128,8 +66,9 @@ namespace TestStack.Seleno.Configuration
         /// <returns>Initialised IE driver</returns>
         public static InternetExplorerDriver InternetExplorer()
         {
-            var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
-            return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
+			// These options are a requirement to successfully launch IE
+			var options = new InternetExplorerOptions { IntroduceInstabilityByIgnoringProtectedModeSettings = true };
+			return new WebDriverBuilder<InternetExplorerDriver>(() => new InternetExplorerDriver(options))
                 .WithFileName("IEDriverServer.exe");
         }
 
